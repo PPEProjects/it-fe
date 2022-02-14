@@ -6,7 +6,7 @@ const OnBoardPage = React.lazy(() => import("./OnBoardPage"));
 const RunningPage = React.lazy(() => import("./RunningPage"));
 
 export const homeRoutes = [
-  { path: "/AllPage", element: <AllPage />, exact: true },
+  { path: "/", element: <AllPage />, exact: true },
   { path: "/DonePage", element: <DonePage />, exact: true },
   { path: "/IdeasPage", element: <IdeasPage />, exact: true },
   { path: "/OnBoardPage", element: <OnBoardPage />, exact: true },

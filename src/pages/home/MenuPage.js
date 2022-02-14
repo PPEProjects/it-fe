@@ -10,7 +10,7 @@ export const MenuPage = () => {
       {
         label: "All",
         key: "AllPage",
-        link: "/AllPage",
+        link: "/",
       },
       {
         label: "Ideas",
