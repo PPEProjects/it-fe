@@ -1,0 +1,6 @@
+/*
+npx tailwindcss-cli@latest build -i ./public/styles/tailwind/input.css -o ./public/styles/tailwind/output.css;
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
