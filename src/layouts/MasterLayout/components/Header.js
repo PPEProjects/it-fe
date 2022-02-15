@@ -1,5 +1,6 @@
-import React from "react";
-import { Input, Button } from "antd";
+import React, { useState } from "react";
+import { Input, Button, Modal } from "antd";
+import NewProject from "pages/project/NewProject";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillMicFill } from "react-icons/bs";
@@ -7,6 +8,34 @@ import { BiSearch } from "react-icons/bi";
 import { IoMdAdd, IoMdNotificationsOutline } from "react-icons/io";
 
 const Header = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const renderModalNewProject = () => {
+    return (
+      <Modal
+        className="!w-[1152px]"
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <NewProject />
+      </Modal>
+    );
+  };
+
   return (
     <section className="p-3 flex items-center space-x-2 border-b">
       <div className="flex items-center space-x-3 w-3/12">
@@ -29,7 +58,10 @@ const Header = () => {
         </Button>
       </div>
       <div className="flex space-x-2 items-center pl-16 w-4/12">
-        <Button className="!rounded-md !bg-[#FB923C] !h-[50px]">
+        <Button
+          onClick={showModal}
+          className="!rounded-md !bg-[#FB923C] !h-[50px]"
+        >
           <div className="flex items-center text-xl text-white space-x-1">
             <IoMdAdd />
             <span>New Idea/Project</span>
@@ -47,6 +79,7 @@ const Header = () => {
           <span className="text-[#0E7490] text-xl">Product</span>
         </div>
       </div>
+      {renderModalNewProject()}
     </section>
   );
 };

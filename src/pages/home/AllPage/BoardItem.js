@@ -15,6 +15,7 @@ export const BoardItem = ({
   numberLike,
   numberComment,
   numberHeart,
+  children,
 }) => {
   return (
     <section>
@@ -37,24 +38,25 @@ export const BoardItem = ({
             <HiOutlineDotsHorizontal className="text-2xl text-gray-400" />
           </span>
         </div>
-        <div className="flex items-center justify-between text-sm text-gray-500">
+        <div className="flex items-center justify-between text-sm text-[#164E63]">
           <p className="flex items-center space-x-1 cursor-pointer">
-            <AiOutlineLike className="text-xl" />
+            <AiOutlineLike className="text-2xl stroke-[20px]" />
             <span>{numberLike}</span>
           </p>
           <p className="flex items-center space-x-1 cursor-pointer">
-            <AiOutlineMessage className="text-xl" />
+            <AiOutlineMessage className="text-2xl stroke-[20px]" />
             <span>{numberComment}</span>
           </p>
           <p className="flex items-center space-x-1 cursor-pointer">
-            <AiOutlineHeart className="text-xl" />
+            <AiOutlineHeart className="text-2xl stroke-[20px]" />
             <span>{numberHeart}</span>
           </p>
           <p className="pr-2 cursor-pointer">
-            <AiOutlineShareAlt className="text-xl" />
+            <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
           </p>
         </div>
       </div>
+      {children}
     </section>
   );
 };
