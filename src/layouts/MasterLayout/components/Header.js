@@ -26,10 +26,10 @@ const Header = () => {
     return (
       <Modal
         className="!w-[1152px]"
-        title="Basic Modal"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
         <NewProject />
       </Modal>
