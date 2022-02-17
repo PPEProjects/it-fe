@@ -1,22 +1,14 @@
 import React, { useEffect } from "react";
-import { Button, Switch, Form, Input } from "antd";
-// import { useDispatch, useSelector } from "react-redux";
+import { Button, Form, Input } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import {
-//   authLogin,
-//   authsSelector,
-//   getUrlFacebook,
-//   getUrlGoogle,
-//   setAuth,
-// } from "slices/auths";
-// import Cookies from "universal-cookie";
+import { authLogin, authsSelector } from "./authsSlice";
 
 import { AiFillLeftCircle } from "react-icons/ai";
 
-// var cookies = new Cookies();
 const ForgotPassWord = () => {
-  // const dispatch = useDispatch();
-  // const { lAuth, iAuth, url } = useSelector(authsSelector);
+  const dispatch = useDispatch();
+  const { lAuth } = useSelector(authsSelector);
 
   return (
     <section className="flex">
@@ -30,7 +22,7 @@ const ForgotPassWord = () => {
           <div className="px-[160px] pt-7">
             <Form
               name="basic"
-              // onFinish={(values) => dispatch(authLogin(values))}
+              onFinish={(values) => dispatch(authLogin(values))}
               layout="vertical"
             >
               <Form.Item>
@@ -94,7 +86,7 @@ const ForgotPassWord = () => {
                   type="primary"
                   size="large"
                   htmlType="submit"
-                  // loading={lAuth.isLoading}
+                  loading={lAuth.isLoading}
                 >
                   Submit
                 </Button>

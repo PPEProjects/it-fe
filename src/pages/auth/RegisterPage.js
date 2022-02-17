@@ -1,23 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Switch, Form, Input } from "antd";
-// import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import {
-//   authLogin,
-//   authsSelector,
-//   getUrlFacebook,
-//   getUrlGoogle,
-//   setAuth,
-// } from "slices/auths";
-// import Cookies from "universal-cookie";
+import { authCheckExists, authRegister, authsSelector } from "./authsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import debounce from "lodash/debounce";
 
 import { AiFillLeftCircle } from "react-icons/ai";
 
-// var cookies = new Cookies();
 const RegisterPage = () => {
-  // const dispatch = useDispatch();
-  // const { lAuth, iAuth, url } = useSelector(authsSelector);
+  const dispatch = useDispatch();
+  const { rAuth, checkExistsAuth } = useSelector(authsSelector);
+  const [form] = Form.useForm();
 
+  useEffect(() => {
+    if (checkExistsAuth?.email === true) {
+      form.setFields([{ name: "email", errors: ["Email already exists."] }]);
+    }
+    const val = form.getFieldError("email");
+    setEmailValid(val);
+  }, [checkExistsAuth]);
+
+  const debounceFetch = debounce((email) => {
+    dispatch(authCheckExists({ email }));
+  }, 500);
+
+  const [emailValid, setEmailValid] = useState();
+  const [email, setEmail] = useState();
   return (
     <section className="flex">
       <div className="w-1/2 pb-4 flex flex-col justify-between">
@@ -28,8 +36,20 @@ const RegisterPage = () => {
         </div>
         <div className="px-[160px] pt-7">
           <Form
+            autoComplete="chrome-off"
+            form={form}
             name="basic"
-            // onFinish={(values) => dispatch(authLogin(values))}
+            onFinish={(values) => {
+              dispatch(authRegister(values));
+            }}
+            onFieldsChange={(f, allFields) => {
+              if (f[0].name[0] === "email") {
+                setEmail(f[0].value);
+                debounceFetch(f[0].value);
+                const val = form.getFieldError("email");
+                setEmailValid(val);
+              }
+            }}
             layout="vertical"
           >
             <Form.Item>
@@ -64,28 +84,38 @@ const RegisterPage = () => {
             >
               <Input className="!rounded" placeholder="Name" size="large" />
             </Form.Item>
+            <div className="relative">
+              <Form.Item
+                name="email"
+                label="Email"
+                rules={[
+                  {
+                    whitespace: true,
+                    message: "",
+                  },
+                  {
+                    type: "email",
+                    message: "The input is not valid E-mail!",
+                  },
+                  {
+                    required: true,
+                    message: "Please input your E-mail!",
+                  },
+                ]}
+              >
+                <Input className="!rounded" placeholder="Email" size="large" />
+              </Form.Item>
+              {/* {_.isEmpty(emailValid) && email && (
+                <Button
+                  className={"absolute z-10 right-0 bottom-0 mb-2 mr-2"}
+                  size={"small"}
+                  type={"primary"}
+                  icon={<MdDone />}
+                />
+              )} */}
+            </div>
             <Form.Item
-              name="email"
-              label="Email"
-              rules={[
-                {
-                  whitespace: true,
-                  message: "",
-                },
-                {
-                  type: "email",
-                  message: "The input is not valid E-mail!",
-                },
-                {
-                  required: true,
-                  message: "Please input your E-mail!",
-                },
-              ]}
-            >
-              <Input className="!rounded" placeholder="Email" size="large" />
-            </Form.Item>
-            <Form.Item
-              name="phone"
+              name="phone_number"
               label="Phone"
               rules={[
                 {
@@ -125,8 +155,8 @@ const RegisterPage = () => {
               />
             </Form.Item>
             <Form.Item
-              name="password"
-              label="Password"
+              name="password_confirmation"
+              label="Confirm Password"
               rules={[
                 {
                   pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
@@ -137,6 +167,19 @@ const RegisterPage = () => {
                   required: true,
                   message: "Please input your password!",
                 },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+
+                    return Promise.reject(
+                      new Error(
+                        "The two passwords that you entered do not match!"
+                      )
+                    );
+                  },
+                }),
               ]}
             >
               <Input.Password
@@ -158,7 +201,7 @@ const RegisterPage = () => {
                 type="primary"
                 size="large"
                 htmlType="submit"
-                // loading={lAuth.isLoading}
+                loading={rAuth.isLoading}
               >
                 Register
               </Button>

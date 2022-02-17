@@ -1,27 +1,21 @@
-import React, { useEffect } from "react";
-import { Button, Divider, Form, Input } from "antd";
-// import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Button, Form, Input } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import {
-//   authLogin,
-//   authsSelector,
-//   getUrlFacebook,
-//   getUrlGoogle,
-//   setAuth,
-// } from "slices/auths";
-// import Cookies from "universal-cookie";
+import { authLogin, authsSelector } from "./authsSlice";
 
-// var cookies = new Cookies();
 const LoginPage = () => {
-  // const dispatch = useDispatch();
-  // const { lAuth, iAuth, url } = useSelector(authsSelector);
+  const dispatch = useDispatch();
+  const { lAuth } = useSelector(authsSelector);
 
   return (
     <section className="flex">
       <div className="w-1/2 px-[160px] pt-14 pb-4 flex flex-col justify-between h-[700px]">
         <Form
           name="basic"
-          // onFinish={(values) => dispatch(authLogin(values))}
+          onFinish={(values) => {
+            dispatch(authLogin(values));
+          }}
           layout="vertical"
         >
           <Form.Item>
@@ -60,11 +54,11 @@ const LoginPage = () => {
             name="password"
             label="Password"
             rules={[
-              {
-                pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-                message:
-                  "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!",
-              },
+              // {
+              //   pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+              //   message:
+              //     "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!",
+              // },
               {
                 required: true,
                 message: "Please input your password!",
@@ -92,7 +86,7 @@ const LoginPage = () => {
               type="primary"
               size="large"
               htmlType="submit"
-              // loading={lAuth.isLoading}
+              loading={lAuth.isLoading}
             >
               Log in
             </Button>
