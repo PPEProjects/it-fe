@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { _slice } from "services/reduxToolkit";
 import { apolloClient, restClient } from "services";
-import gql from "graphql-tag";
 import Cookies from "universal-cookie";
-const cookies = new Cookies();
 
 export const initialState = {
   lAuth: {},

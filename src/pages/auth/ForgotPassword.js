@@ -1,22 +1,56 @@
-import React, { useEffect } from "react";
-import { Button, Switch, Form, Input } from "antd";
-// import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Button, Form, Input, Modal } from "antd";
 import { Link } from "react-router-dom";
-// import {
-//   authLogin,
-//   authsSelector,
-//   getUrlFacebook,
-//   getUrlGoogle,
-//   setAuth,
-// } from "slices/auths";
-// import Cookies from "universal-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  authsSelector,
+  authForgotPassword,
+  authCheckExists,
+} from "./authsSlice";
+import debounce from "lodash/debounce";
 
+import { CheckCircleOutlined } from "@ant-design/icons";
 import { AiFillLeftCircle } from "react-icons/ai";
 
-// var cookies = new Cookies();
 const ForgotPassWord = () => {
-  // const dispatch = useDispatch();
-  // const { lAuth, iAuth, url } = useSelector(authsSelector);
+  const dispatch = useDispatch();
+  const { fAuth, checkExistsAuth } = useSelector(authsSelector);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [form] = Form.useForm();
+
+  const debounceFetch = debounce((email) => {
+    dispatch(authCheckExists({ email }));
+  }, 500);
+
+  const existsAuth = () => {
+    form.setFields([{ name: "email", errors: [] }]);
+    if (checkExistsAuth?.email === false) {
+      form.setFields([
+        { name: "email", errors: ["This email does not exists."] },
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    existsAuth();
+  }, [checkExistsAuth]);
+
+  useEffect(() => {
+    setIsModalVisible(fAuth?.data?.status);
+  }, [fAuth]);
+
+  useEffect(() => {
+    if (isModalVisible)
+      Modal.confirm({
+        icon: <CheckCircleOutlined />,
+        content:
+          "We have sent a security code to reset password of SmileEye to your email.",
+        onOk() {
+          window.location.assign("/NewPassword");
+        },
+        cancelButtonProps: { className: "hidden" },
+      });
+  }, [isModalVisible]);
 
   return (
     <section className="flex">
@@ -29,9 +63,13 @@ const ForgotPassWord = () => {
           </div>
           <div className="px-[160px] pt-7">
             <Form
-              name="basic"
-              // onFinish={(values) => dispatch(authLogin(values))}
-              layout="vertical"
+              onFinishFailed={(values) => {
+                existsAuth();
+              }}
+              onFinish={(values) => {
+                existsAuth();
+                dispatch(authForgotPassword(values));
+              }}
             >
               <Form.Item>
                 <div className="flex items-center justify-center space-x-3">
@@ -54,10 +92,6 @@ const ForgotPassWord = () => {
                 label="Email"
                 rules={[
                   {
-                    whitespace: true,
-                    message: "",
-                  },
-                  {
                     type: "email",
                     message: "The input is not valid E-mail!",
                   },
@@ -67,7 +101,12 @@ const ForgotPassWord = () => {
                   },
                 ]}
               >
-                <Input className="!rounded" placeholder="Email" size="large" />
+                <Input
+                  className="!rounded"
+                  placeholder="Email"
+                  size="large"
+                  onChange={(e) => debounceFetch(e.target.value)}
+                />
               </Form.Item>
 
               <Form.Item className="text-center">
@@ -76,7 +115,7 @@ const ForgotPassWord = () => {
                   type="primary"
                   size="large"
                   htmlType="submit"
-                  // loading={lAuth.isLoading}
+                  loading={fAuth.isLoading}
                 >
                   Reset password
                 </Button>

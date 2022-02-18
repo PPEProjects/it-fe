@@ -1,5 +1,4 @@
-import { Button, notification as antd_notification, Space } from "antd";
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { notification as antd_notification } from "antd";
 
 const warning = (description, isTitle = true) => {
   if (isTitle)
@@ -12,6 +11,7 @@ const warning = (description, isTitle = true) => {
     description,
   });
 };
+
 const info = (description) => {
   antd_notification["info"]({
     message: ``,

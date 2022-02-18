@@ -1,14 +1,34 @@
 import React, { useEffect } from "react";
-import { Button, Form, Input } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, Input, Button, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { authLogin, authsSelector } from "./authsSlice";
+import { authsSelector, authVerifyEmail } from "./authsSlice";
+import { error } from "components";
 
+import { CheckCircleOutlined } from "@ant-design/icons";
 import { AiFillLeftCircle } from "react-icons/ai";
 
-const ForgotPassWord = () => {
+const NewPassword = () => {
   const dispatch = useDispatch();
-  const { lAuth } = useSelector(authsSelector);
+  const { vAuth } = useSelector(authsSelector);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!vAuth?.data) return;
+    if (vAuth?.data.status) {
+      Modal.confirm({
+        title: "Success",
+        icon: <CheckCircleOutlined />,
+        content: "Password changed successfully.",
+        cancelButtonProps: { className: "hidden" },
+        onOk() {
+          navigate("/LoginPage");
+        },
+      });
+      return;
+    }
+    error(vAuth?.data?.message);
+  }, [vAuth]);
 
   return (
     <section className="flex">
@@ -22,7 +42,7 @@ const ForgotPassWord = () => {
           <div className="px-[160px] pt-7">
             <Form
               name="basic"
-              onFinish={(values) => dispatch(authLogin(values))}
+              onFinish={(values) => dispatch(authVerifyEmail(values))}
               layout="vertical"
             >
               <Form.Item>
@@ -38,8 +58,25 @@ const ForgotPassWord = () => {
                 </div>
               </Form.Item>
               <Form.Item
+                name="token"
+                label="Input the security code"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input the security code!",
+                  },
+                ]}
+              >
+                <Input.Password
+                  className="!rounded"
+                  placeholder="Security code"
+                  size="large"
+                />
+              </Form.Item>
+              <Form.Item
                 name="password"
                 label="Password"
+                hasFeedback
                 rules={[
                   {
                     pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
@@ -59,18 +96,25 @@ const ForgotPassWord = () => {
                 />
               </Form.Item>
               <Form.Item
-                name="password"
+                name="confirm"
                 label="Confirm Password"
                 rules={[
-                  {
-                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-                    message:
-                      "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!",
-                  },
                   {
                     required: true,
                     message: "Please input your password!",
                   },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          "The two passwords that you entered do not match!"
+                        )
+                      );
+                    },
+                  }),
                 ]}
               >
                 <Input.Password
@@ -86,7 +130,7 @@ const ForgotPassWord = () => {
                   type="primary"
                   size="large"
                   htmlType="submit"
-                  loading={lAuth.isLoading}
+                  loading={vAuth.isLoading}
                 >
                   Submit
                 </Button>
@@ -107,4 +151,4 @@ const ForgotPassWord = () => {
     </section>
   );
 };
-export default ForgotPassWord;
+export default NewPassword;
