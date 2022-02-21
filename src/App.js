@@ -3,6 +3,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import { authRoutes } from "pages/auth/authRoutes";
 import { homeRoutes } from "pages/home/homeRoutes";
+import { userRoutes } from "pages/user/userRoutes";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <BrowserRouter>
         <React.Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            {[...authRoutes, ...homeRoutes].map((props, key) => (
+            {[...authRoutes, ...homeRoutes, ...userRoutes].map((props, key) => (
               <Route key={key} {...props} />
             ))}
           </Routes>

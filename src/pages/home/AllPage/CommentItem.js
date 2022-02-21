@@ -1,23 +1,74 @@
 import React from "react";
+import classNames from "classnames";
 
 import { RiMessage2Fill } from "react-icons/ri";
+import { HiReply } from "react-icons/hi";
+import { AiOutlineLike } from "react-icons/ai";
 
-export const CommentItem = ({ imgAvatar, nameUser, content }) => {
+export const CommentItem = ({
+  imgAvatar,
+  imgAvatarClassName,
+  nameUserClassName,
+  nameUser,
+  content,
+  contentClassName,
+  itemsCenter,
+  topComment,
+  containerClassName,
+  iconClassName,
+  numberLike,
+  time,
+}) => {
   return (
     <section className="relative">
-      <span className="flex items-center space-x-2">
+      <div
+        className={classNames("flex space-x-2", {
+          "items-center": itemsCenter,
+        })}
+      >
         <img
-          className="h-10 w-10 object-cover rounded-full cursor-pointer"
+          className={classNames(
+            "object-cover rounded-full cursor-pointer w-10 h-10",
+            imgAvatarClassName
+          )}
           src={imgAvatar}
           alt=""
         />
-        <div>
-          <div className="text-xs">{nameUser}</div>
-          <div className="text-[10px] text-gray-500">{content}</div>
+        <div className={classNames("", containerClassName)}>
+          <div className={classNames("text-xs", nameUserClassName)}>
+            {nameUser}
+          </div>
+          {topComment && (
+            <div className="text-[14px] text-gray-500">Commented {time}</div>
+          )}
+          <div
+            className={classNames(
+              "text-[10px] text-gray-500",
+              contentClassName
+            )}
+          >
+            {content}
+          </div>
+          {topComment && (
+            <div className="text-[14px] pt-1 text-gray-600 flex items-center justify-end space-x-6">
+              <p className="flex items-center space-x-1 cursor-pointer">
+                <AiOutlineLike className="text-2xl stroke-[20px]" />
+                <span>{numberLike}</span>
+              </p>
+              <p>
+                <HiReply className="text-2xl" />
+              </p>
+            </div>
+          )}
         </div>
-      </span>
-      <div className="absolute bottom-0 left-7 w-4 h-4 flex items-center justify-center bg-white rounded-full">
-        <RiMessage2Fill className="text-[#0E7490] text-[12px]" />
+      </div>
+      <div
+        className={classNames(
+          "absolute bottom-0 text-[12px] text-[#0E7490] left-7 w-4 h-4 flex items-center justify-center bg-white rounded-full",
+          iconClassName
+        )}
+      >
+        <RiMessage2Fill />
       </div>
     </section>
   );

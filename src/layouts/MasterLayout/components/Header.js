@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Input, Button, Modal } from "antd";
 import NewProject from "pages/project/NewProject";
+import { Link } from "react-router-dom";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillMicFill } from "react-icons/bs";
@@ -72,12 +73,14 @@ const Header = () => {
             <IoMdNotificationsOutline className="text-xl text-[#0E7490]" />
           </span>
         </Button>
-        <div className="flex items-center space-x-2">
-          <span className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100">
-            P
-          </span>
-          <span className="text-[#0E7490] text-xl">Product</span>
-        </div>
+        <Link to="/MyProfile">
+          <div className="flex items-center space-x-2">
+            <span className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100">
+              P
+            </span>
+            <span className="text-[#0E7490] text-xl">Product</span>
+          </div>
+        </Link>
       </div>
       {renderModalNewProject()}
     </section>

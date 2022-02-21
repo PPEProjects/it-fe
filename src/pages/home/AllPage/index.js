@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "antd";
 
 import { BoardItem } from "./BoardItem";
 import { SeeMore } from "./SeeMore";
@@ -105,11 +104,13 @@ export const AllPage = () => {
                   <div className="px-2.5 space-y-1.5">
                     <div className="space-y-2">
                       <CommentItem
+                        itemsCenter
                         imgAvatar="https://i.pravatar.cc/100?img=2"
                         nameUser="Eduardo Benz"
                         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                       />
                       <CommentItem
+                        itemsCenter
                         imgAvatar="https://i.pravatar.cc/100?img=2"
                         nameUser="Eduardo Benz"
                         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
