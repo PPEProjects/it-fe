@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { Form, Input, Select, Switch, Button } from "antd";
+import React, { useState, useEffect } from "react";
+import { Form, Input, Select, Switch, Button, Radio } from "antd";
 import { RadioGroup } from "@headlessui/react";
 import classNames from "classnames";
+import { createProject, projectSelector } from "./projectSlice";
+import { getMe, userSelector } from "pages/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { AiFillInfoCircle } from "react-icons/ai";
@@ -24,7 +27,22 @@ const NewProject = () => {
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const { Option } = Select;
+  const dispatch = useDispatch();
+  const { cProject } = useSelector(projectSelector);
+  const { me } = useSelector(userSelector);
+  console.log("me", me);
+
   const [selected, setSelected] = useState(settings[0]);
+  const [value, setValue] = React.useState(1);
+
+  const onChange = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+  };
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
 
   return (
     <section>
@@ -38,7 +56,26 @@ const NewProject = () => {
           </span>
         </p>
       </div>
-      <Form form={form} name="basic" scrollToFirstError>
+      <Form
+        form={form}
+        name="basic"
+        onFinish={(values) => dispatch(createProject(values))}
+        scrollToFirstError
+      >
+        <div className="flex border-b p-3">
+          <label className="w-1/3 text-sm text-gray-700">Type</label>
+          <Form.Item className="w-2/3 !mb-0" name="">
+            <Radio.Group
+              className="space-y-1.5"
+              onChange={onChange}
+              value={value}
+            >
+              <Radio value={1}>Project</Radio>
+              <br />
+              <Radio value={2}>Idea</Radio>
+            </Radio.Group>
+          </Form.Item>
+        </div>
         <div className="flex items-center border-b p-3">
           <label className="w-1/3 text-sm text-gray-700">
             Idea/Project name
@@ -46,7 +83,7 @@ const NewProject = () => {
           <Form.Item
             className="w-2/3 !mb-0"
             rules={[{ required: true }]}
-            name=""
+            name="name"
           >
             <Input className="!rounded" placeholder="" />
           </Form.Item>
@@ -58,7 +95,7 @@ const NewProject = () => {
           <Form.Item
             className="w-1/3 !mb-0"
             rules={[{ required: true }]}
-            name=""
+            name="name_user"
           >
             <Input className="!rounded" placeholder="" />
           </Form.Item>
@@ -68,7 +105,7 @@ const NewProject = () => {
               <Form.Item
                 className="!mb-0 w-full"
                 rules={[{ required: true }]}
-                name=""
+                name="email"
               >
                 <Input className="!rounded" placeholder="you@example.com" />
               </Form.Item>
@@ -78,7 +115,7 @@ const NewProject = () => {
               <Form.Item
                 className="!mb-0 w-full"
                 rules={[{ required: true }]}
-                name=""
+                name="phone"
               >
                 <Input className="!rounded" placeholder="" />
               </Form.Item>
@@ -87,31 +124,19 @@ const NewProject = () => {
         </div>
         <div className="flex border-b p-3">
           <label className="w-1/3 text-sm text-gray-700">Co-author name</label>
-          <Form.Item
-            className="w-1/3 !mb-0"
-            rules={[{ required: true }]}
-            name=""
-          >
+          <Form.Item className="w-1/3 !mb-0" name="">
             <Input className="!rounded" placeholder="" />
           </Form.Item>
           <div className="w-1/3 !pl-4 space-y-3">
             <div className="flex items-center">
               <label className="text-sm w-[60px] text-gray-700">Email</label>
-              <Form.Item
-                className="!mb-0 w-full"
-                rules={[{ required: true }]}
-                name=""
-              >
+              <Form.Item className="!mb-0 w-full" name="">
                 <Input className="!rounded" placeholder="you@example.com" />
               </Form.Item>
             </div>
             <div className="flex items-center">
               <label className="text-sm w-[60px] text-gray-700">Phone</label>
-              <Form.Item
-                className="!mb-0 w-full"
-                rules={[{ required: true }]}
-                name=""
-              >
+              <Form.Item className="!mb-0 w-full" name="">
                 <Input className="!rounded" placeholder="" />
               </Form.Item>
             </div>
@@ -124,7 +149,7 @@ const NewProject = () => {
           <Form.Item
             className="w-2/3 !mb-0"
             rules={[{ required: true }]}
-            name=""
+            name="description"
           >
             <TextArea className="!rounded !h-[120px]" placeholder="" />
           </Form.Item>
@@ -133,30 +158,17 @@ const NewProject = () => {
           <label className="w-1/3 text-sm text-gray-700">
             Category (website, adon, extension, app, other...)
           </label>
-          <Form.Item
-            className="w-1/3 !mb-0"
-            rules={[{ required: true }]}
-            name=""
-          >
+          <Form.Item className="w-1/3 !mb-0" name="category">
             <Input className="!rounded" placeholder="" />
           </Form.Item>
         </div>
         <div className="flex items-center border-b p-3">
           <label className="w-1/3 text-sm text-gray-700">Budget</label>
           <div className="w-1/3 space-x-3 flex">
-            <Form.Item
-              className="!mb-0 w-[70%]"
-              rules={[{ required: true }]}
-              name=""
-            >
-              <Input className="!rounded" placeholder="$ 0.00" />
-            </Form.Item>
-            <Form.Item
-              className="!mb-0 w-[30%]"
-              rules={[{ required: true }]}
-              name=""
-            >
-              <Select className="!rounded" defaultValue="USD">
+            <Form.Item className="!mb-0 space-x-3" name="budget_iso_code">
+              <Input className="!rounded !w-[70%]" placeholder="$ 0.00" />
+
+              <Select className="!rounded !w-[30%]" defaultValue="USD">
                 <Option value="jack">Jack</Option>
                 <Option value="lucy">Lucy</Option>
                 <Option value="disabled" disabled>
@@ -180,18 +192,10 @@ const NewProject = () => {
             Salary estimated at that time
           </label>
           <div className="w-1/3 space-x-3 flex">
-            <Form.Item
-              className="!mb-0 w-[70%]"
-              rules={[{ required: true }]}
-              name=""
-            >
+            <Form.Item className="!mb-0 w-[70%]" name="salary_money">
               <Input className="!rounded" placeholder="$ 0.00" />
             </Form.Item>
-            <Form.Item
-              className="!mb-0 w-[30%]"
-              rules={[{ required: true }]}
-              name=""
-            >
+            <Form.Item className="!mb-0 w-[30%]" name="salary_iso_code">
               <Select className="!rounded" defaultValue="USD">
                 <Option value="jack">Jack</Option>
                 <Option value="lucy">Lucy</Option>
@@ -353,7 +357,7 @@ const NewProject = () => {
             <Button
               className="!rounded-md"
               size="large"
-              htmlType="submit"
+              // htmlType="submit"
               // loading={lAuth.isLoading}
             >
               Cancel

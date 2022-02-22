@@ -13,7 +13,7 @@ import {
 export const BoardItem = ({
   imgPage,
   imgAvatar,
-  project,
+  nameProject,
   numberLike,
   numberComment,
   numberHeart,
@@ -65,13 +65,13 @@ export const BoardItem = ({
       />
       <div className="border-l border-r border-b rounded-b-md px-3">
         <div className="flex items-center justify-between py-2">
-          <span className="flex items-center space-x-2 w-[60%]">
+          <span className="flex items-center space-x-3 w-[60%]">
             <img
               className="h-10 w-10 object-cover rounded-full cursor-pointer"
               src={imgAvatar}
               alt=""
             />
-            <span>{project}</span>
+            <span className="font-[600] text-[#0369A1]">{nameProject}</span>
           </span>
           <Dropdown overlay={menu} trigger={["click"]}>
             <p className="w-10 h-10 hover:border hover:bg-gray-50 rounded-full flex items-center justify-center cursor-pointer">
@@ -97,7 +97,7 @@ export const BoardItem = ({
           </p>
         </div>
       </div>
-      {children}
+      <div className="pt-2">{children}</div>
     </section>
   );
 };
