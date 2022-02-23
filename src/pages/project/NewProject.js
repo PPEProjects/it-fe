@@ -11,7 +11,7 @@ import { AiFillInfoCircle } from "react-icons/ai";
 import { RiImageAddLine } from "react-icons/ri";
 
 import { ReactComponent as IconDatabase } from "assets/database.svg";
-
+import { VideoUpload } from "react-storage-codeby";
 const settings = [
   {
     name: "Public",
@@ -208,9 +208,15 @@ const NewProject = () => {
           </div>
         </div>
         <div className="flex border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">Main picture</label>
-
-          <button
+          {/* <label className="w-1/3 text-sm text-gray-700">Main picture</label> */}
+          <Form.Item
+            className="w-1/3 text-sm text-gray-700"
+            name="main_picture"
+            label="Main picture"
+          >
+            <VideoUpload />
+          </Form.Item>
+          {/* <button
             type="button"
             className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0369A1]"
           >
@@ -225,7 +231,7 @@ const NewProject = () => {
             <span className="text-[12px] text-gray-400">
               PNG, JPG, up to 10MB
             </span>
-          </button>
+          </button> */}
         </div>
 
         <div className="flex border-b p-3">
