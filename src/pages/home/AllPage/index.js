@@ -102,6 +102,7 @@ export const AllPage = () => {
         <h3 className="text-[18px] font-[600]">Ideas</h3>
         <div className="grid grid-cols-4 gap-4">
           {(mlMyProject?.myProject ?? [])?.map((item, index) => {
+            console.log("item", item);
             return (
               <div key={index}>
                 {item?.type === "ideas" && (

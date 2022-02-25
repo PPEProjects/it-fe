@@ -5,6 +5,7 @@ import { authRoutes } from "pages/auth/authRoutes";
 import { homeRoutes } from "pages/home/homeRoutes";
 import { userRoutes } from "pages/user/userRoutes";
 import { researchRoutes } from "pages/research/researchRoutes";
+import { projectRoutes } from "pages/project/projectRoutes";
 
 function App() {
   return (
@@ -13,10 +14,11 @@ function App() {
         <React.Suspense fallback={<div>Loading...</div>}>
           <Routes>
             {[
-                ...authRoutes,
-                ...homeRoutes,
-                ...userRoutes,
-                ...researchRoutes,
+              ...authRoutes,
+              ...homeRoutes,
+              ...userRoutes,
+              ...researchRoutes,
+              ...projectRoutes,
             ].map((props, key) => (
               <Route key={key} {...props} />
             ))}

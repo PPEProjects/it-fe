@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Dropdown, Modal } from "antd";
 import { TopComment } from "pages/home/AllPage/TopComment";
+import { Link } from "react-router-dom";
 
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import {
@@ -65,14 +66,18 @@ export const BoardItem = ({
       />
       <div className="border-l border-r border-b rounded-b-md px-3">
         <div className="flex items-center justify-between py-2">
-          <span className="flex items-center space-x-3 w-[60%]">
+          <Link
+            className="flex items-center space-x-3 w-[60%]"
+            to="/ProjectDescription"
+          >
             <img
               className="h-10 w-10 object-cover rounded-full cursor-pointer"
               src={imgAvatar}
               alt=""
             />
             <span className="font-[600] text-[#0369A1]">{nameProject}</span>
-          </span>
+          </Link>
+
           <Dropdown overlay={menu} trigger={["click"]}>
             <p className="w-10 h-10 hover:border hover:bg-gray-50 rounded-full flex items-center justify-center cursor-pointer">
               <BiDotsVerticalRounded className="!text-2xl text-gray-400" />

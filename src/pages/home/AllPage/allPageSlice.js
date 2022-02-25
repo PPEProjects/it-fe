@@ -40,8 +40,8 @@ export function MyProject() {
   return async (dispatch) => {
     dispatch(setMerge({ mlMyProject: { isLoading: true } }));
     const query = gql`
-      query MyProject {
-        myProject {
+      query Query {
+        allProject {
           id
           name
           user {
@@ -50,7 +50,6 @@ export function MyProject() {
             name
           }
           attachments
-          authorUserId
           category
           description
           level
@@ -59,8 +58,8 @@ export function MyProject() {
           budget
           type
           salary
-          is_involved
           is_recruit
+          is_involved
           createdAt
           updatedAt
         }
@@ -69,6 +68,6 @@ export function MyProject() {
     const res = await apolloClient.query({
       query,
     });
-    dispatch(setData({ mlMyProject: { myProject: res.data.myProject } }));
+    dispatch(setData({ mlMyProject: { myProject: res.data.allProject } }));
   };
 }
