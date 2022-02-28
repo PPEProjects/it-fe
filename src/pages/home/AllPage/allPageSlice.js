@@ -5,6 +5,7 @@ import { apolloClient, restClient } from "services";
 
 export const initialState = {
   mlMyProject: {},
+  mlMyIdeas: {},
 };
 
 const allPagesSlice = createSlice({
@@ -36,12 +37,12 @@ export function setAllPageMerge(key, item) {
   };
 }
 
-export function MyProject() {
+export function MyProject(type = "project") {
   return async (dispatch) => {
     dispatch(setMerge({ mlMyProject: { isLoading: true } }));
     const query = gql`
-      query Query {
-        allProject {
+      query SearchProject($name: String, $type: String, $status: String) {
+        searchProject(name: $name, type: $type, status: $status) {
           id
           name
           user {
@@ -49,7 +50,17 @@ export function MyProject() {
             id
             name
           }
+          members {
+            id
+            position
+            memberUserId
+            memberUser {
+              id
+              name
+            }
+          }
           attachments
+          authorUserId
           category
           description
           level
@@ -58,6 +69,8 @@ export function MyProject() {
           budget
           type
           salary
+          status
+          memberJoin
           is_recruit
           is_involved
           createdAt
@@ -67,7 +80,61 @@ export function MyProject() {
     `;
     const res = await apolloClient.query({
       query,
+      variables: {
+        type,
+      },
     });
-    dispatch(setData({ mlMyProject: { myProject: res.data.allProject } }));
+    dispatch(setData({ mlMyProject: { myProject: res.data.searchProject } }));
+  };
+}
+
+export function MyIdeas(type = "ideas") {
+  return async (dispatch) => {
+    dispatch(setMerge({ mlMyIdeas: { isLoading: true } }));
+    const query = gql`
+      query SearchProject($name: String, $type: String, $status: String) {
+        searchProject(name: $name, type: $type, status: $status) {
+          id
+          name
+          user {
+            email
+            id
+            name
+          }
+          members {
+            id
+            position
+            memberUserId
+            memberUser {
+              id
+              name
+            }
+          }
+          attachments
+          authorUserId
+          category
+          description
+          level
+          privacy
+          version
+          budget
+          type
+          salary
+          status
+          memberJoin
+          is_recruit
+          is_involved
+          createdAt
+          updatedAt
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+      variables: {
+        type,
+      },
+    });
+    dispatch(setData({ mlMyIdeas: { myIdeas: res.data.searchProject } }));
   };
 }

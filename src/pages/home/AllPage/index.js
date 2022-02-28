@@ -1,55 +1,37 @@
 import React, { useEffect } from "react";
-
 import { BoardItem } from "./BoardItem";
 import { SeeMore } from "./SeeMore";
 import { BoardPosition } from "./BoardPosition";
 import { CommentItem } from "./CommentItem";
-import { MyProject, allPagesSelector } from "./allPageSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  projectSelector,
+  MyProject,
+  MyIdeas,
+  setProject,
+} from "pages/project/projectSlice";
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { RiCommunityFill } from "react-icons/ri";
 
-const dataBoardItem = [
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    imgPage: "https://i.pravatar.cc/100?img=2",
-    project: "Project 123 Project 456",
-    numberLike: "1",
-    numberComment: "2",
-    numberHeart: "3",
-  },
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    imgPage: "https://i.pravatar.cc/100?img=2",
-    project: "Project 123 Project 456",
-    numberLike: "1",
-    numberComment: "2",
-    numberHeart: "3",
-  },
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    imgPage: "https://i.pravatar.cc/100?img=2",
-    project: "Project 123 Project 456",
-    numberLike: "1",
-    numberComment: "2",
-    numberHeart: "3",
-  },
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    imgPage: "https://i.pravatar.cc/100?img=2",
-    project: "Project 123 Project 456",
-    numberLike: "1",
-    numberComment: "2",
-    numberHeart: "3",
-  },
-];
 export const AllPage = () => {
   const dispatch = useDispatch();
-  const { mlMyProject } = useSelector(allPagesSelector);
+  const { mlMyProject, mlMyIdeas, cProject } = useSelector(projectSelector);
 
   useEffect(() => {
     dispatch(MyProject());
+  }, [dispatch, cProject]);
+
+  useEffect(() => {
+    dispatch(MyIdeas());
+  }, [dispatch, cProject]);
+
+  useEffect(() => {
+    dispatch(
+      setProject({
+        cProject: {},
+      })
+    );
   }, [dispatch]);
 
   return (
@@ -63,34 +45,33 @@ export const AllPage = () => {
           {(mlMyProject?.myProject ?? [])?.map((item, index) => {
             return (
               <div key={index}>
-                {item?.type === "project" && (
-                  <BoardItem
-                    imgPage="https://i.pravatar.cc/100?img=2"
-                    nameProject={item?.name}
-                    numberComment="1"
-                    numberHeart="2"
-                    numberLike="3"
-                    imgAvatar="https://i.pravatar.cc/100?img=2"
-                  >
-                    <div className="relative">
-                      <div className="grid grid-cols-7 gap-2 px-3">
-                        <BoardPosition board text="Leader" />
-                        <BoardPosition board text="PO" />
-                        <BoardPosition board text="Dev" />
-                        <BoardPosition board text="Leader" />
-                        <BoardPosition board text="Leader" />
-                        <BoardPosition board text="Tester" />
-                        <BoardPosition board text="Leader" />
-                        <BoardPosition board text="QA" />
-                        <BoardPosition board text="Leader" />
-                      </div>
-                      <button className="shadow-sm absolute right-4 bottom-3 bg-white p-1.5 flex text-[#F97316] items-center space-x-1.5 w-[90px] rounded-md">
-                        <AiOutlineHeart className="text-xl stroke-[20px]" />
-                        <span className="text-[11px]">Follow</span>
-                      </button>
+                <BoardItem
+                  link={`/ProjectDescription?id=${item?.id}`}
+                  imgPage="https://i.pravatar.cc/100?img=2"
+                  nameProject={item?.name}
+                  numberComment="1"
+                  numberHeart="2"
+                  numberLike="3"
+                  imgAvatar="https://i.pravatar.cc/100?img=2"
+                >
+                  <div className="relative">
+                    <div className="grid grid-cols-7 gap-2 px-3">
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="PO" />
+                      <BoardPosition board text="Dev" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Tester" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="QA" />
+                      <BoardPosition board text="Leader" />
                     </div>
-                  </BoardItem>
-                )}
+                    <button className="shadow-sm absolute right-4 bottom-3 bg-white p-1.5 flex text-[#F97316] items-center space-x-1.5 w-[90px] rounded-md">
+                      <AiOutlineHeart className="text-xl stroke-[20px]" />
+                      <span className="text-[11px]">Follow</span>
+                    </button>
+                  </div>
+                </BoardItem>
               </div>
             );
           })}
@@ -101,43 +82,41 @@ export const AllPage = () => {
       <section>
         <h3 className="text-[18px] font-[600]">Ideas</h3>
         <div className="grid grid-cols-4 gap-4">
-          {(mlMyProject?.myProject ?? [])?.map((item, index) => {
-            console.log("item", item);
+          {(mlMyIdeas?.myIdeas ?? [])?.map((item, index) => {
             return (
               <div key={index}>
-                {item?.type === "ideas" && (
-                  <BoardItem
-                    imgPage="https://i.pravatar.cc/100?img=2"
-                    nameProject={item?.name}
-                    numberComment="1"
-                    numberHeart="2"
-                    numberLike="3"
-                    imgAvatar="https://i.pravatar.cc/100?img=2"
-                  >
-                    <div className="px-2.5 space-y-1.5">
-                      <div className="space-y-2">
-                        <CommentItem
-                          itemsCenter
-                          imgAvatar="https://i.pravatar.cc/100?img=2"
-                          nameUser="Eduardo Benz"
-                          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                        />
-                        <CommentItem
-                          itemsCenter
-                          imgAvatar="https://i.pravatar.cc/100?img=2"
-                          nameUser="Eduardo Benz"
-                          content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                        />
-                      </div>
-                      <div className="flex items-center justify-end">
-                        <button className="shadow-sm bg-white p-1.5 flex text-[#F97316] items-center space-x-1.5 w-[90px] rounded-md">
-                          <AiOutlineHeart className="text-xl stroke-[20px]" />
-                          <span className="text-[11px]">Follow</span>
-                        </button>
-                      </div>
+                <BoardItem
+                  link={`/ProjectDescription?id=${item?.id}`}
+                  imgPage="https://i.pravatar.cc/100?img=2"
+                  nameProject={item?.name}
+                  numberComment="1"
+                  numberHeart="2"
+                  numberLike="3"
+                  imgAvatar="https://i.pravatar.cc/100?img=2"
+                >
+                  <div className="px-2.5 space-y-1.5">
+                    <div className="space-y-2">
+                      <CommentItem
+                        itemsCenter
+                        imgAvatar="https://i.pravatar.cc/100?img=2"
+                        nameUser="Eduardo Benz"
+                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                      />
+                      <CommentItem
+                        itemsCenter
+                        imgAvatar="https://i.pravatar.cc/100?img=2"
+                        nameUser="Eduardo Benz"
+                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                      />
                     </div>
-                  </BoardItem>
-                )}
+                    <div className="flex items-center justify-end">
+                      <button className="shadow-sm bg-white p-1.5 flex text-[#F97316] items-center space-x-1.5 w-[90px] rounded-md">
+                        <AiOutlineHeart className="text-xl stroke-[20px]" />
+                        <span className="text-[11px]">Follow</span>
+                      </button>
+                    </div>
+                  </div>
+                </BoardItem>
               </div>
             );
           })}
@@ -145,7 +124,7 @@ export const AllPage = () => {
         <SeeMore />
       </section>
 
-      <section>
+      {/* <section>
         <h3 className="text-[18px] font-[600]">Project Running</h3>
         <div className="grid grid-cols-4 gap-4">
           {dataBoardItem?.map((item, index) => {
@@ -327,7 +306,7 @@ export const AllPage = () => {
           })}
         </div>
         <SeeMore />
-      </section>
+      </section> */}
     </section>
   );
 };

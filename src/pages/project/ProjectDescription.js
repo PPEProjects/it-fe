@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MasterLayout from "layouts/MasterLayout";
 import { Input, Button, Menu, Dropdown, Modal } from "antd";
 import { BoardPosition } from "pages/home/AllPage/BoardPosition";
 import { InformationItem } from "./InformationItem";
 import { CommentItem } from "pages/home/AllPage/CommentItem";
 import { TopComment } from "pages/home/AllPage/TopComment";
+import { detailProject, projectSelector } from "./projectSlice";
+import { getURLParams } from "services";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdMailOutline, MdAttachFile } from "react-icons/md";
@@ -22,6 +26,13 @@ import { ReactComponent as IconMenuComment } from "assets/menu-comment-icon.svg"
 
 const { TextArea } = Input;
 const ProjectDescription = () => {
+  const dispatch = useDispatch();
+  const { id } = getURLParams();
+  const { deProject } = useSelector(projectSelector);
+  const detailProjects = deProject.detailProjectIds;
+  console.log("detailProjects", detailProjects);
+  console.log("id", id);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -35,6 +46,10 @@ const ProjectDescription = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  useEffect(() => {
+    dispatch(detailProject(id));
+  }, [id, dispatch]);
 
   const renderModalTopComment = () => {
     return (
@@ -62,10 +77,13 @@ const ProjectDescription = () => {
     <MasterLayout>
       {renderModalTopComment()}
       <section className="p-4 space-y-4">
-        <div className="flex text-gray-900 pl-2 text-sm items-center space-x-1">
-          <AiOutlineLeft className="stroke-4" />
-          <span>Back</span>
-        </div>
+        <Link to="/AllPage">
+          <div className="flex text-gray-900 pl-2 text-sm items-center space-x-1">
+            <AiOutlineLeft className="stroke-4" />
+            <span>Back</span>
+          </div>
+        </Link>
+
         <section className="flex items-center space-x-5">
           <div className="w-3/4">
             <img
@@ -97,7 +115,7 @@ const ProjectDescription = () => {
         <section className="flex space-x-5">
           <div className="w-3/4">
             <div className="text-[#0C4A6E] text-[24px] uppercase flex items-center justify-between border-b">
-              <p>DU AN CAY XANH CHO NGOI NHA YEU THUONG</p>
+              <p>{detailProjects?.name}</p>
               <p className="flex items-center space-x-7 text-sm text-[#164E63]">
                 <p className="flex items-center space-x-1 cursor-pointer">
                   <AiOutlineLike className="text-2xl stroke-[20px]" />
@@ -127,7 +145,9 @@ const ProjectDescription = () => {
                   alt=""
                 />
                 <div className="pt-1">
-                  <h6 className="text-sm text-gray-900">Tom Cook</h6>
+                  <h6 className="text-sm text-gray-900">
+                    {detailProjects?.user?.name}
+                  </h6>
                   <h6 className="text-xs -mt-1 text-gray-500">View profile</h6>
                 </div>
               </div>
@@ -151,17 +171,19 @@ const ProjectDescription = () => {
               <InformationItem
                 justifyBetween
                 Information="Main author name"
-                result="Tom Cook"
+                result={detailProjects?.user?.name}
               >
                 <div>
                   <p className="flex items-center space-x-2">
                     <MdMailOutline className="text-xl text-gray-400" />
-                    <span>tomcook.admin.01@gmail.com</span>
+                    <span>{detailProjects?.user?.email}</span>
                   </p>
-                  <p className="flex items-center space-x-2">
-                    <BsTelephoneFill className="text-gray-400 text-lg" />
-                    <span>0909 888 000</span>
-                  </p>
+                  {detailProjects?.user?.phone && (
+                    <p className="flex items-center space-x-2">
+                      <BsTelephoneFill className="text-gray-400 text-lg" />
+                      <span>{detailProjects?.user?.email}</span>
+                    </p>
+                  )}
                 </div>
               </InformationItem>
               <InformationItem
@@ -172,17 +194,28 @@ const ProjectDescription = () => {
                 <div>
                   <p className="flex items-center space-x-2">
                     <MdMailOutline className="text-xl text-gray-400" />
-                    <span>tomcook.admin.01@gmail.com</span>
+                    <span>{detailProjects?.user?.email}</span>
                   </p>
-                  <p className="flex items-center space-x-2">
-                    <BsTelephoneFill className="text-gray-400 text-lg" />
-                    <span>0909 888 000</span>
-                  </p>
+                  {detailProjects?.user?.phone && (
+                    <p className="flex items-center space-x-2">
+                      <BsTelephoneFill className="text-gray-400 text-lg" />
+                      <span>{detailProjects?.user?.email}</span>
+                    </p>
+                  )}
                 </div>
               </InformationItem>
-              <InformationItem Information="Category" result="Moblie App" />
-              <InformationItem Information="Salary" result="$120,000" />
-              <InformationItem Information="Tuition" result="$100" />
+              <InformationItem
+                Information="Category"
+                result={detailProjects?.category}
+              />
+              <InformationItem
+                Information="Salary"
+                result={`$ ${detailProjects?.salary?.money}`}
+              />
+              <InformationItem
+                Information="Budget"
+                result={`$ ${detailProjects?.budget?.money}`}
+              />
               <InformationItem
                 Information="Time to do:"
                 result="From: 01/01/2022 to: 30/03/2022"
@@ -197,7 +230,7 @@ const ProjectDescription = () => {
               />
               <InformationItem
                 Information="Main description"
-                result="Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu."
+                result={detailProjects?.description}
               />
               <InformationItem widthFull Information="Attachments">
                 <div className="text-sm w-full rounded-t p-1 px-3 flex items-center !justify-between border">

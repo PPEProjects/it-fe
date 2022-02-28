@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Input, Button, Modal } from "antd";
 import NewProject from "pages/project/NewProject";
 import { Link } from "react-router-dom";
+import { getMe, userSelector } from "pages/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { projectSelector, setProjectMerge } from "pages/project/projectSlice";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsFillMicFill } from "react-icons/bs";
@@ -9,27 +12,22 @@ import { BiSearch } from "react-icons/bi";
 import { IoMdAdd, IoMdNotificationsOutline } from "react-icons/io";
 
 const Header = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  const { me } = useSelector(userSelector);
+  const { cProject } = useSelector(projectSelector);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
 
   const renderModalNewProject = () => {
     return (
       <Modal
         className="!w-[1152px]"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        visible={cProject?.isOpen}
+        onCancel={() =>
+          dispatch(setProjectMerge("cProject", { isOpen: false }))
+        }
         footer={null}
       >
         <NewProject />
@@ -58,9 +56,11 @@ const Header = () => {
           </span>
         </Button>
       </div>
-      <div className="flex space-x-2 items-center pl-16 w-4/12">
+      <div className="flex space-x-2 items-center justify-end pr-4 w-4/12">
         <Button
-          onClick={showModal}
+          onClick={() => {
+            dispatch(setProjectMerge("cProject", { isOpen: true }));
+          }}
           className="!rounded-md !bg-[#FB923C] !h-[50px]"
         >
           <div className="flex items-center text-xl text-white space-x-1">
@@ -78,7 +78,7 @@ const Header = () => {
             <span className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100">
               P
             </span>
-            <span className="text-[#0E7490] text-xl">Product</span>
+            <span className="text-[#0E7490] text-xl">{me?.data?.name}</span>
           </div>
         </Link>
       </div>

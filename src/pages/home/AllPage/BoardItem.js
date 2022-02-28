@@ -18,6 +18,7 @@ export const BoardItem = ({
   numberLike,
   numberComment,
   numberHeart,
+  link,
   children,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -66,10 +67,7 @@ export const BoardItem = ({
       />
       <div className="border-l border-r border-b rounded-b-md px-3">
         <div className="flex items-center justify-between py-2">
-          <Link
-            className="flex items-center space-x-3 w-[60%]"
-            to="/ProjectDescription"
-          >
+          <Link to={link} className="flex items-center space-x-3 w-[60%]">
             <img
               className="h-10 w-10 object-cover rounded-full cursor-pointer"
               src={imgAvatar}

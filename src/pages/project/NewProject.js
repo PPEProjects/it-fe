@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { createProject, projectSelector } from "./projectSlice";
 import { getMe, userSelector } from "pages/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import CurrencyItem from "components/CurrencyItem";
 
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import { AiFillInfoCircle } from "react-icons/ai";
@@ -26,19 +27,11 @@ const settings = [
 const NewProject = () => {
   const [form] = Form.useForm();
   const { TextArea } = Input;
-  const { Option } = Select;
   const dispatch = useDispatch();
   const { cProject } = useSelector(projectSelector);
   const { me } = useSelector(userSelector);
-  console.log("me", me);
 
   const [selected, setSelected] = useState(settings[0]);
-  const [value, setValue] = React.useState(1);
-
-  const onChange = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
-  };
 
   useEffect(() => {
     dispatch(getMe());
@@ -62,161 +55,182 @@ const NewProject = () => {
         onFinish={(values) => dispatch(createProject(values))}
         scrollToFirstError
       >
-        <div className="flex border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">Type</label>
-          <Form.Item className="w-2/3 !mb-0" name="">
-            <Radio.Group
-              className="space-y-1.5"
-              onChange={onChange}
-              value={value}
-            >
-              <Radio value={1}>Project</Radio>
-              <br />
-              <Radio value={2}>Idea</Radio>
-            </Radio.Group>
-          </Form.Item>
-        </div>
-        <div className="flex items-center border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">
-            Idea/Project name
-          </label>
-          <Form.Item
-            className="w-2/3 !mb-0"
-            rules={[{ required: true }]}
-            name="name"
-          >
-            <Input className="!rounded" placeholder="" />
-          </Form.Item>
-        </div>
-        <div className="flex border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">
-            Main author name
-          </label>
-          <Form.Item
-            className="w-1/3 !mb-0"
-            rules={[{ required: true }]}
-            name="name_user"
-          >
-            <Input className="!rounded" placeholder="" />
-          </Form.Item>
-          <div className="w-1/3 !pl-4 space-y-3">
-            <div className="flex items-center">
-              <label className="text-sm w-[60px] text-gray-700">Email</label>
-              <Form.Item
-                className="!mb-0 w-full"
-                rules={[{ required: true }]}
-                name="email"
-              >
-                <Input className="!rounded" placeholder="you@example.com" />
-              </Form.Item>
-            </div>
-            <div className="flex items-center">
-              <label className="text-sm w-[60px] text-gray-700">Phone</label>
-              <Form.Item
-                className="!mb-0 w-full"
-                rules={[{ required: true }]}
-                name="phone"
-              >
-                <Input className="!rounded" placeholder="" />
-              </Form.Item>
-            </div>
-          </div>
-        </div>
-        <div className="flex border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">Co-author name</label>
-          <Form.Item className="w-1/3 !mb-0" name="">
-            <Input className="!rounded" placeholder="" />
-          </Form.Item>
-          <div className="w-1/3 !pl-4 space-y-3">
-            <div className="flex items-center">
-              <label className="text-sm w-[60px] text-gray-700">Email</label>
-              <Form.Item className="!mb-0 w-full" name="">
-                <Input className="!rounded" placeholder="you@example.com" />
-              </Form.Item>
-            </div>
-            <div className="flex items-center">
-              <label className="text-sm w-[60px] text-gray-700">Phone</label>
-              <Form.Item className="!mb-0 w-full" name="">
-                <Input className="!rounded" placeholder="" />
-              </Form.Item>
-            </div>
-          </div>
-        </div>
-        <div className="flex border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">
-            Main description
-          </label>
-          <Form.Item
-            className="w-2/3 !mb-0"
-            rules={[{ required: true }]}
-            name="description"
-          >
-            <TextArea className="!rounded !h-[120px]" placeholder="" />
-          </Form.Item>
-        </div>
-        <div className="flex items-center border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">
-            Category (website, adon, extension, app, other...)
-          </label>
-          <Form.Item className="w-1/3 !mb-0" name="category">
-            <Input className="!rounded" placeholder="" />
-          </Form.Item>
-        </div>
-        <div className="flex items-center border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">Budget</label>
-          <div className="w-1/3 space-x-3 flex">
-            <Form.Item className="!mb-0 space-x-3" name="budget_iso_code">
-              <Input className="!rounded !w-[70%]" placeholder="$ 0.00" />
-
-              <Select className="!rounded !w-[30%]" defaultValue="USD">
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="disabled" disabled>
-                  Disabled
-                </Option>
-                <Option value="Yiminghe">yiminghe</Option>
-              </Select>
-            </Form.Item>
-          </div>
-        </div>
-        <div className="flex items-center border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700 flex items-center space-x-2">
-            <span>Recruit members after done</span>
-          </label>
-          <div className="w-1/3">
-            <Switch defaultChecked />
-          </div>
-        </div>
-        <div className="flex items-center border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">
-            Salary estimated at that time
-          </label>
-          <div className="w-1/3 space-x-3 flex">
-            <Form.Item className="!mb-0 w-[70%]" name="salary_money">
-              <Input className="!rounded" placeholder="$ 0.00" />
-            </Form.Item>
-            <Form.Item className="!mb-0 w-[30%]" name="salary_iso_code">
-              <Select className="!rounded" defaultValue="USD">
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="disabled" disabled>
-                  Disabled
-                </Option>
-                <Option value="Yiminghe">yiminghe</Option>
-              </Select>
-            </Form.Item>
-          </div>
-        </div>
-        <div className="flex border-b p-3">
-          {/* <label className="w-1/3 text-sm text-gray-700">Main picture</label> */}
-          <Form.Item
-            className="w-1/3 text-sm text-gray-700"
-            name="main_picture"
-            label="Main picture"
-          >
-            <VideoUpload />
-          </Form.Item>
-          {/* <button
+        <Form.List name={`data`}>
+          {(fields) => (
+            <>
+              <div className="flex border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">Type</label>
+                <Form.Item
+                  className="w-2/3 !mb-0"
+                  name="type"
+                  initialValue="project"
+                >
+                  <Radio.Group className="space-y-1.5">
+                    <Radio value="project">Project</Radio>
+                    <br />
+                    <Radio value="ideas">Ideas</Radio>
+                  </Radio.Group>
+                </Form.Item>
+              </div>
+              <div className="flex items-center border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Idea/Project name
+                </label>
+                <Form.Item
+                  className="w-2/3 !mb-0"
+                  rules={[{ required: true }]}
+                  name="name"
+                >
+                  <Input className="!rounded" placeholder="" />
+                </Form.Item>
+              </div>
+              <div className="flex border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Main author name
+                </label>
+                <Form.Item className="w-1/3 !mb-0" rules={[{ required: true }]}>
+                  <Input
+                    value={me?.data?.name}
+                    disabled
+                    className="!rounded"
+                    placeholder=""
+                  />
+                </Form.Item>
+                <div className="w-1/3 !pl-4 space-y-3">
+                  <div className="flex items-center">
+                    <label className="text-sm w-[60px] text-gray-700">
+                      Email
+                    </label>
+                    <Form.Item
+                      className="!mb-0 w-full"
+                      rules={[{ required: true }]}
+                    >
+                      <Input
+                        className="!rounded"
+                        value={me?.data?.email}
+                        disabled
+                      />
+                    </Form.Item>
+                  </div>
+                  <div className="flex items-center">
+                    <label className="text-sm w-[60px] text-gray-700">
+                      Phone
+                    </label>
+                    <Form.Item
+                      className="!mb-0 w-full"
+                      rules={[{ required: true }]}
+                    >
+                      <Input
+                        className="!rounded"
+                        value={me?.data?.phone}
+                        disabled
+                      />
+                    </Form.Item>
+                  </div>
+                </div>
+              </div>
+              <div className="flex border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Co-author name
+                </label>
+                <Form.Item
+                  className="w-1/3 !mb-0"
+                  // name="author_name"
+                >
+                  <Input className="!rounded" placeholder="" />
+                </Form.Item>
+                <div className="w-1/3 !pl-4 space-y-3">
+                  <div className="flex items-center">
+                    <label className="text-sm w-[60px] text-gray-700">
+                      Email
+                    </label>
+                    <Form.Item
+                      className="!mb-0 w-full"
+                      // name="author_email"
+                    >
+                      <Input
+                        className="!rounded"
+                        placeholder="you@example.com"
+                      />
+                    </Form.Item>
+                  </div>
+                  <div className="flex items-center">
+                    <label className="text-sm w-[60px] text-gray-700">
+                      Phone
+                    </label>
+                    <Form.Item
+                      className="!mb-0 w-full"
+                      // name="author_phone"
+                    >
+                      <Input className="!rounded" placeholder="" />
+                    </Form.Item>
+                  </div>
+                </div>
+              </div>
+              <div className="flex border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Main description
+                </label>
+                <Form.Item
+                  className="w-2/3 !mb-0"
+                  rules={[{ required: true }]}
+                  name="description"
+                >
+                  <TextArea className="!rounded !h-[120px]" placeholder="" />
+                </Form.Item>
+              </div>
+              <div className="flex items-center border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Category (website, adon, extension, app, other...)
+                </label>
+                <Form.Item className="w-1/3 !mb-0" name="category">
+                  <Input className="!rounded" placeholder="" />
+                </Form.Item>
+              </div>
+              <div className="flex items-center border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">Budget</label>
+                <div className="w-1/3 space-x-3">
+                  <Form.Item name="budget">
+                    <CurrencyItem />
+                  </Form.Item>
+                </div>
+              </div>
+              <div className="flex items-center border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Time to do
+                </label>
+                <Form.Item className="w-1/3 !mb-0" name="timeToDo">
+                  <Input className="!rounded" placeholder="" />
+                </Form.Item>
+              </div>
+              <div className="flex items-center border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700 flex items-center space-x-2">
+                  <span>Recruit members after done</span>
+                </label>
+                <div className="w-1/3">
+                  <Switch defaultChecked />
+                </div>
+              </div>
+              <div className="flex items-center border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Salary estimated at that time
+                </label>
+                <div className="w-1/3 space-x-3">
+                  <Form.Item name="salary">
+                    <CurrencyItem />
+                  </Form.Item>
+                </div>
+              </div>
+              <div className="flex border-b p-3">
+                {/* <label className="w-1/3 text-sm text-gray-700">Main picture</label> */}
+                <Form.Item
+                  className="w-1/3 text-sm text-gray-700"
+                  name="main_picture"
+                  label="Main picture"
+                >
+                  <VideoUpload />
+                </Form.Item>
+                {/* <button
             type="button"
             className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0369A1]"
           >
@@ -232,53 +246,57 @@ const NewProject = () => {
               PNG, JPG, up to 10MB
             </span>
           </button> */}
-        </div>
+              </div>
 
-        <div className="flex border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700">Pitch Deck</label>
+              <div className="flex border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Pitch Deck
+                </label>
 
-          <button
-            type="button"
-            className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            <p className="flex items-center justify-center">
-              {" "}
-              <IconDatabase className="!w-[38px] !h-[40px]" />
-            </p>
-            <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
-              <a href>Upload a file</a>
-              <span>or drag and drop</span>
-            </span>
-            <span className="text-[12px] text-gray-400">
-              PNG, JPG, up to 10MB
-            </span>
-          </button>
-        </div>
+                <button
+                  type="button"
+                  className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <p className="flex items-center justify-center">
+                    {" "}
+                    <IconDatabase className="!w-[38px] !h-[40px]" />
+                  </p>
+                  <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
+                    <a href>Upload a file</a>
+                    <span>or drag and drop</span>
+                  </span>
+                  <span className="text-[12px] text-gray-400">
+                    PNG, JPG, up to 10MB
+                  </span>
+                </button>
+              </div>
 
-        <div className="flex border-b p-3">
-          <label className="w-1/3 text-sm text-gray-700 flex items-center space-x-2">
-            <span>Other files</span>
-            <AiFillInfoCircle className="text-lg text-gray-400" />
-          </label>
+              <div className="flex border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700 flex items-center space-x-2">
+                  <span>Other files</span>
+                  <AiFillInfoCircle className="text-lg text-gray-400" />
+                </label>
 
-          <button
-            type="button"
-            className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            <p className="flex items-center justify-center">
-              {" "}
-              <IconDatabase className="!w-[38px] !h-[40px]" />
-            </p>
-            <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
-              <a href>Upload a file</a>
-              <span>or drag and drop</span>
-            </span>
-            <span className="text-[12px] text-gray-400">
-              PNG, JPG, up to 10MB
-            </span>
-          </button>
-        </div>
-
+                <button
+                  type="button"
+                  className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  <p className="flex items-center justify-center">
+                    {" "}
+                    <IconDatabase className="!w-[38px] !h-[40px]" />
+                  </p>
+                  <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
+                    <a href>Upload a file</a>
+                    <span>or drag and drop</span>
+                  </span>
+                  <span className="text-[12px] text-gray-400">
+                    PNG, JPG, up to 10MB
+                  </span>
+                </button>
+              </div>
+            </>
+          )}
+        </Form.List>
         <div className="flex items-center border-b p-3">
           <label className="w-1/3 text-sm text-gray-700 flex items-center space-x-2">
             <span>Are you involved in the project?</span>
@@ -375,7 +393,7 @@ const NewProject = () => {
               type="primary"
               size="large"
               htmlType="submit"
-              // loading={lAuth.isLoading}
+              loading={cProject.isLoading}
             >
               Create
             </Button>
