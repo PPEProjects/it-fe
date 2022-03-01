@@ -73,7 +73,7 @@ const Header = () => {
             <IoMdNotificationsOutline className="text-xl text-[#0E7490]" />
           </span>
         </Button>
-        <Link to="/MyProfile">
+        <Link to={`/MyProfile?id=${me?.data?.id}`}>
           <div className="flex items-center space-x-2">
             <span className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100">
               P

@@ -31,7 +31,6 @@ const ProjectDescription = () => {
   const { deProject } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
   console.log("detailProjects", detailProjects);
-  console.log("id", id);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -222,12 +221,15 @@ const ProjectDescription = () => {
               />
               <InformationItem
                 Information="Framework:"
-                result="Laravel, Tailwind"
+                result={(detailProjects?.framework).join()}
               />
+
               <InformationItem
                 Information="Programing Language:"
-                result="React Native, Java"
+                resultClassName="!flex !items-center !space-x-1"
+                result={(detailProjects?.programingLanguage).join()}
               />
+
               <InformationItem
                 Information="Main description"
                 result={detailProjects?.description}

@@ -160,11 +160,14 @@ export function createProject(values) {
             description
             level
             privacy
-            timeToDo
             version
             budget
             type
             salary
+            status
+            memberJoin
+            framework
+            programingLanguage
             is_recruit
             is_involved
             createdAt
@@ -200,7 +203,7 @@ export function detailProject(id) {
   return async (dispatch) => {
     dispatch(setMerge({ deProject: { isRefresh: false, isLoading: true } }));
     const query = gql`
-      query DetailProject($detailProjectId: Int) {
+      query DetailProject($detailProjectId: ID) {
         detailProject(id: $detailProjectId) {
           id
           name
@@ -232,6 +235,8 @@ export function detailProject(id) {
           salary
           status
           memberJoin
+          framework
+          programingLanguage
           is_recruit
           is_involved
           createdAt
@@ -243,7 +248,7 @@ export function detailProject(id) {
     const res = await apolloClient.query({
       query,
       variables: {
-        id: id,
+        detailProjectId: id,
       },
     });
     const detailProjectIds = res?.data?.detailProject;

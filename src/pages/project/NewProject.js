@@ -26,10 +26,13 @@ const settings = [
 
 const NewProject = () => {
   const [form] = Form.useForm();
+  const { Option } = Select;
   const { TextArea } = Input;
   const dispatch = useDispatch();
   const { cProject } = useSelector(projectSelector);
   const { me } = useSelector(userSelector);
+
+  console.log("me", me);
 
   const [selected, setSelected] = useState(settings[0]);
 
@@ -122,7 +125,7 @@ const NewProject = () => {
                     >
                       <Input
                         className="!rounded"
-                        value={me?.data?.phone}
+                        value={me?.data?.phone_number}
                         disabled
                       />
                     </Form.Item>
@@ -188,6 +191,44 @@ const NewProject = () => {
                 </Form.Item>
               </div>
               <div className="flex items-center border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">
+                  Programming Language
+                </label>
+                <Form.Item className="w-2/3 !mb-0" name="programingLanguage">
+                  <Select
+                    mode="multiple"
+                    allowClear
+                    style={{ width: "100%" }}
+                    placeholder="Please select"
+                    defaultValue="ReactJs"
+                  >
+                    <Option value="reactJs">ReactJs</Option>
+                    <Option value="java">Java</Option>
+                    <Option value="nodeJs">NodeJs</Option>
+                    <Option value="php">Php</Option>
+                    <Option value="c">C</Option>
+                  </Select>
+                </Form.Item>
+              </div>
+              <div className="flex items-center border-b p-3">
+                <label className="w-1/3 text-sm text-gray-700">Framework</label>
+                <Form.Item className="w-2/3 !mb-0" name="framework">
+                  <Select
+                    mode="multiple"
+                    allowClear
+                    style={{ width: "100%" }}
+                    placeholder="Please select"
+                    defaultValue="ReactJs"
+                  >
+                    <Option value="reactJs">ReactJs</Option>
+                    <Option value="java">Java</Option>
+                    <Option value="nodeJs">NodeJs</Option>
+                    <Option value="php">Php</Option>
+                    <Option value="c">C</Option>
+                  </Select>
+                </Form.Item>
+              </div>
+              <div className="flex items-center border-b p-3">
                 <label className="w-1/3 text-sm text-gray-700">Budget</label>
                 <div className="w-1/3 space-x-3">
                   <Form.Item name="budget">
@@ -247,7 +288,6 @@ const NewProject = () => {
             </span>
           </button> */}
               </div>
-
               <div className="flex border-b p-3">
                 <label className="w-1/3 text-sm text-gray-700">
                   Pitch Deck
@@ -270,7 +310,6 @@ const NewProject = () => {
                   </span>
                 </button>
               </div>
-
               <div className="flex border-b p-3">
                 <label className="w-1/3 text-sm text-gray-700 flex items-center space-x-2">
                   <span>Other files</span>

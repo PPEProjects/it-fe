@@ -7,6 +7,7 @@ export const InformationItem = ({
   children,
   justifyBetween,
   widthFull,
+  resultClassName,
 }) => {
   return (
     <div className="py-4 flex border-b">
@@ -16,7 +17,7 @@ export const InformationItem = ({
           "justify-between": justifyBetween,
         })}
       >
-        <span>{result}</span>
+        <span className={classNames("", resultClassName)}>{result}</span>
         <span
           className={classNames("text-xs text-gray-700", {
             "!w-full": widthFull,
