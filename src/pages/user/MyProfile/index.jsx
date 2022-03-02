@@ -14,63 +14,15 @@ import { BsFillCalendar2Fill, BsTelephoneFill } from "react-icons/bs";
 import { FaTransgender } from "react-icons/fa";
 import { HiMail, HiLocationMarker } from "react-icons/hi";
 
-const dataJoinProject = [
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    project: " Project IT Training",
-    category: "Web-app",
-    time: "20/01/2022 - 20/04/2022",
-    position: "Back End Developer",
-  },
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    project: " Project IT Training",
-    category: "Web-app",
-    time: "20/01/2022 - 20/04/2022",
-    position: "Back End Developer",
-  },
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    project: " Project IT Training",
-    category: "Web-app",
-    time: "20/01/2022 - 20/04/2022",
-    position: "Back End Developer",
-  },
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    project: " Project IT Training",
-    category: "Web-app",
-    time: "20/01/2022 - 20/04/2022",
-    position: "Back End Developer",
-  },
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    project: " Project IT Training",
-    category: "Web-app",
-    time: "20/01/2022 - 20/04/2022",
-    position: "Back End Developer",
-  },
-  {
-    imgAvatar: "https://i.pravatar.cc/100?img=2",
-    project: " Project IT Training",
-    category: "Web-app",
-    time: "20/01/2022 - 20/04/2022",
-    position: "Back End Developer",
-  },
-];
-
 const MyProfile = () => {
   const dispatch = useDispatch();
   const { id } = getURLParams();
   const { deUser } = useSelector(userSelector);
-
   const deUsers = deUser?.detailUserIds;
 
   useEffect(() => {
     dispatch(detailUser(id));
   }, [id, dispatch]);
-
-  console.log("deUser", deUsers);
 
   return (
     <MasterLayout>
@@ -191,7 +143,7 @@ const MyProfile = () => {
               />
               <CardSkin
                 project="Framework"
-                number={deUsers?.userAdvance?.numberFramework}
+                number={deUsers?.userAdvance?.skill?.length}
               />
             </div>
           </div>
@@ -230,7 +182,7 @@ const MyProfile = () => {
             </p>
           </div>
 
-          {(deUsers?.userAdvance?.skill ?? [])?.map((item, index) => {
+          {/* {(deUsers?.userAdvance?.skill ?? [])?.map((item, index) => {
             return (
               <div key={index} className="space-y-3">
                 <div className="space-y-6 pt-4" key={index}>
@@ -293,23 +245,23 @@ const MyProfile = () => {
                             className="!bg-[#d1fae5] !text-[#065F46]"
                             framework={frameworkItem}
                           />
-                          {/* <Framework
+                          <Framework
                             className="!bg-[#F3F4F6]"
                             framework={frameworkItem}
-                          /> */}
-                          {/* <Framework
-                              className="!bg-[#FEE2E2] !text-[#991B1B]"
-                              framework={frameworkItem}
-                            />
-                            <Framework
-                              className="!bg-[#FEF3C7] !text-[#92400E]"
-                              framework={frameworkItem}
-                            /> */}
+                          />
+                          <Framework
+                            className="!bg-[#FEE2E2] !text-[#991B1B]"
+                            framework={frameworkItem}
+                          />
+                          <Framework
+                            className="!bg-[#FEF3C7] !text-[#92400E]"
+                            framework={frameworkItem}
+                          />
                         </div>
                       );
                     })}
                   </div>
-                  {/* <div className="flex items-center justify-end space-x-12 px-2">
+                  <div className="flex items-center justify-end space-x-12 px-2">
                     <Framework
                       className="!bg-[#d1fae5] !text-[#065F46]"
                       framework=".NET"
@@ -322,11 +274,11 @@ const MyProfile = () => {
                       className="!bg-[#EDE9FE] !text-[#5B21B6]"
                       framework="Tailwind"
                     />
-                  </div> */}
+                  </div>
                 </div>
               </div>
             );
-          })}
+          })} */}
 
           <div className="space-y-3 py-5">
             <Directory

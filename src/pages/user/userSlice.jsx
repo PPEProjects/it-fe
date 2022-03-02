@@ -6,6 +6,7 @@ import { apolloClient, restClient } from "services";
 export const initialState = {
   me: { isRefresh: true },
   deUser: { isRefresh: true },
+  upsertProfile: {},
 };
 
 const userSlice = createSlice({
@@ -140,5 +141,60 @@ export function detailUser(id) {
         },
       })
     );
+  };
+}
+
+export function upsertUserAdvance(values) {
+  console.log("values", values);
+  return async (dispatch) => {
+    dispatch(setMerge({ upsertProfile: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation UpsertUserAdvance($data: UserAdvanceInput!) {
+          upsertUserAdvance(data: $data) {
+            id
+            userId
+            roles
+            language
+            skill
+            info
+            goal
+            plan
+            user {
+              id
+              first_name
+              name
+              phone_number
+              address
+              country
+              gender
+              date_of_birth
+              avatar_attachment
+              background_attachment
+            }
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then((res) => {
+        dispatch(
+          setMerge({
+            upsertProfile: {
+              japaneseGoal: res.data.upsertUserAdvance,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ upsertProfile: { isLoading: false } }));
+    }
   };
 }

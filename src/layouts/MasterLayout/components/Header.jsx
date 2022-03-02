@@ -37,10 +37,12 @@ const Header = () => {
 
   return (
     <section className="p-3 flex items-center space-x-2 border-b">
-      <div className="flex items-center space-x-3 w-3/12">
-        <GiHamburgerMenu className="text-2xl" />
-        <span className="text-[30px]">SmileEye</span>
-      </div>
+      <Link to={`/NewProfile?id=${me?.data?.id}`}>
+        <div className="flex items-center space-x-3 w-3/12">
+          <GiHamburgerMenu className="text-2xl" />
+          <span className="text-[30px]">SmileEye</span>
+        </div>
+      </Link>
       <div className="flex items-center space-x-2 w-5/12">
         <div className="flex items-center w-5/6">
           <Input className="!rounded-l-[6px] h-[50px] z-10" />
