@@ -145,7 +145,6 @@ export function detailUser(id) {
 }
 
 export function upsertUserAdvance(values) {
-  console.log("values", values);
   return async (dispatch) => {
     dispatch(setMerge({ upsertProfile: { isLoading: true } }));
     const mutationAPI = () => {

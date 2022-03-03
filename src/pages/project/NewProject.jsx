@@ -165,7 +165,7 @@ const NewProject = () => {
                       className="!mb-0 w-full"
                       // name="author_phone"
                     >
-                      <Input className="!rounded" placeholder="" />
+                      <Input type='number' className="!rounded" placeholder="" />
                     </Form.Item>
                   </div>
                 </div>

@@ -7,7 +7,7 @@ class restClient extends Component {
   static _get_config() {
     const cookies = new Cookies();
     return {
-      headers: { Authorization: `Bearer ${cookies.get("it-fe")}` },
+      headers: { Authorization: `Bearer ${cookies.get("ppe-it")}` },
     };
   }
 

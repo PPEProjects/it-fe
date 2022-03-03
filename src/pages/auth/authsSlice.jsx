@@ -14,6 +14,7 @@ export const initialState = {
   url: "",
   checkExistsAuth: {},
   addAuth: {},
+  media_id: null
 };
 
 const authsSlice = createSlice({
@@ -51,14 +52,14 @@ export function authLogin(values) {
     dispatch(setMerge({ lAuth: { isLoading: true } }));
     const res = await restClient.post("/ppe-core/auth/login", values);
     if (res?.data?.data?.token) {
-      cookies.set("ppe-token", res.data.data.token, {
+      cookies.set("ppe-it", res.data.data.token, {
         path: "/",
         expires: new Date(Date.now() + 25920000000),
       });
       window.location.assign("/AllPage");
     }
     if (res?.data?.data?.token && res?.data?.data?.roles[0] === "admin") {
-      cookies.set("ppe-token", res.data.data.token, {
+      cookies.set("ppe-it", res.data.data.token, {
         // path: "/admin/TableGoalList/GoalTemplateList",
         path: "/admin/TableGoalList/ConfirmedGoalList",
         expires: new Date(Date.now() + 25920000000),
@@ -76,7 +77,7 @@ export function authRegister(values) {
     dispatch(setMerge({ rAuth: { isLoading: true } }));
     const res = await restClient.post("/ppe-core/auth/register", values);
     if (res?.data?.data?.access_token) {
-      cookies.set("ppe-token", res.data.data.access_token, {
+      cookies.set("ppe-it", res.data.data.access_token, {
         path: "/",
         expires: new Date(Date.now() + 25920000000),
       });
@@ -103,7 +104,7 @@ export function authLogout() {
   return async (dispatch) => {
     dispatch(setMerge({ loAuth: { isLoading: true } }));
     const res = await restClient.get("/ppe-core/auth/logout");
-    cookies.remove("ppe-token");
+    cookies.remove("ppe-it");
     dispatch(setMerge({ loAuth: { isLoading: false } }));
     window.location.assign("/m/LoginPage");
   };
@@ -159,7 +160,7 @@ export function authLoginPusher(res) {
     dispatch(setMerge({ lAuth: { isLoading: true } }));
     if (res) {
       console.log("token res = ", res);
-      cookies.set("ppe-token", res, {
+      cookies.set("ppe-it", res, {
         path: "/",
         expires: new Date(Date.now() + 25920000000),
       });

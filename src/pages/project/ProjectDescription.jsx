@@ -177,10 +177,10 @@ const ProjectDescription = () => {
                     <MdMailOutline className="text-xl text-gray-400" />
                     <span>{detailProjects?.user?.email}</span>
                   </p>
-                  {detailProjects?.user?.phone && (
+                  {detailProjects?.user?.phone_number && (
                     <p className="flex items-center space-x-2">
                       <BsTelephoneFill className="text-gray-400 text-lg" />
-                      <span>{detailProjects?.user?.email}</span>
+                      <span>{detailProjects?.user?.phone_number}</span>
                     </p>
                   )}
                 </div>
@@ -195,10 +195,10 @@ const ProjectDescription = () => {
                     <MdMailOutline className="text-xl text-gray-400" />
                     <span>{detailProjects?.user?.email}</span>
                   </p>
-                  {detailProjects?.user?.phone && (
+                  {detailProjects?.user?.phone_number && (
                     <p className="flex items-center space-x-2">
                       <BsTelephoneFill className="text-gray-400 text-lg" />
-                      <span>{detailProjects?.user?.email}</span>
+                      <span>{detailProjects?.user?.phone_number}</span>
                     </p>
                   )}
                 </div>
@@ -209,25 +209,25 @@ const ProjectDescription = () => {
               />
               <InformationItem
                 Information="Salary"
-                result={`$ ${detailProjects?.salary?.money}`}
+                result={detailProjects?.salary?.money}
               />
               <InformationItem
                 Information="Budget"
-                result={`$ ${detailProjects?.budget?.money}`}
+                result={detailProjects?.budget?.money}
               />
               <InformationItem
                 Information="Time to do:"
-                result="From: 01/01/2022 to: 30/03/2022"
+                result={detailProjects?.timeToDo}
               />
               <InformationItem
                 Information="Framework:"
-                result={(detailProjects?.framework).join()}
+                // result={(detailProjects?.framework).join()}
               />
 
               <InformationItem
                 Information="Programing Language:"
                 resultClassName="!flex !items-center !space-x-1"
-                result={(detailProjects?.programingLanguage).join()}
+                // result={(detailProjects?.programingLanguage).join()}
               />
 
               <InformationItem

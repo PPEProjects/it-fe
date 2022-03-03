@@ -6,10 +6,10 @@ import { AllPage } from "./AllPage";
 const HomePage = () => {
   return (
     <MasterLayout>
-      <div className="!bg-[#F6F9FB]">
+      <section className="!bg-[#F6F9FB]">
         <MenuPage />
         <AllPage />
-      </div>
+      </section>
     </MasterLayout>
   );
 };

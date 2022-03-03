@@ -59,7 +59,7 @@ const NewProfile = () => {
         onFinish={(values) => dispatch(upsertUserAdvance(values))}
         scrollToFirstError
         layout="vertical"
-        className="!p-4"
+        className="!px-4 !py-6"
       >
         <section className="border rounded-md p-4 bg-white">
           <Form.List name="data">
@@ -223,7 +223,7 @@ const NewProfile = () => {
           <div className="p-3 text-right">
             <Form.Item>
               <Button
-                className="!rounded-md bg-[#0EA5E9]"
+                className="!rounded-md !bg-[#0EA5E9]"
                 onClick={() => openNotificationWithIcon("success")}
                 type="primary"
                 size="large"

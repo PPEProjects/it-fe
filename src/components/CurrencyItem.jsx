@@ -13,6 +13,7 @@ const CurrencyItem = ({ onChange, value }) => {
       <Input
         className="!rounded !w-[70%]"
         placeholder="$ 0.00"
+        type='number'
         onChange={(e) => setPrice({ ...price, money: e.target.value })}
       />
 

@@ -8,7 +8,7 @@ export class resfulClient extends Component {
     static _get_config() {
         const cookies = new Cookies();
         return {
-            headers: {'Authorization': `Bearer ${cookies.get('ppe-token')}`}
+            headers: {'Authorization': `Bearer ${cookies.get('ppe-it')}`}
         };
     }
 

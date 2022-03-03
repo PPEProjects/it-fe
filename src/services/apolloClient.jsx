@@ -5,7 +5,7 @@ import { HttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 const cookies = new Cookies();
-const token = cookies.get("ppe-token");
+const token = cookies.get("ppe-it");
 const httpLink = new HttpLink({
   uri: `${process.env.REACT_APP_BE_URL}`,
   headers: {
