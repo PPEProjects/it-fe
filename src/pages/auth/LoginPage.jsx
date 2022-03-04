@@ -1,8 +1,8 @@
-import React from "react";
-import { Button, Form, Input } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { authLogin, authsSelector } from "./authsSlice";
+import React from 'react';
+import { Button, Form, Input } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { authLogin, authsSelector } from './authsSlice';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const LoginPage = () => {
       <div className="w-1/2 px-[160px] pt-14 pb-4 flex flex-col justify-between h-[700px]">
         <Form
           name="basic"
-          onFinish={(values) => {
+          onFinish={values => {
             dispatch(authLogin(values));
           }}
           layout="vertical"
@@ -25,9 +25,7 @@ const LoginPage = () => {
                 src={`/assets/images/photo_2021-07-14_10-53-20.jpg`}
                 alt=""
               />
-              <h3 className="text-[24px] text-black pt-3 font-bold text-center">
-                Login
-              </h3>
+              <h3 className="text-[24px] text-black pt-3 font-bold text-center">Login</h3>
             </div>
           </Form.Item>
           <Form.Item
@@ -36,15 +34,15 @@ const LoginPage = () => {
             rules={[
               {
                 whitespace: true,
-                message: "",
+                message: '',
               },
               {
-                type: "email",
-                message: "The input is not valid E-mail!",
+                type: 'email',
+                message: 'The input is not valid E-mail!',
               },
               {
                 required: true,
-                message: "Please input your E-mail!",
+                message: 'Please input your E-mail!',
               },
             ]}
           >
@@ -56,15 +54,11 @@ const LoginPage = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+                message: 'Please input your password!',
               },
             ]}
           >
-            <Input.Password
-              className="!rounded"
-              placeholder="Password"
-              size="large"
-            />
+            <Input.Password className="!rounded" placeholder="Password" size="large" />
           </Form.Item>
           <div className="flex justify-center text-[14px] space-x-1 pb-4 text-gray-400">
             <span>Forgot Password?</span>

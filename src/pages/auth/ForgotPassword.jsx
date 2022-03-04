@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form, Input, Modal } from "antd";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  authsSelector,
-  authForgotPassword,
-  authCheckExists,
-} from "./authsSlice";
-import debounce from "lodash/debounce";
+import React, { useEffect, useState } from 'react';
+import { Button, Form, Input, Modal } from 'antd';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { authsSelector, authForgotPassword, authCheckExists } from './authsSlice';
+import debounce from 'lodash/debounce';
 
-import { CheckCircleOutlined } from "@ant-design/icons";
-import { AiFillLeftCircle } from "react-icons/ai";
+import { CheckCircleOutlined } from '@ant-design/icons';
+import { AiFillLeftCircle } from 'react-icons/ai';
 
 const ForgotPassWord = () => {
   const dispatch = useDispatch();
@@ -18,16 +14,14 @@ const ForgotPassWord = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
 
-  const debounceFetch = debounce((email) => {
+  const debounceFetch = debounce(email => {
     dispatch(authCheckExists({ email }));
   }, 500);
 
   const existsAuth = () => {
-    form.setFields([{ name: "email", errors: [] }]);
+    form.setFields([{ name: 'email', errors: [] }]);
     if (checkExistsAuth?.email === false) {
-      form.setFields([
-        { name: "email", errors: ["This email does not exists."] },
-      ]);
+      form.setFields([{ name: 'email', errors: ['This email does not exists.'] }]);
     }
   };
 
@@ -43,12 +37,11 @@ const ForgotPassWord = () => {
     if (isModalVisible)
       Modal.confirm({
         icon: <CheckCircleOutlined />,
-        content:
-          "We have sent a security code to reset password of SmileEye to your email.",
+        content: 'We have sent a security code to reset password of SmileEye to your email.',
         onOk() {
-          window.location.assign("/NewPassword");
+          window.location.assign('/NewPassword');
         },
-        cancelButtonProps: { className: "hidden" },
+        cancelButtonProps: { className: 'hidden' },
       });
   }, [isModalVisible]);
 
@@ -63,10 +56,10 @@ const ForgotPassWord = () => {
           </div>
           <div className="px-[160px] pt-7">
             <Form
-              onFinishFailed={(values) => {
+              onFinishFailed={values => {
                 existsAuth();
               }}
-              onFinish={(values) => {
+              onFinish={values => {
                 existsAuth();
                 dispatch(authForgotPassword(values));
               }}
@@ -83,8 +76,8 @@ const ForgotPassWord = () => {
                   </h3>
                 </div>
                 <div className="text-sm text-center px-4 pt-3 text-gray-700">
-                  Don't worry! Fill in your email, if we can match it we'll send
-                  you a link to reset your password.
+                  Don't worry! Fill in your email, if we can match it we'll send you a link to reset
+                  your password.
                 </div>
               </Form.Item>
               <Form.Item
@@ -92,12 +85,12 @@ const ForgotPassWord = () => {
                 label="Email"
                 rules={[
                   {
-                    type: "email",
-                    message: "The input is not valid E-mail!",
+                    type: 'email',
+                    message: 'The input is not valid E-mail!',
                   },
                   {
                     required: true,
-                    message: "Please input your E-mail!",
+                    message: 'Please input your E-mail!',
                   },
                 ]}
               >
@@ -105,7 +98,7 @@ const ForgotPassWord = () => {
                   className="!rounded"
                   placeholder="Email"
                   size="large"
-                  onChange={(e) => debounceFetch(e.target.value)}
+                  onChange={e => debounceFetch(e.target.value)}
                 />
               </Form.Item>
 

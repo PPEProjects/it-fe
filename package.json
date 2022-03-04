@@ -61,8 +61,11 @@
     "apollo-link": "^1.2.14",
     "apollo-link-error": "^1.1.13",
     "autoprefixer": "^10.4.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "graphql-tag": "^2.12.6",
     "postcss": "^8.4.5",
+    "prettier": "^2.5.1",
     "react-api-codeby": "^1.0.5",
     "tailwindcss": "^3.0.12",
     "yup": "^0.32.11"

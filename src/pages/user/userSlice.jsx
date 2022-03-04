@@ -1,7 +1,7 @@
-import gql from "graphql-tag";
-import { createSlice } from "@reduxjs/toolkit";
-import { _slice } from "services/reduxToolkit";
-import { apolloClient, restClient } from "services";
+import gql from 'graphql-tag';
+import { createSlice } from '@reduxjs/toolkit';
+import { _slice } from 'services/reduxToolkit';
+import { apolloClient, restClient } from 'services';
 
 export const initialState = {
   me: { isRefresh: true },
@@ -10,7 +10,7 @@ export const initialState = {
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     setData: (state, { payload }) => {
@@ -23,31 +23,29 @@ const userSlice = createSlice({
 });
 
 export const { setData, setMerge } = userSlice.actions;
-export const userSelector = (state) => state.user;
+export const userSelector = state => state.user;
 export default userSlice.reducer;
 
 export function setUser(state) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setData(state));
   };
 }
 
 export function setUserMerge(key, item) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setMerge({ ...{}, [key]: item }));
   };
 }
 
 export function getMe() {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setMerge({ me: { isLoading: true } }));
     const query = gql`
       query Me {
         me {
           id
           name
-          email
-          phone_number
           avatar_attachment
           userAdvance {
             goal
@@ -58,18 +56,20 @@ export function getMe() {
           userFeedback {
             grate
           }
-          project {
+          selfProject {
             id
             name
             type
           }
-          projectMembers {
+          joinProject {
             id
             project {
               name
             }
             position
           }
+          numberSelfProject
+          numberJoinedProject
         }
       }
     `;
@@ -81,7 +81,7 @@ export function getMe() {
 }
 
 export function detailUser(id) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setMerge({ deUser: { isRefresh: false, isLoading: true } }));
     const query = gql`
       query DetailUser($detailUserId: ID) {
@@ -94,6 +94,25 @@ export function detailUser(id) {
           address
           date_of_birth
           gender
+          avatar_attachment
+          background_attachment
+          selfProject {
+            id
+            name
+            description
+            attachments
+          }
+          joinProject {
+            id
+            position
+            project {
+              id
+              name
+              category
+              attachments
+              timeToDo
+            }
+          }
           userAdvance {
             id
             userId
@@ -103,24 +122,6 @@ export function detailUser(id) {
             info
             plan
             goal
-            numberFramework
-            selfProject {
-              id
-              name
-              description
-              attachments
-            }
-            joinProject {
-              id
-              position
-              project {
-                id
-                name
-                category
-                attachments
-                timeToDo
-              }
-            }
           }
         }
       }
@@ -145,7 +146,7 @@ export function detailUser(id) {
 }
 
 export function upsertUserAdvance(values) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setMerge({ upsertProfile: { isLoading: true } }));
     const mutationAPI = () => {
       const mutation = gql`
@@ -181,7 +182,7 @@ export function upsertUserAdvance(values) {
     };
 
     try {
-      await mutationAPI().then((res) => {
+      await mutationAPI().then(res => {
         dispatch(
           setMerge({
             upsertProfile: {

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Input, Button, Modal } from "antd";
-import NewProject from "pages/project/NewProject";
-import { Link } from "react-router-dom";
-import { getMe, userSelector } from "pages/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { projectSelector, setProjectMerge } from "pages/project/projectSlice";
+import React, { useEffect, useState } from 'react';
+import { Input, Button, Modal } from 'antd';
+import NewProject from 'pages/project/NewProject';
+import { Link } from 'react-router-dom';
+import { getMe, userSelector } from 'pages/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { projectSelector, setProjectMerge } from 'pages/project/projectSlice';
 
-import { GiHamburgerMenu } from "react-icons/gi";
-import { BsFillMicFill } from "react-icons/bs";
-import { BiSearch } from "react-icons/bi";
-import { IoMdAdd, IoMdNotificationsOutline } from "react-icons/io";
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { BsFillMicFill } from 'react-icons/bs';
+import { BiSearch } from 'react-icons/bi';
+import { IoMdAdd, IoMdNotificationsOutline } from 'react-icons/io';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -30,9 +30,7 @@ const Header = () => {
       <Modal
         className="!w-[1152px]"
         visible={cProject?.isOpen}
-        onCancel={() =>
-          dispatch(setProjectMerge("cProject", { isOpen: false }))
-        }
+        onCancel={() => dispatch(setProjectMerge('cProject', { isOpen: false }))}
         footer={null}
       >
         <NewProject />
@@ -44,20 +42,21 @@ const Header = () => {
     <>
       <section className="p-3 relative flex items-center space-x-2 border-b">
         <div className="w-3/12">
-          <div className="flex items-center space-x-4 ">
-            <GiHamburgerMenu
-              onClick={showSideBarLeft}
-              className="text-3xl cursor-pointer"
-            />
-            <Link to={`/AllPage`}>
+          <div className="flex items-center space-x-4">
+            <Link to={`/Account?id=${me?.data?.id}`}>
+              <GiHamburgerMenu
+                // onClick={showSideBarLeft}
+                className="text-3xl cursor-pointer"
+              />
+            </Link>
+            <Link className="flex items-center space-x-4" to={`/AllPage`}>
               <img
                 className="w-[41px]"
                 src={`/assets/images/photo_2021-07-14_10-53-20.jpg`}
                 alt=""
-              />{" "}
+              />{' '}
+              <span className="text-[30px]">SmileEye</span>
             </Link>
-
-            <span className="text-[30px]">SmileEye</span>
           </div>
           {/* <div
             className={`${
@@ -100,7 +99,7 @@ const Header = () => {
         <div className="flex space-x-2 items-center justify-end pr-4 w-4/12">
           <Button
             onClick={() => {
-              dispatch(setProjectMerge("cProject", { isOpen: true }));
+              dispatch(setProjectMerge('cProject', { isOpen: true }));
             }}
             className="!rounded-md !bg-[#FB923C] !h-[50px]"
           >
@@ -114,15 +113,14 @@ const Header = () => {
               <IoMdNotificationsOutline className="text-xl text-[#0E7490]" />
             </span>
           </Button>
-          <div
-            onClick={showSideBarRight}
-            className="flex items-center cursor-pointer space-x-2"
-          >
-            <span className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100">
-              P
-            </span>
-            <span className="text-[#0E7490] text-xl">{me?.data?.name}</span>
-          </div>
+          <Link to={`/MyProfile?id=${me?.data?.id}`}>
+            <div onClick={showSideBarRight} className="flex items-center cursor-pointer space-x-2">
+              <span className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100">
+                P
+              </span>
+              <span className="text-[#0E7490] text-xl">{me?.data?.name}</span>
+            </div>
+          </Link>
         </div>
         {renderModalNewProject()}
       </section>

@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import MasterLayout from "layouts/MasterLayout";
-import { MenuPage } from "./MenuPage";
-import { BoardItem } from "pages/home/AllPage/BoardItem";
-import { SeeMore } from "pages/home/AllPage/SeeMore";
-import { BoardPosition } from "pages/home/AllPage/BoardPosition";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  projectSelector,
-  MyProject,
-} from "pages/project/projectSlice";
+import React, { useEffect, useState } from 'react';
+import MasterLayout from 'layouts/MasterLayout';
+import { MenuPage } from './MenuPage';
+import { BoardItem } from 'pages/home/AllPage/BoardItem';
+import { SeeMore } from 'components/SeeMore';
+import { BoardPosition } from 'pages/home/AllPage/BoardPosition';
+import { useDispatch, useSelector } from 'react-redux';
+import { projectSelector, MyProject } from 'pages/project/projectSlice';
 
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from 'react-icons/ai';
 
 const OnBoardPage = () => {
   const dispatch = useDispatch();
   const { mlMyProject, cProject } = useSelector(projectSelector);
-
+  const [loadMore, setLoadMore] = useState(8);
+  const onLoadMore = () => {
+    setLoadMore(loadMore + 8);
+  };
   useEffect(() => {
     dispatch(MyProject());
   }, [dispatch, cProject]);
@@ -23,13 +23,13 @@ const OnBoardPage = () => {
   return (
     <MasterLayout>
       <MenuPage />
-      <section className='p-4'>
+      <section className="p-4">
         <h3 className="text-[18px] font-[600]">Project Board</h3>
         <p className="text-sm -mt-2 text-gray-500">
           Projects that allow registration to participate.
         </p>
         <div className="grid grid-cols-4 gap-4">
-          {(mlMyProject?.myProject ?? [])?.map((item, index) => {
+          {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
             return (
               <div key={index}>
                 <BoardItem
@@ -63,7 +63,9 @@ const OnBoardPage = () => {
             );
           })}
         </div>
-        <SeeMore />
+        {loadMore < mlMyProject?.myProject?.length && (
+          <SeeMore name="See more" onClick={onLoadMore} />
+        )}
       </section>
     </MasterLayout>
   );

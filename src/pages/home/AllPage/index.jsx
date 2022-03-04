@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
-import { BoardItem } from "./BoardItem";
-import { SeeMore } from "./SeeMore";
-import { BoardPosition } from "./BoardPosition";
-import { CommentItem } from "./CommentItem";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  projectSelector,
-  MyProject,
-  MyIdeas,
-  setProject,
-} from "pages/project/projectSlice";
+import React, { useEffect, useState } from 'react';
+import { BoardItem } from './BoardItem';
+import { SeeMore } from 'components/SeeMore';
+import { BoardPosition } from './BoardPosition';
+import { CommentItem } from './CommentItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { projectSelector, MyProject, MyIdeas, setProject } from 'pages/project/projectSlice';
 
-import { AiOutlineHeart } from "react-icons/ai";
-import { RiCommunityFill } from "react-icons/ri";
+import { AiOutlineHeart } from 'react-icons/ai';
+import { RiCommunityFill } from 'react-icons/ri';
 
 export const AllPage = () => {
   const dispatch = useDispatch();
   const { mlMyProject, mlMyIdeas, cProject } = useSelector(projectSelector);
+
+  const [loadMore, setLoadMore] = useState(8);
+  const onLoadMore = () => {
+    setLoadMore(loadMore + 8);
+  };
 
   useEffect(() => {
     dispatch(MyProject());
@@ -42,7 +42,7 @@ export const AllPage = () => {
           Projects that allow registration to participate.
         </p>
         <div className="grid grid-cols-4 gap-4">
-          {(mlMyProject?.myProject ?? [])?.map((item, index) => {
+          {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
             return (
               <div key={index}>
                 <BoardItem
@@ -76,13 +76,15 @@ export const AllPage = () => {
             );
           })}
         </div>
-        <SeeMore />
+        {loadMore < mlMyProject?.myProject?.length && (
+          <SeeMore name="See more" onClick={onLoadMore} />
+        )}
       </section>
 
       <section>
         <h3 className="text-[18px] font-[600]">Ideas</h3>
         <div className="grid grid-cols-4 gap-4">
-          {(mlMyIdeas?.myIdeas ?? [])?.map((item, index) => {
+          {(mlMyIdeas?.myIdeas?.slice(0, loadMore) ?? [])?.map((item, index) => {
             return (
               <div key={index}>
                 <BoardItem
@@ -121,7 +123,7 @@ export const AllPage = () => {
             );
           })}
         </div>
-        <SeeMore />
+        {loadMore < mlMyIdeas?.myIdeas?.length && <SeeMore name="See more" onClick={onLoadMore} />}
       </section>
 
       {/* <section>
@@ -196,7 +198,7 @@ export const AllPage = () => {
             );
           })}
         </div>
-        <SeeMore />
+        <SeeMore name='See more' />
       </section>
 
       <section>
@@ -271,7 +273,7 @@ export const AllPage = () => {
             );
           })}
         </div>
-        <SeeMore />
+        <SeeMore name='See more' />
       </section>
 
       <section>
@@ -305,7 +307,7 @@ export const AllPage = () => {
             );
           })}
         </div>
-        <SeeMore />
+        <SeeMore name='See more' />
       </section> */}
     </section>
   );

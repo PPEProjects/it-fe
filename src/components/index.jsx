@@ -1,3 +1,3 @@
-import { warning, error, success, info } from "./Notification";
+import { error, success } from './Notification';
 
-export { warning, error, success, info };
+export { error, success };

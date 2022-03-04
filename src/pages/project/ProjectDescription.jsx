@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import MasterLayout from "layouts/MasterLayout";
-import { Input, Button, Menu, Dropdown, Modal } from "antd";
-import { BoardPosition } from "pages/home/AllPage/BoardPosition";
-import { InformationItem } from "./InformationItem";
-import { CommentItem } from "pages/home/AllPage/CommentItem";
-import { TopComment } from "pages/home/AllPage/TopComment";
-import { detailProject, projectSelector } from "./projectSlice";
-import { getURLParams } from "services";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import MasterLayout from 'layouts/MasterLayout';
+import { Input, Button, Menu, Dropdown, Modal } from 'antd';
+import { BoardPosition } from 'pages/home/AllPage/BoardPosition';
+import { InformationItem } from './InformationItem';
+import { CommentItem } from 'pages/home/AllPage/CommentItem';
+import { TopComment } from 'pages/home/AllPage/TopComment';
+import { detailProject, projectSelector } from './projectSlice';
+import { getURLParams } from 'services';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { BiDotsVerticalRounded } from "react-icons/bi";
-import { MdMailOutline, MdAttachFile } from "react-icons/md";
-import { BsTelephoneFill } from "react-icons/bs";
+import { BiDotsVerticalRounded } from 'react-icons/bi';
+import { MdMailOutline, MdAttachFile } from 'react-icons/md';
+import { BsTelephoneFill } from 'react-icons/bs';
 import {
   AiOutlineLike,
   AiOutlineMessage,
@@ -20,9 +20,9 @@ import {
   AiOutlineShareAlt,
   AiOutlineLeft,
   AiOutlineDown,
-} from "react-icons/ai";
+} from 'react-icons/ai';
 
-import { ReactComponent as IconMenuComment } from "assets/menu-comment-icon.svg";
+import { ReactComponent as IconMenuComment } from 'assets/menu-comment-icon.svg';
 
 const { TextArea } = Input;
 const ProjectDescription = () => {
@@ -30,8 +30,8 @@ const ProjectDescription = () => {
   const { id } = getURLParams();
   const { deProject } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
-  console.log("detailProjects", detailProjects);
 
+  console.log('detailProjects', detailProjects);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -144,20 +144,14 @@ const ProjectDescription = () => {
                   alt=""
                 />
                 <div className="pt-1">
-                  <h6 className="text-sm text-gray-900">
-                    {detailProjects?.user?.name}
-                  </h6>
+                  <h6 className="text-sm text-gray-900">{detailProjects?.user?.name}</h6>
                   <h6 className="text-xs -mt-1 text-gray-500">View profile</h6>
                 </div>
               </div>
               <div className="text-sm flex space-x-12 items-center">
                 <span>Member:</span>
                 <div className="flex items-center space-x-2 pt-2">
-                  <BoardPosition
-                    running
-                    imgAvatar="https://i.pravatar.cc/100?img=2"
-                    text="PO"
-                  />
+                  <BoardPosition running imgAvatar="https://i.pravatar.cc/100?img=2" text="PO" />
                   <BoardPosition board text="Dev" />
                   <BoardPosition board text="Leader" />
                   <BoardPosition board text="Leader" />
@@ -185,11 +179,7 @@ const ProjectDescription = () => {
                   )}
                 </div>
               </InformationItem>
-              <InformationItem
-                Information="Co-author name"
-                result="Margot Foster"
-                justifyBetween
-              >
+              <InformationItem Information="Co-author name" result="Margot Foster" justifyBetween>
                 <div>
                   <p className="flex items-center space-x-2">
                     <MdMailOutline className="text-xl text-gray-400" />
@@ -203,22 +193,10 @@ const ProjectDescription = () => {
                   )}
                 </div>
               </InformationItem>
-              <InformationItem
-                Information="Category"
-                result={detailProjects?.category}
-              />
-              <InformationItem
-                Information="Salary"
-                result={detailProjects?.salary?.money}
-              />
-              <InformationItem
-                Information="Budget"
-                result={detailProjects?.budget?.money}
-              />
-              <InformationItem
-                Information="Time to do:"
-                result={detailProjects?.timeToDo}
-              />
+              <InformationItem Information="Category" result={detailProjects?.category} />
+              <InformationItem Information="Salary" result={detailProjects?.salary?.money} />
+              <InformationItem Information="Budget" result={detailProjects?.budget?.money} />
+              <InformationItem Information="Time to do:" result={detailProjects?.timeToDo} />
               <InformationItem
                 Information="Framework:"
                 // result={(detailProjects?.framework).join()}
@@ -262,7 +240,7 @@ const ProjectDescription = () => {
           <div className="w-1/4 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-[18px] text-gray-900">Comments</span>
-              <Dropdown overlay={menu} trigger={["click"]}>
+              <Dropdown overlay={menu} trigger={['click']}>
                 <span className="cursor-pointer flex items-center space-x-2 border p-2 bg-white rounded-lg">
                   <IconMenuComment />
                   <AiOutlineDown className="text-gray-400 stroke-2" />
@@ -280,10 +258,7 @@ const ProjectDescription = () => {
                 <TextArea rows={4} placeholder="Add a comment..." />
               </div>
               <div className="text-right">
-                <Button
-                  className="!h-[40px] !font-[500] !rounded-lg"
-                  type="primary"
-                >
+                <Button className="!h-[40px] !font-[500] !rounded-lg" type="primary">
                   Comment
                 </Button>
               </div>

@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import MasterLayout from "layouts/MasterLayout";
-import { MenuPage } from "./MenuPage";
-import { BoardItem } from "pages/home/AllPage/BoardItem";
-import { SeeMore } from "pages/home/AllPage/SeeMore";
-import { CommentItem } from "pages/home/AllPage/CommentItem";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  projectSelector,
-  MyIdeas,
-} from "pages/project/projectSlice";
+import React, { useEffect, useState } from 'react';
+import MasterLayout from 'layouts/MasterLayout';
+import { MenuPage } from './MenuPage';
+import { BoardItem } from 'pages/home/AllPage/BoardItem';
+import { SeeMore } from 'components/SeeMore';
+import { CommentItem } from 'pages/home/AllPage/CommentItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { projectSelector, MyIdeas } from 'pages/project/projectSlice';
 
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from 'react-icons/ai';
 
 const IdeasPage = () => {
   const dispatch = useDispatch();
   const { mlMyIdeas, cProject } = useSelector(projectSelector);
-
+  const [loadMore, setLoadMore] = useState(8);
+  const onLoadMore = () => {
+    setLoadMore(loadMore + 8);
+  };
   useEffect(() => {
     dispatch(MyIdeas());
   }, [dispatch, cProject]);
@@ -23,10 +23,10 @@ const IdeasPage = () => {
   return (
     <MasterLayout>
       <MenuPage />
-      <section className='p-4'>
+      <section className="p-4">
         <h3 className="text-[18px] font-[600]">Ideas</h3>
         <div className="grid grid-cols-4 gap-4">
-          {(mlMyIdeas?.myIdeas ?? [])?.map((item, index) => {
+          {(mlMyIdeas?.myIdeas?.slice(0, loadMore) ?? [])?.map((item, index) => {
             return (
               <div key={index}>
                 <BoardItem
@@ -65,7 +65,7 @@ const IdeasPage = () => {
             );
           })}
         </div>
-        <SeeMore />
+        {loadMore < mlMyIdeas?.myIdeas?.length && <SeeMore onClick={onLoadMore} />}
       </section>
     </MasterLayout>
   );

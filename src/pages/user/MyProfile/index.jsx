@@ -1,24 +1,27 @@
-import React, { useEffect } from "react";
-import MasterLayout from "layouts/MasterLayout";
-import { CardSkin } from "./CardSkin";
-import { ProjectItem } from "./ProjectItem";
-import { Directory } from "./Directory";
-import { Framework } from "./Framework";
-import { Button } from "antd";
-import { detailUser, userSelector } from "pages/user/userSlice";
-import { getURLParams } from "services";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from 'react';
+import MasterLayout from 'layouts/MasterLayout';
+import { CardSkin } from './CardSkin';
+import { ProjectItem } from './ProjectItem';
+import { Directory } from './Directory';
+import { Framework } from './Framework';
+import { Button } from 'antd';
+import { detailUser, userSelector } from 'pages/user/userSlice';
+import { getURLParams } from 'services';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { AiOutlineStar, AiFillStar, AiTwotoneDownSquare } from "react-icons/ai";
-import { BsFillCalendar2Fill, BsTelephoneFill } from "react-icons/bs";
-import { FaTransgender } from "react-icons/fa";
-import { HiMail, HiLocationMarker } from "react-icons/hi";
+import { AiOutlineStar, AiFillStar, AiTwotoneDownSquare } from 'react-icons/ai';
+import { BsFillCalendar2Fill, BsTelephoneFill } from 'react-icons/bs';
+import { FaTransgender } from 'react-icons/fa';
+import { HiMail, HiLocationMarker } from 'react-icons/hi';
+import { IoLogoGoogleplus } from 'react-icons/io';
 
 const MyProfile = () => {
   const dispatch = useDispatch();
   const { id } = getURLParams();
   const { deUser } = useSelector(userSelector);
   const deUsers = deUser?.detailUserIds;
+
+  console.log('deUsers', deUsers);
 
   useEffect(() => {
     dispatch(detailUser(id));
@@ -28,7 +31,7 @@ const MyProfile = () => {
     <MasterLayout>
       <section className="flex space-x-7 p-5 bg-[#F6F9FB]">
         <section className="w-1/2 space-y-5">
-          <div className="border-b-[4px] border-[#FDBA74] space-y-1 pb-5">
+          <div className="border-b-[4px] h-[540px] border-[#FDBA74] space-y-1 pb-5">
             <p className="flex items-center justify-center">
               <img
                 className="w-[450px] rounded-full h-[450px]"
@@ -53,11 +56,12 @@ const MyProfile = () => {
           <div className="space-y-3">
             <Directory nameDirectory="Self Ideas/Projects" />
             <div className="grid grid-cols-2 gap-4 pt-2">
-              {(deUsers?.userAdvance?.selfProject ?? [])?.map((item, index) => {
+              {(deUsers?.selfProject ?? [])?.map((item, index) => {
                 return (
                   <div key={index}>
                     <ProjectItem
                       ideas
+                      project={item?.name}
                       imgAvatar="https://i.pravatar.cc/100?img=2"
                       content={item?.description}
                     />
@@ -70,7 +74,7 @@ const MyProfile = () => {
           <div className="space-y-3">
             <Directory nameDirectory="Joined Projects" />
             <div className="grid grid-cols-2 gap-4 pt-2">
-              {(deUsers?.userAdvance?.joinProject ?? [])?.map((item, index) => {
+              {(deUsers?.joinProject ?? [])?.map((item, index) => {
                 return (
                   <div key={index}>
                     <ProjectItem
@@ -101,13 +105,9 @@ const MyProfile = () => {
           </div>
         </section>
         <section className="w-1/2 space-y-5">
-          <div className="px-2 pt-2 border-b-[4px] pb-[22px] border-[#FDBA74]">
-            <h6 className="text-[#164E63] text-[66px] uppercase">
-              {deUsers?.name}
-            </h6>
-            <h6 className="text-[#0891B2] text-[40px] uppercase">
-              {deUsers?.userAdvance?.goal}
-            </h6>
+          <div className="px-2 pt-2 h-[540px] border-b-[4px] pb-[22px] border-[#FDBA74]">
+            <h6 className="text-[#164E63] text-[66px] uppercase">{deUsers?.name}</h6>
+            <h6 className="text-[#0891B2] text-[40px] uppercase">{deUsers?.userAdvance?.goal}</h6>
             <div className="text-[24px] text-[#164E63]">
               <div className="flex items-center justify-between">
                 <div className="flex pl-[3px] items-center space-x-1.5">
@@ -141,18 +141,13 @@ const MyProfile = () => {
                 project="Joined Project"
                 number={deUsers?.userAdvance?.joinProject?.length}
               />
-              <CardSkin
-                project="Framework"
-                number={deUsers?.userAdvance?.skill?.length}
-              />
+              <CardSkin project="Framework" number={deUsers?.userAdvance?.skill?.length} />
             </div>
           </div>
 
           <div className="space-y-3">
             <Directory nameDirectory="Personal goals" />
-            <p className="text-[24px] text-[#000000]">
-              {deUsers?.userAdvance?.plan}
-            </p>
+            <p className="text-[24px] text-[#000000]">{deUsers?.userAdvance?.plan}</p>
           </div>
 
           <div className="space-y-3">
@@ -161,17 +156,17 @@ const MyProfile = () => {
               {(deUsers?.userAdvance?.language ?? [])?.map((item, index) => {
                 return (
                   <div key={index}>
-                    {item === "VietNames" && (
+                    {item === 'VietNames' && (
                       <Button className="!h-[57px] !w-[160px] !text-[24px] border-none !rounded !text-[#92400E] !bg-[#FEF3C7]">
                         Vietnamese
                       </Button>
                     )}
-                    {item === "English" && (
+                    {item === 'English' && (
                       <Button className="!h-[57px] !w-[160px] !text-[24px] border-none !rounded !text-[#065F46] !bg-[#D1FAE5]">
                         English
                       </Button>
                     )}
-                    {item === "Japanese" && (
+                    {item === 'Japanese' && (
                       <Button className="!h-[57px] !w-[160px] !text-[24px] border-none !rounded !text-[#1E40AF] !bg-[#DBEAFE]">
                         Japanese
                       </Button>
@@ -281,13 +276,8 @@ const MyProfile = () => {
           })} */}
 
           <div className="space-y-3 py-5">
-            <Directory
-              className="!w-[490px]"
-              nameDirectory="Self Introduction"
-            />
-            <p className="text-[24px] text-[#000000]">
-              {deUsers?.userAdvance?.info}
-            </p>
+            <Directory className="!w-[490px]" nameDirectory="Self Introduction" />
+            <p className="text-[24px] text-[#000000]">{deUsers?.userAdvance?.info}</p>
           </div>
         </section>
       </section>
