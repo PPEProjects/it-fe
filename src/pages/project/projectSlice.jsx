@@ -1,7 +1,7 @@
-import gql from "graphql-tag";
-import { createSlice } from "@reduxjs/toolkit";
-import { _slice } from "services/reduxToolkit";
-import { apolloClient, restClient } from "services";
+import gql from 'graphql-tag';
+import { createSlice } from '@reduxjs/toolkit';
+import { _slice } from 'services/reduxToolkit';
+import { apolloClient, restClient } from 'services';
 
 export const initialState = {
   cProject: {},
@@ -11,7 +11,7 @@ export const initialState = {
 };
 
 const projectSlice = createSlice({
-  name: "project",
+  name: 'project',
   initialState,
   reducers: {
     setData: (state, { payload }) => {
@@ -24,23 +24,23 @@ const projectSlice = createSlice({
 });
 
 export const { setData, setMerge } = projectSlice.actions;
-export const projectSelector = (state) => state.project;
+export const projectSelector = state => state.project;
 export default projectSlice.reducer;
 
 export function setProject(state) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setData(state));
   };
 }
 
 export function setProjectMerge(key, item) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setMerge({ ...{}, [key]: item }));
   };
 }
 
-export function MyProject(type = "project") {
-  return async (dispatch) => {
+export function MyProject(type = 'project') {
+  return async dispatch => {
     dispatch(setMerge({ mlMyProject: { isLoading: true } }));
     const query = gql`
       query SearchProject($name: String, $type: String, $status: String) {
@@ -90,8 +90,8 @@ export function MyProject(type = "project") {
   };
 }
 
-export function MyIdeas(type = "ideas") {
-  return async (dispatch) => {
+export function MyIdeas(type = 'ideas') {
+  return async dispatch => {
     dispatch(setMerge({ mlMyIdeas: { isLoading: true } }));
     const query = gql`
       query SearchProject($name: String, $type: String, $status: String) {
@@ -142,7 +142,7 @@ export function MyIdeas(type = "ideas") {
 }
 
 export function createProject(values) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setMerge({ cProject: { isLoading: true } }));
     const mutationAPI = () => {
       const mutation = gql`
@@ -182,11 +182,11 @@ export function createProject(values) {
     };
 
     try {
-      await mutationAPI().then((res) => {
+      await mutationAPI().then(res => {
         dispatch(
           setMerge({
             cProject: {
-              japaneseGoal: res.data.createProject,
+              project: res.data.createProject,
               isLoading: false,
               isOpen: false,
             },
@@ -200,7 +200,7 @@ export function createProject(values) {
 }
 
 export function detailProject(id) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setMerge({ deProject: { isRefresh: false, isLoading: true } }));
     const query = gql`
       query DetailProject($detailProjectId: ID) {

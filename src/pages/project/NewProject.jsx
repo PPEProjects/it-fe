@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Select, Switch, Button, Radio } from 'antd';
+import { Form, Input, Select, Switch, Button, Radio, Modal } from 'antd';
 import { RadioGroup } from '@headlessui/react';
 import classNames from 'classnames';
-import { createProject, projectSelector } from './projectSlice';
+import { createProject, projectSelector, setProjectMerge } from './projectSlice';
 import { getMe, userSelector } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import CurrencyItem from 'components/CurrencyItem';
+import { CurrencyItem } from 'components/CurrencyItem';
+import { error } from 'components';
+import { VideoUpload } from 'react-storage-codeby';
+import { Image } from '@tienlucky/storage';
 
 import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { AiFillInfoCircle } from 'react-icons/ai';
 import { RiImageAddLine } from 'react-icons/ri';
 
 import { ReactComponent as IconDatabase } from 'assets/database.svg';
-import { VideoUpload } from 'react-storage-codeby';
 const settings = [
   {
     name: 'Public',
@@ -56,7 +58,7 @@ const NewProject = () => {
         scrollToFirstError
       >
         <Form.List name={`data`}>
-          {fields => (
+          {() => (
             <>
               <div className="flex border-b p-3">
                 <label className="w-1/3 text-sm text-gray-700">Type</label>
@@ -204,13 +206,15 @@ const NewProject = () => {
                 </div>
               </div>
               <div className="flex border-b p-3">
-                {/* <label className="w-1/3 text-sm text-gray-700">Main picture</label> */}
-                <Form.Item
-                  className="w-1/3 text-sm text-gray-700"
-                  name="main_picture"
-                  label="Main picture"
-                >
-                  <VideoUpload />
+                <label className="w-1/3 text-sm text-gray-700">Main picture</label>
+                <Form.Item name="test" className="w-2/3 text-sm text-gray-700">
+                  <Image.SingleUpload
+                    option={{
+                      dragText: 'or drag and drop',
+                      formatText: 'PNG, JPG, up to 10MB',
+                      uploadStyle: { width: '100%', border: true, delete: true },
+                    }}
+                  />
                 </Form.Item>
                 {/* <button
             type="button"
@@ -343,8 +347,7 @@ const NewProject = () => {
             <Button
               className="!rounded-md"
               size="large"
-              // htmlType="submit"
-              // loading={lAuth.isLoading}
+              onClick={() => dispatch(setProjectMerge('cProject', { isOpen: false }))}
             >
               Cancel
             </Button>

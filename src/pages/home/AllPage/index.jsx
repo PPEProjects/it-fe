@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BoardItem } from './BoardItem';
+import { BoardItem } from 'components/BoardItem';
 import { SeeMore } from 'components/SeeMore';
 import { BoardPosition } from './BoardPosition';
 import { CommentItem } from './CommentItem';
@@ -46,6 +46,7 @@ export const AllPage = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  user
                   link={`/ProjectDescription?id=${item?.id}`}
                   imgPage="https://i.pravatar.cc/100?img=2"
                   nameProject={item?.name}
@@ -88,6 +89,7 @@ export const AllPage = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  user
                   link={`/ProjectDescription?id=${item?.id}`}
                   imgPage="https://i.pravatar.cc/100?img=2"
                   nameProject={item?.name}

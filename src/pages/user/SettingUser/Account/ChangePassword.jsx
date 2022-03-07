@@ -1,23 +1,18 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { authsSelector, authChangePassword } from 'pages/auth/authsSlice';
-import { error } from 'components';
+import { error, success } from 'components';
 
 export const ChangePassword = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { chAuth } = useSelector(authsSelector);
 
-  const openNotificationWithIcon = type => {
-    notification[type]({
-      message: 'Update information successfully!',
-    });
-  };
   useEffect(() => {
     if (!chAuth?.data) return;
     if (chAuth?.data) {
-      openNotificationWithIcon('success');
+      success('Update information successfully!');
       return;
     }
     error(chAuth?.data?.message);

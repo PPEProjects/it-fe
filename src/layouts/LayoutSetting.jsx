@@ -1,24 +1,24 @@
-import React from "react";
-import MasterLayout from "layouts/MasterLayout";
-import { Menu } from "antd";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { userSelector } from "pages/user/userSlice";
+import React from 'react';
+import MasterLayout from 'layouts/MasterLayout';
+import { Menu } from 'antd';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { userSelector } from 'pages/user/userSlice';
 
 export const LayoutSetting = ({ children }) => {
-  let href = window.location.href.replace(/^.+?\/(\w+)$/gim, "$1");
+  let href = window.location.href.replace(/^.+?\/(\w+)$/gim, '$1');
   const { me } = useSelector(userSelector);
 
   const renderMenu = () => {
     const menu = [
       {
-        label: "Account",
-        key: "Account",
+        label: 'Account',
+        key: 'Account',
         link: `/Account?id=${me?.data?.id}`,
       },
       {
-        label: "Profile",
-        key: "NewProfile",
+        label: 'Profile',
+        key: 'NewProfile',
         link: `/NewProfile?id=${me?.data?.id}`,
       },
     ];

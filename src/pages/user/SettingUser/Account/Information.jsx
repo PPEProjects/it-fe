@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
-import { Form, Input, Button, notification } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  detailUser,
-  userSelector,
-  upsertUserAdvance,
-} from "pages/user/userSlice";
-import { getURLParams } from "services";
+import React, { useEffect } from 'react';
+import { Form, Input, Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { detailUser, userSelector, upsertUserAdvance } from 'pages/user/userSlice';
+import { getURLParams } from 'services';
+import { success } from 'components';
 
 export const Information = () => {
   const [form] = Form.useForm();
@@ -18,12 +15,6 @@ export const Information = () => {
   useEffect(() => {
     dispatch(detailUser(id));
   }, [id, dispatch]);
-
-  const openNotificationWithIcon = (type) => {
-    notification[type]({
-      message: "Update information successfully!",
-    });
-  };
 
   useEffect(() => {
     form.setFieldsValue({
@@ -40,7 +31,7 @@ export const Information = () => {
     <Form
       form={form}
       name="basic"
-      onFinish={(values) => dispatch(upsertUserAdvance(values))}
+      onFinish={values => dispatch(upsertUserAdvance(values))}
       scrollToFirstError
       layout="vertical"
       className="!p-4 border bg-white space-y-3 rounded-md"
@@ -51,29 +42,16 @@ export const Information = () => {
             {() => (
               <>
                 <Form.Item className="!mb-0" label="Email">
-                  <Input
-                    disabled
-                    value={deUsers?.email}
-                    className="!rounded"
-                    placeholder=""
-                  />
+                  <Input disabled value={deUsers?.email} className="!rounded" placeholder="" />
                 </Form.Item>
                 <Form.Item className="!mb-0" name="phone_number" label="Phone">
                   <Input className="!rounded" placeholder="" />
                 </Form.Item>
                 <div className="flex items-center space-x-3 w-full">
-                  <Form.Item
-                    className="!mb-0 w-1/2"
-                    name="first_name"
-                    label="First name"
-                  >
+                  <Form.Item className="!mb-0 w-1/2" name="first_name" label="First name">
                     <Input className="!rounded" placeholder="" />
                   </Form.Item>
-                  <Form.Item
-                    className="!mb-0 w-1/2"
-                    name="name"
-                    label="Last name"
-                  >
+                  <Form.Item className="!mb-0 w-1/2" name="name" label="Last name">
                     <Input className="!rounded" placeholder="" />
                   </Form.Item>
                 </div>
@@ -86,7 +64,7 @@ export const Information = () => {
       <Form.Item className="!mb-0 p-3 text-right">
         <Button
           className="!rounded-md !bg-[#0EA5E9]"
-          onClick={() => openNotificationWithIcon("success")}
+          onClick={() => success('Update information successfully!')}
           type="primary"
           size="large"
           htmlType="submit"

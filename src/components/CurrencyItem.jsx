@@ -3,7 +3,7 @@ import { Input, Select } from 'antd';
 
 const { Option } = Select;
 
-const CurrencyItem = ({ onChange, value }) => {
+export const CurrencyItem = ({ onChange, value }) => {
   const [price, setPrice] = useState(value);
 
   useEffect(() => {
@@ -32,5 +32,3 @@ const CurrencyItem = ({ onChange, value }) => {
     </div>
   );
 };
-
-export default CurrencyItem;

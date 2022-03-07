@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MasterLayout from 'layouts/MasterLayout';
 import { MenuPage } from './MenuPage';
-import { BoardItem } from 'pages/home/AllPage/BoardItem';
+import { BoardItem } from 'components/BoardItem';
 import { SeeMore } from 'components/SeeMore';
 import { CommentItem } from 'pages/home/AllPage/CommentItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +30,7 @@ const IdeasPage = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  user
                   link={`/ProjectDescription?id=${item?.id}`}
                   imgPage="https://i.pravatar.cc/100?img=2"
                   nameProject={item?.name}

@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
-import { Form, Input, Select, Button, notification } from "antd";
-import { LayoutSetting } from "layouts/LayoutSetting";
-import { InformationItem } from "./InformationItem";
-import {
-  detailUser,
-  userSelector,
-  upsertUserAdvance,
-} from "pages/user/userSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { getURLParams } from "services";
+import React, { useEffect } from 'react';
+import { Form, Input, Select, Button } from 'antd';
+import { LayoutSetting } from 'layouts/LayoutSetting';
+import { InformationItem } from './InformationItem';
+import { detailUser, userSelector, upsertUserAdvance } from 'pages/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getURLParams } from 'services';
+import { success } from 'components';
 
-import { RiImageAddLine } from "react-icons/ri";
+import { RiImageAddLine } from 'react-icons/ri';
 
 const NewProfile = () => {
   const [form] = Form.useForm();
@@ -20,12 +17,6 @@ const NewProfile = () => {
   const { id } = getURLParams();
   const { deUser, upsertProfile } = useSelector(userSelector);
   const deUsers = deUser?.detailUserIds;
-
-  const openNotificationWithIcon = (type) => {
-    notification[type]({
-      message: "Update information successfully!",
-    });
-  };
 
   useEffect(() => {
     dispatch(detailUser(id));
@@ -56,7 +47,7 @@ const NewProfile = () => {
       <Form
         form={form}
         name="basic"
-        onFinish={(values) => dispatch(upsertUserAdvance(values))}
+        onFinish={values => dispatch(upsertUserAdvance(values))}
         scrollToFirstError
         layout="vertical"
         className="!px-4 !py-6"
@@ -87,11 +78,7 @@ const NewProfile = () => {
                       >
                         <Input className="!rounded" placeholder="" />
                       </Form.Item>
-                      <Form.Item
-                        className="!mb-0 !w-1/2"
-                        name="gender"
-                        label="Gender"
-                      >
+                      <Form.Item className="!mb-0 !w-1/2" name="gender" label="Gender">
                         <Select className="!rounded">
                           <Option value="male">Male</Option>
                           <Option value="female">Female</Option>
@@ -99,25 +86,14 @@ const NewProfile = () => {
                         </Select>
                       </Form.Item>
 
-                      <Form.Item
-                        className="!mb-0 !w-1/2"
-                        name="gender"
-                        label="Country / Region"
-                      >
-                        <Select
-                          className="!rounded"
-                          defaultValue="United States"
-                        >
+                      <Form.Item className="!mb-0 !w-1/2" name="gender" label="Country / Region">
+                        <Select className="!rounded" defaultValue="United States">
                           <Option value="male">United States</Option>
                           <Option value="female">Female</Option>
                           <Option value="otherGenders">Other genders</Option>
                         </Select>
                       </Form.Item>
-                      <Form.Item
-                        className="!mb-0"
-                        name="address"
-                        label="Address"
-                      >
+                      <Form.Item className="!mb-0" name="address" label="Address">
                         <Input className="!rounded" placeholder="" />
                       </Form.Item>
                     </InformationItem>
@@ -142,16 +118,14 @@ const NewProfile = () => {
                       className="relative w-full block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0369A1]"
                     >
                       <p className="flex items-center justify-center">
-                        {" "}
+                        {' '}
                         <RiImageAddLine className="text-gray-400 !w-[38px] !h-[40px]" />
                       </p>
                       <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
                         <a href>Upload a file</a>
                         <span>or drag and drop</span>
                       </span>
-                      <span className="text-[12px] text-gray-400">
-                        PNG, JPG, up to 10MB
-                      </span>
+                      <span className="text-[12px] text-gray-400">PNG, JPG, up to 10MB</span>
                     </button>
                   </div>
                   <Form.Item className="!mb-0 !w-1/2" name="goal" label="Goal">
@@ -160,15 +134,11 @@ const NewProfile = () => {
                   <Form.Item className="w-full !mb-0" name="plan" label="Plan">
                     <TextArea className="!rounded !h-[120px]" placeholder="" />
                   </Form.Item>
-                  <Form.Item
-                    className="w-full !mb-0"
-                    name="language"
-                    label="Language"
-                  >
+                  <Form.Item className="w-full !mb-0" name="language" label="Language">
                     <Select
                       mode="multiple"
                       allowClear
-                      style={{ width: "100%" }}
+                      style={{ width: '100%' }}
                       placeholder="Please select"
                     >
                       <Option value="male">Male</Option>
@@ -185,21 +155,17 @@ const NewProfile = () => {
                           <Select
                             mode="multiple"
                             allowClear
-                            style={{ width: "100%" }}
+                            style={{ width: '100%' }}
                             placeholder="Please select"
                           >
                             <Option value="female">Female</Option>
                           </Select>
                         </Form.Item>
-                        <Form.Item
-                          className="w-full !mb-0"
-                          name="framework"
-                          label="Framework"
-                        >
+                        <Form.Item className="w-full !mb-0" name="framework" label="Framework">
                           <Select
                             mode="multiple"
                             allowClear
-                            style={{ width: "100%" }}
+                            style={{ width: '100%' }}
                             placeholder="Please select"
                           >
                             <Option value="otherGenders">Other genders</Option>
@@ -209,11 +175,7 @@ const NewProfile = () => {
                     )}
                   </Form.List>
 
-                  <Form.Item
-                    className="w-full !mb-0"
-                    name="info"
-                    label="CV Self Introduction"
-                  >
+                  <Form.Item className="w-full !mb-0" name="info" label="CV Self Introduction">
                     <TextArea className="!rounded !h-[120px]" placeholder="" />
                   </Form.Item>
                 </InformationItem>
@@ -224,7 +186,7 @@ const NewProfile = () => {
             <Form.Item>
               <Button
                 className="!rounded-md !bg-[#0EA5E9]"
-                onClick={() => openNotificationWithIcon("success")}
+                onClick={() => success('Update information successfully!')}
                 type="primary"
                 size="large"
                 htmlType="submit"

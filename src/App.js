@@ -6,6 +6,7 @@ import { homeRoutes } from 'pages/home/homeRoutes';
 import { userRoutes } from 'pages/user/userRoutes';
 import { researchRoutes } from 'pages/research/researchRoutes';
 import { projectRoutes } from 'pages/project/projectRoutes';
+import '@tienlucky/storage/src/tienlucky-storage.min.css';
 
 function App() {
   return (

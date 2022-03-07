@@ -12,7 +12,6 @@ const error = (description, isTitle = true) => {
 
 const success = description => {
   notification['success']({
-    message: `Success`,
     description,
   });
 };
