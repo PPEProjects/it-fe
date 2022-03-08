@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Menu, Dropdown, Modal } from 'antd';
+import { Menu, Dropdown, Modal, Button } from 'antd';
 import { TopComment } from 'pages/home/AllPage/TopComment';
 import { Link } from 'react-router-dom';
+import { MenuItemHover } from 'components/MenuItemHover';
+import { thumbImage } from 'services/convert';
 
 import { BiDotsVerticalRounded } from 'react-icons/bi';
+import { FiEdit } from 'react-icons/fi';
 import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
 
 export const BoardItem = ({
@@ -16,6 +19,10 @@ export const BoardItem = ({
   link,
   children,
   user,
+  linkViewDetail,
+  linkViewDescription,
+  placement,
+  admin,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -33,47 +40,69 @@ export const BoardItem = ({
 
   const renderModalTopComment = () => {
     return (
-      <Modal
-        // className="!w-[1152px]"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={null}
-      >
+      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
         <TopComment />
       </Modal>
     );
   };
+
   const menu = () => {
     return (
       <Menu>
-        <Menu.Item>View Description</Menu.Item>
-        <Menu.Item onClick={showModal}>Top Comment</Menu.Item>
+        {user && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
+            <MenuItemHover nameMenu="Top Comment" onClick={showModal} />
+          </>
+        )}
       </Menu>
     );
   };
 
   return (
-    <section>
+    <section className="border-l border-r border-b rounded-b-md pb-3 shadow-md">
       {renderModalTopComment()}
-      <img className="h-[215px] w-full object-cover rounded cursor-pointer" src={imgPage} alt="" />
-      <div className="border-l border-r border-b rounded-b-md px-3">
+      <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
+        <img
+          className="h-[215px] w-full object-cover rounded cursor-pointer"
+          src={imgPage}
+          alt=""
+        />
+        <div className="invisible rounded-md opacity-0 transition group-hover:!visible group-hover:opacity-100">
+          <Link to={`${linkViewDetail}`}>
+            <div className="absolute top-0 left-0 cursor-pointer right-0 flex space-x-2 h-full bg-black !bg-opacity-60 items-center justify-center text-white">
+              <span className="text-xs">View detail</span>
+              <FiEdit />
+            </div>
+          </Link>
+        </div>
+      </div>
+      <div className="px-3">
         <div className="flex items-center justify-between py-2">
-          <Link to={link} className="flex items-center space-x-3 w-[60%]">
+          <Link to={`${link}`} className="flex items-center space-x-3 w-[60%]">
             <img
               className="h-10 w-10 object-cover rounded-full cursor-pointer"
-              src={imgAvatar}
+              src={thumbImage(imgAvatar)}
               alt=""
             />
             <span className="font-[600] text-[#0369A1]">{nameProject}</span>
           </Link>
 
-          <Dropdown overlay={menu} trigger={['click']}>
+          <Dropdown overlay={menu} placement={placement} trigger={['click']}>
             <p className="w-10 h-10 hover:border hover:bg-gray-50 rounded-full flex items-center justify-center cursor-pointer">
               <BiDotsVerticalRounded className="!text-2xl text-gray-400" />
             </p>
           </Dropdown>
         </div>
+        {admin && (
+          <div className="text-right pr-6 pb-1">
+            <Button className="!bg-[#0EA5E9] !h-[40px] rounded !text-white !text-sm">
+              Approve
+            </Button>
+          </div>
+        )}
         {user && (
           <div className="flex items-center justify-between text-sm text-[#164E63]">
             <p className="flex items-center space-x-1 cursor-pointer">

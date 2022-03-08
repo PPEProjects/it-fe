@@ -6,7 +6,7 @@ import { SeeMore } from 'components/SeeMore';
 import { BoardPosition } from 'pages/home/AllPage/BoardPosition';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, MyProject } from 'pages/project/projectSlice';
-
+import { Image } from '@tienlucky/storage';
 import { AiOutlineHeart } from 'react-icons/ai';
 
 const OnBoardPage = () => {
@@ -34,13 +34,15 @@ const OnBoardPage = () => {
               <div key={index}>
                 <BoardItem
                   user
+                  placement="bottomRight"
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                   link={`/ProjectDescription?id=${item?.id}`}
-                  imgPage="https://i.pravatar.cc/100?img=2"
+                  imgPage={item?.attachments?.main_picture?.file}
                   nameProject={item?.name}
                   numberComment="1"
                   numberHeart="2"
                   numberLike="3"
-                  imgAvatar="https://i.pravatar.cc/100?img=2"
                 >
                   <div className="relative">
                     <div className="grid grid-cols-7 gap-2 px-3">

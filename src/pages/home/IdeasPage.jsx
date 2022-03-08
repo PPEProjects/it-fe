@@ -6,7 +6,6 @@ import { SeeMore } from 'components/SeeMore';
 import { CommentItem } from 'pages/home/AllPage/CommentItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, MyIdeas } from 'pages/project/projectSlice';
-
 import { AiOutlineHeart } from 'react-icons/ai';
 
 const IdeasPage = () => {
@@ -31,13 +30,15 @@ const IdeasPage = () => {
               <div key={index}>
                 <BoardItem
                   user
+                  placement="bottomRight"
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                   link={`/ProjectDescription?id=${item?.id}`}
-                  imgPage="https://i.pravatar.cc/100?img=2"
+                  imgPage={item?.attachments?.main_picture?.file}
                   nameProject={item?.name}
                   numberComment="1"
                   numberHeart="2"
                   numberLike="3"
-                  imgAvatar="https://i.pravatar.cc/100?img=2"
                 >
                   <div className="px-2.5 space-y-1.5">
                     <div className="space-y-2">

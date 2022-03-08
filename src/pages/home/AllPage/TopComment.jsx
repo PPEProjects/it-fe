@@ -1,6 +1,6 @@
-import React from "react";
-import { CommentItem } from "./CommentItem";
-import { Button } from "antd";
+import React from 'react';
+import { CommentItem } from './CommentItem';
+import { Button } from 'antd';
 
 export const TopComment = () => {
   return (
@@ -16,7 +16,6 @@ export const TopComment = () => {
           imgAvatarClassName="!w-12 !h-12"
           nameUserClassName="pt-2 !text-[14px]"
           contentClassName="!text-[14px]"
-          imgAvatar="https://i.pravatar.cc/100?img=2"
           nameUser="Eduardo Benz"
           content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus "
         />
@@ -29,7 +28,6 @@ export const TopComment = () => {
           imgAvatarClassName="!w-12 !h-12"
           nameUserClassName="pt-2 !text-[14px]"
           contentClassName="!text-[14px]"
-          imgAvatar="https://i.pravatar.cc/100?img=2"
           nameUser="Eduardo Benz"
           content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus "
         />

@@ -8,6 +8,7 @@ import { Button } from 'antd';
 import { detailUser, userSelector } from 'pages/user/userSlice';
 import { getURLParams } from 'services';
 import { useDispatch, useSelector } from 'react-redux';
+import { thumbImage } from 'services/convert';
 
 import { AiOutlineStar, AiFillStar, AiTwotoneDownSquare } from 'react-icons/ai';
 import { BsFillCalendar2Fill, BsTelephoneFill } from 'react-icons/bs';
@@ -33,11 +34,7 @@ const MyProfile = () => {
         <section className="w-1/2 space-y-5">
           <div className="border-b-[4px] h-[540px] border-[#FDBA74] space-y-1 pb-5">
             <p className="flex items-center justify-center">
-              <img
-                className="w-[450px] rounded-full h-[450px]"
-                src="https://i.pravatar.cc/100?img=2"
-                alt=""
-              />
+              <img className="w-[450px] rounded-full h-[450px]" src={thumbImage()} alt="" />
             </p>
             <p className="text-5xl flex justify-center space-x-1">
               <AiFillStar className="text-[#ffc700]" />
@@ -62,7 +59,7 @@ const MyProfile = () => {
                     <ProjectItem
                       ideas
                       project={item?.name}
-                      imgAvatar="https://i.pravatar.cc/100?img=2"
+                      imgPage={item?.attachments?.main_picture?.file}
                       content={item?.description}
                     />
                   </div>
@@ -75,11 +72,12 @@ const MyProfile = () => {
             <Directory nameDirectory="Joined Projects" />
             <div className="grid grid-cols-2 gap-4 pt-2">
               {(deUsers?.joinProject ?? [])?.map((item, index) => {
+                console.log('item', item);
                 return (
                   <div key={index}>
                     <ProjectItem
                       joinProject
-                      imgAvatar="https://i.pravatar.cc/100?img=2"
+                      imgPage={item?.attachments?.main_picture?.file}
                       project={item?.project?.name}
                       category={item?.project?.category}
                       time={item?.project?.timeToDo}

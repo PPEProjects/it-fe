@@ -46,6 +46,10 @@ export function getMe() {
         me {
           id
           name
+          email
+          phone_number
+          gender
+          date_of_birth
           avatar_attachment
           userAdvance {
             goal

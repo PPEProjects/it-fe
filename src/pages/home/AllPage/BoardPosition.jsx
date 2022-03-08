@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import { JoinPosition } from 'pages/home/AllPage/JoinPosition';
+import { thumbImage } from 'services/convert';
 
 import { IoMdAdd } from 'react-icons/io';
 
@@ -47,14 +48,14 @@ export const BoardPosition = ({ text, board, running, imgAvatar, done }) => {
         {running && (
           <img
             className="h-[32px] w-[32px] object-cover rounded-full cursor-pointer"
-            src={imgAvatar}
+            src={thumbImage(imgAvatar)}
             alt=""
           />
         )}
         {done && (
           <img
             className="h-[32px] w-[32px] object-cover rounded-full cursor-pointer"
-            src={imgAvatar}
+            src={thumbImage(imgAvatar)}
             alt=""
           />
         )}

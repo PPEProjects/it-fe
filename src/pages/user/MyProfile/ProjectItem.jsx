@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { BiTask, BiTerminal } from "react-icons/bi";
-import { BsCalendar2 } from "react-icons/bs";
+import { BiTask, BiTerminal } from 'react-icons/bi';
+import { BsCalendar2 } from 'react-icons/bs';
 
 export const ProjectItem = ({
   ideas,
@@ -12,15 +12,11 @@ export const ProjectItem = ({
   joinProject,
   category,
   children,
-  imgAvatar,
+  imgPage,
 }) => {
   return (
     <section>
-      <img
-        className="h-[215px] w-full object-cover rounded cursor-pointer"
-        src={imgAvatar}
-        alt=""
-      />
+      <img className="h-[215px] w-full object-cover rounded cursor-pointer" src={imgPage} alt="" />
       <h3 className="text-[24px] text-center text-gray-800">{project}</h3>
       {ideas && <p className="text-gray-600 -mt-2">{content}</p>}
       {joinProject && (

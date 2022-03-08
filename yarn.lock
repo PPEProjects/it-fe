@@ -2036,10 +2036,10 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@tienlucky/storage@^0.1.27":
-  "integrity" "sha512-zXmqLO+1ipx+AcLuWs5kAzoHetqrkt6Gv6C9tOSIr3LqiGmx6z0k1sa2VjFJar0QooyoMclh9d7Z9X6XR5IA+Q=="
-  "resolved" "https://registry.npmjs.org/@tienlucky/storage/-/storage-0.1.27.tgz"
-  "version" "0.1.27"
+"@tienlucky/storage@^0.1.31":
+  "integrity" "sha512-zDLNYXB0xf5IyEpjgh1VoinqFF/KvbNHFS7kEAPeWD+hHE2Yb6vKgUO74+hSNEr7giM/k9Mtz0YOfVUJ+0bpYg=="
+  "resolved" "https://registry.npmjs.org/@tienlucky/storage/-/storage-0.1.31.tgz"
+  "version" "0.1.31"
   dependencies:
     "@headlessui/react" "^1.5.0"
     "@tailwindcss/aspect-ratio" "^0.4.0"

@@ -5,6 +5,7 @@ import { BoardPosition } from './BoardPosition';
 import { CommentItem } from './CommentItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, MyProject, MyIdeas, setProject } from 'pages/project/projectSlice';
+import { Image } from '@tienlucky/storage';
 
 import { AiOutlineHeart } from 'react-icons/ai';
 import { RiCommunityFill } from 'react-icons/ri';
@@ -43,17 +44,21 @@ export const AllPage = () => {
         </p>
         <div className="grid grid-cols-4 gap-4">
           {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
+            console.log('item', item);
             return (
               <div key={index}>
                 <BoardItem
+                  placement="bottomRight"
                   user
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                   link={`/ProjectDescription?id=${item?.id}`}
-                  imgPage="https://i.pravatar.cc/100?img=2"
+                  // imgPage={Image.getFileUrl(item?.attachments?.main_picture, 200)}
+                  imgPage={item?.attachments?.main_picture?.file}
                   nameProject={item?.name}
                   numberComment="1"
                   numberHeart="2"
                   numberLike="3"
-                  imgAvatar="https://i.pravatar.cc/100?img=2"
                 >
                   <div className="relative">
                     <div className="grid grid-cols-7 gap-2 px-3">
@@ -90,25 +95,25 @@ export const AllPage = () => {
               <div key={index}>
                 <BoardItem
                   user
+                  placement="bottomRight"
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                   link={`/ProjectDescription?id=${item?.id}`}
-                  imgPage="https://i.pravatar.cc/100?img=2"
+                  imgPage={item?.attachments?.main_picture?.file}
                   nameProject={item?.name}
                   numberComment="1"
                   numberHeart="2"
                   numberLike="3"
-                  imgAvatar="https://i.pravatar.cc/100?img=2"
                 >
                   <div className="px-2.5 space-y-1.5">
                     <div className="space-y-2">
                       <CommentItem
                         itemsCenter
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
                         nameUser="Eduardo Benz"
                         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                       />
                       <CommentItem
                         itemsCenter
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
                         nameUser="Eduardo Benz"
                         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                       />
@@ -146,47 +151,47 @@ export const AllPage = () => {
                     <div className="grid grid-cols-7 gap-2 px-3">
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="PO"
                       />
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Dev"
                       />
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Tester"
                       />
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="QA"
                       />
                       <BoardPosition
                         running
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                     </div>
@@ -221,47 +226,47 @@ export const AllPage = () => {
                     <div className="grid grid-cols-7 gap-2 px-3">
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="PO"
                       />
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Dev"
                       />
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Tester"
                       />
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="QA"
                       />
                       <BoardPosition
                         done
-                        imgAvatar="https://i.pravatar.cc/100?img=2"
+
                         text="Leader"
                       />
                     </div>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { getMe, userSelector } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, setProjectMerge } from 'pages/project/projectSlice';
+import { thumbImage } from 'services/convert';
 
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsFillMicFill } from 'react-icons/bs';
@@ -115,9 +116,11 @@ const Header = () => {
           </Button>
           <Link to={`/MyProfile?id=${me?.data?.id}`}>
             <div onClick={showSideBarRight} className="flex items-center cursor-pointer space-x-2">
-              <span className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100">
-                P
-              </span>
+              <img
+                className='className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100"'
+                src={thumbImage()}
+                alt=""
+              />
               <span className="text-[#0E7490] text-xl">{me?.data?.name}</span>
             </div>
           </Link>
