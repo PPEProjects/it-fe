@@ -117,8 +117,8 @@ const Header = () => {
           <Link to={`/MyProfile?id=${me?.data?.id}`}>
             <div onClick={showSideBarRight} className="flex items-center cursor-pointer space-x-2">
               <img
-                className='className="w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100"'
-                src={thumbImage()}
+                className='w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100"'
+                src={thumbImage(me?.data?.avatar_attachment?.file)}
                 alt=""
               />
               <span className="text-[#0E7490] text-xl">{me?.data?.name}</span>

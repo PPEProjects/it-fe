@@ -34,7 +34,11 @@ const MyProfile = () => {
         <section className="w-1/2 space-y-5">
           <div className="border-b-[4px] h-[540px] border-[#FDBA74] space-y-1 pb-5">
             <p className="flex items-center justify-center">
-              <img className="w-[450px] rounded-full h-[450px]" src={thumbImage()} alt="" />
+              <img
+                className="w-[450px] rounded-full h-[450px]"
+                src={thumbImage(deUsers?.avatar_attachment?.file)}
+                alt=""
+              />
             </p>
             <p className="text-5xl flex justify-center space-x-1">
               <AiFillStar className="text-[#ffc700]" />
@@ -72,7 +76,6 @@ const MyProfile = () => {
             <Directory nameDirectory="Joined Projects" />
             <div className="grid grid-cols-2 gap-4 pt-2">
               {(deUsers?.joinProject ?? [])?.map((item, index) => {
-                console.log('item', item);
                 return (
                   <div key={index}>
                     <ProjectItem
@@ -131,15 +134,12 @@ const MyProfile = () => {
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4 pt-2">
+              <CardSkin project="Self Ideas/Project" number={deUsers?.selfProject?.length} />
+              <CardSkin project="Joined Project" number={deUsers?.joinProject?.length} />
               <CardSkin
-                project="Self Ideas/Project"
-                number={deUsers?.userAdvance?.selfProject?.length}
+                project="Framework"
+                number={deUsers?.userAdvance?.skill?.framework?.length}
               />
-              <CardSkin
-                project="Joined Project"
-                number={deUsers?.userAdvance?.joinProject?.length}
-              />
-              <CardSkin project="Framework" number={deUsers?.userAdvance?.skill?.length} />
             </div>
           </div>
 
@@ -175,103 +175,59 @@ const MyProfile = () => {
             </p>
           </div>
 
-          {/* {(deUsers?.userAdvance?.skill ?? [])?.map((item, index) => {
-            return (
-              <div key={index} className="space-y-3">
-                <div className="space-y-6 pt-4" key={index}>
-                  <Directory
-                    className="!w-[490px]"
-                    nameDirectory="Programming Language"
-                  />
-
-                  <div className="text-[12px] m-auto p-8 bg-white w-[220px]">
-                    {(item?.program_language ?? [])?.map(
-                      (programItem, index) => {
-                        return (
-                          <div key={index}>
-                            {programItem === "php" && (
-                              <p className="flex items-center space-x-2">
-                                <AiTwotoneDownSquare className="text-[#35B26F] text-xl" />
-                                <span className="text-[#2E9960]">
-                                  {programItem}
-                                </span>
-                              </p>
-                            )}
-                            {programItem === "java" && (
-                              <p className="flex items-center space-x-2">
-                                <AiTwotoneDownSquare className="text-[#0284C7] text-xl" />
-                                <span className="text-[#2563EB]">
-                                  {programItem}
-                                </span>
-                              </p>
-                            )}
-                            {programItem === "C" && (
-                              <p className="flex items-center space-x-2">
-                                <AiTwotoneDownSquare className="text-[#F2CE54] text-xl" />
-                                <span className="text-[#CCAE47]">
-                                  {programItem}
-                                </span>
-                              </p>
-                            )}
-                            {programItem === "css" && (
-                              <p className="flex items-center space-x-2">
-                                <AiTwotoneDownSquare className="text-[#F2545D] text-xl" />
-                                <span className="text-[#CC474E]">
-                                  {programItem}
-                                </span>
-                              </p>
-                            )}
-                          </div>
-                        );
-                      }
-                    )}
-                  </div>
-                </div>
-
-                <div className="space-y-6 pt-4">
-                  <Directory nameDirectory="Framework" />
-                  <div className="flex items-center space-x-12 px-2">
-                    {(item?.framework ?? [])?.map((frameworkItem, index) => {
-                      return (
-                        <div key={index}>
-                          <Framework
-                            className="!bg-[#d1fae5] !text-[#065F46]"
-                            framework={frameworkItem}
-                          />
-                          <Framework
-                            className="!bg-[#F3F4F6]"
-                            framework={frameworkItem}
-                          />
-                          <Framework
-                            className="!bg-[#FEE2E2] !text-[#991B1B]"
-                            framework={frameworkItem}
-                          />
-                          <Framework
-                            className="!bg-[#FEF3C7] !text-[#92400E]"
-                            framework={frameworkItem}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="flex items-center justify-end space-x-12 px-2">
-                    <Framework
-                      className="!bg-[#d1fae5] !text-[#065F46]"
-                      framework=".NET"
-                    />
-                    <Framework
-                      className="!bg-[#DBEAFE] !text-[#1E40AF]"
-                      framework="Laravel"
-                    />
-                    <Framework
-                      className="!bg-[#EDE9FE] !text-[#5B21B6]"
-                      framework="Tailwind"
-                    />
-                  </div>
-                </div>
+          <div className="space-y-3">
+            <div className="space-y-6 pt-4">
+              <Directory className="!w-[490px]" nameDirectory="Programming Language" />
+              <div className="text-[12px] m-auto p-8 bg-white w-[220px]">
+                {(deUsers?.userAdvance?.skill?.program_language ?? [])?.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      {item === 'php' && (
+                        <p className="flex items-center space-x-2">
+                          <AiTwotoneDownSquare className="text-[#35B26F] text-xl" />
+                          <span className="text-[#2E9960]">{item}</span>
+                        </p>
+                      )}
+                      {item === 'java' && (
+                        <p className="flex items-center space-x-2">
+                          <AiTwotoneDownSquare className="text-[#0284C7] text-xl" />
+                          <span className="text-[#2563EB]">{item}</span>
+                        </p>
+                      )}
+                      {item === 'C' && (
+                        <p className="flex items-center space-x-2">
+                          <AiTwotoneDownSquare className="text-[#F2CE54] text-xl" />
+                          <span className="text-[#CCAE47]">{item}</span>
+                        </p>
+                      )}
+                      {item === 'css' && (
+                        <p className="flex items-center space-x-2">
+                          <AiTwotoneDownSquare className="text-[#F2545D] text-xl" />
+                          <span className="text-[#CC474E]">{item}</span>
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })} */}
+            </div>
+          </div>
+
+          <div className="space-y-6 pt-4">
+            <Directory nameDirectory="Framework" />
+            <div className="flex items-center px-2">
+              {(deUsers?.userAdvance?.skill?.program_language ?? [])?.map((item, index) => {
+                return (
+                  <div key={index} className="grid grid-cols-3 gap-8">
+                    <Framework className="!bg-[#d1fae5] !text-[#065F46]" framework={item} />
+                    {/* <Framework className="!bg-[#F3F4F6]" framework={item} />
+                    <Framework className="!bg-[#FEE2E2] !text-[#991B1B]" framework={item} />
+                    <Framework className="!bg-[#FEF3C7] !text-[#92400E]" framework={item} /> */}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           <div className="space-y-3 py-5">
             <Directory className="!w-[490px]" nameDirectory="Self Introduction" />

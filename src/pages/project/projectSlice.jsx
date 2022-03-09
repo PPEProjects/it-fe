@@ -51,6 +51,7 @@ export function MyProject(type = 'project') {
             email
             id
             name
+            avatar_attachment
           }
           members {
             id
@@ -102,6 +103,7 @@ export function MyIdeas(type = 'ideas') {
             email
             id
             name
+            avatar_attachment
           }
           members {
             id

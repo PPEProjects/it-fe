@@ -31,8 +31,8 @@ const ProjectDescription = () => {
   const { id } = getURLParams();
   const { deProject } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
-
   console.log('detailProjects', detailProjects);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -141,7 +141,7 @@ const ProjectDescription = () => {
               <div className="flex w-1/3 items-center py-2 space-x-2">
                 <img
                   className="object-cover rounded-full cursor-pointer w-10 h-10"
-                  src={thumbImage()}
+                  src={thumbImage(detailProjects?.avatar_attachment?.file)}
                   alt=""
                 />
                 <div className="pt-1">

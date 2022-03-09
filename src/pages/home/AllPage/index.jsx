@@ -44,7 +44,6 @@ export const AllPage = () => {
         </p>
         <div className="grid grid-cols-4 gap-4">
           {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
-            console.log('item', item);
             return (
               <div key={index}>
                 <BoardItem
@@ -59,6 +58,7 @@ export const AllPage = () => {
                   numberComment="1"
                   numberHeart="2"
                   numberLike="3"
+                  imgAvatar={item?.avatar_attachment?.file}
                 >
                   <div className="relative">
                     <div className="grid grid-cols-7 gap-2 px-3">
@@ -86,7 +86,6 @@ export const AllPage = () => {
           <SeeMore name="See more" onClick={onLoadMore} />
         )}
       </section>
-
       <section>
         <h3 className="text-[18px] font-[600]">Ideas</h3>
         <div className="grid grid-cols-4 gap-4">
@@ -104,6 +103,7 @@ export const AllPage = () => {
                   numberComment="1"
                   numberHeart="2"
                   numberLike="3"
+                  imgAvatar={item?.avatar_attachment?.file}
                 >
                   <div className="px-2.5 space-y-1.5">
                     <div className="space-y-2">
@@ -132,7 +132,6 @@ export const AllPage = () => {
         </div>
         {loadMore < mlMyIdeas?.myIdeas?.length && <SeeMore name="See more" onClick={onLoadMore} />}
       </section>
-
       {/* <section>
         <h3 className="text-[18px] font-[600]">Project Running</h3>
         <div className="grid grid-cols-4 gap-4">

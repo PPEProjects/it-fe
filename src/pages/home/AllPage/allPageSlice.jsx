@@ -1,7 +1,7 @@
-import gql from "graphql-tag";
-import { createSlice } from "@reduxjs/toolkit";
-import { _slice } from "services/reduxToolkit";
-import { apolloClient, restClient } from "services";
+import gql from 'graphql-tag';
+import { createSlice } from '@reduxjs/toolkit';
+import { _slice } from 'services/reduxToolkit';
+import { apolloClient, restClient } from 'services';
 
 export const initialState = {
   mlMyProject: {},
@@ -9,7 +9,7 @@ export const initialState = {
 };
 
 const allPagesSlice = createSlice({
-  name: "allPages",
+  name: 'allPages',
   initialState,
   reducers: {
     setData: (state, { payload }) => {
@@ -22,23 +22,23 @@ const allPagesSlice = createSlice({
 });
 
 export const { setData, setMerge } = allPagesSlice.actions;
-export const allPagesSelector = (state) => state.allPages;
+export const allPagesSelector = state => state.allPages;
 export default allPagesSlice.reducer;
 
 export function setAllPage(state) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setData(state));
   };
 }
 
 export function setAllPageMerge(key, item) {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(setMerge({ ...{}, [key]: item }));
   };
 }
 
-export function MyProject(type = "project") {
-  return async (dispatch) => {
+export function MyProject(type = 'project') {
+  return async dispatch => {
     dispatch(setMerge({ mlMyProject: { isLoading: true } }));
     const query = gql`
       query SearchProject($name: String, $type: String, $status: String) {
@@ -88,8 +88,8 @@ export function MyProject(type = "project") {
   };
 }
 
-export function MyIdeas(type = "ideas") {
-  return async (dispatch) => {
+export function MyIdeas(type = 'ideas') {
+  return async dispatch => {
     dispatch(setMerge({ mlMyIdeas: { isLoading: true } }));
     const query = gql`
       query SearchProject($name: String, $type: String, $status: String) {

@@ -6,6 +6,7 @@ import { homeRoutes } from 'pages/home/homeRoutes';
 import { userRoutes } from 'pages/user/userRoutes';
 import { researchRoutes } from 'pages/research/researchRoutes';
 import { projectRoutes } from 'pages/project/projectRoutes';
+import { adminIstratorRoutes } from 'admin/AdminIstrator/adminIstratorRoutes';
 import '@tienlucky/storage/src/tienlucky-storage.min.css';
 
 function App() {
@@ -14,11 +15,16 @@ function App() {
       <BrowserRouter>
         <React.Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            {[...authRoutes, ...homeRoutes, ...userRoutes, ...researchRoutes, ...projectRoutes].map(
-              (props, key) => (
-                <Route key={key} {...props} />
-              )
-            )}
+            {[
+              ...authRoutes,
+              ...homeRoutes,
+              ...userRoutes,
+              ...researchRoutes,
+              ...projectRoutes,
+              ...adminIstratorRoutes,
+            ].map((props, key) => (
+              <Route key={key} {...props} />
+            ))}
             <Route exact path={`/`} element={<Navigate to="/AllPage" />} />
           </Routes>
         </React.Suspense>

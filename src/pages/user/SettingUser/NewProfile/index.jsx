@@ -6,6 +6,7 @@ import { detailUser, userSelector, upsertUserAdvance } from 'pages/user/userSlic
 import { useDispatch, useSelector } from 'react-redux';
 import { getURLParams } from 'services';
 import { success } from 'components';
+import { Image } from '@tienlucky/storage';
 
 import { RiImageAddLine } from 'react-icons/ri';
 
@@ -17,6 +18,7 @@ const NewProfile = () => {
   const { id } = getURLParams();
   const { deUser, upsertProfile } = useSelector(userSelector);
   const deUsers = deUser?.detailUserIds;
+  console.log('deUsers', deUsers);
 
   useEffect(() => {
     dispatch(detailUser(id));
@@ -29,6 +31,7 @@ const NewProfile = () => {
           date_of_birth: deUsers?.date_of_birth,
           gender: deUsers?.gender,
           address: deUsers?.address,
+          // avatar_attachment: deUsers?.avatar_attachment?.file,
         },
         skill: {
           framework: deUsers?.userAdvance?.skill?.framework,
@@ -105,29 +108,28 @@ const NewProfile = () => {
                   content="This information will be displayed publicly so be careful what you share. "
                   childrenClassName="space-y-4"
                 >
-                  <div className="flex items-center space-x-4">
-                    <span className="w-[48px] h-[48px] border rounded-full flex items-center justify-center">
-                      ok
-                    </span>
-                    <Button className="!h-[48px] !rounded-md">Change</Button>
-                  </div>
-                  <div>
-                    <label>Cover Photo</label>
-                    <button
-                      type="button"
-                      className="relative w-full block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0369A1]"
-                    >
-                      <p className="flex items-center justify-center">
-                        {' '}
-                        <RiImageAddLine className="text-gray-400 !w-[38px] !h-[40px]" />
-                      </p>
-                      <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
-                        <a href>Upload a file</a>
-                        <span>or drag and drop</span>
-                      </span>
-                      <span className="text-[12px] text-gray-400">PNG, JPG, up to 10MB</span>
-                    </button>
-                  </div>
+                  <Form.List name="user">
+                    {() => (
+                      <div className="space-y-4">
+                        <div className="flex items-center space-x-4">
+                          <img
+                            alt=""
+                            src={deUsers?.avatar_attachment?.file}
+                            className="w-[48px] h-[48px] border rounded-full flex items-center justify-center"
+                          />
+                          <Button className="!h-[48px] !rounded-md">Change</Button>
+                        </div>
+                        <Form.Item
+                          name="avatar_attachment"
+                          label="Cover Photo"
+                          className="text-sm text-gray-700"
+                        >
+                          <Image.SingleUpload isBorder isDelete isFull />
+                        </Form.Item>
+                      </div>
+                    )}
+                  </Form.List>
+
                   <Form.Item className="!mb-0 !w-1/2" name="goal" label="Goal">
                     <Input className="!rounded" placeholder="" />
                   </Form.Item>
