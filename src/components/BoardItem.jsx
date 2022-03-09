@@ -8,6 +8,7 @@ import { thumbImage } from 'services/convert';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
+import classNames from 'classnames';
 
 export const BoardItem = ({
   imgPage,
@@ -19,6 +20,7 @@ export const BoardItem = ({
   link,
   children,
   user,
+  shadowNone,
   linkViewDetail,
   linkViewDescription,
   placement,
@@ -57,12 +59,25 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Top Comment" onClick={showModal} />
           </>
         )}
+
+        {admin && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
+            <MenuItemHover nameMenu="Download" onClick={showModal} />
+          </>
+        )}
       </Menu>
     );
   };
 
   return (
-    <section className="border-l border-r border-b rounded-b-md pb-3 shadow-md">
+    <section
+      className={classNames('border-l border-r border-b rounded-b-md pb-3 shadow-md', {
+        'shadow-none': shadowNone,
+      })}
+    >
       {renderModalTopComment()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <img
