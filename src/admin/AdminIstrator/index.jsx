@@ -2,7 +2,7 @@ import React from 'react';
 import MasterLayout from 'layouts/MasterLayout';
 
 const Administrator = () => {
-  return <MasterLayout>Administrator</MasterLayout>;
+  return <MasterLayout>12314</MasterLayout>;
 };
 
 export default Administrator;
