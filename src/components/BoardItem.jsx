@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Menu, Dropdown, Modal, Button } from 'antd';
 import { TopComment } from 'pages/home/AllPage/TopComment';
+import { Reviewer } from 'admin/AdminIstrator/AllAdmin/Reviewer';
 import { AssignReviewer } from 'admin/AdminIstrator/AllAdmin/AssignReviewer';
+import { UpdateInformation } from 'admin/AdminIstrator/AllAdmin/UpdateInformation';
 import { Link } from 'react-router-dom';
 import { MenuItemHover } from 'components/MenuItemHover';
 import { thumbImage } from 'services/convert';
@@ -32,6 +34,8 @@ export const BoardItem = ({
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
+  const [isModalReviewer, setIsModalReviewer] = useState(false);
+  const [isModalUpdateInformation, setIsModalUpdateInformation] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -48,11 +52,24 @@ export const BoardItem = ({
   const handleCancelAssignReviewer = () => {
     setIsModalAssignReviewer(false);
   };
+  const showModalReviewer = () => {
+    setIsModalReviewer(true);
+  };
 
-  const renderModalTopComment = () => {
+  const handleModalReviewer = () => {
+    setIsModalReviewer(false);
+  };
+  const showModalUpdateInformation = () => {
+    setIsModalUpdateInformation(true);
+  };
+
+  const handleCancelUpdateInformation = () => {
+    setIsModalUpdateInformation(false);
+  };
+  const renderModalReviewer = () => {
     return (
-      <Modal visible={isModalVisible} onCancel={handleCancel} footer={null}>
-        <TopComment />
+      <Modal visible={isModalReviewer} onCancel={handleModalReviewer} footer={null}>
+        <Reviewer />
       </Modal>
     );
   };
@@ -64,7 +81,24 @@ export const BoardItem = ({
       </Modal>
     );
   };
-
+  const renderModalTopComment = () => {
+    return (
+      <Modal visible={isModalVisible} onCancel={handleCancel} footer={null}>
+        <TopComment />
+      </Modal>
+    );
+  };
+  const renderModelUpdateInformation = () => {
+    return (
+      <Modal
+        visible={isModalUpdateInformation}
+        onCancel={handleCancelUpdateInformation}
+        footer={null}
+      >
+        <UpdateInformation />
+      </Modal>
+    );
+  };
   const menu = () => {
     return (
       <Menu>
@@ -83,9 +117,9 @@ export const BoardItem = ({
               <MenuItemHover nameMenu="View Description" />
             </Link>
             <MenuItemHover nameMenu="Download" onClick={showModal} />
-            <MenuItemHover nameMenu="Review" />
+            <MenuItemHover nameMenu="Review" onClick={showModalReviewer} />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalAssignReviewer} />
-            <MenuItemHover nameMenu="Update Information" />
+            <MenuItemHover nameMenu="Update Information" onClick={showModalUpdateInformation} />
           </>
         )}
       </Menu>
@@ -100,6 +134,8 @@ export const BoardItem = ({
     >
       {renderModalTopComment()}
       {renderModalAssignReviewer()}
+      {renderModalReviewer()}
+      {renderModelUpdateInformation()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <div className="relative">
           <img
