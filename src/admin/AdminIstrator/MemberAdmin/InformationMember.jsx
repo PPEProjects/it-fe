@@ -1,48 +1,70 @@
-import { Dropdown } from 'antd';
+import { Menu, Dropdown, Modal, Button } from 'antd';
 import React from 'react';
-import { AiFillStar, AiOutlineMail } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import { MenuItemHover } from 'components/MenuItemHover';
+
+import { AiFillStar } from 'react-icons/ai';
 import { BsFillTelephoneFill, BsThreeDotsVertical } from 'react-icons/bs';
+import { HiMail } from 'react-icons/hi';
 
-export const InformationMember = () => {
+export const InformationMember = ({ placement }) => {
+  const menu = () => {
+    return (
+      <Menu>
+        {/* <Link to={`${linkViewDescription}`}> */}
+        <MenuItemHover nameMenu="View Description" />
+        {/* </Link> */}
+        <MenuItemHover nameMenu="Download" />
+        <MenuItemHover nameMenu="Review" />
+        <MenuItemHover nameMenu="Assign Reviewer" />
+        <MenuItemHover nameMenu="Update Information" />
+      </Menu>
+    );
+  };
+
   return (
-    <section className="px-[25px]">
-      <div className="w-[325px] h-[369px]  shadow-md border-4-solid">
-        <div className="flex items-center justify-center">
-          <img src="https://i.pravatar.cc/100?img=2" alt="" className="rounded-full" />
-        </div>
-
-        <div className="w-[261px] h-[20px] pl-[32px] text-center text-sm">Alidabet</div>
-        <div className="w-[261px] h-[20px] text-sm pl-[40px] text-center">Goal: Leader</div>
-        <div className="flex items-center justify-center">
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar className="float-left" />
-          <AiFillStar />
-        </div>
-
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="border flex items-center pl-[22px] w-[277px] h-[35px]">
-              <AiOutlineMail className="float-left !w-[16px] !h-[12px] " />
-              <span className="pl-[22px]">123@gmail.com</span>
-            </div>
-
-            <div className="border flex items-center  pl-[22px] w-[277px] h-[35px]">
-              <BsFillTelephoneFill className="float-left !w-[16px] !h-[12px]" />
-              <span className="pl-[22px]">0123456789</span>
-            </div>
+    <section className="shadow-md space-y-7">
+      <div className="text-center text-sm">
+        <p className="flex items-center justify-center">
+          <img
+            src="https://i.pravatar.cc/100?img=2"
+            alt=""
+            className="rounded-full h-[128px] w-[128px]"
+          />
+        </p>
+        <h6>Alidabet</h6>
+        <h6 className="text-[#6B7280] -mt-1">Goal: Leader</h6>
+        <p className="flex items-center justify-center space-x-1">
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+          <AiFillStar className="text-xl" />
+        </p>
+      </div>
+      <div className="flex items-center h-[94px] justify-between">
+        <div className="w-[80%]">
+          <div className="border-b border-r border-t flex h-[47px] w-full pl-3 items-center space-x-2">
+            <HiMail className="text-xl text-gray-400" />
+            <span className="text-xs">123@gmail.com</span>
           </div>
-          <div className="border items-sm w-[49px] h-[70px] flex items-center justify-center">
-            <BsThreeDotsVertical />
+
+          <div className="border-b border-r flex h-[47px] w-full pl-3 items-center space-x-2">
+            <BsFillTelephoneFill className="text-xl text-gray-400" />
+            <span className="text-xs">0123456789</span>
           </div>
         </div>
+        <Dropdown overlay={menu} placement={placement} trigger={['click']}>
+          <div className="border-t hover:bg-gray-100 border-b items-sm w-[20%] h-full flex items-center justify-center">
+            <BsThreeDotsVertical className="!text-2xl text-gray-400" />
+          </div>
+        </Dropdown>
       </div>
     </section>
   );

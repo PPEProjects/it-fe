@@ -6,7 +6,9 @@ const MemberAdmin = () => {
   return (
     <MasterLayout>
       <LayoutAdmin>
-        <InformationMember />
+        <div className="grid grid-cols-3 gap-4 p-3">
+          <InformationMember />
+        </div>
       </LayoutAdmin>
     </MasterLayout>
   );
