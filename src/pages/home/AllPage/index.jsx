@@ -47,6 +47,7 @@ export const AllPage = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  lever="100"
                   placement="bottomRight"
                   user
                   linkViewDescription={`/ProjectDescription?id=${item?.id}`}
@@ -93,6 +94,7 @@ export const AllPage = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  lever="100"
                   user
                   placement="bottomRight"
                   linkViewDescription={`/ProjectDescription?id=${item?.id}`}

@@ -28,6 +28,7 @@ export const BoardItem = ({
   admin,
   minSize,
   test12,
+  lever,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
@@ -100,11 +101,19 @@ export const BoardItem = ({
       {renderModalTopComment()}
       {renderModalAssignReviewer()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
-        <img
-          className="h-[215px] w-full object-cover rounded cursor-pointer"
-          src={imgPage}
-          alt=""
-        />
+        <div className="relative">
+          <img
+            className="h-[215px] w-full object-cover rounded cursor-pointer"
+            src={imgPage}
+            alt=""
+          />
+        </div>
+        {lever && (
+          <div className="absolute top-3 right-3 bg-white w-[60px] font-semibold text-black rounded-full border h-[60px] flex items-center justify-center">
+            {lever}
+          </div>
+        )}
+
         <div className="invisible rounded-md opacity-0 transition group-hover:!visible group-hover:opacity-100">
           <Link to={`${linkViewDetail}`}>
             <div className="absolute top-0 left-0 cursor-pointer right-0 flex space-x-2 h-full bg-black !bg-opacity-60 items-center justify-center text-white">
@@ -114,6 +123,7 @@ export const BoardItem = ({
           </Link>
         </div>
       </div>
+
       <div className="px-3">
         <div className="flex items-center justify-between py-2">
           <Link to={`${link}`} className="flex items-center space-x-3 w-[60%]">
@@ -183,6 +193,7 @@ export const BoardItem = ({
           </div>
         )}
       </div>
+
       <div className="pt-2">{children}</div>
     </section>
   );
