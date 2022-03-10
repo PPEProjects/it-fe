@@ -25,6 +25,7 @@ export const BoardItem = ({
   linkViewDescription,
   placement,
   admin,
+  minSize,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -105,11 +106,32 @@ export const BoardItem = ({
             <span className="font-[600] text-[#0369A1]">{nameProject}</span>
           </Link>
 
-          <Dropdown overlay={menu} placement={placement} trigger={['click']}>
-            <p className="w-10 h-10 hover:border hover:bg-gray-50 rounded-full flex items-center justify-center cursor-pointer">
-              <BiDotsVerticalRounded className="!text-2xl text-gray-400" />
+          <div className="flex items-center space-x-2">
+            <p className="flex items-center space-x-1 cursor-pointer">
+              <AiOutlineLike className="text-xl" />
+              <span>{numberLike}</span>
             </p>
-          </Dropdown>
+            <p className="flex items-center space-x-1 cursor-pointer">
+              <AiOutlineMessage className="text-xl" />
+              <span>{numberComment}</span>
+            </p>
+            <Dropdown overlay={menu} placement={placement} trigger={['click']}>
+              <p
+                className={classNames(
+                  'w-10 h-10 hover:border hover:bg-gray-50 rounded-full flex items-center justify-center cursor-pointer',
+                  {
+                    '!w-8 !h-8': minSize,
+                  }
+                )}
+              >
+                <BiDotsVerticalRounded
+                  className={classNames('!text-2xl text-gray-400', {
+                    '!text-xl': minSize,
+                  })}
+                />
+              </p>
+            </Dropdown>
+          </div>
         </div>
         {admin && (
           <div className="text-right pr-6 pb-1">
