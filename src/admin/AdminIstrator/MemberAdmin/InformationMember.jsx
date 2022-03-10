@@ -7,7 +7,13 @@ import { AiFillStar } from 'react-icons/ai';
 import { BsFillTelephoneFill, BsThreeDotsVertical } from 'react-icons/bs';
 import { HiMail } from 'react-icons/hi';
 
-export const InformationMember = ({ placement }) => {
+export const InformationMember = ({
+  placement,
+  nameMember,
+  goadMember,
+  emailMember,
+  phoneMember,
+}) => {
   const menu = () => {
     return (
       <Menu>
@@ -32,8 +38,8 @@ export const InformationMember = ({ placement }) => {
             className="rounded-full h-[128px] w-[128px]"
           />
         </p>
-        <h6>Alidabet</h6>
-        <h6 className="text-[#6B7280] -mt-1">Goal: Leader</h6>
+        <h6>{nameMember}</h6>
+        <h6 className="text-[#6B7280] -mt-1">{goadMember}</h6>
         <p className="flex items-center justify-center space-x-1">
           <AiFillStar className="text-xl" />
           <AiFillStar className="text-xl" />
@@ -52,12 +58,12 @@ export const InformationMember = ({ placement }) => {
         <div className="w-[80%]">
           <div className="border-b border-r border-t flex h-[47px] w-full pl-3 items-center space-x-2">
             <HiMail className="text-xl text-gray-400" />
-            <span className="text-xs">123@gmail.com</span>
+            <span className="text-xs">{emailMember}</span>
           </div>
 
           <div className="border-b border-r flex h-[47px] w-full pl-3 items-center space-x-2">
             <BsFillTelephoneFill className="text-xl text-gray-400" />
-            <span className="text-xs">0123456789</span>
+            <span className="text-xs">{phoneMember}</span>
           </div>
         </div>
         <Dropdown overlay={menu} placement={placement} trigger={['click']}>

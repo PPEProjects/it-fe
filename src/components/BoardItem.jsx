@@ -76,7 +76,12 @@ export const BoardItem = ({
 
   const renderModalAssignReviewer = () => {
     return (
-      <Modal visible={isModalAssignReviewer} onCancel={handleCancelAssignReviewer} footer={null}>
+      <Modal
+        className="!w-[800px]"
+        visible={isModalAssignReviewer}
+        onCancel={handleCancelAssignReviewer}
+        footer={null}
+      >
         <AssignReviewer />
       </Modal>
     );
