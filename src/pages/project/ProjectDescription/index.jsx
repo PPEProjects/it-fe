@@ -200,13 +200,13 @@ const ProjectDescription = () => {
               <InformationItem Information="Time to do:" result={detailProjects?.timeToDo} />
               <InformationItem
                 Information="Framework:"
-                // result={(detailProjects?.framework).join()}
+                // result={`${(detailProjects?.framework).join()}`}
               />
 
               <InformationItem
                 Information="Programing Language:"
                 resultClassName="!flex !items-center !space-x-1"
-                // result={(detailProjects?.programingLanguage).join()}
+                // result={`${(detailProjects?.programingLanguage).join()}`}
               />
 
               <InformationItem

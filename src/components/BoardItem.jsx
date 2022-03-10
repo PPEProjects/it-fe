@@ -18,6 +18,8 @@ export const BoardItem = ({
   imgAvatar,
   nameProject,
   numberLike,
+  numberLikeIdeas,
+  numberCommentIdeas,
   numberComment,
   numberHeart,
   link,
@@ -29,7 +31,7 @@ export const BoardItem = ({
   placement,
   admin,
   minSize,
-  test12,
+  ideas,
   lever,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -172,15 +174,15 @@ export const BoardItem = ({
           </Link>
 
           <div className="flex items-center space-x-2">
-            {test12 && (
+            {ideas && (
               <>
                 <p className="flex items-center space-x-1 cursor-pointer">
                   <AiOutlineLike className="text-xl" />
-                  <span>{numberLike}</span>
+                  <span>{numberLikeIdeas}</span>
                 </p>
                 <p className="flex items-center space-x-1 cursor-pointer">
                   <AiOutlineMessage className="text-xl" />
-                  <span>{numberComment}</span>
+                  <span>{numberCommentIdeas}</span>
                 </p>
               </>
             )}

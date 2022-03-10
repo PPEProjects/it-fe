@@ -5,5 +5,5 @@ export const thumbImage = thumb_image => {
 
 export const thumbImageBg = thumb_image_Bg => {
   if (thumb_image_Bg) return thumb_image_Bg;
-  return '/assets/imgs/background_default.png';
+  return '/assets/images/background_default.png';
 };

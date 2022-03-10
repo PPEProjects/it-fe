@@ -106,7 +106,7 @@ export function authLogout() {
     const res = await restClient.get('/ppe-core/auth/logout');
     cookies.remove('ppe-it');
     dispatch(setMerge({ loAuth: { isLoading: false } }));
-    window.location.assign('/m/LoginPage');
+    window.location.assign('/LoginPage');
   };
 }
 
@@ -114,7 +114,6 @@ export function authForgotPassword(values) {
   return async dispatch => {
     dispatch(setMerge({ fAuth: { isLoading: true } }));
     const res = await restClient.post('/ppe-core/auth/reset-password', values);
-    console.log('res', res);
     dispatch(setMerge({ fAuth: { data: res?.data, isLoading: false } }));
   };
 }

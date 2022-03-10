@@ -49,6 +49,7 @@ export function getMe() {
           email
           phone_number
           gender
+          allPosition
           date_of_birth
           avatar_attachment
           userAdvance {

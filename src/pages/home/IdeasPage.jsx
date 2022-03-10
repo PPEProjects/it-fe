@@ -30,6 +30,7 @@ const IdeasPage = () => {
               <div key={index}>
                 <BoardItem
                   user
+                  lever="100"
                   placement="bottomRight"
                   linkViewDescription={`/ProjectDescription?id=${item?.id}`}
                   linkViewDetail={`/ProjectDescription?id=${item?.id}`}
