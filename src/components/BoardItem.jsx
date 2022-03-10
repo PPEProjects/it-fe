@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, Dropdown, Modal, Button } from 'antd';
 import { TopComment } from 'pages/home/AllPage/TopComment';
+import { AssignReviewer } from 'admin/AdminIstrator/AllAdmin/AssignReviewer';
 import { Link } from 'react-router-dom';
 import { MenuItemHover } from 'components/MenuItemHover';
 import { thumbImage } from 'services/convert';
@@ -26,25 +27,39 @@ export const BoardItem = ({
   placement,
   admin,
   minSize,
+  test12,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
 
+  const showModalAssignReviewer = () => {
+    setIsModalAssignReviewer(true);
+  };
+
+  const handleCancelAssignReviewer = () => {
+    setIsModalAssignReviewer(false);
+  };
+
   const renderModalTopComment = () => {
     return (
-      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
+      <Modal visible={isModalVisible} onCancel={handleCancel} footer={null}>
         <TopComment />
+      </Modal>
+    );
+  };
+
+  const renderModalAssignReviewer = () => {
+    return (
+      <Modal visible={isModalAssignReviewer} onCancel={handleCancelAssignReviewer} footer={null}>
+        <AssignReviewer />
       </Modal>
     );
   };
@@ -67,6 +82,9 @@ export const BoardItem = ({
               <MenuItemHover nameMenu="View Description" />
             </Link>
             <MenuItemHover nameMenu="Download" onClick={showModal} />
+            <MenuItemHover nameMenu="Review" />
+            <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalAssignReviewer} />
+            <MenuItemHover nameMenu="Update Information" />
           </>
         )}
       </Menu>
@@ -80,6 +98,7 @@ export const BoardItem = ({
       })}
     >
       {renderModalTopComment()}
+      {renderModalAssignReviewer()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <img
           className="h-[215px] w-full object-cover rounded cursor-pointer"
@@ -107,14 +126,18 @@ export const BoardItem = ({
           </Link>
 
           <div className="flex items-center space-x-2">
-            <p className="flex items-center space-x-1 cursor-pointer">
-              <AiOutlineLike className="text-xl" />
-              <span>{numberLike}</span>
-            </p>
-            <p className="flex items-center space-x-1 cursor-pointer">
-              <AiOutlineMessage className="text-xl" />
-              <span>{numberComment}</span>
-            </p>
+            {test12 && (
+              <>
+                <p className="flex items-center space-x-1 cursor-pointer">
+                  <AiOutlineLike className="text-xl" />
+                  <span>{numberLike}</span>
+                </p>
+                <p className="flex items-center space-x-1 cursor-pointer">
+                  <AiOutlineMessage className="text-xl" />
+                  <span>{numberComment}</span>
+                </p>
+              </>
+            )}
             <Dropdown overlay={menu} placement={placement} trigger={['click']}>
               <p
                 className={classNames(
