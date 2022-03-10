@@ -1,16 +1,15 @@
-import React from 'react';
 import MasterLayout from 'layouts/MasterLayout';
 import { LayoutAdmin } from 'layouts/LayoutAdmin';
-import { MenuAdmin } from './MenuAdmin';
+import { InformationMember } from './InformationMember';
 
-const Administrator = () => {
+const MemberAdmin = () => {
   return (
     <MasterLayout>
       <LayoutAdmin>
-        <MenuAdmin />
+        <InformationMember />
       </LayoutAdmin>
     </MasterLayout>
   );
 };
 
-export default Administrator;
+export default MemberAdmin;
