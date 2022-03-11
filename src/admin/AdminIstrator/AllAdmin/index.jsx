@@ -61,7 +61,7 @@ const dataDraft = [
 const Administrator = ({ imgPage, imgAvatar, nameProject }) => {
   return (
     <MasterLayout>
-      <LayoutAdmin className=" border rounded space-y-4">
+      <LayoutAdmin admin className=" border rounded space-y-4">
         <div className="space-y-4 border-b p-4 pb-5">
           <div className="flex space-x-5">
             <button className="border h-10 bg-[#F6F9FB] flex items-center justify-between px-3 rounded-lg font-medium text-sm w-44 text-[#0369A1]">
