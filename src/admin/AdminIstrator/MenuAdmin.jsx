@@ -19,8 +19,8 @@ export const MenuAdmin = () => {
       },
       {
         label: 'Ideas',
-        key: 'IdeasPage',
-        link: '/IdeasPage',
+        key: 'Ideas',
+        link: '/Admin/Ideas',
       },
       {
         label: 'OnBoard',
