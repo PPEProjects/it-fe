@@ -6,9 +6,7 @@ import { MenuAdmin } from './MenuAdmin';
 const Administrator = () => {
   return (
     <MasterLayout>
-      <LayoutAdmin>
-        <MenuAdmin />
-      </LayoutAdmin>
+      <LayoutAdmin>{/* <MenuAdmin /> */}</LayoutAdmin>
     </MasterLayout>
   );
 };
