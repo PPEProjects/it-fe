@@ -33,6 +33,7 @@ export const BoardItem = ({
   minSize,
   ideas,
   lever,
+  projectManager,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
@@ -122,6 +123,20 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Review" onClick={showModalReviewer} />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalAssignReviewer} />
             <MenuItemHover nameMenu="Update Information" onClick={showModalUpdateInformation} />
+          </>
+        )}
+
+        {projectManager && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
+            <MenuItemHover nameMenu="Manage Members" />
+            <MenuItemHover nameMenu="Add Project Levels" />
+            <MenuItemHover nameMenu="Download Files" />
+            <MenuItemHover nameMenu="Update Files" />
+            <MenuItemHover nameMenu="Update Project Status" />
+            <MenuItemHover nameMenu="Update Information" />
           </>
         )}
       </Menu>
