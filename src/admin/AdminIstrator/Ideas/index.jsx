@@ -74,7 +74,7 @@ const dataIdeas = [
 const Ideas = () => {
   return (
     <MasterLayout>
-      <LayoutAdmin>
+      <LayoutAdmin admin>
         <section className="p-4 space-y-4 -mt-2">
           <div className="w-5/12">
             <SearchCommon

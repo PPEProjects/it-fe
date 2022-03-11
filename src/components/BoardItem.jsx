@@ -12,6 +12,11 @@ import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
 import classNames from 'classnames';
+import { ManageMember } from 'admin/ProjectManager/ManageMember';
+import { AddProjectLevel } from 'admin/ProjectManager/AddProjectLevel';
+import { DownloadFiles } from 'admin/ProjectManager/DownloadFiles';
+import { UpdateFiles } from 'admin/ProjectManager/UpdateFiles';
+import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
 
 export const BoardItem = ({
   imgPage,
@@ -39,7 +44,31 @@ export const BoardItem = ({
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
   const [isModalReviewer, setIsModalReviewer] = useState(false);
   const [isModalUpdateInformation, setIsModalUpdateInformation] = useState(false);
+  const [isModalManageMembers, setIsModalManageMembers] = useState(false);
+  const [isModalAddProjectLevel, setIsModalAddProjectLevel] = useState(false);
+  const [isModalDownloadFiles, setIsModalDownloadFiles] = useState(false);
+  const [isModalUpdateFiles, setIsModalUpdateFiles] = useState(false);
+  const [isModalUpdateProjectStatus, setIsModalUpdateProjectStatus] = useState(false);
+  const [isModalUpdateInformationPro, setIsModalUpdateInformationPro] = useState(false);
 
+  const showModalUpdateInformationPro = () => {
+    setIsModalUpdateInformationPro(true);
+  };
+  const handleCancelUpdateInformationPro = () => {
+    setIsModalUpdateInformationPro(false);
+  };
+  const showModalUpdateProjectStatus = () => {
+    setIsModalUpdateProjectStatus(true);
+  };
+  const handleCancelUpdateProjectStatus = () => {
+    setIsModalUpdateProjectStatus(false);
+  };
+  const showModalUpdateFiles = () => {
+    setIsModalUpdateFiles(true);
+  };
+  const handleCancelUpdateFiles = () => {
+    setIsModalUpdateFiles(false);
+  };
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -69,6 +98,28 @@ export const BoardItem = ({
   const handleCancelUpdateInformation = () => {
     setIsModalUpdateInformation(false);
   };
+  const showModalManageMembers = () => {
+    setIsModalManageMembers(true);
+  };
+
+  const handleCancelManageMembers = () => {
+    setIsModalManageMembers(false);
+  };
+
+  const showModalAddProjectLevel = () => {
+    setIsModalAddProjectLevel(true);
+  };
+
+  const handleCancelAddProjectLevel = () => {
+    setIsModalAddProjectLevel(false);
+  };
+  const showModalDownloadFiles = () => {
+    setIsModalDownloadFiles(true);
+  };
+
+  const handleCancelDownloadFiles = () => {
+    setIsModalDownloadFiles(false);
+  };
   const renderModalReviewer = () => {
     return (
       <Modal visible={isModalReviewer} onCancel={handleModalReviewer} footer={null}>
@@ -96,7 +147,7 @@ export const BoardItem = ({
       </Modal>
     );
   };
-  const renderModelUpdateInformation = () => {
+  const renderModalUpdateInformation = () => {
     return (
       <Modal
         visible={isModalUpdateInformation}
@@ -104,6 +155,67 @@ export const BoardItem = ({
         footer={null}
       >
         <UpdateInformation />
+      </Modal>
+    );
+  };
+  const renderModalManageMembers = () => {
+    return (
+      <Modal
+        className="!w-[500px]"
+        visible={isModalManageMembers}
+        onCancel={handleCancelManageMembers}
+        footer={null}
+      >
+        <ManageMember />
+      </Modal>
+    );
+  };
+  const renderModalAddProjectLevel = () => {
+    return (
+      <Modal
+        className="!w-[500px]"
+        visible={isModalAddProjectLevel}
+        onCancel={handleCancelAddProjectLevel}
+        footer={null}
+      >
+        <AddProjectLevel />
+        {/* <ManageMember /> */}
+      </Modal>
+    );
+  };
+  const renderModalDownloadFiles = () => {
+    return (
+      <Modal visible={isModalDownloadFiles} onCancel={handleCancelDownloadFiles} footer={null}>
+        <DownloadFiles />
+      </Modal>
+    );
+  };
+  const renderModalUpdateFiles = () => {
+    return (
+      <Modal visible={isModalUpdateFiles} onCancel={handleCancelUpdateFiles} footer={null}>
+        <UpdateFiles />
+      </Modal>
+    );
+  };
+  const renderModalUpdateProjectStatus = () => {
+    return (
+      <Modal
+        visible={isModalUpdateProjectStatus}
+        onCancel={handleCancelUpdateProjectStatus}
+        footer={null}
+      >
+        <UpdateProjectStatus />
+      </Modal>
+    );
+  };
+  const renderModalUpdateInformationPro = () => {
+    return (
+      <Modal
+        visible={isModalUpdateInformationPro}
+        onCancel={handleCancelUpdateInformationPro}
+        footer={null}
+      >
+        <isModalUpdateInformationPro />
       </Modal>
     );
   };
@@ -136,12 +248,15 @@ export const BoardItem = ({
             <Link to={`${linkViewDescription}`}>
               <MenuItemHover nameMenu="View Description" />
             </Link>
-            <MenuItemHover nameMenu="Manage Members" />
-            <MenuItemHover nameMenu="Add Project Levels" />
-            <MenuItemHover nameMenu="Download Files" />
-            <MenuItemHover nameMenu="Update Files" />
-            <MenuItemHover nameMenu="Update Project Status" />
-            <MenuItemHover nameMenu="Update Information" />
+            <MenuItemHover nameMenu="Manage Members" onClick={showModalManageMembers} />
+            <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
+            <MenuItemHover nameMenu="Download Files" onClick={showModalDownloadFiles} />
+            <MenuItemHover nameMenu="Update Files" onClick={showModalUpdateFiles} />
+            <MenuItemHover
+              nameMenu="Update Project Status"
+              onClick={showModalUpdateProjectStatus}
+            />
+            <MenuItemHover nameMenu="Update Information" onClick={showModalUpdateInformationPro} />
           </>
         )}
       </Menu>
@@ -157,7 +272,13 @@ export const BoardItem = ({
       {renderModalTopComment()}
       {renderModalAssignReviewer()}
       {renderModalReviewer()}
-      {renderModelUpdateInformation()}
+      {renderModalUpdateInformation()}
+      {renderModalManageMembers()}
+      {renderModalAddProjectLevel()}
+      {renderModalDownloadFiles()}
+      {renderModalUpdateFiles()}
+      {renderModalUpdateProjectStatus()}
+      {renderModalUpdateInformationPro()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <div className="relative">
           <img

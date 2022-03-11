@@ -32,7 +32,7 @@ const dataInformationMember = [
 const MemberAdmin = () => {
   return (
     <MasterLayout>
-      <LayoutAdmin>
+      <LayoutAdmin admin>
         <div className="grid grid-cols-3 gap-5 p-3">
           {(dataInformationMember ?? []).map((item, index) => {
             return (
