@@ -7,16 +7,16 @@ import { UpdateInformation } from 'admin/AdminIstrator/AllAdmin/UpdateInformatio
 import { Link } from 'react-router-dom';
 import { MenuItemHover } from 'components/MenuItemHover';
 import { thumbImage } from 'services/convert';
-
-import { BiDotsVerticalRounded } from 'react-icons/bi';
-import { FiEdit } from 'react-icons/fi';
-import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
 import classNames from 'classnames';
 import { ManageMember } from 'admin/ProjectManager/ManageMember';
 import { AddProjectLevel } from 'admin/ProjectManager/AddProjectLevel';
 import { DownloadFiles } from 'admin/ProjectManager/DownloadFiles';
 import { UpdateFiles } from 'admin/ProjectManager/UpdateFiles';
 import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
+
+import { BiDotsVerticalRounded } from 'react-icons/bi';
+import { FiEdit } from 'react-icons/fi';
+import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
 
 export const BoardItem = ({
   imgPage,
@@ -39,6 +39,7 @@ export const BoardItem = ({
   ideas,
   lever,
   projectManager,
+  myIdea,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
@@ -211,11 +212,12 @@ export const BoardItem = ({
   const renderModalUpdateInformationPro = () => {
     return (
       <Modal
+        className="!w-[1045px]"
         visible={isModalUpdateInformationPro}
         onCancel={handleCancelUpdateInformationPro}
         footer={null}
       >
-        <isModalUpdateInformationPro />
+        <UpdateInformation />
       </Modal>
     );
   };
@@ -257,6 +259,15 @@ export const BoardItem = ({
               onClick={showModalUpdateProjectStatus}
             />
             <MenuItemHover nameMenu="Update Information" onClick={showModalUpdateInformationPro} />
+          </>
+        )}
+        {myIdea && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
+            <MenuItemHover nameMenu="Download Files" />
+            <MenuItemHover nameMenu="Upload Review Files " />
           </>
         )}
       </Menu>

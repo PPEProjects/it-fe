@@ -42,6 +42,8 @@ const MemberAdmin = () => {
                   goadMember={item?.goadMember}
                   emailMember={item?.emailMember}
                   phoneMember={item?.phoneMember}
+                  dropDown
+                  icon
                 />
               </div>
             );
