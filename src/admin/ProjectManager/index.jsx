@@ -98,8 +98,8 @@ const ProjectManager = () => {
                   placement="bottomRight"
                 >
                   <div className="p-2 space-y-4">
-                    <Steps stepsRow dataSteps={dataSteps} />
-                    <Steps stepsColumn dataSteps={dataStepsColumn} />
+                    <Steps stepsRow stepsName dataSteps={dataSteps} />
+                    <Steps stepsColumn uppercase dataSteps={dataStepsColumn} />
                   </div>
                 </BoardItem>
               </div>

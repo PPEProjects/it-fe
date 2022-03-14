@@ -60,11 +60,9 @@ export function authLogin(values) {
     }
     if (res?.data?.data?.token && res?.data?.data?.roles[0] === 'admin') {
       cookies.set('ppe-it', res.data.data.token, {
-        // path: "/admin/TableGoalList/GoalTemplateList",
         path: '/AllAdmin',
         expires: new Date(Date.now() + 25920000000),
       });
-      // window.location.assign("/admin/TableGoalList/GoalTemplateList");
       window.location.assign('/AllAdmin');
     }
     dispatch(setMerge({ lAuth: { isLoading: false } }));
@@ -145,7 +143,6 @@ export function getUrlFacebook(values) {
   return async dispatch => {
     dispatch(setData({ iAuth: { isLoading: true } }));
     const res = await restClient.get('/ppe-core/auth/generate-url?platform=facebook');
-    console.log(res);
     dispatch(setMerge({ iAuth: { data: res?.data?.data } }));
   };
 }
@@ -154,7 +151,6 @@ export function authLoginPusher(res) {
   return async dispatch => {
     dispatch(setMerge({ lAuth: { isLoading: true } }));
     if (res) {
-      console.log('token res = ', res);
       cookies.set('ppe-it', res, {
         path: '/',
         expires: new Date(Date.now() + 25920000000),

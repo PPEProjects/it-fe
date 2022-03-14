@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import { AiOutlineCheck } from 'react-icons/ai';
 
-export const Steps = ({ dataSteps, stepsRow, stepsColumn }) => {
+export const Steps = ({ dataSteps, stepsRow, stepsColumn, uppercase, stepsName }) => {
   return (
     <div className="border rounded p-3">
       <nav aria-label="Progress">
@@ -40,15 +40,17 @@ export const Steps = ({ dataSteps, stepsRow, stepsColumn }) => {
                   >
                     <AiOutlineCheck className="w-5 h-5 text-white" aria-hidden="true" />
                   </a>
-                  <div className="ml-4 min-w-0 flex flex-col">
+                  <div className="ml-4 min-w-0 flex flex-col text-sm">
                     <span
                       className={classNames('', {
-                        'font-medium text-gray-900': stepsRow,
+                        'font-medium text-gray-900': stepsName,
+                        'text-xs text-[#0369A1] font-semibold': stepsColumn,
+                        'uppercase block': uppercase,
                       })}
                     >
                       {step?.name}
                     </span>
-                    <span className="text-sm text-gray-500">{step.description}</span>
+                    <span className="text-gray-500">{step.description}</span>
                   </div>
                 </div>
               ) : step.status === 'current' ? (
@@ -80,15 +82,17 @@ export const Steps = ({ dataSteps, stepsRow, stepsColumn }) => {
                       <span className="h-2.5 w-2.5 bg-[#0369A1] rounded-full" aria-hidden="true" />
                     </a>
                   )}
-                  <div className="ml-4 min-w-0 flex flex-col">
+                  <div className="ml-4 min-w-0 flex flex-col text-sm">
                     <span
                       className={classNames('', {
-                        'font-medium text-[#0369A1]': stepsRow,
+                        'font-medium text-[#0369A1]': stepsName,
+                        'text-xs text-[#0369A1] font-semibold': stepsColumn,
+                        'uppercase block': uppercase,
                       })}
                     >
                       {step?.name}
                     </span>
-                    <span className="text-sm text-gray-500">{step.description}</span>
+                    <span className="text-gray-500">{step.description}</span>
                   </div>
                 </div>
               ) : (
@@ -123,15 +127,17 @@ export const Steps = ({ dataSteps, stepsRow, stepsColumn }) => {
                     </a>
                   )}
 
-                  <div className="ml-4 min-w-0 flex flex-col">
+                  <div className="ml-4 min-w-0 flex flex-col text-sm">
                     <span
                       className={classNames('', {
-                        'font-medium text-gray-500': stepsRow,
+                        'font-medium text-gray-500': stepsName,
+                        'text-xs text-[#0369A1] font-semibold': stepsColumn,
+                        'uppercase block': uppercase,
                       })}
                     >
                       {step?.name}
                     </span>
-                    <span className="text-sm text-gray-500">{step.description}</span>
+                    <span className="text-gray-500">{step.description}</span>
                   </div>
                 </div>
               )}
