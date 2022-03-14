@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { thumbImage } from 'services/convert';
 import { Button, Modal } from 'antd';
-import { IoMdAdd } from 'react-icons/io';
 import { AssignReviewer } from 'admin/AdminIstrator/AllAdmin/AssignReviewer';
+
+import { IoMdAdd } from 'react-icons/io';
 
 export const AddGoal = ({ board, running, imgAvatar, done, text }) => {
   const [isModalAddGoal, setIsModalAddGoal] = useState(false);

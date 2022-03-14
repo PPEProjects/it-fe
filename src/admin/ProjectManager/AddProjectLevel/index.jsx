@@ -1,6 +1,5 @@
 import { Button } from 'antd';
 import React, { useState } from 'react';
-import { Radio } from 'antd';
 import { RadioGroup } from '@headlessui/react';
 import classNames from 'classnames';
 

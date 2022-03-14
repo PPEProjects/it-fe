@@ -1,6 +1,7 @@
 import { Button, Modal } from 'antd';
 import { AddGoal } from 'components/AddGoal';
 import React, { useState } from 'react';
+
 import { HiUserAdd } from 'react-icons/hi';
 export const ClickEdit = () => {
   const [isModalClickConfirm, setIsModalClickClickConfirm] = useState(false);
