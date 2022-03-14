@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MasterLayout from 'layouts/MasterLayout';
 import { LayoutAdmin } from 'layouts/LayoutAdmin';
 import { BoardItem } from 'components/BoardItem';
 import { Steps } from 'components/Steps';
+import { useDispatch, useSelector } from 'react-redux';
+import { projectSelector, MyProject, MyIdeas, setProject } from 'pages/project/projectSlice';
 
 const dataBoardItem = [
   {
@@ -98,9 +100,9 @@ const ProjectManager = () => {
                   placement="bottomRight"
                 >
                   <div className="p-2 space-y-4">
-                    <Steps stepsRow stepsName dataSteps={dataSteps} />
-                    <Steps stepsColumn borderNone uppercase dataSteps={dataStepsColumn} />
-                    <Steps stepsColumn borderNone uppercase stepsName dataSteps={dataSteps} />
+                    <Steps dataSteps={dataSteps} stepsRow stepsName />
+                    <Steps stepsColumn uppercase borderNone dataSteps={dataStepsColumn} />
+                    <Steps stepsColumn uppercase stepsName borderNone dataSteps={dataSteps} />
                   </div>
                 </BoardItem>
               </div>
