@@ -99,7 +99,8 @@ const ProjectManager = () => {
                 >
                   <div className="p-2 space-y-4">
                     <Steps stepsRow stepsName dataSteps={dataSteps} />
-                    <Steps stepsColumn uppercase dataSteps={dataStepsColumn} />
+                    <Steps stepsColumn borderNone uppercase dataSteps={dataStepsColumn} />
+                    <Steps stepsColumn borderNone uppercase stepsName dataSteps={dataSteps} />
                   </div>
                 </BoardItem>
               </div>

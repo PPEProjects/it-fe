@@ -3,9 +3,13 @@ import classNames from 'classnames';
 
 import { AiOutlineCheck } from 'react-icons/ai';
 
-export const Steps = ({ dataSteps, stepsRow, stepsColumn, uppercase, stepsName }) => {
+export const Steps = ({ dataSteps, stepsRow, borderNone, stepsColumn, uppercase, stepsName }) => {
   return (
-    <div className="border rounded p-3">
+    <div
+      className={classNames('border rounded p-3', {
+        'border-none': borderNone,
+      })}
+    >
       <nav aria-label="Progress">
         <ol
           role="list"
