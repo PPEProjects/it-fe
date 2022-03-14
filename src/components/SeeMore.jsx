@@ -1,5 +1,6 @@
 import React from 'react';
 import { Divider } from 'antd';
+
 import { IoMdAdd } from 'react-icons/io';
 
 export const SeeMore = ({ onClick, name }) => {

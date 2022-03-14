@@ -4,7 +4,9 @@ import MasterLayout from 'layouts/MasterLayout';
 import { BoardItem } from 'components/BoardItem';
 import { TitleItem } from '../AllAdmin/TitleItem';
 import { SearchCommon } from 'components/SearchCommon';
+
 import { BiSearch } from 'react-icons/bi';
+
 const dataIdeas = [
   {
     imgPage: 'https://i.pravatar.cc/100?img=2',
