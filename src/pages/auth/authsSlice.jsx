@@ -61,11 +61,11 @@ export function authLogin(values) {
     if (res?.data?.data?.token && res?.data?.data?.roles[0] === 'admin') {
       cookies.set('ppe-it', res.data.data.token, {
         // path: "/admin/TableGoalList/GoalTemplateList",
-        path: '/admin/TableGoalList/ConfirmedGoalList',
+        path: '/AllAdmin',
         expires: new Date(Date.now() + 25920000000),
       });
       // window.location.assign("/admin/TableGoalList/GoalTemplateList");
-      window.location.assign('/admin/TableGoalList/ConfirmedGoalList');
+      window.location.assign('/AllAdmin');
     }
     dispatch(setMerge({ lAuth: { isLoading: false } }));
   };
