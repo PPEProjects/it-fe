@@ -3,7 +3,8 @@ import { LayoutProject } from 'layouts/LayoutMyProject';
 import { ButtonSort } from 'components/ButtonSort';
 import { TitleItem } from 'admin/AdminIstrator/AllAdmin/TitleItem';
 import { BoardItem } from 'components/BoardItem';
-import { Steps } from 'components/Steps';
+import { ButtonFollow } from 'components/ButtonFollow';
+import { CommentItem } from 'pages/home/AllPage/CommentItem';
 const dataIdeas = [
   {
     imgPage: 'https://i.pravatar.cc/100?img=2',
@@ -15,33 +16,15 @@ const dataIdeas = [
     imgAvatar: 'https://i.pravatar.cc/100?img=2',
     nameProject: '12345',
   },
-  {
-    imgPage: 'https://i.pravatar.cc/100?img=2',
-    imgAvatar: 'https://i.pravatar.cc/100?img=2',
-    nameProject: '12345',
-  },
 ];
-const dataStepsColumn = [
-  {
-    description: 'Vitae sed mi luctus laoreet.',
-    name: 'Create idea SuCCESSFUL',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    description: 'Cursus semper viverra facilisis et.',
-    name: 'WAITING for approval',
-    href: '#',
-    status: 'improving',
-  },
-];
+
 const MyIdeas = () => {
   return (
     <LayoutProject>
       <section className="px-4 py-6 space-y-3">
         <div className="border rounded-md p-3 bg-white space-y-3">
           <ButtonSort />
-          <TitleItem title="My Idea" number="3" className="text-lg font-semibold" />
+          <TitleItem title="Interested Idea/Project" number="3" className="text-lg font-semibold" />
           <div className="grid grid-cols-3 gap-4 px-3">
             {(dataIdeas ?? []).map((item, index) => {
               return (
@@ -52,10 +35,21 @@ const MyIdeas = () => {
                     nameProject={item?.nameProject}
                     shadowNone
                     clickNode
+                    user
+                    numberLike="3"
+                    numberComment="6"
+                    numberHeart="8"
                     placement="bottomRight"
                   >
-                    <div className="px-2 -mt-4">
-                      <Steps dataSteps={dataStepsColumn} stepsColumn uppercase borderNone></Steps>
+                    <div className="px-3">
+                      <CommentItem
+                        itemsCenter
+                        nameUser="Join"
+                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                      />
+                      <div className="p-2">
+                        <ButtonFollow />
+                      </div>
                     </div>
                   </BoardItem>
                 </div>

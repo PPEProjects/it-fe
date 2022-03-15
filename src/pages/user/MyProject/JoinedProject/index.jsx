@@ -32,7 +32,7 @@ const dataStepsColumn = [
     description: 'Cursus semper viverra facilisis et.',
     name: 'WAITING for approval',
     href: '#',
-    status: 'improving',
+    status: 'current',
   },
 ];
 const MyIdeas = () => {
@@ -41,7 +41,7 @@ const MyIdeas = () => {
       <section className="px-4 py-6 space-y-3">
         <div className="border rounded-md p-3 bg-white space-y-3">
           <ButtonSort />
-          <TitleItem title="My Idea" number="3" className="text-lg font-semibold" />
+          <TitleItem title="Joined Project" number="3" className="text-lg font-semibold" />
           <div className="grid grid-cols-3 gap-4 px-3">
             {(dataIdeas ?? []).map((item, index) => {
               return (
@@ -52,10 +52,14 @@ const MyIdeas = () => {
                     nameProject={item?.nameProject}
                     shadowNone
                     clickNode
+                    user
+                    numberLike="3"
+                    numberComment="6"
+                    numberHeart="8"
                     placement="bottomRight"
                   >
                     <div className="px-2 -mt-4">
-                      <Steps dataSteps={dataStepsColumn} stepsColumn uppercase borderNone></Steps>
+                      <Steps dataSteps={dataStepsColumn} stepsColumn uppercase borderNone />
                     </div>
                   </BoardItem>
                 </div>

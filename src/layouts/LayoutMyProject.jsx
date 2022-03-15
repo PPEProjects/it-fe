@@ -13,23 +13,23 @@ export const LayoutProject = ({ children }) => {
     const menu = [
       {
         label: 'My Idea',
-        key: 'Account',
-        link: `/Account?id=${me?.data?.id}`,
+        key: 'MyIdeas',
+        link: `/MyProject/MyIdeas?id=${me?.data?.id}`,
       },
       {
         label: 'My Project',
-        key: 'NewProfile',
-        link: `/NewProfile?id=${me?.data?.id}`,
+        key: 'NewProjectChildren',
+        link: `/MyProject/MyProjectChildren?id=${me?.data?.id}`,
       },
       {
         label: 'Followed Idea/Project',
-        key: 'NewProfile',
-        link: `/NewProfile?id=${me?.data?.id}`,
+        key: 'FollowIdeaProject',
+        link: `/MyProject/FollowIdeaProject?id=${me?.data?.id}`,
       },
       {
         label: 'Joined Project',
-        key: 'NewProfile',
-        link: `/NewProfile?id=${me?.data?.id}`,
+        key: 'JoinedProject',
+        link: `/MyProject/JoinedProject?id=${me?.data?.id}`,
       },
     ];
 

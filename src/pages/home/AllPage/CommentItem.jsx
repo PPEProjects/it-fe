@@ -36,7 +36,9 @@ export const CommentItem = ({
           alt=""
         />
         <div className={classNames('', containerClassName)}>
-          <div className={classNames('text-xs', nameUserClassName)}>{nameUser}</div>
+          <div className={classNames('text-xs text-gray-900 font-medium', nameUserClassName)}>
+            {nameUser}
+          </div>
           {topComment && <div className="text-[14px] text-gray-500">Commented {time}</div>}
           <div className={classNames('text-[10px] text-gray-500', contentClassName)}>{content}</div>
           {topComment && (
