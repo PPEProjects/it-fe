@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { AiOutlineCheck } from 'react-icons/ai';
+import { CgArrowUp } from 'react-icons/cg';
 
 export const Steps = ({ dataSteps, stepsRow, borderNone, stepsColumn, uppercase, stepsName }) => {
   return (
@@ -21,17 +22,17 @@ export const Steps = ({ dataSteps, stepsRow, borderNone, stepsColumn, uppercase,
             <li
               key={step.name}
               className={classNames(
-                stepIdx !== dataSteps.length - 1 ? `${stepsRow ? 'pr-6 sm:pr-16' : 'pb-10'}` : '',
+                stepIdx !== dataSteps.length - 1 ? `${stepsRow ? 'pr-5' : 'pb-10'}` : '',
                 'relative'
               )}
             >
               {step.status === 'complete' ? (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center">
                   {stepsColumn && (
                     <>
                       {stepIdx !== dataSteps.length - 1 ? (
                         <div
-                          className="-ml-px absolute mt-0.5 top-4 left-6 w-0.5 h-full bg-[#0369A1]"
+                          className="-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full bg-[#0369A1]"
                           aria-hidden="true"
                         />
                       ) : null}
@@ -58,12 +59,12 @@ export const Steps = ({ dataSteps, stepsRow, borderNone, stepsColumn, uppercase,
                   </div>
                 </div>
               ) : step.status === 'current' ? (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center">
                   {stepsColumn && (
                     <>
                       {stepIdx !== dataSteps.length - 1 ? (
                         <div
-                          className="-ml-px absolute mt-0.5 top-4 left-6 w-0.5 h-full bg-[#0369A1]"
+                          className="-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full bg-[#0369A1]"
                           aria-hidden="true"
                         />
                       ) : null}
@@ -99,13 +100,55 @@ export const Steps = ({ dataSteps, stepsRow, borderNone, stepsColumn, uppercase,
                     <span className="text-gray-500">{step.description}</span>
                   </div>
                 </div>
-              ) : (
-                <div className="flex pl-[8px] items-center space-x-2">
+              ) : step.status === 'improving' ? (
+                <div className="flex items-center">
                   {stepsColumn && (
                     <>
                       {stepIdx !== dataSteps.length - 1 ? (
                         <div
-                          className="-ml-px absolute mt-0.5 top-4 left-6 w-0.5 h-full bg-[#0369A1]"
+                          className="-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full bg-[#0369A1]"
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                    </>
+                  )}
+                  {stepsRow && (
+                    <a
+                      href="#"
+                      className="relative w-8 h-8 flex items-center justify-center bg-white border-2 border-[#0369A1] rounded-full"
+                    >
+                      <span className="text-sm font-[500] text-[#0369A1]">0{step?.key}</span>
+                    </a>
+                  )}
+                  {stepsColumn && (
+                    <a
+                      href="#"
+                      className="relative w-8 h-8 flex items-center justify-center bg-red-600 border-2 border-red-600 rounded-full"
+                      aria-current="step"
+                    >
+                      <CgArrowUp className="w-5 h-5 text-white" aria-hidden="true" />
+                    </a>
+                  )}
+                  <div className="ml-4 min-w-0 flex flex-col text-sm">
+                    <span
+                      className={classNames('', {
+                        'font-medium text-[#EF4444]': stepsName,
+                        'text-xs text-[#EF4444] font-semibold': stepsColumn,
+                        'uppercase block': uppercase,
+                      })}
+                    >
+                      {step?.name}
+                    </span>
+                    <span className="text-gray-500">{step.description}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  {stepsColumn && (
+                    <>
+                      {stepIdx !== dataSteps.length - 1 ? (
+                        <div
+                          className="-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full bg-[#0369A1]"
                           aria-hidden="true"
                         />
                       ) : null}

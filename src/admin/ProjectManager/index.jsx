@@ -50,9 +50,9 @@ const dataSteps = [
   },
   {
     key: 4,
-    name: 'Done',
+    name: 'Done1',
     href: '#',
-    status: 'upcoming',
+    status: 'improving',
   },
 ];
 

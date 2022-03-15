@@ -34,6 +34,18 @@ const dataStepsColumn = [
     href: '#',
     status: 'current',
   },
+  {
+    description: 'Cursus semper viverra facilisis et.',
+    name: 'WAITING for approval',
+    href: '#',
+    status: 'upcoming',
+  },
+  {
+    description: 'Cursus semper viverra facilisis et.',
+    name: 'WAITING for approval',
+    href: '#',
+    status: 'current',
+  },
 ];
 const MyIdeas = () => {
   return (
@@ -53,10 +65,11 @@ const MyIdeas = () => {
                     shadowNone
                     clickNode
                     placement="bottomRight"
-                  />
-                  <div className="p-2 space-y-4">
-                    <Steps dataSteps={dataStepsColumn} stepsColumn uppercase borderNone></Steps>
-                  </div>
+                  >
+                    <div className="p-2 space-y-4">
+                      <Steps dataSteps={dataStepsColumn} stepsColumn uppercase borderNone></Steps>
+                    </div>
+                  </BoardItem>
                 </div>
               );
             })}
