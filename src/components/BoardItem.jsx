@@ -17,6 +17,7 @@ import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
+import { Steps } from './Steps';
 
 export const BoardItem = ({
   imgPage,
@@ -40,6 +41,7 @@ export const BoardItem = ({
   lever,
   projectManager,
   myIdea,
+  clickNode,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
@@ -270,6 +272,14 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Upload Review Files " />
           </>
         )}
+        {clickNode && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
+            <MenuItemHover nameMenu="Update Idea" />
+          </>
+        )}
       </Menu>
     );
   };
@@ -363,6 +373,7 @@ export const BoardItem = ({
             </Button>
           </div>
         )}
+
         {user && (
           <div className="flex items-center justify-between text-sm text-[#164E63]">
             <p className="flex items-center space-x-1 cursor-pointer">
