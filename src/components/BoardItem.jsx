@@ -13,6 +13,7 @@ import { AddProjectLevel } from 'admin/ProjectManager/AddProjectLevel';
 import { DownloadFiles } from 'admin/ProjectManager/DownloadFiles';
 import { UpdateFiles } from 'admin/ProjectManager/UpdateFiles';
 import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
+import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
 
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
@@ -42,6 +43,7 @@ export const BoardItem = ({
   projectManager,
   myIdea,
   clickNode,
+  item,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
@@ -53,7 +55,16 @@ export const BoardItem = ({
   const [isModalUpdateFiles, setIsModalUpdateFiles] = useState(false);
   const [isModalUpdateProjectStatus, setIsModalUpdateProjectStatus] = useState(false);
   const [isModalUpdateInformationPro, setIsModalUpdateInformationPro] = useState(false);
+  const [isModalUpdateProject, setIsModalUpdateProject] = useState(false);
 
+  const [updateMyProject, setUpdateMyProject] = useState();
+
+  const showModalUpdateUpdateProject = () => {
+    setIsModalUpdateProject(true);
+  };
+  const handleCancelUpdateUpdateProject = () => {
+    setIsModalUpdateProject(false);
+  };
   const showModalUpdateInformationPro = () => {
     setIsModalUpdateInformationPro(true);
   };
@@ -123,6 +134,20 @@ export const BoardItem = ({
   const handleCancelDownloadFiles = () => {
     setIsModalDownloadFiles(false);
   };
+
+  const renderModalUpdateProject = () => {
+    return (
+      <Modal
+        className="!w-[1280px]"
+        visible={isModalUpdateProject}
+        onCancel={handleCancelUpdateUpdateProject}
+        footer={null}
+      >
+        <UpdateProject updateMyProject={updateMyProject} />
+      </Modal>
+    );
+  };
+
   const renderModalReviewer = () => {
     return (
       <Modal visible={isModalReviewer} onCancel={handleModalReviewer} footer={null}>
@@ -277,7 +302,13 @@ export const BoardItem = ({
             <Link to={`${linkViewDescription}`}>
               <MenuItemHover nameMenu="View Description" />
             </Link>
-            <MenuItemHover nameMenu="Update Idea" />
+            <MenuItemHover
+              onClick={() => {
+                setUpdateMyProject(item);
+                showModalUpdateUpdateProject();
+              }}
+              nameMenu="Update Ideas"
+            />
           </>
         )}
       </Menu>
@@ -290,6 +321,7 @@ export const BoardItem = ({
         'shadow-none': shadowNone,
       })}
     >
+      {renderModalUpdateProject()}
       {renderModalTopComment()}
       {renderModalAssignReviewer()}
       {renderModalReviewer()}
@@ -348,7 +380,7 @@ export const BoardItem = ({
                 </p>
               </>
             )}
-            <Dropdown overlay={menu} placement={placement} trigger={['click']}>
+            <Dropdown overlay={menu(item)} placement={placement} trigger={['click']}>
               <p
                 className={classNames(
                   'w-10 h-10 hover:border hover:bg-gray-50 rounded-full flex items-center justify-center cursor-pointer',

@@ -6,6 +6,8 @@ import { apolloClient, restClient } from 'services';
 export const initialState = {
   me: { isRefresh: true },
   deUser: { isRefresh: true },
+  mlMyProject: {},
+  mlMyIdeas: {},
   upsertProfile: {},
 };
 
@@ -201,5 +203,85 @@ export function upsertUserAdvance(values) {
     } catch (e) {
       dispatch(setMerge({ upsertProfile: { isLoading: false } }));
     }
+  };
+}
+
+export function myProject(type = 'project') {
+  return async dispatch => {
+    dispatch(setMerge({ mlMyProject: { isLoading: true } }));
+    const query = gql`
+      query MyProject($type: String) {
+        myProject(type: $type) {
+          id
+          name
+          user {
+            email
+            id
+            name
+          }
+          attachments
+          authorUserId
+          category
+          description
+          level
+          privacy
+          version
+          budget
+          type
+          salary
+          is_involved
+          is_recruit
+          createdAt
+          updatedAt
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+      variables: {
+        type,
+      },
+    });
+    dispatch(setData({ mlMyProject: { myProject: res.data.myProject } }));
+  };
+}
+
+export function myIdeas(type = 'ideas') {
+  return async dispatch => {
+    dispatch(setMerge({ mlMyIdeas: { isLoading: true } }));
+    const query = gql`
+      query MyProject($type: String) {
+        myProject(type: $type) {
+          id
+          name
+          user {
+            email
+            id
+            name
+          }
+          attachments
+          authorUserId
+          category
+          description
+          level
+          privacy
+          version
+          budget
+          type
+          salary
+          is_involved
+          is_recruit
+          createdAt
+          updatedAt
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+      variables: {
+        type,
+      },
+    });
+    dispatch(setData({ mlMyIdeas: { myIdeas: res.data.myProject } }));
   };
 }
