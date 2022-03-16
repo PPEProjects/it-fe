@@ -14,11 +14,12 @@ import { DownloadFiles } from 'admin/ProjectManager/DownloadFiles';
 import { UpdateFiles } from 'admin/ProjectManager/UpdateFiles';
 import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
 import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
+import { userSelector, setUserMerge, updateProject } from 'pages/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
-import { Steps } from './Steps';
 
 export const BoardItem = ({
   imgPage,
@@ -43,8 +44,12 @@ export const BoardItem = ({
   projectManager,
   myIdea,
   clickNode,
+  clickNode1,
   item,
 }) => {
+  const dispatch = useDispatch();
+  const { upProject } = useSelector(userSelector);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
   const [isModalReviewer, setIsModalReviewer] = useState(false);
@@ -55,16 +60,10 @@ export const BoardItem = ({
   const [isModalUpdateFiles, setIsModalUpdateFiles] = useState(false);
   const [isModalUpdateProjectStatus, setIsModalUpdateProjectStatus] = useState(false);
   const [isModalUpdateInformationPro, setIsModalUpdateInformationPro] = useState(false);
-  const [isModalUpdateProject, setIsModalUpdateProject] = useState(false);
-
   const [updateMyProject, setUpdateMyProject] = useState();
+  const [updateMyProject1, setUpdateMyProject1] = useState();
+  console.log('updateMyProject1', updateMyProject1);
 
-  const showModalUpdateUpdateProject = () => {
-    setIsModalUpdateProject(true);
-  };
-  const handleCancelUpdateUpdateProject = () => {
-    setIsModalUpdateProject(false);
-  };
   const showModalUpdateInformationPro = () => {
     setIsModalUpdateInformationPro(true);
   };
@@ -139,11 +138,24 @@ export const BoardItem = ({
     return (
       <Modal
         className="!w-[1280px]"
-        visible={isModalUpdateProject}
-        onCancel={handleCancelUpdateUpdateProject}
+        visible={upProject?.isOpen}
+        onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
         footer={null}
       >
         <UpdateProject updateMyProject={updateMyProject} />
+      </Modal>
+    );
+  };
+
+  const renderModalUpdateProject1 = () => {
+    return (
+      <Modal
+        className="!w-[1280px]"
+        visible={upProject?.isOpen}
+        onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
+        footer={null}
+      >
+        <UpdateProject updateMyProject={updateMyProject1} />
       </Modal>
     );
   };
@@ -305,7 +317,21 @@ export const BoardItem = ({
             <MenuItemHover
               onClick={() => {
                 setUpdateMyProject(item);
-                showModalUpdateUpdateProject();
+                dispatch(setUserMerge('upProject', { isOpen: true }));
+              }}
+              nameMenu="Update Ideas"
+            />
+          </>
+        )}
+        {clickNode1 && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
+            <MenuItemHover
+              onClick={() => {
+                setUpdateMyProject1(item);
+                dispatch(setUserMerge('upProject', { isOpen: true }));
               }}
               nameMenu="Update Ideas"
             />
@@ -321,6 +347,7 @@ export const BoardItem = ({
         'shadow-none': shadowNone,
       })}
     >
+      {renderModalUpdateProject1()}
       {renderModalUpdateProject()}
       {renderModalTopComment()}
       {renderModalAssignReviewer()}

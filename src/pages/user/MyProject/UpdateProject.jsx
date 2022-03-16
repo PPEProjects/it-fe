@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Select, Switch, Button, Radio, Modal } from 'antd';
 import { RadioGroup } from '@headlessui/react';
 import classNames from 'classnames';
-import { createProject, projectSelector, setProjectMerge } from 'pages/project/projectSlice';
-import { getMe, userSelector } from 'pages/user/userSlice';
+import { userSelector, setUserMerge, updateProject } from 'pages/user/userSlice';
+import { getMe } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { CurrencyItem } from 'components/CurrencyItem';
 import { Image } from '@tienlucky/storage';
@@ -31,7 +31,7 @@ export const UpdateProject = ({ updateMyProject }) => {
   const { Option } = Select;
   const { TextArea } = Input;
   const dispatch = useDispatch();
-  const { cProject } = useSelector(projectSelector);
+  const { upProject } = useSelector(userSelector);
   const { me } = useSelector(userSelector);
   const [selected, setSelected] = useState(settings[0]);
 
@@ -39,18 +39,24 @@ export const UpdateProject = ({ updateMyProject }) => {
     form.setFieldsValue({
       data: {
         budget: {
-          money: updateMyProject?.money,
-          gender: updateMyProject?.gender,
+          money: updateMyProject?.budget?.money,
+          iso_code: updateMyProject?.budget?.iso_code,
         },
-        // skill: {
-        //   framework: updateMyProject?.userAdvance?.skill?.framework,
-        //   program_language: updateMyProject?.userAdvance?.skill?.program_language,
-        // },
+        attachments: {
+          main_picture: updateMyProject?.attachments?.main_picture?.file,
+        },
+        salary: {
+          money: updateMyProject?.budget?.money,
+          iso_code: updateMyProject?.budget?.iso_code,
+        },
+
+        framework: updateMyProject?.framework,
+        programingLanguage: updateMyProject?.programingLanguage,
         type: updateMyProject?.type,
         name: updateMyProject?.name,
+        id: updateMyProject?.id,
         description: updateMyProject?.description,
         category: updateMyProject?.category,
-        // programingLanguage:
       },
     });
   }, [updateMyProject, form]);
@@ -74,7 +80,7 @@ export const UpdateProject = ({ updateMyProject }) => {
       <Form
         form={form}
         name="basic"
-        onFinish={values => dispatch(createProject(values))}
+        onFinish={values => dispatch(updateProject(values))}
         scrollToFirstError
       >
         <Form.List name={`data`}>
@@ -166,7 +172,6 @@ export const UpdateProject = ({ updateMyProject }) => {
                     allowClear
                     style={{ width: '100%' }}
                     placeholder="Please select"
-                    defaultValue="ReactJs"
                   >
                     <Option value="reactJs">ReactJs</Option>
                     <Option value="java">Java</Option>
@@ -179,7 +184,7 @@ export const UpdateProject = ({ updateMyProject }) => {
 
               <LabelItemProject width label="Budget">
                 <Form.Item name="budget">
-                  <CurrencyItem />
+                  <CurrencyItem name_money="money" name_iso_code="iso_code" />
                 </Form.Item>
               </LabelItemProject>
 
@@ -318,13 +323,14 @@ export const UpdateProject = ({ updateMyProject }) => {
             </div>
           </RadioGroup>
         </LabelItemProject>
+        <Form.Item name="id" hidden={true} />
 
         <div className="flex space-x-2 justify-end p-3">
           <Form.Item>
             <Button
               className="!rounded-md"
               size="large"
-              onClick={() => dispatch(setProjectMerge('cProject', { isOpen: false }))}
+              onClick={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
             >
               Cancel
             </Button>
@@ -335,7 +341,7 @@ export const UpdateProject = ({ updateMyProject }) => {
               type="primary"
               size="large"
               htmlType="submit"
-              loading={cProject.isLoading}
+              loading={upProject.isLoading}
             >
               Create
             </Button>

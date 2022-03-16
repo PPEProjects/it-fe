@@ -9,6 +9,7 @@ export const initialState = {
   mlMyProject: {},
   mlMyIdeas: {},
   upsertProfile: {},
+  upProject: {},
 };
 
 const userSlice = createSlice({
@@ -193,7 +194,7 @@ export function upsertUserAdvance(values) {
         dispatch(
           setMerge({
             upsertProfile: {
-              japaneseGoal: res.data.upsertUserAdvance,
+              upsertUserAdvance: res.data.upsertUserAdvance,
               isLoading: false,
               isOpen: false,
             },
@@ -224,6 +225,8 @@ export function myProject(type = 'project') {
           category
           description
           level
+          framework
+          programingLanguage
           privacy
           version
           budget
@@ -264,6 +267,8 @@ export function myIdeas(type = 'ideas') {
           category
           description
           level
+          framework
+          programingLanguage
           privacy
           version
           budget
@@ -283,5 +288,61 @@ export function myIdeas(type = 'ideas') {
       },
     });
     dispatch(setData({ mlMyIdeas: { myIdeas: res.data.myProject } }));
+  };
+}
+
+export function updateProject(values) {
+  return async dispatch => {
+    dispatch(setMerge({ upProject: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation UpdateProject($data: ProjectInput!) {
+          updateProject(data: $data) {
+            id
+            name
+            attachments
+            authorUserId
+            category
+            description
+            framework
+            programingLanguage
+            level
+            privacy
+            version
+            budget
+            type
+            salary
+            status
+            contentStatus
+            memberJoin
+            is_involved
+            is_recruit
+            createdAt
+            updatedAt
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        console.log('res', res);
+        dispatch(
+          setMerge({
+            upProject: {
+              updateProject: res.data.updateProject,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ upProject: { isLoading: false } }));
+    }
   };
 }

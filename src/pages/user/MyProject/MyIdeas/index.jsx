@@ -5,7 +5,7 @@ import { TitleItem } from 'admin/AdminIstrator/AllAdmin/TitleItem';
 import { BoardItem } from 'components/BoardItem';
 import { Steps } from 'components/Steps';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSelector, myIdeas, myProject } from 'pages/user/userSlice';
+import { userSelector, myIdeas } from 'pages/user/userSlice';
 
 const dataStepsColumn = [
   {
@@ -23,15 +23,11 @@ const dataStepsColumn = [
 ];
 const MyIdeas = () => {
   const dispatch = useDispatch();
-  const { mlMyProject, mlMyIdeas, cProject } = useSelector(userSelector);
+  const { mlMyIdeas, upProject } = useSelector(userSelector);
 
   useEffect(() => {
     dispatch(myIdeas());
-  }, [dispatch, cProject]);
-
-  useEffect(() => {
-    dispatch(myProject());
-  }, [dispatch, cProject]);
+  }, [dispatch, upProject]);
 
   return (
     <LayoutProject>
