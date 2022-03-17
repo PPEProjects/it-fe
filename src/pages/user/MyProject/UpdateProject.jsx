@@ -26,7 +26,6 @@ const settings = [
 ];
 
 export const UpdateProject = ({ updateMyProject }) => {
-  console.log('updateMyProject', updateMyProject);
   const [form] = Form.useForm();
   const { Option } = Select;
   const { TextArea } = Input;
@@ -39,24 +38,24 @@ export const UpdateProject = ({ updateMyProject }) => {
     form.setFieldsValue({
       data: {
         budget: {
-          money: updateMyProject?.budget?.money,
-          iso_code: updateMyProject?.budget?.iso_code,
+          money: updateMyProject?.item?.budget?.money,
+          iso_code: updateMyProject?.item?.budget?.iso_code,
         },
         attachments: {
-          main_picture: updateMyProject?.attachments?.main_picture?.file,
+          main_picture: updateMyProject?.item?.attachments?.main_picture?.file,
         },
         salary: {
-          money: updateMyProject?.budget?.money,
-          iso_code: updateMyProject?.budget?.iso_code,
+          money: updateMyProject?.item?.budget?.money,
+          iso_code: updateMyProject?.item?.budget?.iso_code,
         },
 
-        framework: updateMyProject?.framework,
-        programingLanguage: updateMyProject?.programingLanguage,
-        type: updateMyProject?.type,
-        name: updateMyProject?.name,
-        id: updateMyProject?.id,
-        description: updateMyProject?.description,
-        category: updateMyProject?.category,
+        framework: updateMyProject?.item?.framework,
+        programingLanguage: updateMyProject?.item?.programingLanguage,
+        type: updateMyProject?.item?.type,
+        name: updateMyProject?.item?.name,
+        id: updateMyProject?.item?.id,
+        description: updateMyProject?.item?.description,
+        category: updateMyProject?.item?.category,
       },
     });
   }, [updateMyProject, form]);

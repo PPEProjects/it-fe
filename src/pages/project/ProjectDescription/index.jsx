@@ -31,7 +31,6 @@ const ProjectDescription = () => {
   const { id } = getURLParams();
   const { deProject } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
-  console.log('detailProjects', detailProjects);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 

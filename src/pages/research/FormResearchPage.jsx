@@ -3,11 +3,7 @@ import { CurrencyItem } from '../../components/CurrencyItem';
 
 const FormResearchPage = () => {
   return (
-    <Form
-      onFinish={values => {
-        console.log('onFinish values', values);
-      }}
-    >
+    <Form onFinish={values => {}}>
       <Form.Item name={'gia-tien'}>
         <CurrencyItem />
       </Form.Item>

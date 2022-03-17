@@ -22,8 +22,6 @@ const MyProfile = () => {
   const { deUser } = useSelector(userSelector);
   const deUsers = deUser?.detailUserIds;
 
-  console.log('deUsers', deUsers);
-
   useEffect(() => {
     dispatch(detailUser(id));
   }, [id, dispatch]);

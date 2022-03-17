@@ -10,6 +10,7 @@ export const initialState = {
   mlMyIdeas: {},
   upsertProfile: {},
   upProject: {},
+  dataProject: {},
 };
 
 const userSlice = createSlice({
@@ -229,6 +230,7 @@ export function myProject(type = 'project') {
           programingLanguage
           privacy
           version
+          status
           budget
           type
           salary
@@ -262,6 +264,7 @@ export function myIdeas(type = 'ideas') {
             id
             name
           }
+          status
           attachments
           authorUserId
           category
@@ -330,7 +333,6 @@ export function updateProject(values) {
 
     try {
       await mutationAPI().then(res => {
-        console.log('res', res);
         dispatch(
           setMerge({
             upProject: {

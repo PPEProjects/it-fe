@@ -39,9 +39,7 @@ export const AssignReviewer = () => {
   ];
   const { Option } = Select;
 
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
+  function handleChange(value) {}
   return (
     <div>
       <span className="flex items-center justify-center text-3xl text-[#9CA3AF]">

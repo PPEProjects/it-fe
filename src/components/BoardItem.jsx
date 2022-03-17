@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
+import { setData } from 'pages/user/userSlice';
 
 export const BoardItem = ({
   imgPage,
@@ -44,11 +45,10 @@ export const BoardItem = ({
   projectManager,
   myIdea,
   clickNode,
-  clickNode1,
   item,
 }) => {
   const dispatch = useDispatch();
-  const { upProject } = useSelector(userSelector);
+  const { upProject, dataProject } = useSelector(userSelector);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
@@ -60,9 +60,6 @@ export const BoardItem = ({
   const [isModalUpdateFiles, setIsModalUpdateFiles] = useState(false);
   const [isModalUpdateProjectStatus, setIsModalUpdateProjectStatus] = useState(false);
   const [isModalUpdateInformationPro, setIsModalUpdateInformationPro] = useState(false);
-  const [updateMyProject, setUpdateMyProject] = useState();
-  const [updateMyProject1, setUpdateMyProject1] = useState();
-  console.log('updateMyProject1', updateMyProject1);
 
   const showModalUpdateInformationPro = () => {
     setIsModalUpdateInformationPro(true);
@@ -142,7 +139,7 @@ export const BoardItem = ({
         onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
         footer={null}
       >
-        <UpdateProject updateMyProject={updateMyProject} />
+        <UpdateProject updateMyProject={dataProject} />
       </Modal>
     );
   };
@@ -155,7 +152,7 @@ export const BoardItem = ({
         onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
         footer={null}
       >
-        <UpdateProject updateMyProject={updateMyProject1} />
+        <UpdateProject updateMyProject={dataProject} />
       </Modal>
     );
   };
@@ -316,21 +313,7 @@ export const BoardItem = ({
             </Link>
             <MenuItemHover
               onClick={() => {
-                setUpdateMyProject(item);
-                dispatch(setUserMerge('upProject', { isOpen: true }));
-              }}
-              nameMenu="Update Ideas"
-            />
-          </>
-        )}
-        {clickNode1 && (
-          <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
-            <MenuItemHover
-              onClick={() => {
-                setUpdateMyProject1(item);
+                dispatch(setData({ dataProject: { item } }));
                 dispatch(setUserMerge('upProject', { isOpen: true }));
               }}
               nameMenu="Update Ideas"

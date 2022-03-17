@@ -56,6 +56,52 @@ const dataSteps = [
   },
 ];
 
+const dataStepsNameColumn = [
+  {
+    key: 1,
+    name: 'Created',
+    href: '#',
+    status: 'complete',
+  },
+
+  {
+    key: 2,
+    name: ' Creviewing & Improving ',
+    href: '#',
+    status: 'current',
+  },
+  {
+    key: 3,
+    name: ' Approve',
+    href: '#',
+    status: 'current',
+  },
+  {
+    key: 4,
+    name: 'PM Preparing',
+    href: '#',
+    status: 'current',
+  },
+  {
+    key: 5,
+    name: 'OnBoard',
+    href: '#',
+    status: 'current',
+  },
+  {
+    key: 6,
+    name: 'Running',
+    href: '#',
+    status: 'complete',
+  },
+  {
+    key: 7,
+    name: 'Done/Stuck/In use',
+    href: '#',
+    status: 'complete',
+  },
+];
+
 const dataStepsColumn = [
   {
     description: 'Iusto et officia maiores porro ad non quas.',
@@ -101,6 +147,7 @@ const ProjectManager = () => {
                 >
                   <div className="p-2 space-y-4">
                     <Steps dataSteps={dataSteps} stepsRow stepsName />
+                    <Steps dataSteps={dataStepsNameColumn} stepsRow StepsNameColumn stepsName />
                     <Steps stepsColumn uppercase borderNone dataSteps={dataStepsColumn} />
                     <Steps stepsColumn uppercase stepsName borderNone dataSteps={dataSteps} />
                   </div>

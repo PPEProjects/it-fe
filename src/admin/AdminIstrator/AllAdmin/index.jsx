@@ -8,9 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, MyProject, MyIdeas } from 'pages/project/projectSlice';
 import { SeeMore } from 'components/SeeMore';
 
-function onChange(e) {
-  console.log(`checked = ${e.target.checked}`);
-}
+function onChange(e) {}
 const dataIdeas = [
   {
     imgPage: 'https://i.pravatar.cc/100?img=2',
