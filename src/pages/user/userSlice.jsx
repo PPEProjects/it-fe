@@ -11,6 +11,7 @@ export const initialState = {
   upsertProfile: {},
   upProject: {},
   dataProject: {},
+  dProject: {},
 };
 
 const userSlice = createSlice({
@@ -345,6 +346,40 @@ export function updateProject(values) {
       });
     } catch (e) {
       dispatch(setMerge({ upProject: { isLoading: false } }));
+    }
+  };
+}
+
+export function deleteProject(id) {
+  return async dispatch => {
+    dispatch(setMerge({ dProject: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation DeleteProject($deleteProjectId: ID) {
+          deleteProject(id: $deleteProjectId)
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: {
+          deleteProjectId: id,
+        },
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            deleProject: {
+              dProject: res.data.DeleteProject,
+              isLoading: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ dProject: { isLoading: false } }));
     }
   };
 }

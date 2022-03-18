@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Dropdown, Modal, Button } from 'antd';
+import { Menu, Dropdown, Modal, Button, Popconfirm } from 'antd';
 import { TopComment } from 'pages/home/AllPage/TopComment';
 import { Reviewer } from 'admin/AdminIstrator/AllAdmin/Reviewer';
 import { AssignReviewer } from 'admin/AdminIstrator/AllAdmin/AssignReviewer';
@@ -14,7 +14,7 @@ import { DownloadFiles } from 'admin/ProjectManager/DownloadFiles';
 import { UpdateFiles } from 'admin/ProjectManager/UpdateFiles';
 import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
 import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
-import { userSelector, setUserMerge, updateProject } from 'pages/user/userSlice';
+import { userSelector, setUserMerge, deleteProject } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BiDotsVerticalRounded } from 'react-icons/bi';
@@ -318,6 +318,27 @@ export const BoardItem = ({
               }}
               nameMenu="Update Ideas"
             />
+            <Popconfirm
+              // icon={<QuestionCircleOutlined style={{color: "red"}}/>}
+              title={
+                <div>
+                  Do you want to delete the project
+                  <span className="font-bold"> {dataProject?.item?.name}</span>
+                </div>
+              }
+              onConfirm={() => {
+                dispatch(deleteProject(dataProject?.item?.id));
+              }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <MenuItemHover
+                onClick={() => {
+                  dispatch(setData({ dataProject: { item } }));
+                }}
+                nameMenu="Delete project"
+              />
+            </Popconfirm>
           </>
         )}
       </Menu>
