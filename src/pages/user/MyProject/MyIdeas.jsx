@@ -23,11 +23,11 @@ const dataStepsColumn = [
 ];
 const MyIdeas = () => {
   const dispatch = useDispatch();
-  const { mlMyIdeas, upProject, cProject } = useSelector(userSelector);
+  const { mlMyIdeas, upProject, cProject, dProject } = useSelector(userSelector);
 
   useEffect(() => {
     dispatch(myIdeas());
-  }, [dispatch, upProject, cProject]);
+  }, [dispatch, upProject, cProject, dProject]);
 
   return (
     <LayoutProject>

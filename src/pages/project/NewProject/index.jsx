@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Select, Switch, Button, Radio, Modal } from 'antd';
+import { Form, Input, Select, Switch, Button, Radio } from 'antd';
 import { RadioGroup } from '@headlessui/react';
 import classNames from 'classnames';
 import { createProject, projectSelector, setProjectMerge } from 'pages/project/projectSlice';

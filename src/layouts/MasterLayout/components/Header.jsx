@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Button, Modal } from 'antd';
 import NewProject from 'pages/project/NewProject';
+import { TestNewProject } from 'pages/project/NewProject/TestNewProject';
 import { Link } from 'react-router-dom';
 import { getMe, userSelector } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,6 +19,34 @@ const Header = () => {
   const { cProject } = useSelector(projectSelector);
   const [isShowBarLeft, setIsShowSideBarLeft] = useState(false);
   const [isShowBarRight, setIsShowSideBarRight] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const renderNewModalTestNewProject = () => {
+    return (
+      <Modal
+        className="!w-[1152px]"
+        visible={cProject?.isOpen}
+        onCancel={() => {
+          dispatch(setProjectMerge('cProject', { isOpen: false }));
+        }}
+        footer={null}
+      >
+        <TestNewProject />
+      </Modal>
+    );
+  };
 
   const showSideBarLeft = () => setIsShowSideBarLeft(!isShowBarLeft);
   const showSideBarRight = () => setIsShowSideBarRight(!isShowBarRight);
@@ -109,7 +138,12 @@ const Header = () => {
               <span>New Idea/Project</span>
             </div>
           </Button>
-          <Button shape="circle !h-[36px] !bg-gray-200 !w-[36px]">
+          <Button
+            onClick={() => {
+              dispatch(setProjectMerge('cProject', { isOpen: true }));
+            }}
+            shape="circle !h-[36px] !bg-gray-200 !w-[36px]"
+          >
             <span className="pt-[2px]">
               <IoMdNotificationsOutline className="text-xl text-[#0E7490]" />
             </span>
@@ -126,6 +160,7 @@ const Header = () => {
           </Link>
         </div>
         {renderModalNewProject()}
+        {renderNewModalTestNewProject()}
       </section>
       {/* <div
         onClick={showSideBarRight}

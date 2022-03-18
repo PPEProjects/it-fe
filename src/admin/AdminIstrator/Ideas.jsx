@@ -2,7 +2,7 @@ import React from 'react';
 import { LayoutAdmin } from 'layouts/LayoutAdmin';
 import MasterLayout from 'layouts/MasterLayout';
 import { BoardItem } from 'components/BoardItem';
-import { TitleItem } from '../AllAdmin/TitleItem';
+import { TitleItem } from './AllAdmin/TitleItem';
 import { SearchCommon } from 'components/SearchCommon';
 
 import { BiSearch } from 'react-icons/bi';

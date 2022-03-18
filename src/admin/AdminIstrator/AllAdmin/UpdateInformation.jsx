@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Space, Modal } from 'antd';
-import { StatusManage } from '../StatusManage';
+import { StatusManage } from './StatusManage';
 
 import { AiOutlineStar } from 'react-icons/ai';
 
