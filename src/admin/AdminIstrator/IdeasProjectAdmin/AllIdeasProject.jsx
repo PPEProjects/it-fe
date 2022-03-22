@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TitleItem } from './TitleItem';
+import { TitleItem } from 'components/TitleItem';
 import { BoardItem } from 'components/BoardItem';
 import { Checkbox } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
