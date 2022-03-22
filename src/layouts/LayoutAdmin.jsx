@@ -59,7 +59,7 @@ export const LayoutAdmin = ({ children, admin }) => {
     <section className="p-3 flex space-x-4">
       <div className="w-[15%] border rounded">{renderMenu()}</div>
       <div className="w-[85%] border rounded space-y-4">
-        {admin && <MenuAdmin />}
+        {/* {admin && <MenuAdmin />} */}
         <div>{children}</div>
       </div>
     </section>

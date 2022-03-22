@@ -6,6 +6,7 @@ import allPagesReducer from 'pages/home/AllPage/allPageSlice';
 import projectSliceReducer from 'pages/project/projectSlice';
 import userSliceReducer from 'pages/user/userSlice';
 import adminIstratorSliceReducer from 'admin/AdminIstrator/adminIstratorSlice';
+import memberProjectSliceReducer from 'pages/memberProject/memberProjectSlice';
 
 const reducer = combineReducers({
   auths: authsReducer,
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   project: projectSliceReducer,
   user: userSliceReducer,
   adminIstrator: adminIstratorSliceReducer,
+  memberProject: memberProjectSliceReducer,
 });
 
 export const store = configureStore({

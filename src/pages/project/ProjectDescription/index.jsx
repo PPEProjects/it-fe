@@ -10,7 +10,11 @@ import { getURLParams } from 'services';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { thumbImage } from 'services/convert';
-
+import { JoinPosition } from 'pages/home/AllPage/JoinPosition';
+import {
+  memberProjectSelector,
+  setMemberProjectMerge,
+} from 'pages/memberProject/memberProjectSlice';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { MdMailOutline, MdAttachFile } from 'react-icons/md';
 import { BsTelephoneFill } from 'react-icons/bs';
@@ -31,6 +35,7 @@ const ProjectDescription = () => {
   const { id } = getURLParams();
   const { deProject } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
+  const { cMemberProject } = useSelector(memberProjectSelector);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -50,15 +55,22 @@ const ProjectDescription = () => {
     dispatch(detailProject(id));
   }, [id, dispatch]);
 
-  const renderModalTopComment = () => {
+  const renderModalJoinPosition = () => {
     return (
       <Modal
-        // className="!w-[1152px]"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        className="!w-[800px]"
+        visible={cMemberProject?.isOpen}
+        onCancel={() => dispatch(setMemberProjectMerge('cMemberProject', { isOpen: false }))}
         footer={null}
       >
+        <JoinPosition />
+      </Modal>
+    );
+  };
+
+  const renderModalTopComment = () => {
+    return (
+      <Modal visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
         <TopComment />
       </Modal>
     );
@@ -75,6 +87,7 @@ const ProjectDescription = () => {
   return (
     <MasterLayout>
       {renderModalTopComment()}
+      {renderModalJoinPosition()}
       <section className="p-4 space-y-4">
         <Link to="/AllPage">
           <div className="flex text-gray-900 pl-2 text-sm items-center space-x-1">

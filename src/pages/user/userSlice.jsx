@@ -52,6 +52,7 @@ export function getMe() {
           id
           name
           email
+          first_name
           phone_number
           gender
           allPosition
@@ -381,5 +382,56 @@ export function deleteProject(id) {
     } catch (e) {
       dispatch(setMerge({ dProject: { isLoading: false } }));
     }
+  };
+}
+
+export function SearchUser() {
+  return async dispatch => {
+    dispatch(setMerge({ mlMyProject: { isLoading: true } }));
+    const query = gql`
+      query SearchProject($name: String, $type: String, $status: String) {
+        searchProject(name: $name, type: $type, status: $status) {
+          id
+          name
+          user {
+            email
+            id
+            name
+            avatar_attachment
+          }
+          members {
+            id
+            position
+            memberUserId
+            memberUser {
+              id
+              name
+              avatar_attachment
+            }
+          }
+          attachments
+          authorUserId
+          category
+          description
+          level
+          privacy
+          version
+          budget
+          type
+          salary
+          status
+          contentStatus
+          memberJoin
+          is_recruit
+          is_involved
+          createdAt
+          updatedAt
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+    });
+    dispatch(setData({ mlMyProject: { myProject: res.data.searchProject } }));
   };
 }

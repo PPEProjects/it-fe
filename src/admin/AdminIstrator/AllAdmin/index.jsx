@@ -8,41 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, MyProject, MyIdeas } from 'pages/project/projectSlice';
 import { SeeMore } from 'components/SeeMore';
 
-function onChange(e) {}
-const dataIdeas = [
-  {
-    imgPage: 'https://i.pravatar.cc/100?img=2',
-    imgAvatar: 'https://i.pravatar.cc/100?img=2',
-    nameProject: '12345',
-  },
-  {
-    imgPage: 'https://i.pravatar.cc/100?img=2',
-    imgAvatar: 'https://i.pravatar.cc/100?img=2',
-    nameProject: '12345',
-  },
-  {
-    imgPage: 'https://i.pravatar.cc/100?img=2',
-    imgAvatar: 'https://i.pravatar.cc/100?img=2',
-    nameProject: '12345',
-  },
-];
-const dataProject = [
-  {
-    imgPage: 'https://i.pravatar.cc/100?img=2',
-    imgAvatar: 'https://i.pravatar.cc/100?img=2',
-    nameProject: '12345',
-  },
-  {
-    imgPage: 'https://i.pravatar.cc/100?img=2',
-    imgAvatar: 'https://i.pravatar.cc/100?img=2',
-    nameProject: '12345',
-  },
-  {
-    imgPage: 'https://i.pravatar.cc/100?img=2',
-    imgAvatar: 'https://i.pravatar.cc/100?img=2',
-    nameProject: '12345',
-  },
-];
 const dataDraft = [
   {
     imgPage: 'https://i.pravatar.cc/100?img=2',
@@ -84,11 +49,11 @@ const Administrator = () => {
           <div className="flex space-x-5">
             <button className="border h-10 bg-[#F6F9FB] flex items-center justify-between px-3 rounded-lg font-medium text-sm w-44 text-[#0369A1]">
               <span>Newest</span>
-              <Checkbox onChange={onChange}></Checkbox>
+              <Checkbox></Checkbox>
             </button>
             <button className="border h-10 flex items-center justify-between px-3 rounded-lg font-medium text-sm w-44 text-[#0369A1]">
               <span>Most interested</span>
-              <Checkbox onChange={onChange}></Checkbox>
+              <Checkbox></Checkbox>
             </button>
           </div>
           <TitleItem title="Draft" number="8" />

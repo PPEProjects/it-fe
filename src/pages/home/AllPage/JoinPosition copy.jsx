@@ -10,6 +10,7 @@ export const JoinPosition = () => {
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const { me } = useSelector(userSelector);
+  const { cMemberProject } = useSelector(memberProjectSelector);
   const { id } = getURLParams();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export const JoinPosition = () => {
         projectId: id,
       },
     });
-  }, [me, id, form]);
+  }, [me, form, id]);
 
   return (
     <section>
@@ -40,8 +41,8 @@ export const JoinPosition = () => {
             <>
               <Form.Item className="!mb-0" label="Email">
                 <Input
-                  value={me?.data?.email}
                   disabled
+                  value={me?.data?.email}
                   className="!rounded"
                   placeholder="lalamanghen@gmail.com"
                 />
@@ -49,16 +50,16 @@ export const JoinPosition = () => {
               <div className="flex items-center space-x-3 w-full">
                 <Form.Item className="!mb-0 w-1/2" label="First name">
                   <Input
-                    value={me?.data?.first_name}
                     disabled
+                    value={me?.data?.first_name}
                     className="!rounded"
                     placeholder="Enter your first name"
                   />
                 </Form.Item>
                 <Form.Item className="!mb-0 w-1/2" label="Last name">
                   <Input
-                    value={me?.data?.name}
                     disabled
+                    value={me?.data?.name}
                     className="!rounded"
                     placeholder="Christian"
                   />
@@ -66,9 +67,9 @@ export const JoinPosition = () => {
               </div>
               <Form.Item className="!mb-0" label="Phone">
                 <Input
-                  value={me?.data?.phone_number}
                   disabled
                   className="!rounded"
+                  value={me?.data?.phone_number}
                   placeholder="0987 654 321"
                 />
               </Form.Item>
@@ -78,9 +79,9 @@ export const JoinPosition = () => {
               <Form.Item className="!mb-0" label="Job Description">
                 <TextArea className="!rounded !h-[120px]" placeholder="" />
               </Form.Item>
-              <Form.Item name="memberUserId" />
-              <Form.Item name="status" />
-              <Form.Item name="projectId" />
+              <Form.Item name="memberUserId" hidden={true} />
+              <Form.Item name="status" hidden={true} />
+              <Form.Item name="projectId" hidden={true} />
             </>
           )}
         </Form.List>

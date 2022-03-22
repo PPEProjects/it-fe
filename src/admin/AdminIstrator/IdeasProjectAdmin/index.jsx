@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'components/Tabs';
-import Administrator from 'admin/AdminIstrator/AllAdmin';
+import { AllIdeasProject } from './AllIdeasProject';
 
 const menuList = [
   {
@@ -31,11 +31,10 @@ const menuList = [
 
 const tabPane = [
   {
-    content: '<Administrator />',
+    content: <AllIdeasProject />,
   },
 ];
-
-const MenuAdmin = () => {
+export const IdeasProjectAdmin = () => {
   return (
     <div>
       <Tabs
@@ -50,5 +49,3 @@ const MenuAdmin = () => {
     </div>
   );
 };
-
-export default MenuAdmin;
