@@ -19,9 +19,7 @@ export const InformationMember = ({
   const menu = () => {
     return (
       <Menu>
-        {/* <Link to={`${linkViewDescription}`}> */}
         <MenuItemHover nameMenu="View Description" />
-        {/* </Link> */}
         <MenuItemHover nameMenu="Download" />
         <MenuItemHover nameMenu="Review" />
         <MenuItemHover nameMenu="Assign Reviewer" />
@@ -29,7 +27,6 @@ export const InformationMember = ({
       </Menu>
     );
   };
-  // className="shadow-md space-y-7"
   return (
     <section
       className={classNames('border rounded-lg', {

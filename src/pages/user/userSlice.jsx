@@ -12,6 +12,7 @@ export const initialState = {
   upProject: {},
   dataProject: {},
   dProject: {},
+  mlUser: {},
 };
 
 const userSlice = createSlice({
@@ -381,5 +382,33 @@ export function deleteProject(id) {
     } catch (e) {
       dispatch(setMerge({ dProject: { isLoading: false } }));
     }
+  };
+}
+
+export function myListUser() {
+  return async dispatch => {
+    dispatch(setMerge({ mlUser: { isLoading: true } }));
+    const query = gql`
+      query SearchUsers($name: String, $roles: JSON) {
+        searchUsers(name: $name, roles: $roles) {
+          id
+          name
+          email
+          phone_number
+          userAdvance {
+            id
+            roles
+            goal
+            plan
+            userId
+          }
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+    });
+    console.log('res', res);
+    dispatch(setData({ mlUser: { myListUser: res.data.searchUsers } }));
   };
 }
