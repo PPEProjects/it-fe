@@ -1,20 +1,20 @@
 import React from 'react';
 import { Tabs } from 'components/Tabs';
 import { AllIdeasProject } from './AllIdeasProject';
+import { DraftIdeasProject } from './DraftIdeasProject';
+import { OnBoardIdeasProject } from './OnBoardIdeasProject';
 
 const menuList = [
   {
     title: 'All',
   },
   {
-    title: 'MemberAdmin',
-  },
-  {
-    title: 'Ideas',
+    title: 'Draft',
   },
   {
     title: 'OnBoard',
   },
+
   {
     title: 'Running',
   },
@@ -32,6 +32,12 @@ const menuList = [
 const tabPane = [
   {
     content: <AllIdeasProject />,
+  },
+  {
+    content: <DraftIdeasProject />,
+  },
+  {
+    content: <OnBoardIdeasProject />,
   },
 ];
 export const IdeasProjectAdmin = () => {

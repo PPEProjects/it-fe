@@ -21,6 +21,8 @@ import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
 import { setData } from 'pages/user/userSlice';
+import { ModalDraft } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/ModalDraft';
+import { UpdateStatusIdea } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusIdea';
 
 export const BoardItem = ({
   imgPage,
@@ -46,10 +48,10 @@ export const BoardItem = ({
   myIdea,
   clickNode,
   item,
+  modalDraft,
 }) => {
   const dispatch = useDispatch();
   const { upProject, dataProject } = useSelector(userSelector);
-
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
   const [isModalReviewer, setIsModalReviewer] = useState(false);
@@ -60,7 +62,22 @@ export const BoardItem = ({
   const [isModalUpdateFiles, setIsModalUpdateFiles] = useState(false);
   const [isModalUpdateProjectStatus, setIsModalUpdateProjectStatus] = useState(false);
   const [isModalUpdateInformationPro, setIsModalUpdateInformationPro] = useState(false);
+  const [isModalDraftIdeasProject, setIsModalDraftIdeasProject] = useState(false);
+  const [isModalUpdateStatusIdea, setIsModalUpdateStatusIdea] = useState(false);
 
+  const showModalUpdateStatusIdea = () => {
+    setIsModalUpdateStatusIdea(true);
+  };
+  const handleCancelUpdateStatusIdea = () => {
+    setIsModalUpdateStatusIdea(false);
+  };
+
+  const showModalDraftIdeasProject = () => {
+    setIsModalDraftIdeasProject(true);
+  };
+  const handleCancelDraftIdeasProject = () => {
+    setIsModalDraftIdeasProject(false);
+  };
   const showModalUpdateInformationPro = () => {
     setIsModalUpdateInformationPro(true);
   };
@@ -195,6 +212,17 @@ export const BoardItem = ({
       </Modal>
     );
   };
+  const renderModalUpdateStatusIdea = () => {
+    return (
+      <Modal
+        visible={isModalUpdateStatusIdea}
+        onCancel={handleCancelUpdateStatusIdea}
+        footer={null}
+      >
+        <UpdateStatusIdea />
+      </Modal>
+    );
+  };
   const renderModalManageMembers = () => {
     return (
       <Modal
@@ -204,6 +232,18 @@ export const BoardItem = ({
         footer={null}
       >
         <ManageMember />
+      </Modal>
+    );
+  };
+  const renderModalDraftIdeasProject = () => {
+    return (
+      <Modal
+        className="!w-[800px]"
+        visible={isModalDraftIdeasProject}
+        onCancel={handleCancelDraftIdeasProject}
+        footer={null}
+      >
+        <AssignReviewer />
       </Modal>
     );
   };
@@ -341,6 +381,16 @@ export const BoardItem = ({
             </Popconfirm>
           </>
         )}
+        {modalDraft && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
+            <MenuItemHover nameMenu="Download" />
+            <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
+            <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusIdea} />
+          </>
+        )}
       </Menu>
     );
   };
@@ -363,6 +413,8 @@ export const BoardItem = ({
       {renderModalUpdateFiles()}
       {renderModalUpdateProjectStatus()}
       {renderModalUpdateInformationPro()}
+      {renderModalDraftIdeasProject()}
+      {renderModalUpdateStatusIdea()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <div className="relative">
           <img

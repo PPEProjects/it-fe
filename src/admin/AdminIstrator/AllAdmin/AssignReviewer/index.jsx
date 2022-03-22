@@ -1,42 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Select, Button } from 'antd';
 import { FormAssign } from './FormAssign';
 
 import { HiOutlineUserGroup } from 'react-icons/hi';
+import { useDispatch, useSelector } from 'react-redux';
+import { userSelector, myListUser } from 'pages/user/userSlice';
 
 export const AssignReviewer = () => {
-  const dataAssign = [
-    {
-      nameAssign: 'July',
-      goalAssign: 'Leader',
-      imgAssign: 'https://i.pravatar.cc/100?img=2',
-    },
-    {
-      nameAssign: 'July',
-      goalAssign: 'Leader',
-      imgAssign: 'https://i.pravatar.cc/100?img=2',
-    },
-    {
-      nameAssign: 'July',
-      goalAssign: 'Leader',
-      imgAssign: 'https://i.pravatar.cc/100?img=2',
-    },
-    {
-      nameAssign: 'July',
-      goalAssign: 'Leader',
-      imgAssign: 'https://i.pravatar.cc/100?img=2',
-    },
-    {
-      nameAssign: 'July',
-      goalAssign: 'Leader',
-      imgAssign: 'https://i.pravatar.cc/100?img=2',
-    },
-    {
-      nameAssign: 'July',
-      goalAssign: 'Leader',
-      imgAssign: 'https://i.pravatar.cc/100?img=2',
-    },
-  ];
+  const dispatch = useDispatch();
+  const { mlUser } = useSelector(userSelector);
+  useEffect(() => {
+    dispatch(myListUser());
+  }, [dispatch]);
+
   const { Option } = Select;
 
   function handleChange(value) {}
@@ -55,24 +31,13 @@ export const AssignReviewer = () => {
           onChange={handleChange}
           optionLabelProp="label"
         >
-          <Option value="china" label="China">
+          <Option
+            value={mlUser?.myListUser?.email}
+            label={mlUser?.myListUser?.email}
+            placeholder={mlUser?.myListUser?.email}
+          >
             <div className="demo-option-label-item">
-              <span role="img" aria-label="China"></span>
-            </div>
-          </Option>
-          <Option value="usa" label="USA">
-            <div className="demo-option-label-item">
-              <span role="img" aria-label="USA"></span>
-            </div>
-          </Option>
-          <Option value="japan" label="Japan">
-            <div className="demo-option-label-item">
-              <span role="img" aria-label="Japan"></span>
-            </div>
-          </Option>
-          <Option value="korea" label="Korea">
-            <div className="demo-option-label-item">
-              <span role="img" aria-label="Korea"></span>
+              <span role="img" aria-label={mlUser?.myListUser?.email}></span>
             </div>
           </Option>
         </Select>
@@ -83,12 +48,12 @@ export const AssignReviewer = () => {
       </div>
       <p className="text-xs">RECOMMENDED TEAM MEMBERS</p>
       <div className="grid grid-cols-2 gap-3">
-        {(dataAssign ?? []).map((item, index) => {
+        {(mlUser?.myListUser ?? []).map((item, index) => {
           return (
             <div key={index}>
               <FormAssign
-                nameAssign={item?.nameAssign}
-                goalAssign={item?.goalAssign}
+                nameAssign={item?.name}
+                goalAssign={item?.userAdvance?.goal}
                 imgAssign={item?.imgAssign}
               />
             </div>
