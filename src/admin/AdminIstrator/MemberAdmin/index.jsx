@@ -1,47 +1,30 @@
 import MasterLayout from 'layouts/MasterLayout';
 import { LayoutAdmin } from 'layouts/LayoutAdmin';
 import { InformationMember } from './InformationMember';
-
-const dataInformationMember = [
-  {
-    nameMember: 'Alidabet',
-    goadMember: 'Leader',
-    emailMember: '123@gmail.com',
-    phoneMember: '0905797979',
-  },
-  {
-    nameMember: 'Alidabet',
-    goadMember: 'Leader',
-    emailMember: '123@gmail.com',
-    phoneMember: '0905797979',
-  },
-  {
-    nameMember: 'Alidabet',
-    goadMember: 'Leader',
-    emailMember: '123@gmail.com',
-    phoneMember: '0905797979',
-  },
-  {
-    nameMember: 'Alidabet',
-    goadMember: 'Leader',
-    emailMember: '123@gmail.com',
-    phoneMember: '0905797979',
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { myListUser, userSelector } from 'pages/user/userSlice';
 
 const MemberAdmin = () => {
+  const dispatch = useDispatch();
+  const { mlUser } = useSelector(userSelector);
+
+  useEffect(() => {
+    dispatch(myListUser());
+  }, [dispatch]);
+
   return (
     <MasterLayout>
       <LayoutAdmin admin>
         <div className="grid grid-cols-3 gap-5 p-3">
-          {(dataInformationMember ?? []).map((item, index) => {
+          {(mlUser?.myListUser ?? []).map((item, index) => {
             return (
               <div key={index}>
                 <InformationMember
-                  nameMember={item?.nameMember}
-                  goadMember={item?.goadMember}
-                  emailMember={item?.emailMember}
-                  phoneMember={item?.phoneMember}
+                  nameMember={item?.name}
+                  goadMember={item?.userAdvance?.goal}
+                  emailMember={item?.email}
+                  phoneMember={item?.phone_number}
                   dropDown
                   icon
                 />

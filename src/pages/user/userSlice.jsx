@@ -12,6 +12,7 @@ export const initialState = {
   upProject: {},
   dataProject: {},
   dProject: {},
+  mlUser: {},
 };
 
 const userSlice = createSlice({
@@ -385,53 +386,29 @@ export function deleteProject(id) {
   };
 }
 
-export function SearchUser() {
+export function myListUser() {
   return async dispatch => {
-    dispatch(setMerge({ mlMyProject: { isLoading: true } }));
+    dispatch(setMerge({ mlUser: { isLoading: true } }));
     const query = gql`
-      query SearchProject($name: String, $type: String, $status: String) {
-        searchProject(name: $name, type: $type, status: $status) {
+      query SearchUsers($name: String, $roles: JSON) {
+        searchUsers(name: $name, roles: $roles) {
           id
           name
-          user {
-            email
+          email
+          phone_number
+          userAdvance {
             id
-            name
-            avatar_attachment
+            roles
+            goal
+            plan
+            userId
           }
-          members {
-            id
-            position
-            memberUserId
-            memberUser {
-              id
-              name
-              avatar_attachment
-            }
-          }
-          attachments
-          authorUserId
-          category
-          description
-          level
-          privacy
-          version
-          budget
-          type
-          salary
-          status
-          contentStatus
-          memberJoin
-          is_recruit
-          is_involved
-          createdAt
-          updatedAt
         }
       }
     `;
     const res = await apolloClient.query({
       query,
     });
-    dispatch(setData({ mlMyProject: { myProject: res.data.searchProject } }));
+    dispatch(setData({ mlUser: { myListUser: res.data.searchUsers } }));
   };
 }
