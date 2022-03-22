@@ -3,19 +3,23 @@ import MasterLayout from 'layouts/MasterLayout';
 import { LayoutAdmin } from 'layouts/LayoutAdmin';
 import { Tabs } from 'components/Tabs';
 import { IdeasProjectAdmin } from 'admin/AdminIstrator/IdeasProjectAdmin';
+import { MemberAdmin } from 'admin/AdminIstrator/MemberAdmin';
 
 const menuList = [
   {
-    title: 'All',
+    title: 'Idea/Project',
   },
   {
-    title: 'MemberAdmin',
+    title: 'Member',
   },
 ];
 
 const tabPane = [
   {
     content: <IdeasProjectAdmin />,
+  },
+  {
+    content: <MemberAdmin />,
   },
 ];
 

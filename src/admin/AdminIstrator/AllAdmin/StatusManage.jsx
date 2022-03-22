@@ -1,4 +1,4 @@
-import { InformationMember } from 'admin/AdminIstrator/MemberAdmin/InformationMember';
+import { InformationMember } from 'admin/AdminIstrator/MemberAdmin/AllMember/InformationMember';
 import { Button } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React from 'react';

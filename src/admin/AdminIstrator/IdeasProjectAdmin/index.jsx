@@ -37,15 +37,7 @@ const tabPane = [
 export const IdeasProjectAdmin = () => {
   return (
     <div>
-      <Tabs
-        colorBorder
-        isSmallWidth
-        hasArrayContent
-        justifyBetween
-        listTab={menuList}
-        tabPane={tabPane}
-        borderTop={false}
-      />
+      <Tabs colorBorder listTab={menuList} tabPane={tabPane} borderTop={false} />
     </div>
   );
 };

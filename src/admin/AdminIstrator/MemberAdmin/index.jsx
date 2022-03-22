@@ -1,40 +1,43 @@
-import MasterLayout from 'layouts/MasterLayout';
-import { LayoutAdmin } from 'layouts/LayoutAdmin';
-import { InformationMember } from './InformationMember';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { myListUser, userSelector } from 'pages/user/userSlice';
+import React from 'react';
+import { Tabs } from 'components/Tabs';
+import { AllMember } from './AllMember';
 
-const MemberAdmin = () => {
-  const dispatch = useDispatch();
-  const { mlUser } = useSelector(userSelector);
+const menuList = [
+  {
+    title: 'All',
+  },
+  {
+    title: 'MemberAdmin',
+  },
+  {
+    title: 'Ideas',
+  },
+  {
+    title: 'OnBoard',
+  },
+  {
+    title: 'Running',
+  },
+  {
+    title: 'Stuck',
+  },
+  {
+    title: 'Done',
+  },
+  {
+    title: 'InUse',
+  },
+];
 
-  useEffect(() => {
-    dispatch(myListUser());
-  }, [dispatch]);
-
+const tabPane = [
+  {
+    content: <AllMember />,
+  },
+];
+export const MemberAdmin = () => {
   return (
-    <MasterLayout>
-      <LayoutAdmin admin>
-        <div className="grid grid-cols-3 gap-5 p-3">
-          {(mlUser?.myListUser ?? []).map((item, index) => {
-            return (
-              <div key={index}>
-                <InformationMember
-                  nameMember={item?.name}
-                  goadMember={item?.userAdvance?.goal}
-                  emailMember={item?.email}
-                  phoneMember={item?.phone_number}
-                  dropDown
-                  icon
-                />
-              </div>
-            );
-          })}
-        </div>
-      </LayoutAdmin>
-    </MasterLayout>
+    <div>
+      <Tabs colorBorder listTab={menuList} tabPane={tabPane} borderTop={false} />
+    </div>
   );
 };
-
-export default MemberAdmin;
