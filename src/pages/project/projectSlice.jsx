@@ -185,6 +185,7 @@ export function createProject(values) {
 
     try {
       await mutationAPI().then(res => {
+        console.log('res', res);
         dispatch(
           setMerge({
             cProject: {
