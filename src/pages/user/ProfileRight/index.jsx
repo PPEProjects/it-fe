@@ -4,9 +4,9 @@ import { Popconfirm } from 'antd';
 import { TitleItem } from './TitleItem';
 import { userSelector } from 'pages/user/userSlice';
 import { authLogout } from 'pages/auth/authsSlice';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Stars } from 'components/Stars';
 
 import { AiOutlineStar, AiFillStar, AiOutlineSetting } from 'react-icons/ai';
 import { HiOutlineLogout } from 'react-icons/hi';
@@ -33,19 +33,8 @@ export const ProfileRight = () => {
       </div>
       <div className="text-center pt-12">
         <p className="text-[#0E7490] font-bold text-[24px]">{me?.data?.name}</p>
-        <p className="text-[17px] text-[#06B6D4] italic -mt-7">{me?.data?.userAdvance?.goal}</p>
-        <div className="flex items-center space-x-2 text-[17px] justify-center -mt-4">
-          <AiFillStar className="text-[#ffc700]" />
-          <AiFillStar className="text-[#ffc700]" />
-          <AiFillStar className="text-[#ffc700]" />
-          <AiFillStar className="text-[#ffc700]" />
-          <AiFillStar className="text-[#ffc700]" />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-        </div>
+        <p className="text-[#06B6D4] italic -mt-7">{me?.data?.userAdvance?.goal}</p>
+        <Stars containerClassName="-mt-4 px-6" numberStartActive={4} />
       </div>
       <div className="pb-8 border-b">
         <TitleItem title="Self Ideas/Projects:" numberTitle={me?.data?.selfProject?.length}>

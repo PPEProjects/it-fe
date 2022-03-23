@@ -1,16 +1,16 @@
-import React from "react";
-import { LayoutSetting } from "layouts/LayoutSetting";
-import { Form, Switch, Button } from "antd";
+import React from 'react';
+import { LayoutSetting } from 'layouts/LayoutSetting';
+import { Form, Switch, Button } from 'antd';
 
-import { Information } from "./Information";
-import { ChangePassword } from "./ChangePassword";
+import { Information } from './Information';
+import { ChangePassword } from './ChangePassword';
 
 const Account = () => {
   const [form] = Form.useForm();
 
   return (
     <LayoutSetting>
-      <section className="px-4 py-6 space-y-3">
+      <section className="px-4 py-6">
         <Information />
         <ChangePassword />
 
@@ -24,8 +24,7 @@ const Account = () => {
           <div className="flex items-center space-x-3">
             <Switch />
             <span className="text-sm text-gray-700">
-              News and features updates, as well as occasional company
-              announcements.
+              News and features updates, as well as occasional company announcements.
             </span>
           </div>
           <div className="flex items-center space-x-3">

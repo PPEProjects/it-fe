@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Input, Button, Modal } from 'antd';
 import NewProject from 'pages/project/NewProject';
 import { Link } from 'react-router-dom';
-import { getMe, userSelector } from 'pages/user/userSlice';
+import { getMe, userSelector, setUserMerge, setUser } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, setProjectMerge } from 'pages/project/projectSlice';
 import { thumbImage } from 'services/convert';
@@ -14,13 +14,11 @@ import { IoMdAdd, IoMdNotificationsOutline } from 'react-icons/io';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { me } = useSelector(userSelector);
+  const { me, isOpenMyProfileRight } = useSelector(userSelector);
   const { cProject } = useSelector(projectSelector);
   const [isShowBarLeft, setIsShowSideBarLeft] = useState(false);
-  const [isShowBarRight, setIsShowSideBarRight] = useState(false);
 
   const showSideBarLeft = () => setIsShowSideBarLeft(!isShowBarLeft);
-  const showSideBarRight = () => setIsShowSideBarRight(!isShowBarRight);
 
   useEffect(() => {
     dispatch(getMe());
@@ -114,29 +112,20 @@ const Header = () => {
               <IoMdNotificationsOutline className="text-xl text-[#0E7490]" />
             </span>
           </Button>
-          <Link to={`/MyProfile?id=${me?.data?.id}`}>
-            <div onClick={showSideBarRight} className="flex items-center cursor-pointer space-x-2">
-              <img
-                className='w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100"'
-                src={thumbImage(me?.data?.avatar_attachment?.file)}
-                alt=""
-              />
-              <span className="text-[#0E7490] text-xl">{me?.data?.name}</span>
-            </div>
-          </Link>
+          <div
+            onClick={() => dispatch(setUser({ isOpenMyProfileRight: !isOpenMyProfileRight }))}
+            className="flex items-center cursor-pointer space-x-2"
+          >
+            <img
+              className='w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100"'
+              src={thumbImage(me?.data?.avatar_attachment?.file)}
+              alt=""
+            />
+            <span className="text-[#0E7490] text-xl">{me?.data?.name}</span>
+          </div>
         </div>
         {renderModalNewProject()}
       </section>
-      {/* <div
-        onClick={showSideBarRight}
-        className={`${
-          isShowBarRight
-            ? "bg-white absolute w-[250px] h-[700px] top-0 left-[100%] ease-in-out"
-            : "left-0 ease-in"
-        }`}
-      >
-        Ok123213143
-      </div> */}
     </>
   );
 };
