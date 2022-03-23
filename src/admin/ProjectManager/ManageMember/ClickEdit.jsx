@@ -3,6 +3,7 @@ import { AddGoal } from 'components/AddGoal';
 import React, { useState } from 'react';
 
 import { HiUserAdd } from 'react-icons/hi';
+import { ClickConfirm } from './ClickConfirm';
 export const ClickEdit = () => {
   const [isModalClickConfirm, setIsModalClickClickConfirm] = useState(false);
 
@@ -14,8 +15,13 @@ export const ClickEdit = () => {
   };
   const renderModalClickConfirm = () => {
     return (
-      <Modal visible={isModalClickConfirm} onCancel={handleCancelClickConfirm} footer={null}>
-        <ClickEdit />
+      <Modal
+        className="!w-[800px]"
+        visible={isModalClickConfirm}
+        onCancel={handleCancelClickConfirm}
+        footer={null}
+      >
+        <ClickConfirm />
       </Modal>
     );
   };
