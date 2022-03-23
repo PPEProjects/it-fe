@@ -13,6 +13,7 @@ export const initialState = {
   dataProject: {},
   dProject: {},
   mlUser: {},
+  isOpenMyProfileRight: false,
 };
 
 const userSlice = createSlice({

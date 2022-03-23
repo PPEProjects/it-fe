@@ -46,7 +46,7 @@ export const LayoutProject = ({ children }) => {
   };
   return (
     <MasterLayout>
-      <section className="flex space-x-4 bg-[#F6F9FB]">
+      <section className="flex space-x-4 bg-[#F6F9FB] w-full">
         <div className="w-[15%] p-3">
           <h3 className="text-[#0369A1] text-[24px]">My Idea/Project</h3>
           <div>{renderMenu()}</div>
