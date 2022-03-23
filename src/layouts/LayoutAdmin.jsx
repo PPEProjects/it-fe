@@ -11,7 +11,7 @@ export const LayoutAdmin = ({ children, admin }) => {
       {
         label: 'Admin',
         key: 'AllAdmin',
-        link: `/AllAdmin`,
+        link: `/Administrator`,
       },
       {
         label: 'Idea Review',
@@ -56,7 +56,7 @@ export const LayoutAdmin = ({ children, admin }) => {
     );
   };
   return (
-    <section className="p-3 flex space-x-4">
+    <section className="w-full p-3 flex space-x-4">
       <div className="w-[15%] border rounded">{renderMenu()}</div>
       <div className="w-[85%] border rounded space-y-4">
         {/* {admin && <MenuAdmin />} */}

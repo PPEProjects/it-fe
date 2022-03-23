@@ -47,25 +47,28 @@ export const Tabs = ({
               )}
             >
               {listTab.map((item, index) => (
-                <div key={index} className="flex-auto text-center -mb-[15px] pl-4">
-                  <p
-                    className={
-                      'flex cursor-pointer items-center justify-center p-3 text-[15px] text-gray-500' +
-                      (openTab === index
-                        ? classNames('bg-black', {
-                            'border-b-2 border-[#0369A1] bg-white text-[#0369A1] font-semibold':
+                <div key={index} className="flex-auto text-center pl-4">
+                  <span
+                    className={classNames(
+                      'flex cursor-pointer items-center justify-center p-2.5 text-[15px] text-gray-500',
+                      openTab === index
+                        ? classNames('', {
+                            'border-b-2 border-[#0369A1] bg-white text-[#6f838d] font-semibold':
                               colorBorder,
-                            'bg-gray-400 w-[150px]': colorBg,
+                            'bg-[#0369A1] rounded-md !text-white text-base': colorBg,
                           })
-                        : classNames('bg-black', { 'bg-white': color }))
-                    }
+                        : classNames('', { 'bg-white': color }),
+                      {
+                        'border rounded-md mb-2 !p-2 shadow-md font-semibold !px-4': colorBg,
+                      }
+                    )}
                     onClick={() => {
                       setOpenTab(index);
                     }}
                   >
                     <span className="text-2xl text-gray-300">{item?.icon}</span>
                     <span>{item?.title}</span>
-                  </p>
+                  </span>
                 </div>
               ))}
             </div>

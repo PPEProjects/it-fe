@@ -28,7 +28,7 @@ const MyProfile = () => {
 
   return (
     <MasterLayout>
-      <section className="flex space-x-7 p-5 bg-[#F6F9FB]">
+      <section className="flex space-x-7 p-5 bg-[#F6F9FB] w-full">
         <section className="w-1/2 space-y-5">
           <div className="border-b-[4px] h-[540px] border-[#FDBA74] space-y-1 pb-5">
             <p className="flex items-center justify-center">
