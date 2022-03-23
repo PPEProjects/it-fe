@@ -52,7 +52,7 @@ export const DraftIdeasProject = () => {
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
-                  modalDraft
+                  modalDraftProject
                   shadowNone
                   placement="bottomRight"
                 />

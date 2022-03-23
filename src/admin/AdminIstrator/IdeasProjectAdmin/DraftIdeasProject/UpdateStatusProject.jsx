@@ -17,8 +17,28 @@ const dataStepsColumn = [
     href: '#',
     status: 'upcoming',
   },
+  {
+    name: 'pm preparing',
+    href: '#',
+    status: 'upcoming',
+  },
+  {
+    name: 'onboard',
+    href: '#',
+    status: 'upcoming',
+  },
+  {
+    name: 'running',
+    href: '#',
+    status: 'upcoming',
+  },
+  {
+    name: 'done/stuck/in use',
+    href: '#',
+    status: 'upcoming',
+  },
 ];
-export const UpdateStatusIdea = () => {
+export const UpdateStatusProject = () => {
   return (
     <div>
       <span className="text-lg font-semibold text-gray-800">Project Idea Update</span>

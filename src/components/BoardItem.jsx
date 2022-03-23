@@ -23,6 +23,7 @@ import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } fr
 import { setData } from 'pages/user/userSlice';
 import { ModalDraft } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/ModalDraft';
 import { UpdateStatusIdea } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusIdea';
+import { UpdateStatusProject } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusProject';
 
 export const BoardItem = ({
   imgPage,
@@ -49,6 +50,7 @@ export const BoardItem = ({
   clickNode,
   item,
   modalDraft,
+  modalDraftProject,
 }) => {
   const dispatch = useDispatch();
   const { upProject, dataProject } = useSelector(userSelector);
@@ -64,7 +66,14 @@ export const BoardItem = ({
   const [isModalUpdateInformationPro, setIsModalUpdateInformationPro] = useState(false);
   const [isModalDraftIdeasProject, setIsModalDraftIdeasProject] = useState(false);
   const [isModalUpdateStatusIdea, setIsModalUpdateStatusIdea] = useState(false);
+  const [isModalUpdateStatusProject, setIsModalUpdateStatusProject] = useState(false);
 
+  const showModalUpdateStatusProject = () => {
+    setIsModalUpdateStatusProject(true);
+  };
+  const handleCancelUpdateStatusProject = () => {
+    setIsModalUpdateStatusProject(false);
+  };
   const showModalUpdateStatusIdea = () => {
     setIsModalUpdateStatusIdea(true);
   };
@@ -223,6 +232,19 @@ export const BoardItem = ({
       </Modal>
     );
   };
+
+  const renderModalUpdateStatusProject = () => {
+    return (
+      <Modal
+        visible={isModalUpdateStatusProject}
+        onCancel={handleCancelUpdateStatusProject}
+        footer={null}
+      >
+        <UpdateStatusProject />
+      </Modal>
+    );
+  };
+
   const renderModalManageMembers = () => {
     return (
       <Modal
@@ -391,6 +413,16 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusIdea} />
           </>
         )}
+        {modalDraftProject && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
+            <MenuItemHover nameMenu="Download" />
+            <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
+            <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusProject} />
+          </>
+        )}
       </Menu>
     );
   };
@@ -415,6 +447,7 @@ export const BoardItem = ({
       {renderModalUpdateInformationPro()}
       {renderModalDraftIdeasProject()}
       {renderModalUpdateStatusIdea()}
+      {renderModalUpdateStatusProject()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <div className="relative">
           <img
