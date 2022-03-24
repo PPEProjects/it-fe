@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Button, Modal } from 'antd';
+import { Input, Button, Modal, Menu } from 'antd';
 import NewProject from 'pages/project/NewProject';
 import { Link } from 'react-router-dom';
-import { getMe, userSelector, setUserMerge, setUser } from 'pages/user/userSlice';
+import { getMe, userSelector, setUser } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, setProjectMerge } from 'pages/project/projectSlice';
 import { thumbImage } from 'services/convert';
@@ -10,15 +10,31 @@ import { thumbImage } from 'services/convert';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsFillMicFill } from 'react-icons/bs';
 import { BiSearch } from 'react-icons/bi';
+import { AiOutlineClose } from 'react-icons/ai';
 import { IoMdAdd, IoMdNotificationsOutline } from 'react-icons/io';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { SubMenu } = Menu;
   const { me, isOpenMyProfileRight } = useSelector(userSelector);
   const { cProject } = useSelector(projectSelector);
-  const [isShowBarLeft, setIsShowSideBarLeft] = useState(false);
+  const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
-  const showSideBarLeft = () => setIsShowSideBarLeft(!isShowBarLeft);
+  const [menuShow, setMenuShow] = useState(false);
+  const [openKeys, setOpenKeys] = useState(['sub1']);
+
+  const toggleMenu = () => {
+    setMenuShow(!menuShow);
+  };
+
+  const onOpenChange = keys => {
+    const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
 
   useEffect(() => {
     dispatch(getMe());
@@ -42,42 +58,86 @@ const Header = () => {
       <section className="p-3 relative flex items-center space-x-2 border-b">
         <div className="w-3/12">
           <div className="flex items-center space-x-4">
-            <Link to={`/Account?id=${me?.data?.id}`}>
-              <GiHamburgerMenu
-                // onClick={showSideBarLeft}
-                className="text-3xl cursor-pointer"
-              />
-            </Link>
+            <GiHamburgerMenu onClick={toggleMenu} className="text-3xl cursor-pointer" />
             <Link className="flex items-center space-x-4" to={`/AllPage`}>
               <img
                 className="w-[41px]"
                 src={`/assets/images/photo_2021-07-14_10-53-20.jpg`}
                 alt=""
               />{' '}
-              <span className="text-[30px]">SmileEye</span>
+              <span className="text-[30px] !text-black">SmileEye</span>
             </Link>
           </div>
-          {/* <div
-            className={`${
-              isShowBarLeft
-                ? "bg-white left-[100%] ease-in-out"
-                : "left-0 ease-in"
-            }`}
+          <div
+            onClick={toggleMenu}
+            className={`bg-black w-full h-full opacity-40 z-[99] fixed top-0 ${
+              menuShow ? 'block' : 'hidden'
+            } `}
+          />
+          <div
+            id=""
+            className={`bg-white w-[251px] z-[99] h-[856px] absolute ease-in-out duration-[420ms] top-0  ${
+              menuShow ? 'left-0' : 'left-[-251px]'
+            } `}
           >
-            <div
-              onClick={showSideBarLeft}
-              className="absolute z-10 w-[250px] top-0 left-0  h-[700px] bg-blue-500"
-            >
-              <p className="h-5 w-5 cursor-pointer" onClick={showSideBarLeft}>
-                10
-              </p>
-              <p>1</p>
-              <p>1</p>
-              <p>1</p>
-              <p>1</p>
-              <p>1</p>
+            <div className="flex items-center justify-between px-3">
+              <div className="flex items-center space-x-2">
+                <img
+                  alt=""
+                  className="w-12 h-12 my-auto"
+                  src="https://smileeye.edu.vn/assets/images/photo_2021-07-14_10-53-20.jpg"
+                />
+                <h3 className="text-center my-auto ml-[1em] text-[20px]">SmileEye</h3>
+              </div>
+              <button
+                onClick={toggleMenu}
+                className="border-[2px] text-[20px] border-[#0369A1] rounded-md text-[#0369A1] p-1"
+              >
+                <AiOutlineClose />
+              </button>
             </div>
-          </div> */}
+
+            <div className="w-full px-2">
+              <Menu
+                mode="inline"
+                openKeys={openKeys}
+                onOpenChange={onOpenChange}
+                style={{ width: 243 }}
+              >
+                <Menu.Item key="5">
+                  <Link to="/AllPage">Home</Link>
+                </Menu.Item>
+
+                <SubMenu key="sub1" title="My Idea/Project">
+                  <Menu.Item key="1">
+                    <Link to={`/MyProject/MyIdeas?id=${me?.data?.id}`}>My Idea</Link>
+                  </Menu.Item>
+                  <Menu.Item key="2">
+                    <Link to={`/MyProject/MyProjectChildren?id=${me?.data?.id}`}>My Project</Link>
+                  </Menu.Item>
+                  <Menu.Item key="3">
+                    <Link to={`/MyProject/FollowIdeaProject?id=${me?.data?.id}`}>
+                      Interested Project
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key="4">
+                    <Link to={`/MyProject/JoinedProject?id=${me?.data?.id}`}>Joined Project</Link>
+                  </Menu.Item>
+                </SubMenu>
+                <Menu.Item key="6">
+                  <Link to={`/Administrator?id=${me?.data?.id}`}>Administration</Link>
+                </Menu.Item>
+                <SubMenu key="sub4" title="Setting">
+                  <Menu.Item key="8">
+                    <Link to={`/Account?id=${me?.data?.id}`}>Account</Link>
+                  </Menu.Item>
+                  <Menu.Item key="9">
+                    <Link to={`/NewProfile?id=${me?.data?.id}`}>Profile</Link>
+                  </Menu.Item>
+                </SubMenu>
+              </Menu>
+            </div>
+          </div>
         </div>
 
         <div className="flex items-center space-x-2 w-5/12">
