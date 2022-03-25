@@ -5,6 +5,7 @@ import { apolloClient, restClient } from 'services';
 
 export const initialState = {
   upMemberProject: {},
+  dMemberProject: {},
 };
 
 const memberProjectSlice = createSlice({
@@ -77,6 +78,40 @@ export function upsertMemberProject(values) {
       });
     } catch (e) {
       dispatch(setMerge({ upMemberProject: { isLoading: false } }));
+    }
+  };
+}
+
+export function deleteMemberProject(id) {
+  return async dispatch => {
+    dispatch(setMerge({ dMemberProject: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation DeleteProjectMembers($deleteProjectMembersId: ID) {
+          deleteProjectMembers(id: $deleteProjectMembersId)
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: {
+          deleteProjectMembersId: id,
+        },
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            deleProject: {
+              dMemberProject: res.data.DeleteProjectMembers,
+              isLoading: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ dMemberProject: { isLoading: false } }));
     }
   };
 }

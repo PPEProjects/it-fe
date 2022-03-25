@@ -10,7 +10,7 @@ export const JoinPosition = () => {
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const { me } = useSelector(userSelector);
-  // const { upMemberProject } = useSelector(memberProjectSelector);
+  const { upMemberProject } = useSelector(memberProjectSelector);
   const { id } = getURLParams();
 
   useEffect(() => {
@@ -30,7 +30,6 @@ export const JoinPosition = () => {
         form={form}
         name="basic"
         onFinish={values => {
-          // console.log('values', values);
           dispatch(upsertMemberProject(values));
         }}
         scrollToFirstError
@@ -93,7 +92,7 @@ export const JoinPosition = () => {
             type="primary"
             size="large"
             htmlType="submit"
-            // loading={upMemberProject.isLoading}
+            loading={upMemberProject.isLoading}
           >
             Start test
           </Button>

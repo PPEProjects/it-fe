@@ -14,7 +14,9 @@ import { JoinPosition } from 'pages/home/AllPage/JoinPosition';
 import {
   memberProjectSelector,
   setMemberProjectMerge,
+  deleteMemberProject,
 } from 'pages/memberProject/memberProjectSlice';
+
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { MdMailOutline, MdAttachFile } from 'react-icons/md';
 import { BsTelephoneFill } from 'react-icons/bs';
@@ -35,7 +37,7 @@ const ProjectDescription = () => {
   const { id } = getURLParams();
   const { deProject } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
-  const { upMemberProject } = useSelector(memberProjectSelector);
+  const { upMemberProject, dMemberProject } = useSelector(memberProjectSelector);
 
   console.log('detailProjects', detailProjects);
 
@@ -55,7 +57,7 @@ const ProjectDescription = () => {
 
   useEffect(() => {
     dispatch(detailProject(id));
-  }, [id, dispatch, upMemberProject]);
+  }, [id, dispatch, upMemberProject, dMemberProject]);
 
   const renderModalJoinPosition = () => {
     return (
@@ -167,11 +169,19 @@ const ProjectDescription = () => {
                 <span>Member:</span>
                 <div className="flex items-center space-x-2 pt-2">
                   {(detailProjects?.members ?? []).map((item, index) => {
+                    console.log('item', item);
                     return (
                       <BoardPosition
                         running
+                        nameUser={item?.memberUser?.name}
                         imgAvatar={item?.memberUser?.avatar_attachment?.file}
                         text={item?.position}
+                        onConfirm={() => {
+                          dispatch(deleteMemberProject(item?.id));
+                        }}
+                        // onClick={() => {
+                        //   dispatch(setData({ dataProject: { item } }));
+                        // }}
                       />
                     );
                   })}
