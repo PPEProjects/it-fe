@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 import { userSelector } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { memberProjectSelector, createMemberProject } from 'pages/memberProject/memberProjectSlice';
+import { memberProjectSelector, upsertMemberProject } from 'pages/memberProject/memberProjectSlice';
 import { getURLParams } from 'services';
 
 export const JoinPosition = () => {
@@ -10,7 +10,6 @@ export const JoinPosition = () => {
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const { me } = useSelector(userSelector);
-  const { cMemberProject } = useSelector(memberProjectSelector);
   const { id } = getURLParams();
 
   useEffect(() => {
@@ -19,6 +18,7 @@ export const JoinPosition = () => {
         memberUserId: me?.data?.id,
         status: 'pending',
         projectId: id,
+        avatar: me?.data?.avatar_attachment?.file,
       },
     });
   }, [me, form, id]);
@@ -30,7 +30,7 @@ export const JoinPosition = () => {
         form={form}
         name="basic"
         onFinish={values => {
-          dispatch(createMemberProject(values));
+          dispatch(upsertMemberProject(values));
         }}
         scrollToFirstError
         layout="vertical"
@@ -82,6 +82,7 @@ export const JoinPosition = () => {
               <Form.Item name="memberUserId" hidden={true} />
               <Form.Item name="status" hidden={true} />
               <Form.Item name="projectId" hidden={true} />
+              <Form.Item name="avatar" hidden={true} />
             </>
           )}
         </Form.List>
