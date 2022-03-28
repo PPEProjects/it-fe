@@ -13,6 +13,7 @@ import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { AiFillInfoCircle } from 'react-icons/ai';
 
 import { ReactComponent as IconDatabase } from 'assets/database.svg';
+import { ButtonItems } from './ButtonItems';
 
 const settings = [
   {
@@ -68,51 +69,78 @@ const NewProject = () => {
                   </Radio.Group>
                 </Form.Item>
               </LabelItemProject>
-              <LabelItemProject label="Idea/Project name">
-                <Form.Item className="!mb-0" rules={[{ required: true }]} name="name">
+              <LabelItemProject label="Idea/Project name" rules>
+                <Form.Item
+                  className="!mb-0"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Idea/Project Name is missing.',
+                    },
+                  ]}
+                  name="name"
+                >
                   <Input className="!rounded" placeholder="" />
                 </Form.Item>
               </LabelItemProject>
-              <LabelItemProject flex label="Main author name">
+              <LabelItemProject flex label="Main author name" rules>
                 <Form.Item className="w-1/2 !mb-0" rules={[{ required: true }]}>
                   <Input value={me?.data?.name} disabled className="!rounded" placeholder="" />
                 </Form.Item>
                 <div className="w-1/2 !pl-4 space-y-3">
                   <div className="flex items-center">
-                    <label className="text-sm w-[60px] text-gray-700">Email</label>
+                    <label className="text-sm w-[60px] text-gray-700 font-medium flex items-center space-x-1">
+                      <span>Email</span>
+                      <span className="text-[#EF4444] mt-1.5 text-base">*</span>
+                    </label>
                     <Form.Item className="!mb-0 w-full" rules={[{ required: true }]}>
                       <Input className="!rounded" value={me?.data?.email} disabled />
                     </Form.Item>
                   </div>
                   <div className="flex items-center">
-                    <label className="text-sm w-[60px] text-gray-700">Phone</label>
+                    <label className="text-sm w-[60px] text-gray-700 font-medium flex items-center space-x-0.5">
+                      <span>Phone</span>
+                      <span className="text-[#EF4444] mt-1.5 pr-0.5 text-base">*</span>
+                    </label>
                     <Form.Item className="!mb-0 w-full" rules={[{ required: true }]}>
                       <Input className="!rounded" value={me?.data?.phone_number} disabled />
                     </Form.Item>
                   </div>
                 </div>
               </LabelItemProject>
-              <LabelItemProject flex label="Co-author name">
-                <Form.Item className="w-1/2 !mb-0" rules={[{ required: true }]}>
-                  <Input value={me?.data?.name} className="!rounded" placeholder="" />
-                </Form.Item>
-                <div className="w-1/2 !pl-4 space-y-3">
-                  <div className="flex items-center">
-                    <label className="text-sm w-[60px] text-gray-700">Email</label>
-                    <Form.Item className="!mb-0 w-full" rules={[{ required: true }]}>
-                      <Input className="!rounded" value={me?.data?.email} />
-                    </Form.Item>
+              <div className="border-b pb-3">
+                <LabelItemProject borderB={false} flex label="Co-author name">
+                  <Form.Item className="w-1/2 !mb-0" rules={[{ required: true }]}>
+                    <Input value={me?.data?.name} className="!rounded" placeholder="" />
+                  </Form.Item>
+
+                  <div className="w-1/2 !pl-4 space-y-3">
+                    <div className="flex items-center">
+                      <label className="text-sm w-[60px] text-gray-700 font-medium">Email</label>
+                      <Form.Item className="!mb-0 w-full" rules={[{ required: true }]}>
+                        <Input className="!rounded" value={me?.data?.email} />
+                      </Form.Item>
+                    </div>
+
+                    <div className="flex items-center">
+                      <label className="text-sm w-[60px] text-gray-700 font-medium">Phone</label>
+                      <Form.Item className="!mb-0 w-full" rules={[{ required: true }]}>
+                        <Input className="!rounded" value={me?.data?.phone_number} />
+                      </Form.Item>
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <label className="text-sm w-[60px] text-gray-700">Phone</label>
-                    <Form.Item className="!mb-0 w-full" rules={[{ required: true }]}>
-                      <Input className="!rounded" value={me?.data?.phone_number} />
-                    </Form.Item>
-                  </div>
+                </LabelItemProject>
+                <div>
+                  <ButtonItems />
                 </div>
-              </LabelItemProject>
-              <LabelItemProject label="Main description">
-                <Form.Item className="!mb-0" rules={[{ required: true }]} name="description">
+              </div>
+
+              <LabelItemProject label="Main description" rules information>
+                <Form.Item
+                  className="!mb-0"
+                  rules={[{ required: true, message: 'Main Description is missing.' }]}
+                  name="description"
+                >
                   <TextArea className="!rounded !h-[120px]" placeholder="" />
                 </Form.Item>
               </LabelItemProject>
@@ -178,12 +206,12 @@ const NewProject = () => {
               <Form.List name={`attachments`}>
                 {() => (
                   <>
-                    <LabelItemProject label="Main picture">
+                    <LabelItemProject label="Main picture" rules>
                       <Form.Item name="main_picture" className="text-sm text-gray-700">
                         <Image.SingleUpload isBorder isDelete isFull />
                       </Form.Item>
                     </LabelItemProject>
-                    <LabelItemProject label="Pitch Deck">
+                    <LabelItemProject label="Pitch Deck" rules>
                       <Form.Item name="" className="text-sm text-gray-700">
                         <Image.SingleUpload isBorder isDelete isFull />
                       </Form.Item>
