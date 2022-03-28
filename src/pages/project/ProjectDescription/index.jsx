@@ -14,7 +14,9 @@ import { JoinPosition } from 'pages/home/AllPage/JoinPosition';
 import {
   memberProjectSelector,
   setMemberProjectMerge,
+  deleteMemberProject,
 } from 'pages/memberProject/memberProjectSlice';
+
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { MdMailOutline, MdAttachFile } from 'react-icons/md';
 import { BsTelephoneFill } from 'react-icons/bs';
@@ -35,7 +37,9 @@ const ProjectDescription = () => {
   const { id } = getURLParams();
   const { deProject } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
-  const { cMemberProject } = useSelector(memberProjectSelector);
+  const { upMemberProject, dMemberProject } = useSelector(memberProjectSelector);
+
+  console.log('detailProjects', detailProjects);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -53,14 +57,14 @@ const ProjectDescription = () => {
 
   useEffect(() => {
     dispatch(detailProject(id));
-  }, [id, dispatch]);
+  }, [id, dispatch, upMemberProject, dMemberProject]);
 
   const renderModalJoinPosition = () => {
     return (
       <Modal
         className="!w-[800px]"
-        visible={cMemberProject?.isOpen}
-        onCancel={() => dispatch(setMemberProjectMerge('cMemberProject', { isOpen: false }))}
+        visible={upMemberProject?.isOpen}
+        onCancel={() => dispatch(setMemberProjectMerge('upMemberProject', { isOpen: false }))}
         footer={null}
       >
         <JoinPosition />
@@ -164,11 +168,24 @@ const ProjectDescription = () => {
               <div className="text-sm flex space-x-12 items-center">
                 <span>Member:</span>
                 <div className="flex items-center space-x-2 pt-2">
-                  <BoardPosition running imgAvatar="https://i.pravatar.cc/100?img=2" text="PO" />
-                  <BoardPosition board text="Dev" />
-                  <BoardPosition board text="Leader" />
-                  <BoardPosition board text="Leader" />
-                  <BoardPosition board text="Tester" />
+                  {(detailProjects?.members ?? []).map((item, index) => {
+                    console.log('item', item);
+                    return (
+                      <BoardPosition
+                        running
+                        nameUser={item?.memberUser?.name}
+                        imgAvatar={item?.memberUser?.avatar_attachment?.file}
+                        text={item?.position}
+                        onConfirm={() => {
+                          dispatch(deleteMemberProject(item?.id));
+                        }}
+                        // onClick={() => {
+                        //   dispatch(setData({ dataProject: { item } }));
+                        // }}
+                      />
+                    );
+                  })}
+                  <BoardPosition board text="Position" />
                 </div>
               </div>
             </div>

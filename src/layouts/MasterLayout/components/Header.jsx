@@ -9,8 +9,9 @@ import { thumbImage } from 'services/convert';
 
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsFillMicFill } from 'react-icons/bs';
-import { BiSearch } from 'react-icons/bi';
-import { AiOutlineClose } from 'react-icons/ai';
+import { HiOutlineUserGroup } from 'react-icons/hi';
+import { BiSearch, BiShoppingBag } from 'react-icons/bi';
+import { AiOutlineClose, AiFillHome, AiOutlineSetting } from 'react-icons/ai';
 import { IoMdAdd, IoMdNotificationsOutline } from 'react-icons/io';
 
 const Header = () => {
@@ -75,9 +76,8 @@ const Header = () => {
             } `}
           />
           <div
-            id=""
             className={`bg-white w-[251px] z-[99] h-[856px] absolute ease-in-out duration-[420ms] top-0  ${
-              menuShow ? 'left-0' : 'left-[-251px]'
+              menuShow ? 'left-0' : 'left-[-555px]'
             } `}
           >
             <div className="flex items-center justify-between px-3">
@@ -105,10 +105,17 @@ const Header = () => {
                 style={{ width: 243 }}
               >
                 <Menu.Item key="5">
-                  <Link to="/AllPage">Home</Link>
+                  <Link to="/AllPage" className="flex items-center space-x-2">
+                    <AiFillHome className="text-2xl" />
+                    <span>Home</span>
+                  </Link>
                 </Menu.Item>
 
-                <SubMenu key="sub1" title="My Idea/Project">
+                <SubMenu
+                  icon={<BiShoppingBag className="!text-2xl" />}
+                  key="sub1"
+                  title="My Idea/Project"
+                >
                   <Menu.Item key="1">
                     <Link to={`/MyProject/MyIdeas?id=${me?.data?.id}`}>My Idea</Link>
                   </Menu.Item>
@@ -124,10 +131,21 @@ const Header = () => {
                     <Link to={`/MyProject/JoinedProject?id=${me?.data?.id}`}>Joined Project</Link>
                   </Menu.Item>
                 </SubMenu>
+
                 <Menu.Item key="6">
-                  <Link to={`/Administrator?id=${me?.data?.id}`}>Administration</Link>
+                  <Link
+                    to={`/Administrator?id=${me?.data?.id}`}
+                    className="flex items-center space-x-2"
+                  >
+                    <HiOutlineUserGroup className="text-2xl" />
+                    <span>Administration</span>
+                  </Link>
                 </Menu.Item>
-                <SubMenu key="sub4" title="Setting">
+                <SubMenu
+                  icon={<AiOutlineSetting className="!text-2xl" />}
+                  key="sub4"
+                  title="Setting"
+                >
                   <Menu.Item key="8">
                     <Link to={`/Account?id=${me?.data?.id}`}>Account</Link>
                   </Menu.Item>

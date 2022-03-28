@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 import { userSelector } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { memberProjectSelector, createMemberProject } from 'pages/memberProject/memberProjectSlice';
+import { memberProjectSelector, upsertMemberProject } from 'pages/memberProject/memberProjectSlice';
 import { getURLParams } from 'services';
 
 export const JoinPosition = () => {
@@ -10,6 +10,7 @@ export const JoinPosition = () => {
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const { me } = useSelector(userSelector);
+  const { upMemberProject } = useSelector(memberProjectSelector);
   const { id } = getURLParams();
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export const JoinPosition = () => {
         form={form}
         name="basic"
         onFinish={values => {
-          dispatch(createMemberProject(values));
+          dispatch(upsertMemberProject(values));
         }}
         scrollToFirstError
         layout="vertical"
@@ -75,12 +76,12 @@ export const JoinPosition = () => {
               <Form.Item className="!mb-0 w-1/2" name="position" label="Position">
                 <Input className="!rounded" placeholder="Leader" />
               </Form.Item>
-              <Form.Item className="!mb-0" label="Job Description">
+              <Form.Item className="!mb-0" label="Job Description" name="jobDescription">
                 <TextArea className="!rounded !h-[120px]" placeholder="" />
               </Form.Item>
-              <Form.Item name="memberUserId" />
-              <Form.Item name="status" />
-              <Form.Item name="projectId" />
+              <Form.Item name="memberUserId" hidden={true} />
+              <Form.Item name="status" hidden={true} />
+              <Form.Item name="projectId" hidden={true} />
             </>
           )}
         </Form.List>
@@ -88,11 +89,10 @@ export const JoinPosition = () => {
         <Form.Item className="!mb-0 p-3">
           <Button
             className="!rounded-md !bg-blue-500"
-            // onClick={() => openNotificationWithIcon("success")}
             type="primary"
             size="large"
             htmlType="submit"
-            // loading={upsertProfile.isLoading}
+            loading={upMemberProject.isLoading}
           >
             Start test
           </Button>
