@@ -10,7 +10,7 @@ const Account = () => {
 
   return (
     <LayoutSetting>
-      <section className="px-4 py-6">
+      <section className="px-4 py-6 space-y-4">
         <Information />
         <ChangePassword />
 

@@ -27,14 +27,6 @@ export const AllPage = () => {
     dispatch(MyIdeas());
   }, [dispatch, cProject]);
 
-  useEffect(() => {
-    dispatch(
-      setProject({
-        cProject: {},
-      })
-    );
-  }, [dispatch]);
-
   return (
     <section className="p-3 pl-5 space-y-1">
       <section>
@@ -42,7 +34,7 @@ export const AllPage = () => {
         <p className="text-sm -mt-2 text-gray-500">
           Projects that allow registration to participate.
         </p>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-x-4 gap-y-10">
           {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
             return (
               <div key={index}>
@@ -73,7 +65,7 @@ export const AllPage = () => {
                       <BoardPosition board text="QA" />
                       <BoardPosition board text="Leader" />
                     </div>
-                    <button className="shadow-sm absolute right-4 bottom-3 bg-white p-1.5 flex text-[#F97316] items-center space-x-1.5 w-[90px] rounded-md">
+                    <button className="shadow-sm absolute right-4 bottom-3 bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md">
                       <AiOutlineHeart className="text-xl stroke-[20px]" />
                       <span className="text-[11px]">Follow</span>
                     </button>
@@ -89,7 +81,7 @@ export const AllPage = () => {
       </section>
       <section>
         <h3 className="text-[18px] font-[600]">Ideas</h3>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-x-4 gap-y-10">
           {(mlMyIdeas?.myIdeas?.slice(0, loadMore) ?? [])?.map((item, index) => {
             return (
               <div key={index}>

@@ -25,7 +25,7 @@ const IdeasPage = () => {
         <MenuPage />
         <section className="p-4">
           <h3 className="text-[18px] font-[600]">Ideas</h3>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-x-4 gap-y-10">
             {(mlMyIdeas?.myIdeas?.slice(0, loadMore) ?? [])?.map((item, index) => {
               return (
                 <div key={index}>

@@ -46,6 +46,14 @@ const Header = () => {
   };
 
   useEffect(() => {
+    dispatch(
+      setUser({
+        isOpenMyProfileRight: false,
+      })
+    );
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);
 
