@@ -429,7 +429,7 @@ export const BoardItem = ({
 
   return (
     <section
-      className={classNames('border-l border-r border-b rounded-b-md pb-3 shadow-md', {
+      className={classNames('border-l border-b rounded-b-md pb-3 shadow-sm', {
         'shadow-none': shadowNone,
       })}
     >

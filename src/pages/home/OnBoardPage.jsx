@@ -29,7 +29,7 @@ const OnBoardPage = () => {
           <p className="text-sm -mt-2 text-gray-500">
             Projects that allow registration to participate.
           </p>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-4 gap-x-4 gap-y-10">
             {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
               return (
                 <div key={index}>

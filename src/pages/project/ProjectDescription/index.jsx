@@ -39,8 +39,6 @@ const ProjectDescription = () => {
   const detailProjects = deProject.detailProjectIds;
   const { upMemberProject, dMemberProject } = useSelector(memberProjectSelector);
 
-  console.log('detailProjects', detailProjects);
-
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -169,7 +167,6 @@ const ProjectDescription = () => {
                 <span>Member:</span>
                 <div className="flex items-center space-x-2 pt-2">
                   {(detailProjects?.members ?? []).map((item, index) => {
-                    console.log('item', item);
                     return (
                       <BoardPosition
                         running
@@ -179,9 +176,6 @@ const ProjectDescription = () => {
                         onConfirm={() => {
                           dispatch(deleteMemberProject(item?.id));
                         }}
-                        // onClick={() => {
-                        //   dispatch(setData({ dataProject: { item } }));
-                        // }}
                       />
                     );
                   })}
