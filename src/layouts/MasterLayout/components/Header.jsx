@@ -13,6 +13,7 @@ import { HiOutlineUserGroup } from 'react-icons/hi';
 import { BiSearch, BiShoppingBag } from 'react-icons/bi';
 import { AiOutlineClose, AiFillHome, AiOutlineSetting } from 'react-icons/ai';
 import { IoMdAdd, IoMdNotificationsOutline } from 'react-icons/io';
+import { ModalVoice } from './ModalVoice';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,14 @@ const Header = () => {
 
   const [menuShow, setMenuShow] = useState(false);
   const [openKeys, setOpenKeys] = useState(['sub1']);
+  const [isModalVoice, setIsModalVoice] = useState(false);
 
+  const showModalVoice = () => {
+    setIsModalVoice(true);
+  };
+  const handleCancelModalVoice = () => {
+    setIsModalVoice(false);
+  };
   const toggleMenu = () => {
     setMenuShow(!menuShow);
   };
@@ -40,6 +48,19 @@ const Header = () => {
   useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);
+
+  const renderModalVoice = () => {
+    return (
+      <Modal
+        className="!w-[500px] !rounded-full"
+        visible={isModalVoice}
+        onCancel={handleCancelModalVoice}
+        footer={null}
+      >
+        <ModalVoice />
+      </Modal>
+    );
+  };
 
   const renderModalNewProject = () => {
     return (
@@ -169,7 +190,7 @@ const Header = () => {
           </div>
           <Button shape="circle !h-[50px] !w-[50px]">
             <span className="pt-[4px]">
-              <BsFillMicFill className="text-xl" />
+              <BsFillMicFill className="text-xl" onClick={showModalVoice} />
             </span>
           </Button>
         </div>
@@ -203,6 +224,7 @@ const Header = () => {
           </div>
         </div>
         {renderModalNewProject()}
+        {renderModalVoice()}
       </section>
     </>
   );
