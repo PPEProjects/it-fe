@@ -17,9 +17,10 @@ import {
   deleteMemberProject,
 } from 'pages/memberProject/memberProjectSlice';
 
+import { FiCamera } from 'react-icons/fi';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { MdMailOutline, MdAttachFile } from 'react-icons/md';
-import { BsTelephoneFill } from 'react-icons/bs';
+import { BsTelephoneFill, BsEmojiSmile } from 'react-icons/bs';
 import {
   AiOutlineLike,
   AiOutlineMessage,
@@ -30,6 +31,7 @@ import {
 } from 'react-icons/ai';
 
 import { ReactComponent as IconMenuComment } from 'assets/menu-comment-icon.svg';
+import { ItemComment } from './ItemComment';
 
 const { TextArea } = Input;
 const ProjectDescription = () => {
@@ -90,7 +92,7 @@ const ProjectDescription = () => {
     <MasterLayout>
       {renderModalTopComment()}
       {renderModalJoinPosition()}
-      <section className="p-4 space-y-4">
+      <section className="p-4 space-y-4 bg-[#F6F9FB]">
         <Link to="/AllPage">
           <div className="flex text-gray-900 pl-2 text-sm items-center space-x-1">
             <AiOutlineLeft className="stroke-4" />
@@ -272,13 +274,27 @@ const ProjectDescription = () => {
               </Dropdown>
             </div>
             <div className="space-y-3">
-              <div className="flex space-x-2">
-                <CommentItem
-                  iconClassName="!w-7 !rounded-md !h-7 !text-xl top-7"
-                  containerClassName="space-y-1.5"
-                  imgAvatarClassName="!w-12 !h-12"
-                />
-                <TextArea rows={4} placeholder="Add a comment..." />
+              <div className="flex items-center space-x-2">
+                <div className="">
+                  <img
+                    src="https://i.pravatar.cc/100?img=2"
+                    alt=""
+                    className="w-16 border-solid border-4 border-blue rounded-full"
+                  />
+                </div>
+                <div className="relative w-full">
+                  <div className="w-full">
+                    <Input
+                      placeholder="Write a comment..."
+                      className="h-12 !w-full !rounded-lg"
+                    ></Input>
+                  </div>
+                  <div className="absolute top-0 right-0 bottom-0 flex items-center justify-end pr-5 space-x-3">
+                    <BsEmojiSmile />
+                    <FiCamera />
+                  </div>
+                </div>
+                {/* <TextArea rows={4} placeholder="Add a comment..." /> */}
               </div>
               <div className="text-right">
                 <Button className="!h-[40px] !font-[500] !rounded-lg" type="primary">
@@ -286,8 +302,40 @@ const ProjectDescription = () => {
                 </Button>
               </div>
             </div>
-            <div className="space-y-2">
-              <CommentItem
+            <div className="space-y-2 bg-[#FFFF] rounded-lg px-3 pt-2 ">
+              <ItemComment
+                name="Trọng Ca"
+                contents="Hendrerit netus augue interdum odio morbi aliquam. Habitant ultricies volutpat sit eget suspendisse fermentum. Id faucib auctor ultrices senectus dictumst mi blandit. Adipiscing tellus porta enim tortor."
+                numberLike="100"
+                status="Ready"
+                time="24h"
+              />
+              <ItemComment
+                name="Trọng Ca"
+                contents="Hendrerit netus augue interdum odio morbi aliquam. Habitant ultricies volutpat sit eget suspendisse fermentum. Id faucib auctor ultrices senectus dictumst mi blandit. Adipiscing tellus porta enim tortor."
+                numberLike="100"
+                status="Ready"
+                time="24h"
+              />
+              <ItemComment
+                name="Trọng Ca"
+                contents="Hendrerit netus augue interdum odio morbi aliquam. Habitant ultricies volutpat sit eget suspendisse fermentum. Id faucib auctor ultrices senectus dictumst mi blandit. Adipiscing tellus porta enim tortor."
+                numberLike="100"
+                status="Ready"
+                time="24h"
+                feedBack
+                number="3 Replies"
+              />
+              <ItemComment
+                name="Trọng Ca"
+                contents="Hendrerit netus augue interdum odio morbi aliquam. Habitant ultricies volutpat sit eget suspendisse fermentum. Id faucib auctor ultrices senectus dictumst mi blandit. Adipiscing tellus porta enim tortor."
+                numberLike="100"
+                status="Ready"
+                time="24h"
+                feedBack
+                number="3 Replies"
+              />
+              {/* <CommentItem
                 time="6d ago"
                 numberLike="6"
                 iconClassName="!w-7 !rounded-md !h-7 !text-xl top-7"
@@ -310,12 +358,12 @@ const ProjectDescription = () => {
                 contentClassName="!text-[14px]"
                 nameUser="Eduardo Benz"
                 content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt nunc ipsum tempor purus vitae id. Morbi in vestibulum nec varius. Et diam cursus quis sed purus "
-              />
-            </div>
-            <div className="text-center">
-              <Button className="!w-[245] !h-[34px] !text-gray-900 !font-[500] !rounded-lg">
-                View all comment
-              </Button>
+              /> */}
+              <div className="text-center pb-5">
+                <Button className="!w-[90%] !h-[34px] !text-gray-900 !font-[500] !rounded-lg">
+                  View all comment
+                </Button>
+              </div>
             </div>
           </div>
         </section>
