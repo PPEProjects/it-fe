@@ -7,7 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getURLParams } from 'services';
 import { success } from 'components';
 import { Image } from '@tienlucky/storage';
-
+import { ImageSingleUpload, ImageView } from '@smileeye.edu.vn/image';
+import '@smileeye.edu.vn/image/src/smileeye.edu.vn-image.min.css';
+import './style.css';
 import { RiImageAddLine } from 'react-icons/ri';
 
 const NewProfile = () => {
@@ -117,14 +119,29 @@ const NewProfile = () => {
                             src={deUsers?.avatar_attachment?.file}
                             className="w-[48px] h-[48px] border rounded-full flex items-center justify-center"
                           />
-                          <Button className="!h-[48px] !rounded-md">Change</Button>
+                          <div className="image-customize relative">
+                            {/* <Button className="!h-[48px] !rounded-md">Change</Button> */}
+                            <p className="customize absolute -mt-7">
+                              <Form.Item name="avatar_attachment">
+                                <ImageSingleUpload
+                                  labelDrag={false}
+                                  labelFormat={false}
+                                  labelMain="Change"
+                                  width={60}
+                                  isBorder
+                                  icon={false}
+                                  isDelete
+                                />
+                              </Form.Item>
+                            </p>
+                          </div>
                         </div>
                         <Form.Item
-                          name="avatar_attachment"
+                          name="background_attachment"
                           label="Cover Photo"
                           className="text-sm text-gray-700"
                         >
-                          <Image.SingleUpload isBorder isDelete isFull />
+                          <ImageSingleUpload width={200} isBorder isDelete isFull />
                         </Form.Item>
                       </div>
                     )}

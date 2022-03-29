@@ -1,0 +1,20 @@
+/* .image-customize .customize {
+  @apply !h-8;
+} */
+
+.image-customize .customize .upload {
+  @apply !py-3;
+}
+
+/* .image-customize .customize .max-w-lg {
+  @apply !w-[60px] !h-[100px] -mt-1 pt-2;
+}
+
+.image-customize .customize .text-center svg {
+  @apply -mt-5 opacity-0;
+}
+
+.image-customize .customize .text-sm,
+.image-customize .customize .text-xs {
+  @apply hidden;
+} */

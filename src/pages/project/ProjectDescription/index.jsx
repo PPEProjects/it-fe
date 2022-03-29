@@ -28,6 +28,7 @@ import {
   AiOutlineLeft,
   AiOutlineDown,
 } from 'react-icons/ai';
+import { LikeProject } from 'pages/project/LikeProject';
 
 import { ReactComponent as IconMenuComment } from 'assets/menu-comment-icon.svg';
 
@@ -35,11 +36,13 @@ const { TextArea } = Input;
 const ProjectDescription = () => {
   const dispatch = useDispatch();
   const { id } = getURLParams();
-  const { deProject } = useSelector(projectSelector);
+  const { deProject, cProjectLike } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
   const { upMemberProject, dMemberProject } = useSelector(memberProjectSelector);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  console.log('cProjectLike', cProjectLike);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -55,7 +58,7 @@ const ProjectDescription = () => {
 
   useEffect(() => {
     dispatch(detailProject(id));
-  }, [id, dispatch, upMemberProject, dMemberProject]);
+  }, [id, dispatch, upMemberProject, dMemberProject, cProjectLike]);
 
   const renderModalJoinPosition = () => {
     return (
@@ -132,8 +135,9 @@ const ProjectDescription = () => {
               <p>{detailProjects?.name}</p>
               <p className="flex items-center space-x-7 text-sm text-[#164E63]">
                 <p className="flex items-center space-x-1 cursor-pointer">
-                  <AiOutlineLike className="text-2xl stroke-[20px]" />
-                  <span>1</span>
+                  {/* <AiOutlineLike className="text-2xl stroke-[20px]" /> */}
+                  <LikeProject />
+                  <span>{detailProjects?.numberLikes}</span>
                 </p>
                 <p className="flex items-center space-x-1 cursor-pointer">
                   <AiOutlineMessage className="text-2xl stroke-[20px]" />

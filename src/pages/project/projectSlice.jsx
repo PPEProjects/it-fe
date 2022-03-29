@@ -5,6 +5,7 @@ import { apolloClient, restClient } from 'services';
 
 export const initialState = {
   cProject: {},
+  cProjectLike: {},
   mlMyProject: {},
   mlMyIdeas: {},
   deProject: { isRefresh: true },
@@ -235,6 +236,11 @@ export function detailProject(id) {
           version
           budget
           type
+          is_involved
+          projectLikes {
+            projectId
+          }
+          numberLikes
           salary
           status
           memberJoin
@@ -264,5 +270,42 @@ export function detailProject(id) {
         },
       })
     );
+  };
+}
+
+export function createProjectLike(values) {
+  return async dispatch => {
+    dispatch(setMerge({ cProjectLike: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation Mutation($data: ProjectLikesInput!) {
+          createProjectLikes(data: $data) {
+            id
+            userId
+            projectId
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            cProjectLike: {
+              project: res.data.createProjectLikes,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ cProjectLike: { isLoading: false } }));
+    }
   };
 }

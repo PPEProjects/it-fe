@@ -21,7 +21,7 @@ export const ProfileRight = () => {
         <img
           className="h-[76px] w-full rounded-t object-cover"
           alt=""
-          src={thumbImageBg(me?.data?.avatar_attachment?.file)}
+          src={thumbImageBg(me?.data?.background_attachment?.file)}
         />
         <div className="absolute left-0 top-5 right-0 flex items-center justify-center">
           <img
