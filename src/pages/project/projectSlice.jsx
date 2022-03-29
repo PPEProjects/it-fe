@@ -9,6 +9,8 @@ export const initialState = {
   mlMyProject: {},
   mlMyIdeas: {},
   deProject: { isRefresh: true },
+  dProjectLike: {},
+  isLikeProject: false,
 };
 
 const projectSlice = createSlice({
@@ -237,7 +239,9 @@ export function detailProject(id) {
           type
           is_involved
           projectLikes {
+            id
             projectId
+            userId
           }
           numberLikes
           salary
@@ -305,6 +309,41 @@ export function createProjectLike(values) {
       });
     } catch (e) {
       dispatch(setMerge({ cProjectLike: { isLoading: false } }));
+    }
+  };
+}
+
+export function deleteProjectLike(id) {
+  return async dispatch => {
+    dispatch(setMerge({ dProjectLike: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation CreateProjectInterested($deleteProjectLikesId: ID) {
+          deleteProjectLikes(id: $deleteProjectLikesId)
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: {
+          deleteProjectLikesId: id,
+        },
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        console.log('res', res);
+        dispatch(
+          setMerge({
+            deleProject: {
+              dProjectLike: res.data.deleteProjectLikes,
+              isLoading: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ dProjectLike: { isLoading: false } }));
     }
   };
 }

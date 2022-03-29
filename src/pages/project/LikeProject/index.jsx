@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Button } from 'antd';
 import { userSelector } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProjectLike, setProjectMerge } from 'pages/project/projectSlice';
+import { createProjectLike } from 'pages/project/projectSlice';
 import { getURLParams } from 'services';
 
 import { AiOutlineLike } from 'react-icons/ai';
@@ -13,22 +13,32 @@ export const LikeProject = () => {
   const { me } = useSelector(userSelector);
   const { id } = getURLParams();
 
-  useEffect(() => {
-    form.setFieldsValue({
-      data: {
-        userId: me?.data?.id,
-        projectId: id,
-      },
-    });
-  }, [me, id, form]);
-
+  // useEffect(() => {
+  //   form.setFieldsValue({
+  //     data: {
+  //       userId: me?.data?.id,
+  //       projectId: id,
+  //     },
+  //   });
+  // }, [me, id, form]);
+  return (
+    <Button
+      className="!rounded-full !w-10 !text-[#164E63] !border-none"
+      onClick={() => {
+        const values = { userId: me?.data?.id, projectId: id };
+        dispatch(createProjectLike({ data: values }));
+      }}
+    >
+      <AiOutlineLike className="text-2xl stroke-[20px]" />
+    </Button>
+  );
   return (
     <section>
       <Form
         form={form}
         onFinish={values => {
+          console.log('values', values);
           dispatch(createProjectLike(values));
-          dispatch(setProjectMerge('cProjectLike', { isOpen: true }));
         }}
       >
         <Form.List name="data">
