@@ -48,6 +48,7 @@ export const AllPage = () => {
                   // imgPage={Image.getFileUrl(item?.attachments?.main_picture, 200)}
                   imgPage={item?.attachments?.main_picture?.file}
                   nameProject={item?.name}
+                  onClickComment
                   numberComment="1"
                   numberHeart="2"
                   numberLike="3"

@@ -24,6 +24,7 @@ import { setData } from 'pages/user/userSlice';
 import { ModalDraft } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/ModalDraft';
 import { UpdateStatusIdea } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusIdea';
 import { UpdateStatusProject } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusProject';
+import { ModalComment } from 'pages/home/AllPage/ModalComment';
 
 export const BoardItem = ({
   imgPage,
@@ -67,6 +68,14 @@ export const BoardItem = ({
   const [isModalDraftIdeasProject, setIsModalDraftIdeasProject] = useState(false);
   const [isModalUpdateStatusIdea, setIsModalUpdateStatusIdea] = useState(false);
   const [isModalUpdateStatusProject, setIsModalUpdateStatusProject] = useState(false);
+  const [isModalComment, setModalComment] = useState(false);
+
+  const showModalComment = () => {
+    setModalComment(true);
+  };
+  const handleCancelComment = () => {
+    setModalComment(false);
+  };
 
   const showModalUpdateStatusProject = () => {
     setIsModalUpdateStatusProject(true);
@@ -179,6 +188,18 @@ export const BoardItem = ({
         footer={null}
       >
         <UpdateProject updateMyProject={dataProject} />
+      </Modal>
+    );
+  };
+  const renderModalComment = () => {
+    return (
+      <Modal
+        className="!w-[500px]  !rounded-lg"
+        visible={isModalComment}
+        onCancel={handleCancelComment}
+        footer={null}
+      >
+        <ModalComment />
       </Modal>
     );
   };
@@ -448,6 +469,7 @@ export const BoardItem = ({
       {renderModalDraftIdeasProject()}
       {renderModalUpdateStatusIdea()}
       {renderModalUpdateStatusProject()}
+      {renderModalComment()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <div className="relative">
           <img
@@ -528,7 +550,7 @@ export const BoardItem = ({
               <AiOutlineLike className="text-2xl stroke-[20px]" />
               <span>{numberLike}</span>
             </p>
-            <p className="flex items-center space-x-1 cursor-pointer">
+            <p onClick={showModalComment} className="flex items-center space-x-1 cursor-pointer">
               <AiOutlineMessage className="text-2xl stroke-[20px]" />
               <span>{numberComment}</span>
             </p>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { detailUser, userSelector, upsertUserAdvance } from 'pages/user/userSlice';
 import { getURLParams } from 'services';
 import { success } from 'components';
+import { StarRed } from './StarRed';
 
 export const Information = () => {
   const [form] = Form.useForm();
@@ -41,19 +42,50 @@ export const Information = () => {
           <Form.List name="user">
             {() => (
               <>
-                <Form.Item className="!mb-0" label="Email">
-                  <Input disabled value={deUsers?.email} className="!rounded" placeholder="" />
-                </Form.Item>
-                <Form.Item className="!mb-0" name="phone_number" label="Phone">
-                  <Input className="!rounded" placeholder="" />
-                </Form.Item>
-                <div className="flex items-center space-x-3 w-full">
-                  <Form.Item className="!mb-0 w-1/2" name="first_name" label="First name">
+                <div>
+                  <StarRed name="Email" star />
+                  <Form.Item className="!mb-0">
+                    <Input disabled value={deUsers?.email} className="!rounded" placeholder="" />
+                  </Form.Item>
+                </div>
+
+                <div>
+                  <StarRed name="Phone" star />
+                  <Form.Item
+                    className="!mb-0"
+                    name="phone_number"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please input your phone!',
+                      },
+                    ]}
+                  >
                     <Input className="!rounded" placeholder="" />
                   </Form.Item>
-                  <Form.Item className="!mb-0 w-1/2" name="name" label="Last name">
-                    <Input className="!rounded" placeholder="" />
-                  </Form.Item>
+                </div>
+                <div className="flex space-x-3 w-full">
+                  <div className="w-1/2 space-y-1">
+                    <StarRed name="First Name" />
+                    <Form.Item className="!mb-0 w-full" name="first_name">
+                      <Input className="!rounded" placeholder="" />
+                    </Form.Item>
+                  </div>
+                  <div className="w-1/2">
+                    <StarRed name="Last Name" star />
+                    <Form.Item
+                      className="!mb-0 w-full"
+                      name="name"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please input your last name!',
+                        },
+                      ]}
+                    >
+                      <Input className="!rounded" placeholder="" />
+                    </Form.Item>
+                  </div>
                 </div>
               </>
             )}
