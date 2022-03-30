@@ -6,11 +6,12 @@ import { apolloClient, restClient } from 'services';
 export const initialState = {
   cProject: {},
   cProjectLike: {},
+  cProjectInterested: {},
   mlMyProject: {},
   mlMyIdeas: {},
   deProject: { isRefresh: true },
   dProjectLike: {},
-  isLikeProject: false,
+  dProjectInterested: {},
 };
 
 const projectSlice = createSlice({
@@ -243,6 +244,12 @@ export function detailProject(id) {
             projectId
             userId
           }
+          numberInterested
+          projectInterested {
+            id
+            projectId
+            userId
+          }
           numberLikes
           salary
           status
@@ -332,7 +339,6 @@ export function deleteProjectLike(id) {
 
     try {
       await mutationAPI().then(res => {
-        console.log('res', res);
         dispatch(
           setMerge({
             deleProject: {
@@ -344,6 +350,79 @@ export function deleteProjectLike(id) {
       });
     } catch (e) {
       dispatch(setMerge({ dProjectLike: { isLoading: false } }));
+    }
+  };
+}
+
+export function createProjectInterested(values) {
+  return async dispatch => {
+    dispatch(setMerge({ cProjectInterested: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation CreateProjectInterested($data: ProjectInterestedInput!) {
+          createProjectInterested(data: $data) {
+            id
+            projectId
+            createdAt
+            updatedAt
+            userId
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            cProjectInterested: {
+              project: res.data.createProjectInterested,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ cProjectInterested: { isLoading: false } }));
+    }
+  };
+}
+
+export function deleteProjectInterested(id) {
+  return async dispatch => {
+    dispatch(setMerge({ dProjectInterested: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation Mutation($deleteProjectInterestedId: ID) {
+          deleteProjectInterested(id: $deleteProjectInterestedId)
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: {
+          deleteProjectInterestedId: id,
+        },
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            deleProject: {
+              dProjectInterested: res.data.deleteProjectInterested,
+              isLoading: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ dProjectInterested: { isLoading: false } }));
     }
   };
 }
