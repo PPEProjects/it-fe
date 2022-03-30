@@ -5,7 +5,7 @@ import { BoardPosition } from 'pages/home/AllPage/BoardPosition';
 import { InformationItem } from './InformationItem';
 import { CommentItem } from 'pages/home/AllPage/CommentItem';
 import { TopComment } from 'pages/home/AllPage/TopComment';
-import { detailProject, projectSelector } from 'pages/project/projectSlice';
+import { detailProject, projectSelector, deleteProjectLike } from 'pages/project/projectSlice';
 import { getURLParams } from 'services';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,7 @@ import {
   setMemberProjectMerge,
   deleteMemberProject,
 } from 'pages/memberProject/memberProjectSlice';
+import { userSelector } from 'pages/user/userSlice';
 
 import { FiCamera } from 'react-icons/fi';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
@@ -28,7 +29,9 @@ import {
   AiOutlineShareAlt,
   AiOutlineLeft,
   AiOutlineDown,
+  AiFillLike,
 } from 'react-icons/ai';
+import { LikeProject } from 'pages/project/LikeProject';
 
 import { ReactComponent as IconMenuComment } from 'assets/menu-comment-icon.svg';
 import { ItemComment } from './ItemComment';
@@ -37,11 +40,15 @@ const { TextArea } = Input;
 const ProjectDescription = () => {
   const dispatch = useDispatch();
   const { id } = getURLParams();
-  const { deProject } = useSelector(projectSelector);
+  const { deProject, cProjectLike, dProjectLike } = useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
   const { upMemberProject, dMemberProject } = useSelector(memberProjectSelector);
-
+  const { me } = useSelector(userSelector);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [idUserName, setIdUserName] = useState({});
+
+  console.log('detailProjects', detailProjects);
+  console.log('idUserName[0]?.id', idUserName[0]?.id);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -57,7 +64,14 @@ const ProjectDescription = () => {
 
   useEffect(() => {
     dispatch(detailProject(id));
-  }, [id, dispatch, upMemberProject, dMemberProject]);
+  }, [id, dispatch, upMemberProject, dMemberProject, cProjectLike, dProjectLike]);
+
+  useEffect(() => {
+    const idUser = (detailProjects?.projectLikes ?? []).filter(
+      item => item?.userId === me?.data?.id
+    );
+    setIdUserName(idUser);
+  }, [detailProjects, me]);
 
   const renderModalJoinPosition = () => {
     return (
@@ -134,8 +148,19 @@ const ProjectDescription = () => {
               <p>{detailProjects?.name}</p>
               <p className="flex items-center space-x-7 text-sm text-[#164E63]">
                 <p className="flex items-center space-x-1 cursor-pointer">
-                  <AiOutlineLike className="text-2xl stroke-[20px]" />
-                  <span>1</span>
+                  {idUserName[0]?.userId === me?.data?.id ? (
+                    <AiFillLike
+                      onClick={() => {
+                        dispatch(deleteProjectLike(idUserName[0]?.id));
+                        console.log('ok', 123);
+                      }}
+                      className="text-2xl text-blue-600 cursor-pointer"
+                    />
+                  ) : (
+                    <LikeProject />
+                  )}
+
+                  <span>{detailProjects?.numberLikes}</span>
                 </p>
                 <p className="flex items-center space-x-1 cursor-pointer">
                   <AiOutlineMessage className="text-2xl stroke-[20px]" />

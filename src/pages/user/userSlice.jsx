@@ -60,6 +60,7 @@ export function getMe() {
           allPosition
           date_of_birth
           avatar_attachment
+          background_attachment
           userAdvance {
             goal
             plan
