@@ -5,7 +5,12 @@ import { BoardPosition } from 'pages/home/AllPage/BoardPosition';
 import { InformationItem } from './InformationItem';
 import { CommentItem } from 'pages/home/AllPage/CommentItem';
 import { TopComment } from 'pages/home/AllPage/TopComment';
-import { detailProject, projectSelector, deleteProjectLike } from 'pages/project/projectSlice';
+import {
+  detailProject,
+  projectSelector,
+  deleteProjectLike,
+  deleteProjectInterested,
+} from 'pages/project/projectSlice';
 import { getURLParams } from 'services';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -30,6 +35,7 @@ import {
   AiOutlineLeft,
   AiOutlineDown,
   AiFillLike,
+  AiFillHeart,
 } from 'react-icons/ai';
 import { LikeProject } from 'pages/project/LikeProject';
 
@@ -40,15 +46,14 @@ const { TextArea } = Input;
 const ProjectDescription = () => {
   const dispatch = useDispatch();
   const { id } = getURLParams();
-  const { deProject, cProjectLike, dProjectLike } = useSelector(projectSelector);
+  const { deProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested } =
+    useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
   const { upMemberProject, dMemberProject } = useSelector(memberProjectSelector);
   const { me } = useSelector(userSelector);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [idUserName, setIdUserName] = useState({});
-
-  console.log('detailProjects', detailProjects);
-  console.log('idUserName[0]?.id', idUserName[0]?.id);
+  const [idUserProjectInterested, setIdUserProjectInterested] = useState({});
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -64,13 +69,27 @@ const ProjectDescription = () => {
 
   useEffect(() => {
     dispatch(detailProject(id));
-  }, [id, dispatch, upMemberProject, dMemberProject, cProjectLike, dProjectLike]);
+  }, [
+    id,
+    dispatch,
+    upMemberProject,
+    dMemberProject,
+    cProjectLike,
+    dProjectLike,
+    cProjectInterested,
+    dProjectInterested,
+  ]);
 
   useEffect(() => {
     const idUser = (detailProjects?.projectLikes ?? []).filter(
       item => item?.userId === me?.data?.id
     );
+
+    const idProjectInterested = (detailProjects?.projectInterested ?? []).filter(
+      item => item?.userId === me?.data?.id
+    );
     setIdUserName(idUser);
+    setIdUserProjectInterested(idProjectInterested);
   }, [detailProjects, me]);
 
   const renderModalJoinPosition = () => {
@@ -152,12 +171,11 @@ const ProjectDescription = () => {
                     <AiFillLike
                       onClick={() => {
                         dispatch(deleteProjectLike(idUserName[0]?.id));
-                        console.log('ok', 123);
                       }}
                       className="text-2xl text-blue-600 cursor-pointer"
                     />
                   ) : (
-                    <LikeProject />
+                    <LikeProject likeProject />
                   )}
 
                   <span>{detailProjects?.numberLikes}</span>
@@ -167,8 +185,17 @@ const ProjectDescription = () => {
                   <span>2</span>
                 </p>
                 <p className="flex items-center space-x-1 cursor-pointer">
-                  <AiOutlineHeart className="text-2xl stroke-[20px]" />
-                  <span>3</span>
+                  {idUserProjectInterested[0]?.userId === me?.data?.id ? (
+                    <AiFillHeart
+                      onClick={() => {
+                        dispatch(deleteProjectInterested(idUserProjectInterested[0]?.id));
+                      }}
+                      className="text-2xl text-red-500 cursor-pointer"
+                    />
+                  ) : (
+                    <LikeProject />
+                  )}
+                  <span>{detailProjects?.numberInterested}</span>
                 </p>
                 <p className="pr-2 cursor-pointer">
                   <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
