@@ -85,11 +85,11 @@ const Header = () => {
 
   return (
     <>
-      <section className="p-3 relative flex items-center space-x-2 border-b">
-        <div className="w-3/12">
-          <div className="flex items-center space-x-4">
+      <section className="p-3 relative flex items-center space-x-2 border-b px-3">
+        <div className="w-3/12 pl-3">
+          <div className="flex items-center space-x-8">
             <GiHamburgerMenu onClick={toggleMenu} className="text-3xl cursor-pointer" />
-            <Link className="flex items-center space-x-4" to={`/AllPage`}>
+            <Link className="flex items-center space-x-8" to={`/AllPage`}>
               <img
                 className="w-[41px]"
                 src={`/assets/images/photo_2021-07-14_10-53-20.jpg`}

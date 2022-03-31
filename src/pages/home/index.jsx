@@ -6,7 +6,7 @@ import { AllPage } from './AllPage';
 const HomePage = () => {
   return (
     <MasterLayout>
-      <section className="!bg-[#F6F9FB]">
+      <section className="!bg-[#F6F9FB] px-3">
         <MenuPage />
         <AllPage />
       </section>

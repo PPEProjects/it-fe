@@ -3,7 +3,7 @@ import { Form, Input, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { authsSelector, authChangePassword } from 'pages/auth/authsSlice';
 import { error, success } from 'components';
-import { StarRed } from './StarRed';
+import { StarRed } from 'components/StarRed';
 
 export const ChangePassword = () => {
   const dispatch = useDispatch();

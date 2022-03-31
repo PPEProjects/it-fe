@@ -1,9 +1,11 @@
 import { AddGoal } from 'components/AddGoal';
 import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Tooltip } from 'antd';
 import { ClickEdit } from './ClickEdit';
 
 export const ManageMember = () => {
+  const texts = <span>prompt text</span>;
+
   const [isModalClickEdit, setIsModalClickEdit] = useState(false);
 
   const showModalModalClickEdit = () => {
@@ -28,12 +30,26 @@ export const ManageMember = () => {
         each position.
       </p>
       <div className="flex space-x-2 mt-5">
-        <AddGoal board text="Leader" />
-        <AddGoal board text="Leader" />
-        <AddGoal board text="Leader" />
-        <AddGoal board text="Leader" />
-        <AddGoal board text="Leader" />
-        <AddGoal board text="Leader" />
+        <Tooltip placement="bottom" title={texts}>
+          <AddGoal board text="Leader" />
+          <div></div>
+        </Tooltip>
+        <Tooltip placement="bottom" title={texts}>
+          <AddGoal board text="Leader" />
+          <div></div>
+        </Tooltip>
+        <Tooltip placement="bottom" title={texts}>
+          <AddGoal board text="Leader" />
+          <div></div>
+        </Tooltip>
+        <Tooltip placement="bottom" title={texts}>
+          <AddGoal board text="Leader" />
+          <div></div>
+        </Tooltip>
+        <Tooltip placement="bottom" title={texts}>
+          <AddGoal board text="Leader" />
+          <div></div>
+        </Tooltip>
       </div>
       <div className="flex items-end justify-end mt-7">
         <Button

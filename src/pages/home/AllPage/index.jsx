@@ -30,11 +30,11 @@ export const AllPage = () => {
   return (
     <section className="p-3 pl-5 space-y-1">
       <section>
-        <h3 className="text-[18px] font-[600]">Project Board</h3>
+        <h3 className="text-[18px] font-[600]">OnBoard</h3>
         <p className="text-sm -mt-2 text-gray-500">
           Projects that allow registration to participate.
         </p>
-        <div className="grid grid-cols-4 gap-x-4 gap-y-10">
+        <div className="grid grid-cols-4 gap-x-4 gap-y-16">
           {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
             return (
               <div key={index}>

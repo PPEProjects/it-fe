@@ -42,7 +42,7 @@ export const AllIdeasProject = () => {
 
   return (
     <section>
-      <div className="space-y-4 border-b p-4 pb-5">
+      <div className="space-y-4  p-4 pb-5 ">
         <div className="flex space-x-5">
           <button className="border h-10 bg-[#F6F9FB] flex items-center justify-between px-3 rounded-lg font-medium text-sm w-44 text-[#0369A1]">
             <span>Newest</span>
@@ -64,6 +64,7 @@ export const AllIdeasProject = () => {
                   nameProject={item?.nameProject}
                   admin
                   shadowNone
+                  borderRounded={false}
                   placement="bottomRight"
                 />
               </div>
@@ -71,8 +72,8 @@ export const AllIdeasProject = () => {
           })}
         </div>
       </div>
-
-      <div className="space-y-4 border-b p-4 pb-5">
+      <SeeMore name="See more" onClick={onLoadMore} />
+      <div className="space-y-4  p-4 pb-5">
         <TitleItem title="Ideas" number={mlMyIdeas?.myIdeas?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(mlMyIdeas?.myIdeas?.slice(0, loadMore) ?? []).map((item, index) => {
@@ -84,14 +85,15 @@ export const AllIdeasProject = () => {
                   nameProject={item?.name}
                   admin
                   shadowNone
+                  borderRounded={false}
                   placement="bottomRight"
                 />
               </div>
             );
           })}
         </div>
-        {loadMore < mlMyIdeas?.myIdeas?.length && <SeeMore name="See more" onClick={onLoadMore} />}
       </div>
+      {loadMore < mlMyIdeas?.myIdeas?.length && <SeeMore name="See more" onClick={onLoadMore} />}
 
       <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Project" number={mlMyProject?.myProject?.length} />
@@ -104,6 +106,7 @@ export const AllIdeasProject = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   admin
+                  borderRounded={false}
                   shadowNone
                   placement="bottomRight"
                 />
@@ -111,10 +114,10 @@ export const AllIdeasProject = () => {
             );
           })}
         </div>
-        {loadMore < mlMyProject?.myProject?.length && (
-          <SeeMore name="See more" onClick={onLoadMore} />
-        )}
       </div>
+      {loadMore < mlMyProject?.myProject?.length && (
+        <SeeMore name="See more" onClick={onLoadMore} />
+      )}
     </section>
   );
 };

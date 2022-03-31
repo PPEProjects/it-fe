@@ -3,6 +3,7 @@ import { Button, Form, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { authLogin, authsSelector } from './authsSlice';
+import { StarRed } from 'components/StarRed';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -28,38 +29,42 @@ const LoginPage = () => {
               <h3 className="text-[24px] text-black pt-3 font-bold text-center">Login</h3>
             </div>
           </Form.Item>
-          <Form.Item
-            name="email"
-            label="Email"
-            rules={[
-              {
-                whitespace: true,
-                message: '',
-              },
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
-                required: true,
-                message: 'Please input your E-mail!',
-              },
-            ]}
-          >
-            <Input className="!rounded" placeholder="Email" size="large" />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your password!',
-              },
-            ]}
-          >
-            <Input.Password className="!rounded" placeholder="Password" size="large" />
-          </Form.Item>
+          <div>
+            <StarRed star name="Email" />
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  whitespace: true,
+                  message: '',
+                },
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!',
+                },
+              ]}
+            >
+              <Input className="!rounded" placeholder="Email" size="large" />
+            </Form.Item>
+          </div>
+          <div>
+            <StarRed star name="Password" />
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!',
+                },
+              ]}
+            >
+              <Input.Password className="!rounded" placeholder="Password" size="large" />
+            </Form.Item>
+          </div>
           <div className="flex justify-center text-[14px] space-x-1 pb-4 text-gray-400">
             <span>Forgot Password?</span>
             <Link

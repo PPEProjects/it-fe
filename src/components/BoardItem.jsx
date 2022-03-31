@@ -52,6 +52,7 @@ export const BoardItem = ({
   item,
   modalDraft,
   modalDraftProject,
+  borderRounded = true,
 }) => {
   const dispatch = useDispatch();
   const { upProject, dataProject } = useSelector(userSelector);
@@ -419,7 +420,7 @@ export const BoardItem = ({
                 onClick={() => {
                   dispatch(setData({ dataProject: { item } }));
                 }}
-                nameMenu="Delete project"
+                nameMenu=" project"
               />
             </Popconfirm>
           </>
@@ -450,8 +451,9 @@ export const BoardItem = ({
 
   return (
     <section
-      className={classNames('border-l border-b rounded-b-md pb-3 shadow-sm', {
-        'shadow-none': shadowNone,
+      className={classNames('pb-3 shadow-sm', {
+        '!shadow-none': shadowNone,
+        'border-l border-b rounded-b-md': borderRounded,
       })}
     >
       {renderModalUpdateProject1()}
@@ -538,7 +540,7 @@ export const BoardItem = ({
         </div>
         {admin && (
           <div className="text-right pr-6 pb-1">
-            <Button className="!bg-[#0EA5E9] !h-[40px] rounded !text-white !text-sm">
+            <Button className="!bg-[#3B82F6] !h-[40px] rounded !text-white !text-sm">
               Approve
             </Button>
           </div>

@@ -320,7 +320,7 @@ const ProjectDescription = () => {
               <span className="text-[18px] text-gray-900">Comments</span>
               <Dropdown overlay={menu} trigger={['click']}>
                 <span className="cursor-pointer flex items-center space-x-2 border p-2 bg-white rounded-lg">
-                  <IconMenuComment />
+                  <span className="font-medium text-sm text-[#4B5563]">Top Comments</span>
                   <AiOutlineDown className="text-gray-400 stroke-2" />
                 </span>
               </Dropdown>

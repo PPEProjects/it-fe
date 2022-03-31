@@ -1,15 +1,23 @@
-import { Button } from 'antd';
-import React from 'react';
-import { ReactComponent as IconMenuComment } from 'assets/menu-comment-icon.svg';
-import { BsChevronDown } from 'react-icons/bs';
+import { Button, Dropdown, Menu } from 'antd';
+import React, { useState } from 'react';
+import { AiOutlineDown } from 'react-icons/ai';
 export const ButtonSort = () => {
+  const menu = () => {
+    return (
+      <Menu>
+        <Menu.Item className="font-medium text-sm text-[#4B5563]">Newest First</Menu.Item>
+        <Menu.Item className="font-medium text-sm text-[#4B5563]">Oldest First</Menu.Item>
+      </Menu>
+    );
+  };
   return (
-    <div>
-      <Button className="flex items-center justify-center space-x-2 !rounded-lg">
-        <IconMenuComment />
-        <span>Sort</span>
-        <BsChevronDown />
-      </Button>
+    <div className="flex items-center justify-between">
+      <Dropdown overlay={menu} trigger={['click']}>
+        <span className="cursor-pointer flex items-center space-x-2 border p-2 bg-white rounded-lg">
+          <span className="font-medium text-sm text-[#4B5563]">Newest First</span>
+          <AiOutlineDown className="text-gray-400 stroke-2" />
+        </span>
+      </Dropdown>
     </div>
   );
 };

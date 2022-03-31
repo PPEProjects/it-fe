@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Button, Switch, Form, Input } from "antd";
-import { Link } from "react-router-dom";
-import { authCheckExists, authRegister, authsSelector } from "./authsSlice";
-import { useDispatch, useSelector } from "react-redux";
-import debounce from "lodash/debounce";
+import React, { useEffect, useState } from 'react';
+import { Button, Switch, Form, Input } from 'antd';
+import { Link } from 'react-router-dom';
+import { authCheckExists, authRegister, authsSelector } from './authsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import debounce from 'lodash/debounce';
+import { StarRed } from 'components/StarRed';
 
-import { AiFillLeftCircle } from "react-icons/ai";
+import { AiFillLeftCircle } from 'react-icons/ai';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -14,13 +15,13 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (checkExistsAuth?.email === true) {
-      form.setFields([{ name: "email", errors: ["Email already exists."] }]);
+      form.setFields([{ name: 'email', errors: ['Email already exists.'] }]);
     }
-    const val = form.getFieldError("email");
+    const val = form.getFieldError('email');
     setEmailValid(val);
   }, [checkExistsAuth]);
 
-  const debounceFetch = debounce((email) => {
+  const debounceFetch = debounce(email => {
     dispatch(authCheckExists({ email }));
   }, 500);
 
@@ -39,14 +40,14 @@ const RegisterPage = () => {
             autoComplete="chrome-off"
             form={form}
             name="basic"
-            onFinish={(values) => {
+            onFinish={values => {
               dispatch(authRegister(values));
             }}
             onFieldsChange={(f, allFields) => {
-              if (f[0].name[0] === "email") {
+              if (f[0].name[0] === 'email') {
                 setEmail(f[0].value);
                 debounceFetch(f[0].value);
-                const val = form.getFieldError("email");
+                const val = form.getFieldError('email');
                 setEmailValid(val);
               }
             }}
@@ -64,47 +65,51 @@ const RegisterPage = () => {
                 </h3>
               </div>
             </Form.Item>
-            <Form.Item
-              name="name"
-              label="Name"
-              rules={[
-                {
-                  whitespace: true,
-                  message: "Please input your name!",
-                },
-                {
-                  pattern: /^[^!@#$%^&*()+-,<.>/?}|{:;'\[\]'\\]*$/,
-                  message: "Name without special characters!",
-                },
-                {
-                  required: true,
-                  message: "Please input your name!",
-                },
-              ]}
-            >
-              <Input className="!rounded" placeholder="Name" size="large" />
-            </Form.Item>
-            <div className="relative">
+            <div>
+              <StarRed star name="Name" />
               <Form.Item
-                name="email"
-                label="Email"
+                name="name"
                 rules={[
                   {
                     whitespace: true,
-                    message: "",
+                    message: 'Please input your name!',
                   },
                   {
-                    type: "email",
-                    message: "The input is not valid E-mail!",
+                    pattern: /^[^!@#$%^&*()+-,<.>/?}|{:;'\[\]'\\]*$/,
+                    message: 'Name without special characters!',
                   },
                   {
                     required: true,
-                    message: "Please input your E-mail!",
+                    message: 'Please input your name!',
                   },
                 ]}
               >
-                <Input className="!rounded" placeholder="Email" size="large" />
+                <Input className="!rounded" placeholder="Name" size="large" />
               </Form.Item>
+            </div>
+            <div className="relative">
+              <div>
+                <StarRed star name="Email" />
+                <Form.Item
+                  name="email"
+                  rules={[
+                    {
+                      whitespace: true,
+                      message: '',
+                    },
+                    {
+                      type: 'email',
+                      message: 'The input is not valid E-mail!',
+                    },
+                    {
+                      required: true,
+                      message: 'Please input your E-mail!',
+                    },
+                  ]}
+                >
+                  <Input className="!rounded" placeholder="Email" size="large" />
+                </Form.Item>
+              </div>
               {/* {_.isEmpty(emailValid) && email && (
                 <Button
                   className={"absolute z-10 right-0 bottom-0 mb-2 mr-2"}
@@ -114,86 +119,79 @@ const RegisterPage = () => {
                 />
               )} */}
             </div>
-            <Form.Item
-              name="phone_number"
-              label="Phone"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your phone number!",
-                },
-                { min: 10, message: "The input is not valid Phone number!" },
-              ]}
-            >
-              <Input
-                className="!rounded"
-                placeholder="Phone"
-                type="tel"
-                maxLength={13}
-                size="large"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              label="Password"
-              rules={[
-                {
-                  pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-                  message:
-                    "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!",
-                },
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-              ]}
-            >
-              <Input.Password
-                className="!rounded"
-                placeholder="Password"
-                size="large"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password_confirmation"
-              label="Confirm Password"
-              rules={[
-                {
-                  pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-                  message:
-                    "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!",
-                },
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    }
-
-                    return Promise.reject(
-                      new Error(
-                        "The two passwords that you entered do not match!"
-                      )
-                    );
+            <div>
+              <StarRed star name="Phone" />
+              <Form.Item
+                name="phone_number"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your phone number!',
                   },
-                }),
-              ]}
-            >
-              <Input.Password
-                className="!rounded"
-                placeholder="Password"
-                size="large"
-              />
-            </Form.Item>
+                  { min: 10, message: 'The input is not valid Phone number!' },
+                ]}
+              >
+                <Input
+                  className="!rounded"
+                  placeholder="Phone"
+                  type="tel"
+                  maxLength={13}
+                  size="large"
+                />
+              </Form.Item>
+            </div>
+            <div>
+              <StarRed star name="Password" />
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+                    message:
+                      'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                ]}
+              >
+                <Input.Password className="!rounded" placeholder="Password" size="large" />
+              </Form.Item>
+            </div>
+            <div>
+              <StarRed star name="Confirm Password" />
+              <Form.Item
+                name="password_confirmation"
+                rules={[
+                  {
+                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+                    message:
+                      'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                      }
+
+                      return Promise.reject(
+                        new Error('The two passwords that you entered do not match!')
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password className="!rounded" placeholder="Password" size="large" />
+              </Form.Item>
+            </div>
             <div className="flex justify-center text-gray-700 text-[14px] space-x-2 pb-4">
               <Switch />
-              <span>
-                News and features updates, as well as occasional company
-                announcements.
-              </span>
+              <span>News and features updates, as well as occasional company announcements.</span>
             </div>
             <Form.Item className="text-center">
               <Button

@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Form, Input, Button, Modal } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { authsSelector, authVerifyEmail } from "./authsSlice";
-import { error } from "components";
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Form, Input, Button, Modal } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { authsSelector, authVerifyEmail } from './authsSlice';
+import { error } from 'components';
 
-import { CheckCircleOutlined } from "@ant-design/icons";
-import { AiFillLeftCircle } from "react-icons/ai";
+import { CheckCircleOutlined } from '@ant-design/icons';
+import { AiFillLeftCircle } from 'react-icons/ai';
+import { StarRed } from 'components/StarRed';
 
 const NewPassword = () => {
   const dispatch = useDispatch();
@@ -17,12 +18,12 @@ const NewPassword = () => {
     if (!vAuth?.data) return;
     if (vAuth?.data.status) {
       Modal.confirm({
-        title: "Success",
+        title: 'Success',
         icon: <CheckCircleOutlined />,
-        content: "Password changed successfully.",
-        cancelButtonProps: { className: "hidden" },
+        content: 'Password changed successfully.',
+        cancelButtonProps: { className: 'hidden' },
         onOk() {
-          navigate("/LoginPage");
+          navigate('/LoginPage');
         },
       });
       return;
@@ -42,7 +43,7 @@ const NewPassword = () => {
           <div className="px-[160px] pt-7">
             <Form
               name="basic"
-              onFinish={(values) => dispatch(authVerifyEmail(values))}
+              onFinish={values => dispatch(authVerifyEmail(values))}
               layout="vertical"
             >
               <Form.Item>
@@ -57,72 +58,64 @@ const NewPassword = () => {
                   </h3>
                 </div>
               </Form.Item>
-              <Form.Item
-                name="token"
-                label="Input the security code"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input the security code!",
-                  },
-                ]}
-              >
-                <Input.Password
-                  className="!rounded"
-                  placeholder="Security code"
-                  size="large"
-                />
-              </Form.Item>
-              <Form.Item
-                name="password"
-                label="Password"
-                hasFeedback
-                rules={[
-                  {
-                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-                    message:
-                      "Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!",
-                  },
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                ]}
-              >
-                <Input.Password
-                  className="!rounded"
-                  placeholder="Password"
-                  size="large"
-                />
-              </Form.Item>
-              <Form.Item
-                name="confirm"
-                label="Confirm Password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your password!",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(_, value) {
-                      if (!value || getFieldValue("password") === value) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error(
-                          "The two passwords that you entered do not match!"
-                        )
-                      );
+              <div>
+                <StarRed star name="Input the security code" />
+                <Form.Item
+                  name="token"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input the security code!',
                     },
-                  }),
-                ]}
-              >
-                <Input.Password
-                  className="!rounded"
-                  placeholder="Password"
-                  size="large"
-                />
-              </Form.Item>
+                  ]}
+                >
+                  <Input.Password className="!rounded" placeholder="Security code" size="large" />
+                </Form.Item>
+              </div>
+              <div>
+                <StarRed star name="Password" />
+                <Form.Item
+                  name="password"
+                  hasFeedback
+                  rules={[
+                    {
+                      pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+                      message:
+                        'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
+                    },
+                    {
+                      required: true,
+                      message: 'Please input your password!',
+                    },
+                  ]}
+                >
+                  <Input.Password className="!rounded" placeholder="Password" size="large" />
+                </Form.Item>
+              </div>
+              <div>
+                <StarRed star name="Confirm Password" />
+                <Form.Item
+                  name="confirm"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password!',
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue('password') === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error('The two passwords that you entered do not match!')
+                        );
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password className="!rounded" placeholder="Password" size="large" />
+                </Form.Item>
+              </div>
 
               <Form.Item className="text-center">
                 <Button

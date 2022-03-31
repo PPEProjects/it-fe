@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, Tooltip } from 'antd';
 import { thumbImage } from 'services/convert';
 import { setMemberProjectMerge } from 'pages/memberProject/memberProjectSlice';
 import { useDispatch } from 'react-redux';
@@ -17,6 +17,14 @@ export const BoardPosition = ({
   onConfirm,
   onClick,
 }) => {
+  const texts = (
+    <span className="text-[12px] font-medium">
+      Lectus gravida pretium pulvinar consectetur leo in. Duis eu porttitor tincidunt est. Faucibus
+      lobortis pellentesque leo, purus faucibus scelerisque nec purus. Consectetur lectus turpis
+      nibh ut fermentum id. Sit odio hac urna, nullam rutrum pharetra mauris ultricies nam. Massa
+      aliquam bibendum aliquam orci, turpis lorem ut. Augue viverra sed a in...
+    </span>
+  );
   const dispatch = useDispatch();
   return (
     <section>
@@ -29,9 +37,11 @@ export const BoardPosition = ({
               shape="circle"
               className="!w-[32px] !h-[32px]"
             >
-              <div className="flex items-center justify-center">
-                <IoMdAdd className="text-gray-400" />
-              </div>
+              <Tooltip placement="bottom" title={texts}>
+                <div className="flex items-center justify-center">
+                  <IoMdAdd className="text-gray-400" />
+                </div>
+              </Tooltip>
             </Button>
           </>
         )}

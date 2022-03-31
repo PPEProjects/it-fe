@@ -34,6 +34,7 @@ export const DraftIdeasProject = () => {
                   nameProject={item?.name}
                   modalDraft
                   shadowNone
+                  admin
                   placement="bottomRight"
                 />
               </div>

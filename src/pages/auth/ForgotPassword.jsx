@@ -7,6 +7,7 @@ import debounce from 'lodash/debounce';
 
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { AiFillLeftCircle } from 'react-icons/ai';
+import { StarRed } from 'components/StarRed';
 
 const ForgotPassWord = () => {
   const dispatch = useDispatch();
@@ -80,31 +81,34 @@ const ForgotPassWord = () => {
                   your password.
                 </div>
               </Form.Item>
-              <Form.Item
-                name="email"
-                label="Email"
-                rules={[
-                  {
-                    type: 'email',
-                    message: 'The input is not valid E-mail!',
-                  },
-                  {
-                    required: true,
-                    message: 'Please input your E-mail!',
-                  },
-                ]}
-              >
-                <Input
-                  className="!rounded"
-                  placeholder="Email"
-                  size="large"
-                  onChange={e => debounceFetch(e.target.value)}
-                />
-              </Form.Item>
+              <div className="flex items-center space-x-2 ">
+                <StarRed star name="Email:" />
+                <Form.Item
+                  className="!mb-0 w-full"
+                  name="email"
+                  rules={[
+                    {
+                      type: 'email',
+                      message: 'The input is not valid E-mail!',
+                    },
+                    {
+                      required: true,
+                      message: 'Please input your E-mail!',
+                    },
+                  ]}
+                >
+                  <Input
+                    className="!rounded !w-full"
+                    placeholder="Email"
+                    size="large"
+                    onChange={e => debounceFetch(e.target.value)}
+                  />
+                </Form.Item>
+              </div>
 
               <Form.Item className="text-center">
                 <Button
-                  className="!w-[170px] !rounded-md !bg-[#0EA5E9]"
+                  className="!w-[170px] mt-[10%] !rounded-md !bg-[#0EA5E9]"
                   type="primary"
                   size="large"
                   htmlType="submit"

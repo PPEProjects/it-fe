@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { detailUser, userSelector, upsertUserAdvance } from 'pages/user/userSlice';
 import { getURLParams } from 'services';
 import { success } from 'components';
-import { StarRed } from './StarRed';
+import { StarRed } from 'components/StarRed';
 
 export const Information = () => {
   const [form] = Form.useForm();

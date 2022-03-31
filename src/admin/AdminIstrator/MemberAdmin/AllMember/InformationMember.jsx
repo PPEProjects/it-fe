@@ -30,7 +30,7 @@ export const InformationMember = ({
   return (
     <section
       className={classNames('border rounded-lg', {
-        'shadow-md space-y-7': dropDown,
+        'shadow-xs space-y-7': dropDown,
       })}
     >
       <div className="text-center text-sm">
