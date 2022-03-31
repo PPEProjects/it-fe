@@ -544,7 +544,7 @@ export const BoardItem = ({
           </div>
         )}
 
-        {user && (
+        {/* {user && (
           <div className="flex items-center justify-between text-sm text-[#164E63]">
             <p className="flex items-center space-x-1 cursor-pointer">
               <AiOutlineLike className="text-2xl stroke-[20px]" />
@@ -562,7 +562,7 @@ export const BoardItem = ({
               <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
             </p>
           </div>
-        )}
+        )} */}
       </div>
 
       <div className="pt-2">{children}</div>

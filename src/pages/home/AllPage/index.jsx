@@ -4,16 +4,33 @@ import { SeeMore } from 'components/SeeMore';
 import { BoardPosition } from './BoardPosition';
 import { CommentItem } from './CommentItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { projectSelector, MyProject, MyIdeas, setProject } from 'pages/project/projectSlice';
-import { Image } from '@tienlucky/storage';
-
-import { AiOutlineHeart } from 'react-icons/ai';
+import { projectSelector, MyProject, MyIdeas } from 'pages/project/projectSlice';
+import { userSelector } from 'pages/user/userSlice';
+import {
+  AiFillHeart,
+  AiFillLike,
+  AiOutlineMessage,
+  AiOutlineHeart,
+  AiOutlineShareAlt,
+} from 'react-icons/ai';
+import { deleteProjectInterested, deleteProjectLike } from 'pages/project/projectSlice';
+import { LikeProject } from 'pages/project/LikeProject';
+import _ from 'lodash';
+// import { AiOutlineHeart } from 'react-icons/ai';
 import { RiCommunityFill } from 'react-icons/ri';
 
 export const AllPage = () => {
   const dispatch = useDispatch();
-  const { mlMyProject, mlMyIdeas, cProject } = useSelector(projectSelector);
-
+  const {
+    mlMyProject,
+    mlMyIdeas,
+    cProject,
+    cProjectLike,
+    dProjectLike,
+    cProjectInterested,
+    dProjectInterested,
+  } = useSelector(projectSelector);
+  const { me } = useSelector(userSelector);
   const [loadMore, setLoadMore] = useState(8);
   const onLoadMore = () => {
     setLoadMore(loadMore + 8);
@@ -21,11 +38,11 @@ export const AllPage = () => {
 
   useEffect(() => {
     dispatch(MyProject());
-  }, [dispatch, cProject]);
+  }, [dispatch, cProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested]);
 
   useEffect(() => {
     dispatch(MyIdeas());
-  }, [dispatch, cProject]);
+  }, [dispatch, cProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested]);
 
   return (
     <section className="p-3 pl-5 space-y-1">
@@ -36,6 +53,15 @@ export const AllPage = () => {
         </p>
         <div className="grid grid-cols-4 gap-x-4 gap-y-10">
           {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
+            const isMe = _.first(
+              item?.projectLikes?.filter(projectLike => projectLike.userId === me?.data?.id)
+            );
+
+            const isMeInterested = _.first(
+              item?.projectInterested?.filter(
+                projectInterested => projectInterested.userId === me?.data?.id
+              )
+            );
             return (
               <div key={index}>
                 <BoardItem
@@ -45,16 +71,55 @@ export const AllPage = () => {
                   linkViewDescription={`/ProjectDescription?id=${item?.id}`}
                   linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                   link={`/ProjectDescription?id=${item?.id}`}
-                  // imgPage={Image.getFileUrl(item?.attachments?.main_picture, 200)}
                   imgPage={item?.attachments?.main_picture?.file}
                   nameProject={item?.name}
                   onClickComment
-                  numberComment="1"
-                  numberHeart="2"
-                  numberLike="3"
                   imgAvatar={item?.avatar_attachment?.file}
                 >
                   <div className="relative">
+                    <div className="flex items-center justify-between pb-3 text-sm text-[#164E63]">
+                      <button className="flex items-center space-x-1 cursor-pointer px-3">
+                        {isMe ? (
+                          <AiFillLike
+                            onClick={() => {
+                              dispatch(deleteProjectLike(isMe?.id));
+                            }}
+                            className="text-2xl text-blue-600 cursor-pointer"
+                          />
+                        ) : (
+                          <LikeProject likeProject idProject={item?.id} />
+                        )}
+                        {item?.projectLikes === null ? (
+                          <span>0</span>
+                        ) : (
+                          <span>{item?.projectLikes?.length}</span>
+                        )}
+                      </button>
+                      <button className="flex items-center space-x-1 cursor-pointer">
+                        <AiOutlineMessage className="text-2xl stroke-[20px]" />
+                        <span>2</span>
+                      </button>
+                      <button className="flex items-center space-x-1 cursor-pointer">
+                        {isMeInterested ? (
+                          <AiFillHeart
+                            onClick={() => {
+                              dispatch(deleteProjectInterested(isMeInterested?.id));
+                            }}
+                            className="text-2xl text-red-600 cursor-pointer"
+                          />
+                        ) : (
+                          <LikeProject idProject={item?.id} />
+                        )}
+                        {item?.projectInterested === null ? (
+                          <span>0</span>
+                        ) : (
+                          <span>{item?.projectInterested?.length}</span>
+                        )}
+                      </button>
+                      <button className="pr-2 cursor-pointer">
+                        <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
+                      </button>
+                    </div>
                     <div className="grid grid-cols-7 gap-2 px-3">
                       <BoardPosition board text="Leader" />
                       <BoardPosition board text="PO" />
@@ -84,6 +149,15 @@ export const AllPage = () => {
         <h3 className="text-[18px] font-[600]">Ideas</h3>
         <div className="grid grid-cols-4 gap-x-4 gap-y-10">
           {(mlMyIdeas?.myIdeas?.slice(0, loadMore) ?? [])?.map((item, index) => {
+            const isMe = _.first(
+              item?.projectLikes?.filter(projectLike => projectLike.userId === me?.data?.id)
+            );
+
+            const isMeInterested = _.first(
+              item?.projectInterested?.filter(
+                projectInterested => projectInterested.userId === me?.data?.id
+              )
+            );
             return (
               <div key={index}>
                 <BoardItem
@@ -100,6 +174,66 @@ export const AllPage = () => {
                   numberLike="3"
                   imgAvatar={item?.avatar_attachment?.file}
                 >
+                  <div className="relative">
+                    <div className="flex items-center justify-between pb-3 text-sm text-[#164E63]">
+                      <button className="flex items-center space-x-1 cursor-pointer px-3">
+                        {isMe ? (
+                          <AiFillLike
+                            onClick={() => {
+                              dispatch(deleteProjectLike(isMe?.id));
+                            }}
+                            className="text-2xl text-blue-600 cursor-pointer"
+                          />
+                        ) : (
+                          <LikeProject likeProject idProject={item?.id} />
+                        )}
+                        {item?.projectLikes === null ? (
+                          <span>0</span>
+                        ) : (
+                          <span>{item?.projectLikes?.length}</span>
+                        )}
+                      </button>
+                      <button className="flex items-center space-x-1 cursor-pointer">
+                        <AiOutlineMessage className="text-2xl stroke-[20px]" />
+                        <span>2</span>
+                      </button>
+                      <button className="flex items-center space-x-1 cursor-pointer">
+                        {isMeInterested ? (
+                          <AiFillHeart
+                            onClick={() => {
+                              dispatch(deleteProjectInterested(isMeInterested?.id));
+                            }}
+                            className="text-2xl text-red-600 cursor-pointer"
+                          />
+                        ) : (
+                          <LikeProject idProject={item?.id} />
+                        )}
+                        {item?.projectInterested === null ? (
+                          <span>0</span>
+                        ) : (
+                          <span>{item?.projectInterested?.length}</span>
+                        )}
+                      </button>
+                      <button className="pr-2 cursor-pointer">
+                        <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-7 gap-2 px-3">
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="PO" />
+                      <BoardPosition board text="Dev" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Tester" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="QA" />
+                      <BoardPosition board text="Leader" />
+                    </div>
+                    <button className="shadow-sm absolute right-4 bottom-3 bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md">
+                      <AiOutlineHeart className="text-xl stroke-[20px]" />
+                      <span className="text-[11px]">Follow</span>
+                    </button>
+                  </div>
                   <div className="px-2.5 space-y-1.5">
                     <div className="space-y-2">
                       <CommentItem

@@ -82,6 +82,18 @@ export function MyProject(type = 'project') {
           is_involved
           createdAt
           updatedAt
+          projectLikes {
+            id
+            userId
+            projectId
+          }
+          projectInterested {
+            id
+            userId
+            projectId
+          }
+          numberLikes
+          numberInterested
         }
       }
     `;
@@ -134,6 +146,18 @@ export function MyIdeas(type = 'ideas') {
           is_involved
           createdAt
           updatedAt
+          projectLikes {
+            id
+            userId
+            projectId
+          }
+          projectInterested {
+            id
+            userId
+            projectId
+          }
+          numberLikes
+          numberInterested
         }
       }
     `;

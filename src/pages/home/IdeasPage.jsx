@@ -7,17 +7,28 @@ import { CommentItem } from 'pages/home/AllPage/CommentItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, MyIdeas } from 'pages/project/projectSlice';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { userSelector } from 'pages/user/userSlice';
+import _ from 'lodash';
 
 const IdeasPage = () => {
   const dispatch = useDispatch();
-  const { mlMyIdeas, cProject } = useSelector(projectSelector);
+  const {
+    mlMyIdeas,
+    cProject,
+    cProjectLike,
+    dProjectLike,
+    cProjectInterested,
+    dProjectInterested,
+  } = useSelector(projectSelector);
   const [loadMore, setLoadMore] = useState(8);
+  const { me } = useSelector(userSelector);
+
   const onLoadMore = () => {
     setLoadMore(loadMore + 8);
   };
   useEffect(() => {
     dispatch(MyIdeas());
-  }, [dispatch, cProject]);
+  }, [dispatch, cProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested]);
 
   return (
     <MasterLayout>
@@ -27,6 +38,15 @@ const IdeasPage = () => {
           <h3 className="text-[18px] font-[600]">Ideas</h3>
           <div className="grid grid-cols-4 gap-x-4 gap-y-10">
             {(mlMyIdeas?.myIdeas?.slice(0, loadMore) ?? [])?.map((item, index) => {
+              const isMe = _.first(
+                item?.projectLikes?.filter(projectLike => projectLike.userId === me?.data?.id)
+              );
+
+              const isMeInterested = _.first(
+                item?.projectInterested?.filter(
+                  projectInterested => projectInterested.userId === me?.data?.id
+                )
+              );
               return (
                 <div key={index}>
                   <BoardItem
