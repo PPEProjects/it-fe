@@ -6,7 +6,7 @@ import { getURLParams } from 'services';
 
 import { AiOutlineLike, AiOutlineHeart } from 'react-icons/ai';
 
-export const LikeProject = ({ likeProject }) => {
+export const LikeProject = ({ likeProject, idProject }) => {
   const dispatch = useDispatch();
   const { me } = useSelector(userSelector);
   const { id } = getURLParams();
@@ -15,7 +15,7 @@ export const LikeProject = ({ likeProject }) => {
     <button
       className="!text-[#164E63] !border-none"
       onClick={() => {
-        const values = { userId: me?.data?.id, projectId: id };
+        const values = { userId: me?.data?.id, projectId: id || idProject };
         likeProject
           ? dispatch(createProjectLike({ data: values }))
           : dispatch(createProjectInterested({ data: values }));
