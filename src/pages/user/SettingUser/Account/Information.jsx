@@ -57,11 +57,17 @@ export const Information = () => {
                     rules={[
                       {
                         required: true,
-                        message: 'Please input your phone!',
+                        message: 'Please input your phone number!',
                       },
+
+                      {
+                        min: 10,
+                        message: 'The input is not valid Phone number!',
+                      },
+                      // { max: 13, message: 'The input is not valid Phone number!' },
                     ]}
                   >
-                    <Input className="!rounded" placeholder="" />
+                    <Input maxLength={13} className="!rounded" placeholder="" />
                   </Form.Item>
                 </div>
                 <div className="flex space-x-3 w-full">

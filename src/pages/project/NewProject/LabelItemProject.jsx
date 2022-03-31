@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { BsFillExclamationCircleFill } from 'react-icons/bs';
-
+import { Button, Tooltip } from 'antd';
 export const LabelItemProject = ({
   children,
   label,
@@ -11,6 +11,13 @@ export const LabelItemProject = ({
   flex,
   borderB = true,
 }) => {
+  const text = (
+    <span className="text-[12px] font-medium">
+      Purpose, implemention, parties involved, cost and benefits, and expected results
+    </span>
+  );
+
+  const buttonWidth = 70;
   return (
     <section
       className={classNames('flex p-3', {
@@ -22,9 +29,11 @@ export const LabelItemProject = ({
           <span>{label} </span>
           {rules && <span className="text-[#EF4444] mt-1.5 text-base">*</span>}
           {information && (
-            <span>
-              <BsFillExclamationCircleFill className="text-gray-600" />
-            </span>
+            <Tooltip placement="bottom" title={text}>
+              <span>
+                <BsFillExclamationCircleFill className="text-gray-600" />
+              </span>
+            </Tooltip>
           )}
         </div>
       </label>
