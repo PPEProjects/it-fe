@@ -45,9 +45,12 @@ export const LayoutAdmin = ({ children, admin }) => {
       },
     ];
     return (
-      <Menu defaultSelectedKeys={[href]} mode="inline">
+      <Menu defaultSelectedKeys={[href]} mode="inline" className="rounded-lg font-medium text-base">
         {menu.map((item, i) => (
-          <Menu.Item key={item.key}>
+          <Menu.Item
+            className="hover:!text-[#0369A1] hover:!bg-[#F6F9FB] hover:!rounded-lg"
+            key={item.key}
+          >
             {item.label}
             <Link to={`${item.link}`} />
           </Menu.Item>
@@ -56,12 +59,12 @@ export const LayoutAdmin = ({ children, admin }) => {
     );
   };
   return (
-    <section className="w-full p-3 flex space-x-4">
-      <div className="w-[15%] border rounded">{renderMenu()}</div>
-      <div className="w-[85%] border rounded space-y-4">
-        {/* {admin && <MenuAdmin />} */}
-        <div>{children}</div>
+    <section className="flex space-x-4 bg-[#F6F9FB] w-full ">
+      <div className="w-[25%] p-3 ml-3">
+        <h3 className="text-[#0369A1] text-[24px] mt-2">Administrator</h3>
+        <div className="!w-[96%]">{renderMenu()}</div>
       </div>
+      <div className="w-[84%] !bg-[#FFFFFF] shadow-sm mt-3 rounded-md !mr-3">{children}</div>
     </section>
   );
 };

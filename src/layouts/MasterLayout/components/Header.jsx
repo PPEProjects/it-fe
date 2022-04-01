@@ -188,7 +188,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-2 w-5/12">
-          <div className="flex items-center w-5/6 -ml-0.5">
+          <div className="flex items-center w-5/6 -ml-4">
             <Input className="!rounded-l-[6px] h-[50px] z-10" />
             <Button className="!h-[50px] -ml-0.5 !rounded-r-[6px]">
               <span className="pt-[4px]">

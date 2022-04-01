@@ -63,7 +63,7 @@ export const LayoutProject = ({ children }) => {
           <h3 className="text-[#0369A1] text-[24px] mt-2">My Idea/Project</h3>
           <div>{renderMenu()}</div>
         </div>
-        <div className="w-[85%]">{children}</div>
+        <div className="w-[91%] !mr-3">{children}</div>
       </section>
     </MasterLayout>
   );
