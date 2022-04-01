@@ -70,16 +70,18 @@ export const Information = () => {
                     <Input maxLength={13} className="!rounded" placeholder="" />
                   </Form.Item>
                 </div>
-                <div className="flex space-x-3 w-full">
-                  <div className="w-1/2 space-y-1">
-                    <StarRed name="First Name" />
-                    <Form.Item className="!mb-0 w-full" name="first_name">
-                      <Input className="!rounded" placeholder="" />
-                    </Form.Item>
-                  </div>
-                  <div className="w-1/2">
-                    <StarRed name="Last Name" star />
+                <div className="space-x-3 w-full grid grid-cols-3 gap-3">
+                  <Form.Item className="!mb-0 w-full !mt-0.5" name="first_name" label="Surname">
+                    <Input className="!rounded" placeholder="Enter your surname" />
+                  </Form.Item>
+                  <Form.Item className="!mb-0 w-full !mt-0.5" name="first_name" label="Middle Name">
+                    <Input className="!rounded" placeholder="Enter your middle name" />
+                  </Form.Item>
+
+                  <div className="">
+                    <StarRed name="First Name" star />
                     <Form.Item
+                      placeholder="Christian"
                       className="!mb-0 w-full"
                       name="name"
                       rules={[

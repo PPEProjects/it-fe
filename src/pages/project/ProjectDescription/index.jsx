@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MasterLayout from 'layouts/MasterLayout';
-import { Input, Button, Menu, Dropdown, Modal } from 'antd';
+import { Input, Button, Menu, Dropdown, Modal, Tooltip } from 'antd';
 import { BoardPosition } from 'pages/home/AllPage/BoardPosition';
 import { InformationItem } from './InformationItem';
 import { CommentItem } from 'pages/home/AllPage/CommentItem';
@@ -44,6 +44,10 @@ import { ItemComment } from './ItemComment';
 
 const { TextArea } = Input;
 const ProjectDescription = () => {
+  const text = (
+    <span className="text-[10px font-medium] text-gray-700">Copy Link To Clipboard</span>
+  );
+  const color = ['white'];
   const dispatch = useDispatch();
   const { id } = getURLParams();
   const { deProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested } =
@@ -178,11 +182,17 @@ const ProjectDescription = () => {
                     <LikeProject likeProject />
                   )}
 
-                  <span>{detailProjects?.numberLikes}</span>
+                  <div className="flex flex-col items-center">
+                    <span className="">{detailProjects?.numberLikes}</span>
+                    <span className="text-[10px] !-mt-2">Like</span>
+                  </div>
                 </p>
                 <p className="flex items-center space-x-1 cursor-pointer">
                   <AiOutlineMessage className="text-2xl stroke-[20px]" />
-                  <span>2</span>
+                  <div className="flex flex-col items-center">
+                    <span>2</span>
+                    <span className="text-[10px] !-mt-2">Comment</span>
+                  </div>
                 </p>
                 <p className="flex items-center space-x-1 cursor-pointer">
                   {idUserProjectInterested[0]?.userId === me?.data?.id ? (
@@ -195,11 +205,17 @@ const ProjectDescription = () => {
                   ) : (
                     <LikeProject />
                   )}
-                  <span>{detailProjects?.numberInterested}</span>
+                  <div className="flex flex-col items-center">
+                    <span>{detailProjects?.numberInterested}</span>
+                    <span className="text-[10px] !-mt-2">Follow</span>
+                  </div>
                 </p>
-                <p className="pr-2 cursor-pointer">
-                  <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
-                </p>
+                <Tooltip placement="bottom" title={text} color={color}>
+                  <p className="pr-2 cursor-pointer">
+                    <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
+                  </p>
+                </Tooltip>
+
                 <p className="pr-2 cursor-pointer">
                   <BiDotsVerticalRounded className="text-3xl" />
                 </p>

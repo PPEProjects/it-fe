@@ -11,8 +11,14 @@ const Account = () => {
   return (
     <LayoutSetting>
       <section className="px-4 py-6 space-y-4">
-        <Information />
-        <ChangePassword />
+        <div className="space-y-5">
+          <div className="">
+            <Information />
+          </div>
+          <div>
+            <ChangePassword />
+          </div>
+        </div>
 
         <Form
           form={form}

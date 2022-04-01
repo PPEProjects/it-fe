@@ -52,7 +52,7 @@ export const LayoutSetting = ({ children }) => {
           <h3 className="text-[#0369A1] text-[24px] mt-2">Settings</h3>
           <div className="!w-[96%]">{renderMenu()}</div>
         </div>
-        <div className="w-[84%] !bg-[#FFFFFF] shadow-sm mt-3 rounded-md !mr-3">{children}</div>
+        <div className="w-[91%] mt-3 rounded-md !mr-3">{children}</div>
       </section>
     </MasterLayout>
   );
