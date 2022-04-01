@@ -34,8 +34,7 @@ const MyIdeas = () => {
                     imgAvatar={item?.imgAvatar}
                     nameProject={item?.nameProject}
                     shadowNone
-                    clickNode
-                    user
+                    modalJoinProject
                     numberLike="3"
                     numberComment="6"
                     numberHeart="8"

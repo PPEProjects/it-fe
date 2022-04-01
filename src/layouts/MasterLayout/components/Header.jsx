@@ -188,7 +188,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-2 w-5/12">
-          <div className="flex items-center w-5/6">
+          <div className="flex items-center w-5/6 -ml-0.5">
             <Input className="!rounded-l-[6px] h-[50px] z-10" />
             <Button className="!h-[50px] -ml-0.5 !rounded-r-[6px]">
               <span className="pt-[4px]">
@@ -214,10 +214,12 @@ const Header = () => {
               <span>New Idea/Project</span>
             </div>
           </Button>
-          <Button shape="circle !h-[36px] !bg-gray-200 !w-[36px]">
-            <span className="pt-[2px]">
-              <IoMdNotificationsOutline className="text-xl text-[#0E7490]" />
-            </span>
+          <Button shape="circle !h-[36px] !bg-gray-200 !w-[36px] !border-[#0369A1]">
+            <img
+              src="/assets/images/icon-hand.jpg"
+              alt=""
+              className="rounded-full -mt-1 !w-[34px] !h-[34px]"
+            />
           </Button>
           <div
             onClick={() => dispatch(setUser({ isOpenMyProfileRight: !isOpenMyProfileRight }))}
@@ -228,7 +230,7 @@ const Header = () => {
               src={thumbImage(me?.data?.avatar_attachment?.file)}
               alt=""
             />
-            <span className="text-[#0E7490] text-xl">{me?.data?.name}</span>
+            <span className="text-[#0369A1] text-xl">{me?.data?.name}</span>
           </div>
         </div>
         {renderModalNewProject()}

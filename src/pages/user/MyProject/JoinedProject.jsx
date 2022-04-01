@@ -46,10 +46,9 @@ const MyIdeas = () => {
                     linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                     link={`/ProjectDescription?id=${item?.id}`}
                     shadowNone
-                    clickNode
-                    user
                     numberLike="3"
                     numberComment="6"
+                    modalJoinProject
                     numberHeart="8"
                     placement="bottomRight"
                   >

@@ -52,6 +52,7 @@ export const BoardItem = ({
   item,
   modalDraft,
   modalDraftProject,
+  modalJoinProject,
   borderRounded = true,
 }) => {
   const dispatch = useDispatch();
@@ -420,7 +421,6 @@ export const BoardItem = ({
                 onClick={() => {
                   dispatch(setData({ dataProject: { item } }));
                 }}
-                nameMenu=" project"
               />
             </Popconfirm>
           </>
@@ -443,6 +443,13 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Download" />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
             <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusProject} />
+          </>
+        )}
+        {modalJoinProject && (
+          <>
+            <Link to={`${linkViewDescription}`}>
+              <MenuItemHover nameMenu="View Description" />
+            </Link>
           </>
         )}
       </Menu>
