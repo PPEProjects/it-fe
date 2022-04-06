@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.step-circle {
+  @apply flex justify-center items-center rounded-full border-2 border-primary-500 flex-shrink-0 w-8 h-8
+}

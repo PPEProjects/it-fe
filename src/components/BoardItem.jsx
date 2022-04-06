@@ -62,7 +62,7 @@ export const BoardItem = ({
   const [isModalReviewer, setIsModalReviewer] = useState(false);
   const [isModalUpdateInformation, setIsModalUpdateInformation] = useState(false);
   const [isModalManageMembers, setIsModalManageMembers] = useState(false);
-  const [isModalAddProjectLevel, setIsModalAddProjectLevel] = useState(false);
+  let [isModalAddProjectLevel, setIsModalAddProjectLevel] = useState(false);
   const [isModalDownloadFiles, setIsModalDownloadFiles] = useState(false);
   const [isModalUpdateFiles, setIsModalUpdateFiles] = useState(false);
   const [isModalUpdateProjectStatus, setIsModalUpdateProjectStatus] = useState(false);
@@ -292,6 +292,8 @@ export const BoardItem = ({
       </Modal>
     );
   };
+
+
   const renderModalAddProjectLevel = () => {
     return (
       <Modal
@@ -300,8 +302,7 @@ export const BoardItem = ({
         onCancel={handleCancelAddProjectLevel}
         footer={null}
       >
-        <AddProjectLevel />
-        {/* <ManageMember /> */}
+        <AddProjectLevel project={ item } callback={ () => setIsModalAddProjectLevel(false) } />
       </Modal>
     );
   };

@@ -6,7 +6,7 @@ import { apolloClient, restClient } from 'services';
 export const initialState = {
   upMemberProject: {},
   dMemberProject: {},
-  projects: []
+  projects: {}
 };
 
 const memberProjectSlice = createSlice({
@@ -156,5 +156,38 @@ export function getMyProjects() {
 
     } catch (e) {}
 
+  }
+}
+
+export function updateMyProject({ project }, level) {
+  return async (dispatch, getState) => {
+    try {
+
+      const res = await apolloClient.mutate({
+        mutation: gql`
+          mutation UpdateProject($data: ProjectInput!) {
+            updateProject(data: $data) {
+              id
+              level
+            }
+          }
+        `,
+        variables: {
+          data: {
+            id: project.id,
+            level: level
+          }
+        }
+      })
+
+      const { projects } = getState().memberProject
+
+      const index = Object.values(projects).findIndex((_project) => _project.project?.id === project.id)
+
+      projects[index].project = Object.assign({}, projects[index].project, res.data.updateProject)
+
+      dispatch(setMerge({ projects }))
+
+    } catch (e) {}
   }
 }

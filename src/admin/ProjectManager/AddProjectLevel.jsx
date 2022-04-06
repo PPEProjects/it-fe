@@ -2,23 +2,36 @@ import { Button } from 'antd';
 import React, { useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import classNames from 'classnames';
+import {useDispatch} from "react-redux";
+import {updateMyProject} from "../../pages/memberProject/memberProjectSlice";
 
 const settings = [
   {
-    name: 'Public',
-    description: 'This project will be visible to public.',
+    name: 'Easy',
+    description: 'This project is suitable for university students.',
   },
   {
-    name: 'Protected ',
-    description: 'Only project members can see.',
+    name: 'Medium',
+    description: 'This project is suitable for inexperienced technicians.',
   },
   {
-    name: 'Protected ',
-    description: 'Only project members can see.',
+    name: 'Advanced',
+    description: 'This project is suitable for experienced technicians.',
   },
 ];
-export const AddProjectLevel = () => {
+export const AddProjectLevel = ({ project, callback }) => {
+
+  const dispatch = useDispatch()
+
   const [selected, setSelected] = useState(settings[0]);
+  const [loading, setLoading] = useState(false)
+
+  const submitHandle = async () => {
+    setLoading(true)
+    await dispatch(updateMyProject(project, selected.name))
+    setLoading(false)
+    callback()
+  }
 
   return (
     <div>
@@ -81,7 +94,7 @@ export const AddProjectLevel = () => {
         </div>
       </RadioGroup>
       <div className="flex items-end justify-end mt-7">
-        <Button className="!rounded-md !h-10 !Poppins" type="primary">
+        <Button loading={ loading } onClick={submitHandle} className="!rounded-md !h-10 !Poppins" type="primary">
           Edit
         </Button>
       </div>
