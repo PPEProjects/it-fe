@@ -118,34 +118,36 @@ export function deleteMemberProject(id) {
 }
 
 export function getMyProjects() {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
 
     try {
 
-      const { me } = getState().user;
-
       const query = gql`
-        query DetailProjectMemberByIdPm($pmUserId: ID) {
-          detailProjectMemberByIdPm(pmUserId: $pmUserId) {
+        query DetailProjectMemberByIdPm {
+          detailProjectMemberByIdPm {
+            createdAt
+            deleted
+            fee
             id
-            projectId
-            roles
-            pmUserId
             project {
               id
               name
+              attachments
+              status
+              user {
+                id
+                avatar_attachment
+              }
             }
           }
         }
       `
 
       const res = await apolloClient.query({
-        query,
-        variables: {
-          pmUserId: me.id
-        }
+        query
       })
 
+      console.log(res.data?.detailProjectMemberByIdPm)
       // console.log(res)
 
       dispatch(setMerge({

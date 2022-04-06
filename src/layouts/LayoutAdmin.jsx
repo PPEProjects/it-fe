@@ -59,7 +59,7 @@ export const LayoutAdmin = ({ children, admin }) => {
     );
   };
   return (
-    <section className="flex space-x-4 bg-[#F6F9FB] w-full ">
+    <section className="flex space-x-4 bg-[#F6F9FB] w-full min-h-screen">
       <div className="w-[25%] p-3 ml-3">
         <h3 className="text-[#0369A1] text-[24px] mt-2">Administrator</h3>
         <div className="!w-[96%]">{renderMenu()}</div>

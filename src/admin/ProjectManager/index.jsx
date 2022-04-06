@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import MasterLayout from 'layouts/MasterLayout';
 import { LayoutAdmin } from 'layouts/LayoutAdmin';
 import { BoardItem } from 'components/BoardItem';
-import { Steps } from 'components/Steps';
-import { useDispatch, useSelector } from 'react-redux';
-import { projectSelector, MyProject, MyIdeas, setProject } from 'pages/project/projectSlice';
+import { Steps_OLD } from 'components/Steps_OLD';
+import {getMyProjects, memberProjectSelector} from "../../pages/memberProject/memberProjectSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 const dataBoardItem = [
   {
@@ -34,25 +34,25 @@ const dataSteps = [
     key: 1,
     name: 'Preparing',
     href: '#',
-    status: 'complete',
+    status: 'Preparing',
   },
   {
     key: 2,
     name: 'Onboard',
     href: '#',
-    status: 'complete',
+    status: 'Onboard',
   },
   {
     key: 3,
     name: 'Running',
     href: '#',
-    status: 'current',
+    status: 'Running',
   },
   {
     key: 4,
-    name: 'Done1',
+    name: 'Done',
     href: '#',
-    status: 'improving',
+    status: 'Done',
   },
 ];
 
@@ -129,27 +129,38 @@ const dataStepsColumn = [
   },
 ];
 
+const avatarAttachment = (attachment) => {
+  return attachment.thumb
+}
+
 const ProjectManager = () => {
+
+  const dispatch = useDispatch()
+
+  const { projects } = useSelector(memberProjectSelector)
+
+
+  useEffect(() => {
+    dispatch(getMyProjects())
+  }, [])
+
   return (
     <MasterLayout>
       <LayoutAdmin>
         <div className="grid grid-cols-2 gap-4 p-4">
-          {(dataBoardItem ?? []).map((item, index) => {
+          {Object.values(projects).filter((item) => !!item.project).map((item, index) => {
             return (
               <div key={index}>
                 <BoardItem
                   imgPage={item?.imgPage}
-                  imgAvatar={item?.imgAvatar}
-                  nameProject={item?.nameProject}
+                  imgAvatar={avatarAttachment(item.project.user.avatar_attachment)}
+                  nameProject={item?.project.name}
                   shadowNone
                   projectManager
                   placement="bottomRight"
                 >
                   <div className="p-2 space-y-4">
-                    <Steps dataSteps={dataSteps} stepsRow stepsName />
-                    <Steps dataSteps={dataStepsNameColumn} stepsRow StepsNameColumn stepsName />
-                    <Steps stepsColumn uppercase borderNone dataSteps={dataStepsColumn} />
-                    <Steps stepsColumn uppercase stepsName borderNone dataSteps={dataSteps} />
+                    <Steps_OLD dataSteps={dataSteps} stepsRow stepsName />
                   </div>
                 </BoardItem>
               </div>
