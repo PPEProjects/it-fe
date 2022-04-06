@@ -6,6 +6,7 @@ import { apolloClient, restClient } from 'services';
 export const initialState = {
   upMemberProject: {},
   dMemberProject: {},
+  projects: []
 };
 
 const memberProjectSlice = createSlice({
@@ -114,4 +115,44 @@ export function deleteMemberProject(id) {
       dispatch(setMerge({ dMemberProject: { isLoading: false } }));
     }
   };
+}
+
+export function getMyProjects() {
+  return async (dispatch, getState) => {
+
+    try {
+
+      const { me } = getState().user;
+
+      const query = gql`
+        query DetailProjectMemberByIdPm($pmUserId: ID) {
+          detailProjectMemberByIdPm(pmUserId: $pmUserId) {
+            id
+            projectId
+            roles
+            pmUserId
+            project {
+              id
+              name
+            }
+          }
+        }
+      `
+
+      const res = await apolloClient.query({
+        query,
+        variables: {
+          pmUserId: me.id
+        }
+      })
+
+      // console.log(res)
+
+      dispatch(setMerge({
+        projects: res.data?.detailProjectMemberByIdPm || []
+      }))
+
+    } catch (e) {}
+
+  }
 }
