@@ -13,6 +13,7 @@ import {
   AiOutlineHeart,
   AiOutlineShareAlt,
 } from 'react-icons/ai';
+import { IoSendSharp } from 'react-icons/io5';
 import { deleteProjectInterested, deleteProjectLike } from 'pages/project/projectSlice';
 import { LikeProject } from 'pages/project/LikeProject';
 import _ from 'lodash';
@@ -47,7 +48,10 @@ export const AllPage = () => {
   return (
     <section className="p-3 pl-5 space-y-1">
       <section>
-        <h3 className="text-[18px] font-[600]">OnBoard</h3>
+        <h3 className="text-[18px] font-[600]">
+          OnBoard
+          <IoSendSharp />
+        </h3>
         <p className="text-sm -mt-2 text-gray-500">
           Projects that allow registration to participate.
         </p>
@@ -131,10 +135,19 @@ export const AllPage = () => {
                       <BoardPosition board text="QA" />
                       <BoardPosition board text="Leader" />
                     </div>
-                    <button className="shadow-sm absolute right-4 bottom-3 bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md">
-                      <AiOutlineHeart className="text-xl stroke-[20px]" />
-                      <span className="text-[11px]">Follow</span>
-                    </button>
+                    {isMeInterested ? (
+                      <button
+                        onClick={() => {
+                          dispatch(deleteProjectInterested(isMeInterested?.id));
+                        }}
+                        className="shadow-sm absolute right-4 bottom-3 bg-[#F97316] p-1.5 flex text-white items-center justify-center space-x-1.5 w-[90px] rounded-md"
+                      >
+                        <AiOutlineHeart className="text-xl stroke-[20px]" />
+                        <span className="text-[11px]">Follow</span>
+                      </button>
+                    ) : (
+                      <LikeProject follow={false} followName idProject={item?.id} />
+                    )}
                   </div>
                 </BoardItem>
               </div>
@@ -229,10 +242,19 @@ export const AllPage = () => {
                       <BoardPosition board text="QA" />
                       <BoardPosition board text="Leader" />
                     </div>
-                    <button className="shadow-sm absolute right-4 bottom-3 bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md">
-                      <AiOutlineHeart className="text-xl stroke-[20px]" />
-                      <span className="text-[11px]">Follow</span>
-                    </button>
+                    {isMeInterested ? (
+                      <button
+                        onClick={() => {
+                          dispatch(deleteProjectInterested(isMeInterested?.id));
+                        }}
+                        className="shadow-sm absolute right-4 bottom-3 bg-[#F97316] p-1.5 flex text-white items-center justify-center space-x-1.5 w-[90px] rounded-md"
+                      >
+                        <AiOutlineHeart className="text-xl stroke-[20px]" />
+                        <span className="text-[11px]">Follow</span>
+                      </button>
+                    ) : (
+                      <LikeProject follow={false} followName idProject={item?.id} />
+                    )}
                   </div>
                   <div className="px-2.5 space-y-1.5">
                     <div className="space-y-2">
