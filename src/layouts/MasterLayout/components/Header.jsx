@@ -53,9 +53,9 @@ const Header = () => {
     );
   }, [dispatch]);
 
-  /*useEffect(() => {
+  useEffect(() => {
     dispatch(getMe());
-  }, [dispatch]);*/
+  }, [dispatch]);
 
   const renderModalVoice = () => {
     return (
