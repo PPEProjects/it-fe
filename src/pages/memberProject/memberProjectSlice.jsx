@@ -6,6 +6,7 @@ import { apolloClient, restClient } from 'services';
 export const initialState = {
   upMemberProject: {},
   dMemberProject: {},
+  projects: {}
 };
 
 const memberProjectSlice = createSlice({
@@ -114,4 +115,79 @@ export function deleteMemberProject(id) {
       dispatch(setMerge({ dMemberProject: { isLoading: false } }));
     }
   };
+}
+
+export function getMyProjects() {
+  return async (dispatch) => {
+
+    try {
+
+      const query = gql`
+        query DetailProjectMemberByIdPm {
+          detailProjectMemberByIdPm {
+            createdAt
+            deleted
+            fee
+            id
+            project {
+              id
+              name
+              attachments
+              status
+              user {
+                id
+                avatar_attachment
+              }
+            }
+          }
+        }
+      `
+
+      const res = await apolloClient.query({
+        query
+      })
+
+      console.log(res.data?.detailProjectMemberByIdPm)
+      // console.log(res)
+
+      dispatch(setMerge({
+        projects: res.data?.detailProjectMemberByIdPm || []
+      }))
+
+    } catch (e) {}
+
+  }
+}
+
+export function updateMyProject({ project }, level) {
+  return async (dispatch, getState) => {
+    try {
+
+      const res = await apolloClient.mutate({
+        mutation: gql`
+          mutation UpdateProject($data: ProjectInput!) {
+            updateProject(data: $data) {
+              id
+              level
+            }
+          }
+        `,
+        variables: {
+          data: {
+            id: project.id,
+            level: level
+          }
+        }
+      })
+
+      const { projects } = getState().memberProject
+
+      const index = Object.values(projects).findIndex((_project) => _project.project?.id === project.id)
+
+      projects[index].project = Object.assign({}, projects[index].project, res.data.updateProject)
+
+      dispatch(setMerge({ projects }))
+
+    } catch (e) {}
+  }
 }

@@ -3,7 +3,7 @@ import { LayoutProject } from 'layouts/LayoutMyProject';
 import { ButtonSort } from 'components/ButtonSort';
 import { TitleItem } from 'admin/AdminIstrator/AllAdmin/TitleItem';
 import { BoardItem } from 'components/BoardItem';
-import { Steps } from 'components/Steps';
+import { Steps_OLD } from 'components/Steps_OLD';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector, myProject } from 'pages/user/userSlice';
 
@@ -53,7 +53,7 @@ const MyIdeas = () => {
                     placement="bottomRight"
                   >
                     <div className="px-2 -mt-4">
-                      <Steps dataSteps={dataStepsColumn} stepsColumn uppercase borderNone />
+                      <Steps_OLD dataSteps={dataStepsColumn} stepsColumn uppercase borderNone />
                     </div>
                   </BoardItem>
                 </div>

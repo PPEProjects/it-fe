@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import { Steps } from 'components/Steps';
+import { Steps_OLD } from 'components/Steps_OLD';
 import React from 'react';
 const dataStepsColumn = [
   {
@@ -23,7 +23,7 @@ export const UpdateStatusIdea = () => {
     <div>
       <span className="text-lg font-semibold text-gray-800">Project Idea Update</span>
       <div>
-        <Steps stepsColumn uppercase stepsName borderNone dataSteps={dataStepsColumn} />
+        <Steps_OLD stepsColumn uppercase stepsName borderNone dataSteps={dataStepsColumn} />
       </div>
       <div className="text-right">
         <Button type="primary" className="!rounded-lg">

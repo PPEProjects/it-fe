@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { CgArrowUp } from 'react-icons/cg';
 
-export const Steps = ({
+export const Steps_OLD = ({
   dataSteps,
   stepsRow,
   borderNone,
@@ -34,7 +34,7 @@ export const Steps = ({
                 'relative'
               )}
             >
-              {step.status === 'complete' ? (
+              {step.status === 'Preparing' ? (
                 <div
                   className={classNames('flex items-center', {
                     'flex-col': StepsNameColumn,
@@ -52,7 +52,7 @@ export const Steps = ({
                   )}
 
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     className="relative w-8 h-8 flex items-center justify-center bg-[#0369A1] rounded-full hover:bg-indigo-900"
                   >
                     <AiOutlineCheck className="w-5 h-5 text-white" aria-hidden="true" />
@@ -75,7 +75,7 @@ export const Steps = ({
                     <span className="text-gray-500">{step.description}</span>
                   </div>
                 </div>
-              ) : step.status === 'current' ? (
+              ) : step.status === 'Onboard' ? (
                 <div
                   className={classNames('flex items-center', {
                     'flex-col': StepsNameColumn,
@@ -126,7 +126,7 @@ export const Steps = ({
                     <span className="text-gray-500">{step.description}</span>
                   </div>
                 </div>
-              ) : step.status === 'improving' ? (
+              ) : step.status === 'Running' ? (
                 <div
                   className={classNames('flex items-center', {
                     'flex-col': StepsNameColumn,
