@@ -5,6 +5,7 @@ import { createProjectLike, createProjectInterested } from 'pages/project/projec
 import { getURLParams } from 'services';
 
 import { AiOutlineLike, AiOutlineHeart } from 'react-icons/ai';
+import classNames from 'classnames';
 
 export const LikeProject = ({ likeProject, idProject, followName, follow = true }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,10 @@ export const LikeProject = ({ likeProject, idProject, followName, follow = true 
 
   return (
     <button
-      className="!text-[#164E63] !border-none"
+      className={classNames('!text-[#164E63] !border-none', {
+        'shadow-sm absolute right-4 bottom-[11px] bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md':
+          followName,
+      })}
       onClick={() => {
         const values = { userId: me?.data?.id, projectId: id || idProject };
         likeProject
@@ -27,10 +31,10 @@ export const LikeProject = ({ likeProject, idProject, followName, follow = true 
         <>
           {follow && <AiOutlineHeart className="text-2xl stroke-[20px]" />}
           {followName && (
-            <button className="shadow-sm absolute right-4 bottom-8 bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md">
+            <>
               <AiOutlineHeart className="text-xl stroke-[20px]" />
               <span className="text-[11px]">Follow</span>
-            </button>
+            </>
           )}
         </>
       )}

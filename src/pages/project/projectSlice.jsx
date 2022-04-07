@@ -12,6 +12,7 @@ export const initialState = {
   deProject: { isRefresh: true },
   dProjectLike: {},
   dProjectInterested: {},
+  mlProjectInterested: {},
 };
 
 const projectSlice = createSlice({
@@ -448,5 +449,40 @@ export function deleteProjectInterested(id) {
     } catch (e) {
       dispatch(setMerge({ dProjectInterested: { isLoading: false } }));
     }
+  };
+}
+
+export function myProjectInterested() {
+  return async dispatch => {
+    dispatch(setMerge({ mlProjectInterested: { isLoading: true } }));
+    const query = gql`
+      query MyProjectInterested {
+        myProjectInterested {
+          id
+          projectId
+          project {
+            id
+            name
+            status
+            user {
+              id
+              name
+              avatar_attachment
+            }
+            attachments
+            description
+            level
+            privacy
+            type
+          }
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+    });
+    dispatch(
+      setData({ mlProjectInterested: { myProjectInterested: res.data.myProjectInterested } })
+    );
   };
 }

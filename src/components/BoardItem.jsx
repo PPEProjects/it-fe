@@ -45,7 +45,7 @@ export const BoardItem = ({
   admin,
   minSize,
   ideas,
-  lever,
+  level,
   projectManager,
   myIdea,
   clickNode,
@@ -293,7 +293,6 @@ export const BoardItem = ({
     );
   };
 
-
   const renderModalAddProjectLevel = () => {
     return (
       <Modal
@@ -302,7 +301,7 @@ export const BoardItem = ({
         onCancel={handleCancelAddProjectLevel}
         footer={null}
       >
-        <AddProjectLevel project={ item } callback={ () => setIsModalAddProjectLevel(false) } />
+        <AddProjectLevel project={item} callback={() => setIsModalAddProjectLevel(false)} />
       </Modal>
     );
   };
@@ -488,9 +487,9 @@ export const BoardItem = ({
             alt=""
           />
         </div>
-        {lever && (
+        {level && (
           <div className="absolute top-3 right-3 bg-white w-[60px] font-semibold text-black rounded-full border h-[60px] flex items-center justify-center">
-            {lever}
+            {level}
           </div>
         )}
 

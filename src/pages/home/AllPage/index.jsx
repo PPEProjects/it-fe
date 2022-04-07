@@ -13,12 +13,9 @@ import {
   AiOutlineHeart,
   AiOutlineShareAlt,
 } from 'react-icons/ai';
-import { IoSendSharp } from 'react-icons/io5';
 import { deleteProjectInterested, deleteProjectLike } from 'pages/project/projectSlice';
 import { LikeProject } from 'pages/project/LikeProject';
 import _ from 'lodash';
-// import { AiOutlineHeart } from 'react-icons/ai';
-import { RiCommunityFill } from 'react-icons/ri';
 
 export const AllPage = () => {
   const dispatch = useDispatch();
@@ -45,13 +42,11 @@ export const AllPage = () => {
     dispatch(MyIdeas());
   }, [dispatch, cProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested]);
 
+  // console.log('mlMyProject?.myProject', mlMyProject?.myProject);
   return (
     <section className="p-3 pl-5 space-y-1">
       <section>
-        <h3 className="text-[18px] font-[600]">
-          OnBoard
-          <IoSendSharp />
-        </h3>
+        <h3 className="text-[18px] font-[600]">OnBoard</h3>
         <p className="text-sm -mt-2 text-gray-500">
           Projects that allow registration to participate.
         </p>
