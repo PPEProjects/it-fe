@@ -17,12 +17,14 @@ export const AllMember = () => {
         return (
           <div key={index}>
             <InformationMember
+              idMember={item?.id}
               nameMember={item?.name}
               goadMember={item?.userAdvance?.goal}
               emailMember={item?.email}
               phoneMember={item?.phone_number}
               dropDown
               icon
+              item={item?.id}
             />
           </div>
         );

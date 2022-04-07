@@ -27,6 +27,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     });
   }
 });
+
+// test datvnt
 const defaultOptions = {
   watchQuery: {
     fetchPolicy: 'no-cache',

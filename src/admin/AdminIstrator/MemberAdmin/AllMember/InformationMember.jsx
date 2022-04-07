@@ -2,10 +2,12 @@ import { Menu, Dropdown, Modal, Button } from 'antd';
 import React from 'react';
 import { MenuItemHover } from 'components/MenuItemHover';
 import classNames from 'classnames';
+import { useDispatch } from 'react-redux';
 
 import { AiFillStar } from 'react-icons/ai';
 import { BsFillTelephoneFill, BsThreeDotsVertical } from 'react-icons/bs';
 import { HiMail } from 'react-icons/hi';
+import { addAsPosition } from '../../adminIstratorSlice';
 
 export const InformationMember = ({
   placement,
@@ -15,15 +17,25 @@ export const InformationMember = ({
   phoneMember,
   dropDown,
   icon,
+  idMember,
+  item,
 }) => {
-  const menu = () => {
+  const dispatch = useDispatch();
+
+  const menu = item => {
     return (
       <Menu>
-        <MenuItemHover nameMenu="View Description" />
-        <MenuItemHover nameMenu="Download" />
-        <MenuItemHover nameMenu="Review" />
-        <MenuItemHover nameMenu="Assign Reviewer" />
-        <MenuItemHover nameMenu="Update Information" />
+        <MenuItemHover nameMenu="View Profile" />
+        <MenuItemHover
+          onClick={() => {
+            const values = { userId: item, roles: 'admin' };
+            dispatch(addAsPosition(values));
+          }}
+          nameMenu="Add as admin"
+        />
+        <MenuItemHover nameMenu="Add as project managerview" />
+        <MenuItemHover nameMenu="Add as idea reviewer" />
+        <MenuItemHover nameMenu="Add as project reviewer" />
       </Menu>
     );
   };
@@ -80,7 +92,7 @@ export const InformationMember = ({
           </div>
         </div>
         {dropDown && (
-          <Dropdown overlay={menu} placement={placement} trigger={['click']}>
+          <Dropdown overlay={menu(item)} placement={placement} trigger={['click']}>
             <div className="border-t hover:bg-gray-100 border-b items-sm w-[20%] h-full flex items-center justify-center">
               <BsThreeDotsVertical className="!text-2xl text-gray-400" />
             </div>
