@@ -5,6 +5,7 @@ import { apolloClient, restClient } from 'services';
 
 export const initialState = {
   aPosition: {},
+  dPosition: {},
 };
 
 const adminIstratorSlice = createSlice({
@@ -70,6 +71,43 @@ export function addAsPosition(values) {
       });
     } catch (e) {
       dispatch(setMerge({ aPosition: { isLoading: false } }));
+    }
+  };
+}
+
+export function deleteAsPosition(values) {
+  return async dispatch => {
+    dispatch(setMerge({ dPosition: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation RemoveAsPosition($userId: ID, $roles: String) {
+          removeAsPosition(userId: $userId, roles: $roles) {
+            id
+            userId
+            roles
+            skill
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            dPosition: {
+              addPositon: res.data.AddAsPosition,
+              isLoading: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ dPosition: { isLoading: false } }));
     }
   };
 }

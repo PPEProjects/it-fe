@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { AiFillStar } from 'react-icons/ai';
 import { BsFillTelephoneFill, BsThreeDotsVertical } from 'react-icons/bs';
 import { HiMail } from 'react-icons/hi';
-import { addAsPosition } from '../../adminIstratorSlice';
+import { addAsPosition, deleteAsPosition } from '../../adminIstratorSlice';
 
 export const InformationMember = ({
   placement,
@@ -33,9 +33,56 @@ export const InformationMember = ({
           }}
           nameMenu="Add as admin"
         />
-        <MenuItemHover nameMenu="Add as project managerview" />
-        <MenuItemHover nameMenu="Add as idea reviewer" />
-        <MenuItemHover nameMenu="Add as project reviewer" />
+        <MenuItemHover
+          onClick={() => {
+            const values = { userId: item, roles: 'project_manage' };
+            dispatch(addAsPosition(values));
+          }}
+          nameMenu="Add as project manager"
+        />
+        <MenuItemHover
+          onClick={() => {
+            const values = { userId: item, roles: 'ideas_review' };
+            dispatch(addAsPosition(values));
+          }}
+          nameMenu="Add as idea reviewer"
+        />
+        <MenuItemHover
+          onClick={() => {
+            const values = { userId: item, roles: 'project_review' };
+            dispatch(addAsPosition(values));
+          }}
+          nameMenu="Add as project reviewer"
+        />
+
+        <MenuItemHover
+          onClick={() => {
+            const values = { userId: item, roles: 'admin' };
+            dispatch(deleteAsPosition(values));
+          }}
+          nameMenu="Remove as admin"
+        />
+        <MenuItemHover
+          onClick={() => {
+            const values = { userId: item, roles: 'project_manage' };
+            dispatch(deleteAsPosition(values));
+          }}
+          nameMenu="Remove as  project manager"
+        />
+        <MenuItemHover
+          onClick={() => {
+            const values = { userId: item, roles: 'ideas_review' };
+            dispatch(deleteAsPosition(values));
+          }}
+          nameMenu="Remove as idea reviewer"
+        />
+        <MenuItemHover
+          onClick={() => {
+            const values = { userId: item, roles: 'project_review' };
+            dispatch(deleteAsPosition(values));
+          }}
+          nameMenu="Remove as project reviewer"
+        />
       </Menu>
     );
   };
