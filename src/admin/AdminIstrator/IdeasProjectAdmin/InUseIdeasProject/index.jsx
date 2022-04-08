@@ -4,7 +4,7 @@ import { MyIdeas, MyProject, projectSelector } from 'pages/project/projectSlice'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const RunningIdeasProject = () => {
+export const InUseIdeasProject = () => {
   const dispatch = useDispatch();
   const { mlMyProject, mlMyIdeas, cProject } = useSelector(projectSelector);
   const [loadMore, setLoadMore] = useState(3);
@@ -21,12 +21,12 @@ export const RunningIdeasProject = () => {
   }, [dispatch, cProject]);
 
   const dataFillterProjects = (mlMyProject?.myProject ?? []).filter(
-    item => item.status === 'running'
+    item => item.status === 'inuse'
   );
 
   return (
     <section>
-      <div className="space-y-4 border-b p-4 pb-5">
+      <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Project" number={dataFillterProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataFillterProjects ?? []).map((item, index) => {
@@ -36,9 +36,8 @@ export const RunningIdeasProject = () => {
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
-                  modalDraft
+                  modalDraftProject
                   shadowNone
-                  admin
                   placement="bottomRight"
                 />
               </div>

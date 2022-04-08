@@ -4,7 +4,7 @@ import { MyIdeas, MyProject, projectSelector } from 'pages/project/projectSlice'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const RunningIdeasProject = () => {
+export const StuckIdeasProject = () => {
   const dispatch = useDispatch();
   const { mlMyProject, mlMyIdeas, cProject } = useSelector(projectSelector);
   const [loadMore, setLoadMore] = useState(3);
@@ -21,7 +21,7 @@ export const RunningIdeasProject = () => {
   }, [dispatch, cProject]);
 
   const dataFillterProjects = (mlMyProject?.myProject ?? []).filter(
-    item => item.status === 'running'
+    item => item.status === 'stuck'
   );
 
   return (

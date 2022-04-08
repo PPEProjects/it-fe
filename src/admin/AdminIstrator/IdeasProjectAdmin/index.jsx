@@ -4,9 +4,9 @@ import { AllIdeasProject } from './AllIdeasProject';
 import { DraftIdeasProject } from './DraftIdeasProject';
 import { OnBoardIdeasProject } from './OnBoardIdeasProject';
 import { RunningIdeasProject } from './RunningIdeasProject';
-// import { StuckIdeasProject } from './StuckIdeasProject';
-// import { DoneIdeasProject } from './DoneIdeasProject';
-// import { InUseIdeasProject } from './InUseIdeasProject';
+import { StuckIdeasProject } from './StuckIdeasProject';
+import { DoneIdeasProject } from './DoneIdeasProject';
+import { InUseIdeasProject } from './InUseIdeasProject';
 
 const menuList = [
   {
@@ -45,15 +45,15 @@ const tabPane = [
   {
     content: <RunningIdeasProject />,
   },
-  // {
-  //   content: <StuckIdeasProject />,
-  // },
-  // {
-  //   content: <DoneIdeasProject />,
-  // },
-  // {
-  //   content: <InUseIdeasProject />,
-  // },
+  {
+    content: <StuckIdeasProject />,
+  },
+  {
+    content: <DoneIdeasProject />,
+  },
+  {
+    content: <InUseIdeasProject />,
+  },
 ];
 export const IdeasProjectAdmin = () => {
   return (
