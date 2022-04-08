@@ -6,7 +6,7 @@ import { apolloClient, restClient } from 'services';
 export const initialState = {
   upMemberProject: {},
   dMemberProject: {},
-  projects: {}
+  projects: {},
 };
 
 const memberProjectSlice = createSlice({
@@ -118,10 +118,8 @@ export function deleteMemberProject(id) {
 }
 
 export function getMyProjects() {
-  return async (dispatch) => {
-
+  return async dispatch => {
     try {
-
       const query = gql`
         query DetailProjectMemberByIdPm {
           detailProjectMemberByIdPm {
@@ -131,6 +129,7 @@ export function getMyProjects() {
             id
             project {
               id
+              level
               name
               attachments
               status
@@ -141,28 +140,27 @@ export function getMyProjects() {
             }
           }
         }
-      `
+      `;
 
       const res = await apolloClient.query({
-        query
-      })
+        query,
+      });
 
-      console.log(res.data?.detailProjectMemberByIdPm)
+      console.log(res.data?.detailProjectMemberByIdPm);
       // console.log(res)
 
-      dispatch(setMerge({
-        projects: res.data?.detailProjectMemberByIdPm || []
-      }))
-
+      dispatch(
+        setMerge({
+          projects: res.data?.detailProjectMemberByIdPm || [],
+        })
+      );
     } catch (e) {}
-
-  }
+  };
 }
 
 export function updateMyProject({ project }, level) {
   return async (dispatch, getState) => {
     try {
-
       const res = await apolloClient.mutate({
         mutation: gql`
           mutation UpdateProject($data: ProjectInput!) {
@@ -175,19 +173,20 @@ export function updateMyProject({ project }, level) {
         variables: {
           data: {
             id: project.id,
-            level: level
-          }
-        }
-      })
+            level: level,
+          },
+        },
+      });
 
-      const { projects } = getState().memberProject
+      const { projects } = getState().memberProject;
 
-      const index = Object.values(projects).findIndex((_project) => _project.project?.id === project.id)
+      const index = Object.values(projects).findIndex(
+        _project => _project.project?.id === project.id
+      );
 
-      projects[index].project = Object.assign({}, projects[index].project, res.data.updateProject)
+      projects[index].project = Object.assign({}, projects[index].project, res.data.updateProject);
 
-      dispatch(setMerge({ projects }))
-
+      dispatch(setMerge({ projects }));
     } catch (e) {}
-  }
+  };
 }
