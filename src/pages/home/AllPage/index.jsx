@@ -16,6 +16,7 @@ import {
 import { deleteProjectInterested, deleteProjectLike } from 'pages/project/projectSlice';
 import { LikeProject } from 'pages/project/LikeProject';
 import _ from 'lodash';
+import { Tooltip } from 'antd';
 
 export const AllPage = () => {
   const dispatch = useDispatch();
@@ -115,9 +116,15 @@ export const AllPage = () => {
                           <span>{item?.projectInterested?.length}</span>
                         )}
                       </button>
-                      <button className="pr-2 cursor-pointer">
-                        <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
-                      </button>
+                      <Tooltip
+                        color="#ffffff"
+                        placement="bottom"
+                        title={<div className="text-black">Copy Link To Clipboard</div>}
+                      >
+                        <button className="pr-2 cursor-pointer">
+                          <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
+                        </button>
+                      </Tooltip>
                     </div>
                     <div className="grid grid-cols-7 gap-2 px-3">
                       <BoardPosition board text="Leader" />
@@ -150,7 +157,7 @@ export const AllPage = () => {
           })}
         </div>
         {loadMore < mlMyProject?.myProject?.length && (
-          <SeeMore name="See more" onClick={onLoadMore} />
+          <SeeMore py8 name="See more" onClick={onLoadMore} />
         )}
       </section>
       <section>
@@ -222,34 +229,16 @@ export const AllPage = () => {
                           <span>{item?.projectInterested?.length}</span>
                         )}
                       </button>
-                      <button className="pr-2 cursor-pointer">
-                        <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
-                      </button>
-                    </div>
-                    <div className="grid grid-cols-7 gap-2 px-3">
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="PO" />
-                      <BoardPosition board text="Dev" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Tester" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="QA" />
-                      <BoardPosition board text="Leader" />
-                    </div>
-                    {isMeInterested ? (
-                      <button
-                        onClick={() => {
-                          dispatch(deleteProjectInterested(isMeInterested?.id));
-                        }}
-                        className="shadow-sm absolute right-4 bottom-3 bg-[#F97316] p-1.5 flex text-white items-center justify-center space-x-1.5 w-[90px] rounded-md"
+                      <Tooltip
+                        color="#ffffff"
+                        placement="bottom"
+                        title={<div className="text-black">Copy Link To Clipboard</div>}
                       >
-                        <AiOutlineHeart className="text-xl stroke-[20px]" />
-                        <span className="text-[11px]">Follow</span>
-                      </button>
-                    ) : (
-                      <LikeProject follow={false} followName idProject={item?.id} />
-                    )}
+                        <button className="pr-2 cursor-pointer">
+                          <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
+                        </button>
+                      </Tooltip>
+                    </div>
                   </div>
                   <div className="px-2.5 space-y-1.5">
                     <div className="space-y-2">
@@ -265,10 +254,19 @@ export const AllPage = () => {
                       />
                     </div>
                     <div className="flex items-center justify-end">
-                      <button className="shadow-sm bg-white p-1.5 flex text-[#F97316] items-center space-x-1.5 w-[90px] rounded-md">
-                        <AiOutlineHeart className="text-xl stroke-[20px]" />
-                        <span className="text-[11px]">Follow</span>
-                      </button>
+                      {isMeInterested ? (
+                        <button
+                          onClick={() => {
+                            dispatch(deleteProjectInterested(isMeInterested?.id));
+                          }}
+                          className="shadow-sm bg-[#F97316] p-1.5 flex text-white items-center justify-center space-x-1.5 w-[90px] rounded-md"
+                        >
+                          <AiOutlineHeart className="text-xl stroke-[20px]" />
+                          <span className="text-[11px]">Follow</span>
+                        </button>
+                      ) : (
+                        <LikeProject follow={false} followName1 idProject={item?.id} />
+                      )}
                     </div>
                   </div>
                 </BoardItem>
@@ -276,7 +274,9 @@ export const AllPage = () => {
             );
           })}
         </div>
-        {loadMore < mlMyIdeas?.myIdeas?.length && <SeeMore name="See more" onClick={onLoadMore} />}
+        {loadMore < mlMyIdeas?.myIdeas?.length && (
+          <SeeMore py8 name="See more" onClick={onLoadMore} />
+        )}
       </section>
       {/* <section>
         <h3 className="text-[18px] font-[600]">Project Running</h3>

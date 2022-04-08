@@ -13,6 +13,7 @@ export const initialState = {
   dProjectLike: {},
   dProjectInterested: {},
   mlProjectInterested: {},
+  mlPJoinProject: {},
 };
 
 const projectSlice = createSlice({

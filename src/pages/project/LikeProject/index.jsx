@@ -7,7 +7,7 @@ import { getURLParams } from 'services';
 import { AiOutlineLike, AiOutlineHeart } from 'react-icons/ai';
 import classNames from 'classnames';
 
-export const LikeProject = ({ likeProject, idProject, followName, follow = true }) => {
+export const LikeProject = ({ likeProject, idProject, followName, follow = true, followName1 }) => {
   const dispatch = useDispatch();
   const { me } = useSelector(userSelector);
   const { id } = getURLParams();
@@ -32,9 +32,15 @@ export const LikeProject = ({ likeProject, idProject, followName, follow = true 
           {follow && <AiOutlineHeart className="text-2xl stroke-[20px]" />}
           {followName && (
             <>
+              <AiOutlineHeart className="text-xl stroke-[20px] text-[#F97316]" />
+              <span className="text-[11px] text-[#F97316]">Follow</span>
+            </>
+          )}
+          {followName1 && (
+            <button className="shadow-sm p-1.5 text-[#F97316] flex items-center justify-center space-x-1.5 w-[90px] rounded-md">
               <AiOutlineHeart className="text-xl stroke-[20px]" />
               <span className="text-[11px]">Follow</span>
-            </>
+            </button>
           )}
         </>
       )}

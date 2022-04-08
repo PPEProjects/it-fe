@@ -69,7 +69,7 @@ const OnBoardPage = () => {
             })}
           </div>
           {loadMore < mlMyProject?.myProject?.length && (
-            <SeeMore name="See more" onClick={onLoadMore} />
+            <SeeMore py8 name="See more" onClick={onLoadMore} />
           )}
         </section>
       </section>

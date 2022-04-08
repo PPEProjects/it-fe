@@ -20,6 +20,8 @@ export const DraftIdeasProject = () => {
     dispatch(MyIdeas());
   }, [dispatch, cProject]);
 
+  console.log('mlMyIdeas?.myIdeas', mlMyIdeas?.myIdeas);
+
   return (
     <section>
       <div className="space-y-4 border-b p-4 pb-5">

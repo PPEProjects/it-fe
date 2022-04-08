@@ -89,7 +89,9 @@ const IdeasPage = () => {
               );
             })}
           </div>
-          {loadMore < mlMyIdeas?.myIdeas?.length && <SeeMore onClick={onLoadMore} />}
+          {loadMore < mlMyIdeas?.myIdeas?.length && (
+            <SeeMore py8 name="SeeMore" onClick={onLoadMore} />
+          )}
         </section>
       </section>
     </MasterLayout>
