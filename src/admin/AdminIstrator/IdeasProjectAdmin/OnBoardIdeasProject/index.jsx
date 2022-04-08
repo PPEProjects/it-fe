@@ -4,7 +4,7 @@ import { MyIdeas, MyProject, projectSelector } from 'pages/project/projectSlice'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const DraftIdeasProject = () => {
+export const OnBoardIdeasProject = () => {
   const dispatch = useDispatch();
   const { mlMyProject, mlMyIdeas, cProject } = useSelector(projectSelector);
   const [loadMore, setLoadMore] = useState(3);
@@ -20,9 +20,9 @@ export const DraftIdeasProject = () => {
     dispatch(MyIdeas());
   }, [dispatch, cProject]);
 
-  const dataFillterIdeas = (mlMyIdeas?.myIdeas ?? []).filter(item => item.status === 'draft');
+  const dataFillterIdeas = (mlMyIdeas?.myIdeas ?? []).filter(item => item.status === 'onbroad');
   const dataFillterProjects = (mlMyProject?.myProject ?? []).filter(
-    item => item.status === 'draft'
+    item => item.status === 'onbroad'
   );
 
   return (

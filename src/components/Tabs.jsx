@@ -77,7 +77,7 @@ export const Tabs = ({
           <div className="relative flex w-full min-w-0 flex-col break-words border-t">
             {tabPane.map((record, index) => (
               <div key={index} className={openTab === index ? 'block' : 'hidden'}>
-                {record.content}
+                {record.content} : tét 123
               </div>
             ))}
           </div>
