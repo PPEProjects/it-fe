@@ -4,7 +4,7 @@ import { MyIdeas, MyProject, projectSelector } from 'pages/project/projectSlice'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const OnBoardIdeasProject = () => {
+export const StuckIdeasProject = () => {
   const dispatch = useDispatch();
   const { mlMyProject, mlMyIdeas, cProject } = useSelector(projectSelector);
   const [loadMore, setLoadMore] = useState(3);
@@ -20,20 +20,25 @@ export const OnBoardIdeasProject = () => {
     dispatch(MyIdeas());
   }, [dispatch, cProject]);
 
+  const dataFillterProjects = (mlMyProject?.myProject ?? []).filter(
+    item => item.status === 'stuck'
+  );
+
   return (
     <section>
       <div className="space-y-4 border-b p-4 pb-5">
-        <TitleItem title="OnBoard" number={mlMyIdeas?.myIdeas?.length} />
+        <TitleItem title="Project" number={dataFillterProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
-          {(mlMyIdeas?.myIdeas ?? []).map((item, index) => {
+          {(dataFillterProjects ?? []).map((item, index) => {
             return (
               <div key={index}>
                 <BoardItem
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
+                  modalDraft
                   shadowNone
-                  clickNode
+                  admin
                   placement="bottomRight"
                 />
               </div>

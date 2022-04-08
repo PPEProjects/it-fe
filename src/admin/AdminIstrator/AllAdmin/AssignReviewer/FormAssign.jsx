@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GrFormAdd } from 'react-icons/gr';
 
-export const FormAssign = ({ nameAssign, goalAssign, imgAssign }) => {
+export const FormAssign = ({ nameAssign, goalAssign, imgAssign, item }) => {
   return (
     <div className="h-[58px] border rounded-full px-3 flex items-center justify-between">
       <div className="flex items-center space-x-3">
@@ -12,7 +12,10 @@ export const FormAssign = ({ nameAssign, goalAssign, imgAssign }) => {
           <h7 className="-mt-5">{goalAssign}</h7>
         </div>
       </div>
-      <GrFormAdd className="flex items-center justify-center text-3xl" />
+      <GrFormAdd
+        onClick={() => console.log(item)}
+        className="flex items-center justify-center text-3xl cursor-pointer"
+      />
     </div>
   );
 };

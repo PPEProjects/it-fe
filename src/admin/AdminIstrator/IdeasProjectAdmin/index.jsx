@@ -3,6 +3,10 @@ import { Tabs } from 'components/Tabs';
 import { AllIdeasProject } from './AllIdeasProject';
 import { DraftIdeasProject } from './DraftIdeasProject';
 import { OnBoardIdeasProject } from './OnBoardIdeasProject';
+import { RunningIdeasProject } from './RunningIdeasProject';
+import { StuckIdeasProject } from './StuckIdeasProject';
+import { DoneIdeasProject } from './DoneIdeasProject';
+import { InUseIdeasProject } from './InUseIdeasProject';
 
 const menuList = [
   {
@@ -14,7 +18,6 @@ const menuList = [
   {
     title: 'OnBoard',
   },
-
   {
     title: 'Running',
   },
@@ -38,6 +41,18 @@ const tabPane = [
   },
   {
     content: <OnBoardIdeasProject />,
+  },
+  {
+    content: <RunningIdeasProject />,
+  },
+  {
+    content: <StuckIdeasProject />,
+  },
+  {
+    content: <DoneIdeasProject />,
+  },
+  {
+    content: <InUseIdeasProject />,
   },
 ];
 export const IdeasProjectAdmin = () => {

@@ -4,7 +4,7 @@ import { MyIdeas, MyProject, projectSelector } from 'pages/project/projectSlice'
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const DraftIdeasProject = () => {
+export const RunningIdeasProject = () => {
   const dispatch = useDispatch();
   const { mlMyProject, mlMyIdeas, cProject } = useSelector(projectSelector);
   const [loadMore, setLoadMore] = useState(3);
@@ -20,35 +20,13 @@ export const DraftIdeasProject = () => {
     dispatch(MyIdeas());
   }, [dispatch, cProject]);
 
-  const dataFillterIdeas = (mlMyIdeas?.myIdeas ?? []).filter(item => item.status === 'draft');
   const dataFillterProjects = (mlMyProject?.myProject ?? []).filter(
-    item => item.status === 'draft'
+    item => item.status === 'running'
   );
 
   return (
     <section>
       <div className="space-y-4 border-b p-4 pb-5">
-        <TitleItem title="Ideas" number={dataFillterIdeas?.length} />
-        <div className="grid grid-cols-3 gap-4 px-3">
-          {(dataFillterIdeas ?? []).map((item, index) => {
-            return (
-              <div key={index}>
-                <BoardItem
-                  imgPage={item?.attachments?.main_picture?.file}
-                  imgAvatar={item?.avatar_attachment?.file}
-                  nameProject={item?.name}
-                  modalDraft
-                  shadowNone
-                  admin
-                  placement="bottomRight"
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Project" number={dataFillterProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataFillterProjects ?? []).map((item, index) => {
@@ -58,8 +36,9 @@ export const DraftIdeasProject = () => {
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
-                  modalDraftProject
+                  modalDraft
                   shadowNone
+                  admin
                   placement="bottomRight"
                 />
               </div>

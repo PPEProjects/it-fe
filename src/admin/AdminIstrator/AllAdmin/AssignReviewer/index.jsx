@@ -5,6 +5,7 @@ import { FormAssign } from './FormAssign';
 import { HiOutlineUserGroup } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector, myListUser } from 'pages/user/userSlice';
+import { thumbImage } from '../../../../services/convert';
 
 export const AssignReviewer = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export const AssignReviewer = () => {
         </Select>
 
         <Button type="primary " className="pl-5">
-          Primary Button
+          Send invite
         </Button>
       </div>
       <p className="text-xs">RECOMMENDED TEAM MEMBERS</p>
@@ -52,9 +53,10 @@ export const AssignReviewer = () => {
           return (
             <div key={index}>
               <FormAssign
+                item={item}
                 nameAssign={item?.name}
                 goalAssign={item?.userAdvance?.goal}
-                imgAssign={item?.imgAssign}
+                imgAssign={thumbImage(item?.avatar_attachment?.file)}
               />
             </div>
           );

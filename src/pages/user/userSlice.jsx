@@ -399,6 +399,7 @@ export function myListUser() {
           name
           email
           phone_number
+          avatar_attachment
           userAdvance {
             id
             roles
