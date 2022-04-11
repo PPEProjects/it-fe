@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
     "@reduxjs/toolkit": "^1.7.1",
@@ -59,7 +60,6 @@
     ]
   },
   "devDependencies": {
-    "apollo-client": "^2.6.10",
     "apollo-link": "^1.2.14",
     "apollo-link-error": "^1.1.13",
     "autoprefixer": "^10.4.2",
