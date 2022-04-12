@@ -174,6 +174,7 @@ export function MyIdeas(type = 'ideas') {
 }
 
 export function createProject(values) {
+  console.log(values)
   return async dispatch => {
     dispatch(setMerge({ cProject: { isLoading: true } }));
     const mutationAPI = () => {
@@ -226,6 +227,7 @@ export function createProject(values) {
         );
       });
     } catch (e) {
+      console.log(e)
       dispatch(setMerge({ cProject: { isLoading: false } }));
     }
   };
