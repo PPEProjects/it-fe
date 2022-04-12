@@ -142,7 +142,7 @@ const MyProfile = () => {
           </div>
 
           <div className="space-y-3">
-            <Directory nameDirectory="Personal goals" />
+            <Directory nameDirectory="Plan" />
             <p className="text-[24px] text-[#000000]">{deUsers?.userAdvance?.plan}</p>
           </div>
 

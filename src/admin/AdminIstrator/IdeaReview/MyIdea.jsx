@@ -18,7 +18,7 @@ export const MyIdea = () => {
     <MasterLayout>
       <LayoutAdmin>
         <div className="p-4">
-          <TitleItem title="My Idea" number={mlMyIdeas?.myIdeas?.length} />
+          <TitleItem title="Idea Review" number={mlMyIdeas?.myIdeas?.length} />
         </div>
         <div className="grid grid-cols-2 gap-4 p-4">
           {(mlMyIdeas?.myIdeas ?? []).map((item, index) => {

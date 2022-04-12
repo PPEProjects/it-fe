@@ -5,7 +5,7 @@ import { TitleItem } from 'admin/AdminIstrator/AllAdmin/TitleItem';
 import { BoardItem } from 'components/BoardItem';
 import { Steps_OLD } from 'components/Steps_OLD';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSelector, myProject } from 'pages/user/userSlice';
+import { userSelector, listJoinProject } from 'pages/user/userSlice';
 
 const dataStepsColumn = [
   {
@@ -23,19 +23,23 @@ const dataStepsColumn = [
 ];
 const MyIdeas = () => {
   const dispatch = useDispatch();
-  const { mlMyProject, cProject } = useSelector(userSelector);
+  const { mlPJoinProject, cProject } = useSelector(userSelector);
 
   useEffect(() => {
-    dispatch(myProject());
+    dispatch(listJoinProject());
   }, [dispatch, cProject]);
   return (
     <LayoutProject>
       <section className="px-4 py-6 space-y-3">
         <div className="border rounded-md p-3 bg-white space-y-3">
           <ButtonSort />
-          <TitleItem title="Joined Project" number="3" className="text-lg font-semibold" />
+          <TitleItem
+            title="Joined Project"
+            number={mlPJoinProject?.listJoinProject?.length}
+            className="text-lg font-semibold"
+          />
           <div className="grid grid-cols-3 gap-4 px-3">
-            {(mlMyProject?.myProject ?? []).map((item, index) => {
+            {(mlPJoinProject?.listJoinProject ?? []).map((item, index) => {
               return (
                 <div key={index}>
                   <BoardItem

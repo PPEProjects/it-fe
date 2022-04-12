@@ -14,6 +14,7 @@ export const initialState = {
   dProject: {},
   mlUser: {},
   isOpenMyProfileRight: false,
+  mlPJoinProject: {},
 };
 
 const userSlice = createSlice({
@@ -413,5 +414,43 @@ export function myListUser() {
       query,
     });
     dispatch(setData({ mlUser: { myListUser: res.data.searchUsers } }));
+  };
+}
+
+export function listJoinProject() {
+  return async dispatch => {
+    dispatch(setMerge({ mlPJoinProject: { isLoading: true } }));
+    const query = gql`
+      query ListJoinProject($type: String) {
+        listJoinProject(type: $type) {
+          id
+          name
+          user {
+            email
+            id
+            name
+          }
+          attachments
+          authorUserId
+          category
+          status
+          description
+          level
+          privacy
+          version
+          budget
+          type
+          salary
+          is_involved
+          is_recruit
+          createdAt
+          updatedAt
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+    });
+    dispatch(setData({ mlPJoinProject: { listJoinProject: res.data.listJoinProject } }));
   };
 }

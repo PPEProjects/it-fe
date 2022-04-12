@@ -4,6 +4,7 @@ import { userSelector } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { memberProjectSelector, upsertMemberProject } from 'pages/memberProject/memberProjectSlice';
 import { getURLParams } from 'services';
+import { StarRed } from 'components/StarRed';
 
 export const JoinPosition = () => {
   const dispatch = useDispatch();
@@ -73,9 +74,21 @@ export const JoinPosition = () => {
                   placeholder="0987 654 321"
                 />
               </Form.Item>
-              <Form.Item className="!mb-0 w-1/2" name="position" label="Position">
-                <Input className="!rounded" placeholder="Leader" />
-              </Form.Item>
+              <div>
+                <StarRed star name="Position" />
+                <Form.Item
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your position!',
+                    },
+                  ]}
+                  className="!mb-0 w-1/2"
+                  name="position"
+                >
+                  <Input className="!rounded" placeholder="Leader" />
+                </Form.Item>
+              </div>
               <Form.Item className="!mb-0" label="Job Description" name="jobDescription">
                 <TextArea className="!rounded !h-[120px]" placeholder="" />
               </Form.Item>
