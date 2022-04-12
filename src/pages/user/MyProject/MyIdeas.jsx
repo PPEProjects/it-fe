@@ -5,7 +5,10 @@ import { TitleItem } from 'admin/AdminIstrator/AllAdmin/TitleItem';
 import { BoardItem } from 'components/BoardItem';
 import { Steps_OLD } from 'components/Steps_OLD';
 import { useDispatch, useSelector } from 'react-redux';
-import { userSelector, myIdeas } from 'pages/user/userSlice';
+import { userSelector, setData, myIdeas, setUserMerge } from 'pages/user/userSlice';
+import { Menu, Dropdown, Modal, Button, Popconfirm } from 'antd';
+import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
+import { ModalProject } from './ModalProject';
 
 const dataStepsColumn = [
   {
@@ -23,7 +26,20 @@ const dataStepsColumn = [
 ];
 const MyIdeas = () => {
   const dispatch = useDispatch();
-  const { mlMyIdeas, upProject, cProject, dProject } = useSelector(userSelector);
+  const { mlMyIdeas, upProject, dataProject, cProject, dProject } = useSelector(userSelector);
+
+  // const renderModalUpdateProject = () => {
+  //   return (
+  //     <Modal
+  //       className="!w-[1280px]"
+  //       visible={upProject?.isOpen}
+  //       onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
+  //       footer={null}
+  //     >
+  //       <UpdateProject updateMyProject={dataProject} />
+  //     </Modal>
+  //   );
+  // };
 
   useEffect(() => {
     dispatch(myIdeas());
@@ -31,6 +47,8 @@ const MyIdeas = () => {
 
   return (
     <LayoutProject>
+      {/* {renderModalUpdateProject()} */}
+      <ModalProject />
       <section className="px-4 py-6 space-y-3">
         <div className="border rounded-md p-3 bg-white space-y-3">
           <ButtonSort />
@@ -56,7 +74,12 @@ const MyIdeas = () => {
                     placement="bottomRight"
                   >
                     <div className="px-2 -mt-4">
-                      <Steps_OLD dataSteps={dataStepsColumn} stepsColumn uppercase borderNone></Steps_OLD>
+                      <Steps_OLD
+                        dataSteps={dataStepsColumn}
+                        stepsColumn
+                        uppercase
+                        borderNone
+                      ></Steps_OLD>
                     </div>
                   </BoardItem>
                 </div>

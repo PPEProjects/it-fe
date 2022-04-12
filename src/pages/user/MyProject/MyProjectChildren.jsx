@@ -6,6 +6,7 @@ import { BoardItem } from 'components/BoardItem';
 import { Steps_OLD } from 'components/Steps_OLD';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector, myProject } from 'pages/user/userSlice';
+import { ModalProject } from './ModalProject';
 
 const dataStepsNameColumn = [
   {
@@ -61,6 +62,7 @@ const MyIdeas = () => {
 
   return (
     <LayoutProject>
+      <ModalProject />
       <section className="px-4 py-6 space-y-3">
         <div className="border rounded-lg p-3  bg-white space-y-3 ">
           <ButtonSort />
@@ -86,7 +88,12 @@ const MyIdeas = () => {
                     placement="bottomRight"
                   >
                     <div className="px-2 -mt-4">
-                      <Steps_OLD dataSteps={dataStepsNameColumn} stepsRow StepsNameColumn stepsName />{' '}
+                      <Steps_OLD
+                        dataSteps={dataStepsNameColumn}
+                        stepsRow
+                        StepsNameColumn
+                        stepsName
+                      />{' '}
                     </div>
                   </BoardItem>
                 </div>

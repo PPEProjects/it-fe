@@ -167,6 +167,7 @@ export function updateMyProject({ project }, level) {
             updateProject(data: $data) {
               id
               level
+              status
             }
           }
         `,

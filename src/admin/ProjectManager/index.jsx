@@ -42,7 +42,10 @@ const ProjectManager = () => {
                     item={item}
                   >
                     <div className="p-2 space-y-4">
-                      <StepsView current={item.project.status} />
+                      <StepsView
+                        onClick={() => console.log('step')}
+                        current={item.project.status}
+                      />
                     </div>
                   </BoardItem>
                 </div>
