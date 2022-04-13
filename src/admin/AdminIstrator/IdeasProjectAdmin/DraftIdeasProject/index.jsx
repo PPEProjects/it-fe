@@ -34,12 +34,12 @@ export const DraftIdeasProject = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  item={item}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   modalDraft
                   shadowNone
-                  admin
                   placement="bottomRight"
                 />
               </div>

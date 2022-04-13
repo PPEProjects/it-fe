@@ -280,6 +280,8 @@ export const BoardItem = ({
       </Modal>
     );
   };
+
+  // datvnt
   const renderModalDraftIdeasProject = () => {
     return (
       <Modal
@@ -288,7 +290,7 @@ export const BoardItem = ({
         onCancel={handleCancelDraftIdeasProject}
         footer={null}
       >
-        <AssignReviewer />
+        <AssignReviewer item={item} closeModal={handleCancelDraftIdeasProject} />
       </Modal>
     );
   };
