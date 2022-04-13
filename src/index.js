@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import {store} from "services/reduxToolkit";
+import 'lazysizes';
 
 ReactDOM.render(
     <Provider store={store}>

@@ -16,6 +16,7 @@ import { IoMdAdd } from 'react-icons/io';
 import { ModalVoice } from './ModalVoice';
 import {apolloBuilder, NotifyContex, NotifyWrapper, ToastView, UserAvatarView} from "ppe-notify";
 import { message } from 'antd';
+import NotifyButtonView from "components/header/NotifyButtonView";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -263,14 +264,9 @@ const Header = () => {
                 <span>New Idea/Project</span>
               </div>
             </Button>
-            <Button shape="circle !h-[36px] !bg-gray-200 !w-[36px] !border-[#0369A1]">
 
-              <img
-                src="/assets/images/icon-hand.jpg"
-                alt=""
-                className="rounded-full -mt-1 !w-[34px] !h-[34px]"
-              />
-            </Button>
+            <NotifyButtonView />
+
             <div
               onClick={() => dispatch(setUser({ isOpenMyProfileRight: !isOpenMyProfileRight }))}
               className="flex items-center cursor-pointer space-x-2"
