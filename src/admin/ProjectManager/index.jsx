@@ -46,8 +46,9 @@ const ProjectManager = () => {
                   >
                     <div className="p-2 space-y-4">
                       <StepsView StepsEnum={StepsEnum} current={item.project.status} />
-                      <StepsColumn current={item.project.status} />
-                      <StepsView StepsEnum={StepsEnum} current={item.project.status} />
+                      <StepsColumn StepsEnum={StepsEnum} iconDropdown current={item.project.status}>
+                        <div>Xin chao</div>
+                      </StepsColumn>
                     </div>
                   </BoardItem>
                 </div>
