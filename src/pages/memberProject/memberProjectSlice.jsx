@@ -5,6 +5,7 @@ import { apolloClient, restClient } from 'services';
 
 export const initialState = {
   upMemberProject: {},
+  upMemberProjectUserIds: {},
   dMemberProject: {},
   projects: {},
 };
@@ -189,5 +190,54 @@ export function updateMyProject({ project }, level) {
 
       dispatch(setMerge({ projects }));
     } catch (e) {}
+  };
+}
+
+export function UpsertProjectMembersUserIds(values) {
+  return async dispatch => {
+    dispatch(setMerge({ upMemberProjectUserIds: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation UpsertProjectMembersUserIds($data: ProjectMembersInputId!) {
+          upsertProjectMembersUserIds(data: $data) {
+            id
+            pmUserId
+            projectId
+            project {
+              id
+              name
+            }
+            memberUserId
+            position
+            linkTest
+            salary
+            fee
+            status
+            createdAt
+            updatedAt
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            upMemberProjectUserIds: {
+              project: res.data.UpsertProjectMembersUserIds,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ upMemberProjectUserIds: { isLoading: false } }));
+    }
   };
 }

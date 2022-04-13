@@ -30,24 +30,24 @@ export const ManageMember = () => {
         each position.
       </p>
       <div className="flex space-x-2 mt-5">
-        <Tooltip placement="bottom" title={texts}>
+        <Tooltip placement="bottom">
           <AddGoal board text="Leader" />
           <div></div>
         </Tooltip>
-        <Tooltip placement="bottom" title={texts}>
-          <AddGoal board text="Leader" />
+        <Tooltip placement="bottom">
+          <AddGoal board text="QC" />
           <div></div>
         </Tooltip>
-        <Tooltip placement="bottom" title={texts}>
-          <AddGoal board text="Leader" />
+        <Tooltip placement="bottom">
+          <AddGoal board text="Dev" />
           <div></div>
         </Tooltip>
-        <Tooltip placement="bottom" title={texts}>
-          <AddGoal board text="Leader" />
+        <Tooltip placement="bottom">
+          <AddGoal board text="Dev" />
           <div></div>
         </Tooltip>
-        <Tooltip placement="bottom" title={texts}>
-          <AddGoal board text="Leader" />
+        <Tooltip placement="bottom">
+          <AddGoal board text="Tester" />
           <div></div>
         </Tooltip>
       </div>
