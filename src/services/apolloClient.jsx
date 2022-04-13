@@ -1,9 +1,8 @@
 import Cookies from 'universal-cookie';
-import { ApolloClient } from 'apollo-client';
 import { ApolloLink } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import {ApolloClient, InMemoryCache} from "@apollo/client";
 const cookies = new Cookies();
 const token = cookies.get('ppe-it');
 const httpLink = new HttpLink({

@@ -5,6 +5,9 @@ import { BoardItem } from 'components/BoardItem';
 import { getMyProjects, memberProjectSelector } from '../../pages/memberProject/memberProjectSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import StepsView from '../../components/StepsView';
+import { StepsColumn } from 'components/StepsColumn';
+
+export const StepsEnum = ['Preparing', 'Onboard', 'Running', 'Done'];
 
 const avatarAttachment = attachment => {
   return attachment.thumb;
@@ -42,7 +45,9 @@ const ProjectManager = () => {
                     item={item}
                   >
                     <div className="p-2 space-y-4">
-                      <StepsView current={item.project.status} />
+                      <StepsView StepsEnum={StepsEnum} current={item.project.status} />
+                      <StepsColumn current={item.project.status} />
+                      <StepsView StepsEnum={StepsEnum} current={item.project.status} />
                     </div>
                   </BoardItem>
                 </div>
