@@ -482,7 +482,9 @@ export const BoardItem = ({
               src={thumbImage(imgAvatar)}
               alt=""
             />
-            <span className="font-[600] text-[#0369A1]">{nameProject}</span>
+            <span className="text-[#0369A1] font-semibold overflow-hidden line-clamp-2 max-h-10">
+              {nameProject}
+            </span>
           </Link>
 
           <div className="flex items-center space-x-2">
