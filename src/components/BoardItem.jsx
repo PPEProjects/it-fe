@@ -417,7 +417,10 @@ export const BoardItem = ({
             </Link>
             <MenuItemHover nameMenu="Download" />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
-            <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusProject} />
+            <MenuItemHover
+              nameMenu="Update Status Product"
+              onClick={showModalUpdateStatusProject}
+            />
           </>
         )}
         {modalJoinProject && (
