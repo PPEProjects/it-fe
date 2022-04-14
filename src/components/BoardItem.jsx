@@ -97,7 +97,9 @@ export const BoardItem = ({
   };
   const handleCancelDraftIdeasProject = () => {
     setIsModalDraftIdeasProject(false);
-    console.log('modal is false');
+  };
+  const handleCloseDraftIdeasProject = () => {
+    setIsModalDraftIdeasProject(false);
   };
   const showModalUpdateInformationPro = () => {
     setIsModalUpdateInformationPro(true);
@@ -277,7 +279,7 @@ export const BoardItem = ({
         onCancel={handleCancelManageMembers}
         footer={null}
       >
-        <ManageMember item={item} closeModal={handleCancelDraftIdeasProject} />
+        <ManageMember item={item} closeModal={handleCloseDraftIdeasProject} />
       </Modal>
     );
   };

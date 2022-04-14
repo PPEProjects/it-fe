@@ -24,7 +24,7 @@ export const AddGoal = ({ board, running, imgAvatar, done, text, item, position,
         onOk={handleOkAddGoal}
         footer={null}
       >
-        <AssignReviewer item={item} position={position} closeModal={closeModal} />
+        <AssignReviewer item={item} position={position} closeModal={handleOkAddGoal} />
       </Modal>
     );
   };
