@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
-import 'antd/dist/antd.css';
 import { authRoutes } from 'pages/auth/authRoutes';
 import { homeRoutes } from 'pages/home/homeRoutes';
 import { userRoutes } from 'pages/user/userRoutes';

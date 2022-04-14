@@ -14,7 +14,7 @@ import { BiSearch, BiShoppingBag } from 'react-icons/bi';
 import { AiOutlineClose, AiFillHome, AiOutlineSetting } from 'react-icons/ai';
 import { IoMdAdd } from 'react-icons/io';
 import { ModalVoice } from './ModalVoice';
-import {apolloBuilder, NotifyContex, NotifyWrapper, ToastView, UserAvatarView} from "ppe-notify";
+import {apolloBuilder, AppNotifyContext, NotifyWrapper, ToastView} from "ppe-notify";
 import { message } from 'antd';
 import NotifyButtonView from "components/header/NotifyButtonView";
 
@@ -84,207 +84,158 @@ const Header = () => {
         <NewProject />
       </Modal>
     );
-  };
-
-  const [notifyContext, setNotifyContext] = useState({
-      avatar: '',
-      user: {}
-    }
-  )
-
-  const apolloClient = apolloBuilder({
-    httpLink: 'http://localhost:3000/graphql',
-    wsLink: 'ws://localhost:3000/graphql',
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNTM4OWEyNWI1Mzg0OGQyZjdkNzJhOSIsImFwcElEIjoicHBlLW5vdGlmeSIsImlwQWRtaW4iOiI6OjEiLCJpYXQiOjE2NDk2NDIwMDksImV4cCI6MTY0OTkwMTIwOX0.EHyP8YDmseHrd8xxwas3TXiffny2VuDr8uV1UKGHsHY',
-    onError: (message, extensions) => {
-      console.log(message)
-    }
-  })
-
-  const onToast = (_message) => {
-    if(_message.error) {
-      message.error(_message.message)
-    } else {
-      message.success(_message.message)
-    }
   }
-
-  useEffect(()=> {
-
-    if(me?.data) {
-
-      setNotifyContext((prevState) => {
-        prevState.user = {
-          id: '',
-          avatar: me?.data?.avatar_attachment?.file,
-          specialID: me?.data?.id,
-          name: me?.data?.name
-        }
-        return prevState
-      })
-
-    }
-
-  }, [me])
 
   return (
 
-    <NotifyWrapper apollo={apolloClient} context={notifyContext}>
-
-      <>
-        <NotifyContex.Consumer>
-          { ctx => Object.keys(ctx.user).length > 0 ? <ToastView onReceived={onToast} /> :null }
-        </NotifyContex.Consumer>
-        <section className="p-3 relative flex items-center space-x-2 border-b px-3">
-          <div className="w-3/12 pl-3">
-            <div className="flex items-center space-x-8">
-              <GiHamburgerMenu onClick={toggleMenu} className="text-3xl cursor-pointer" />
-              <Link className="flex items-center space-x-8" to={`/AllPage`}>
-                <img
-                  className="w-[41px]"
-                  src={`/assets/images/photo_2021-07-14_10-53-20.jpg`}
-                  alt=""
-                />{' '}
-                <span className="text-[30px] !text-black">SmileEye</span>
-              </Link>
+    <section id='siteHeader' className="p-3 relative flex items-center space-x-2 border-b px-3">
+      <div className="w-3/12 pl-3">
+        <div className="flex items-center space-x-8">
+          <GiHamburgerMenu onClick={toggleMenu} className="text-3xl cursor-pointer" />
+          <Link className="flex items-center space-x-8" to={`/AllPage`}>
+            <img
+              className="w-[41px]"
+              src={`/assets/images/photo_2021-07-14_10-53-20.jpg`}
+              alt=""
+            />{' '}
+            <span className="text-[30px] !text-black">SmileEye</span>
+          </Link>
+        </div>
+        <div
+          onClick={toggleMenu}
+          className={`bg-black w-full h-full opacity-40 z-[99] fixed top-0 ${
+            menuShow ? 'block' : 'hidden'
+          } `}
+        />
+        <div
+          className={`bg-white w-[251px] z-[99] h-[856px] absolute ease-in-out duration-[420ms] top-0  ${
+            menuShow ? 'left-0' : 'left-[-555px]'
+          } `}
+        >
+          <div className="flex items-center justify-between px-3">
+            <div className="flex items-center space-x-2">
+              <img
+                alt=""
+                className="w-12 h-12 my-auto"
+                src="https://smileeye.edu.vn/assets/images/photo_2021-07-14_10-53-20.jpg"
+              />
+              <h3 className="text-center my-auto ml-[1em] text-[20px]">SmileEye</h3>
             </div>
-            <div
+            <button
               onClick={toggleMenu}
-              className={`bg-black w-full h-full opacity-40 z-[99] fixed top-0 ${
-                menuShow ? 'block' : 'hidden'
-              } `}
-            />
-            <div
-              className={`bg-white w-[251px] z-[99] h-[856px] absolute ease-in-out duration-[420ms] top-0  ${
-                menuShow ? 'left-0' : 'left-[-555px]'
-              } `}
+              className="border-[2px] text-[20px] border-[#0369A1] rounded-md text-[#0369A1] p-1"
             >
-              <div className="flex items-center justify-between px-3">
-                <div className="flex items-center space-x-2">
-                  <img
-                    alt=""
-                    className="w-12 h-12 my-auto"
-                    src="https://smileeye.edu.vn/assets/images/photo_2021-07-14_10-53-20.jpg"
-                  />
-                  <h3 className="text-center my-auto ml-[1em] text-[20px]">SmileEye</h3>
-                </div>
-                <button
-                  onClick={toggleMenu}
-                  className="border-[2px] text-[20px] border-[#0369A1] rounded-md text-[#0369A1] p-1"
-                >
-                  <AiOutlineClose />
-                </button>
-              </div>
-
-              <div className="w-full px-2">
-                <Menu
-                  mode="inline"
-                  openKeys={openKeys}
-                  onOpenChange={onOpenChange}
-                  style={{ width: 243 }}
-                >
-                  <Menu.Item key="5">
-                    <Link to="/AllPage" className="flex items-center space-x-2">
-                      <AiFillHome className="text-2xl" />
-                      <span>Home</span>
-                    </Link>
-                  </Menu.Item>
-
-                  <SubMenu
-                    icon={<BiShoppingBag className="!text-2xl" />}
-                    key="sub1"
-                    title="My Idea/Project"
-                  >
-                    <Menu.Item key="1">
-                      <Link to={`/MyProject/MyIdeas?id=${me?.data?.id}`}>My Idea</Link>
-                    </Menu.Item>
-                    <Menu.Item key="2">
-                      <Link to={`/MyProject/MyProjectChildren?id=${me?.data?.id}`}>My Project</Link>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                      <Link to={`/MyProject/FollowIdeaProject?id=${me?.data?.id}`}>
-                        Interested Project
-                      </Link>
-                    </Menu.Item>
-                    <Menu.Item key="4">
-                      <Link to={`/MyProject/JoinedProject?id=${me?.data?.id}`}>Joined Project</Link>
-                    </Menu.Item>
-                  </SubMenu>
-
-                  <Menu.Item key="6">
-                    <Link
-                      to={`/Administrator?id=${me?.data?.id}`}
-                      className="flex items-center space-x-2"
-                    >
-                      <HiOutlineUserGroup className="text-2xl" />
-                      <span>Administration</span>
-                    </Link>
-                  </Menu.Item>
-                  <SubMenu
-                    icon={<AiOutlineSetting className="!text-2xl" />}
-                    key="sub4"
-                    title="Setting"
-                  >
-                    <Menu.Item key="8">
-                      <Link to={`/Account?id=${me?.data?.id}`}>Account</Link>
-                    </Menu.Item>
-                    <Menu.Item key="9">
-                      <Link to={`/NewProfile?id=${me?.data?.id}`}>Profile</Link>
-                    </Menu.Item>
-                  </SubMenu>
-                </Menu>
-              </div>
-            </div>
+              <AiOutlineClose />
+            </button>
           </div>
 
-          <div className="flex items-center space-x-2 w-5/12">
-            <div className="flex items-center w-5/6 -ml-4">
-              <Input className="!rounded-l-[6px] h-[50px] z-10" />
-              <Button className="!h-[50px] -ml-0.5 !rounded-r-[6px]">
+          <div className="w-full px-2">
+            <Menu
+              mode="inline"
+              openKeys={openKeys}
+              onOpenChange={onOpenChange}
+              style={{ width: 243 }}
+            >
+              <Menu.Item key="5">
+                <Link to="/AllPage" className="flex items-center space-x-2">
+                  <AiFillHome className="text-2xl" />
+                  <span>Home</span>
+                </Link>
+              </Menu.Item>
+
+              <SubMenu
+                icon={<BiShoppingBag className="!text-2xl" />}
+                key="sub1"
+                title="My Idea/Project"
+              >
+                <Menu.Item key="1">
+                  <Link to={`/MyProject/MyIdeas?id=${me?.data?.id}`}>My Idea</Link>
+                </Menu.Item>
+                <Menu.Item key="2">
+                  <Link to={`/MyProject/MyProjectChildren?id=${me?.data?.id}`}>My Project</Link>
+                </Menu.Item>
+                <Menu.Item key="3">
+                  <Link to={`/MyProject/FollowIdeaProject?id=${me?.data?.id}`}>
+                    Interested Project
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="4">
+                  <Link to={`/MyProject/JoinedProject?id=${me?.data?.id}`}>Joined Project</Link>
+                </Menu.Item>
+              </SubMenu>
+
+              <Menu.Item key="6">
+                <Link
+                  to={`/Administrator?id=${me?.data?.id}`}
+                  className="flex items-center space-x-2"
+                >
+                  <HiOutlineUserGroup className="text-2xl" />
+                  <span>Administration</span>
+                </Link>
+              </Menu.Item>
+              <SubMenu
+                icon={<AiOutlineSetting className="!text-2xl" />}
+                key="sub4"
+                title="Setting"
+              >
+                <Menu.Item key="8">
+                  <Link to={`/Account?id=${me?.data?.id}`}>Account</Link>
+                </Menu.Item>
+                <Menu.Item key="9">
+                  <Link to={`/NewProfile?id=${me?.data?.id}`}>Profile</Link>
+                </Menu.Item>
+              </SubMenu>
+            </Menu>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center space-x-2 w-5/12">
+        <div className="flex items-center w-5/6 -ml-4">
+          <Input className="!rounded-l-[6px] h-[50px] z-10" />
+          <Button className="!h-[50px] -ml-0.5 !rounded-r-[6px]">
               <span className="pt-[4px]">
                 <BiSearch className="text-2xl" />
               </span>
-              </Button>
-            </div>
-            <Button shape="circle !h-[50px] !w-[50px]">
+          </Button>
+        </div>
+        <Button shape="circle !h-[50px] !w-[50px]">
             <span className="pt-[4px]">
               <BsFillMicFill className="text-xl" onClick={showModalVoice} />
             </span>
-            </Button>
+        </Button>
+      </div>
+      <div className="flex space-x-2 items-center justify-end pr-4 w-4/12">
+        <Button
+          onClick={() => {
+            dispatch(setProjectMerge('cProject', { isOpen: true }));
+          }}
+          className="!rounded-md !bg-[#FB923C] !h-[50px]"
+        >
+          <div className="flex items-center text-xl text-white space-x-1">
+            <IoMdAdd />
+            <span>New Idea/Project</span>
           </div>
-          <div className="flex space-x-2 items-center justify-end pr-4 w-4/12">
-            <Button
-              onClick={() => {
-                dispatch(setProjectMerge('cProject', { isOpen: true }));
-              }}
-              className="!rounded-md !bg-[#FB923C] !h-[50px]"
-            >
-              <div className="flex items-center text-xl text-white space-x-1">
-                <IoMdAdd />
-                <span>New Idea/Project</span>
-              </div>
-            </Button>
+        </Button>
 
-            <NotifyButtonView />
+        <NotifyButtonView />
 
-            <div
-              onClick={() => dispatch(setUser({ isOpenMyProfileRight: !isOpenMyProfileRight }))}
-              className="flex items-center cursor-pointer space-x-2"
-            >
-              <img
-                className='w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100"'
-                src={thumbImage(me?.data?.avatar_attachment?.file)}
-                alt=""
-              />
-              <span className="text-[#0369A1] text-xl">{me?.data?.name}</span>
-            </div>
-          </div>
-          {renderModalNewProject()}
-          {renderModalVoice()}
-        </section>
-      </>
+        <div
+          onClick={() => dispatch(setUser({ isOpenMyProfileRight: !isOpenMyProfileRight }))}
+          className="flex items-center cursor-pointer space-x-2"
+        >
+          <img
+            className='w-[36px] h-[36px] border rounded-full flex items-center justify-center bg-gray-100"'
+            src={thumbImage(me?.data?.avatar_attachment?.file)}
+            alt=""
+          />
+          <span className="text-[#0369A1] text-xl">{me?.data?.name}</span>
+        </div>
+      </div>
+      {renderModalNewProject()}
+      {renderModalVoice()}
+    </section>
 
-    </NotifyWrapper>
   );
 };
 
