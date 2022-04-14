@@ -1,7 +1,20 @@
+@import 'antd/dist/antd.css';
+@import "ppe-notify/dist/css/style.min.css";
+@import '@tienlucky/storage/src/tienlucky-storage.min.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .step-circle {
   @apply flex justify-center items-center rounded-full border-2 border-primary-500 flex-shrink-0 w-8 h-8
+}
+
+.rounded-full.header-notify-avatar img {
+  border-radius: 50%;
+  border: 1px #33333324 solid;
+}
+
+._infinite-notifies:not(:empty) + ._empty-content {
+  display: none;
 }
