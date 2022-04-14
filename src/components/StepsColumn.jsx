@@ -2,10 +2,21 @@ import React, { useState } from 'react';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
 import classNames from 'classnames';
+import { updateStatusProject } from 'pages/project/projectSlice';
+import { useDispatch } from 'react-redux';
 
-export const StepsColumn = ({ current, iconDropdown, children, StepsEnum, uppercase }) => {
+export const StepsColumn = ({
+  current,
+  iconDropdown,
+  children,
+  StepsEnum,
+  uppercase,
+  item,
+  closeModal,
+}) => {
   const _current = StepsEnum.indexOf(current);
   const max_length = StepsEnum.length;
+  const dispatch = useDispatch();
   const [isShow, setIsShow] = useState(false);
 
   return (
@@ -19,7 +30,15 @@ export const StepsColumn = ({ current, iconDropdown, children, StepsEnum, upperc
               index !== max_length - 1 ? 'pb-10' : ''
             )}
           >
-            <a href className="flex items-center space-x-2">
+            <a
+              onClick={() => {
+                const values = { status: step, id: item?.id };
+                dispatch(updateStatusProject({ data: values }));
+                closeModal();
+              }}
+              href
+              className="flex items-center text-gray-400 space-x-2"
+            >
               <div
                 className={classNames(
                   'step-circle z-10',
@@ -50,8 +69,8 @@ export const StepsColumn = ({ current, iconDropdown, children, StepsEnum, upperc
               <span
                 className={classNames(
                   'font-medium ml-1.5',
-                  _current > index && '!text-gray-900',
-                  _current === index - 1 ? '!text-[#0369A1]' : '!text-gray-400',
+                  _current >= index && 'text-gray-900',
+                  _current === index - 1 && 'text-[#0369A1]',
                   {
                     uppercase: uppercase,
                   }

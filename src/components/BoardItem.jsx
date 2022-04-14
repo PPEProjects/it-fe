@@ -224,7 +224,7 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateStatusIdea}
         footer={null}
       >
-        <UpdateStatusIdea />
+        <UpdateStatusIdea item={item} closeModal={handleCancelUpdateStatusIdea} />
       </Modal>
     );
   };
@@ -236,7 +236,7 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateStatusProject}
         footer={null}
       >
-        <UpdateStatusProject />
+        <UpdateStatusProject item={item} closeModal={handleCancelUpdateStatusProject} />
       </Modal>
     );
   };

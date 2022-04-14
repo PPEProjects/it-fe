@@ -14,6 +14,7 @@ export const initialState = {
   dProjectInterested: {},
   mlProjectInterested: {},
   mlPJoinProject: {},
+  upStatusProject: {},
 };
 
 const projectSlice = createSlice({
@@ -174,7 +175,7 @@ export function MyIdeas(type = 'ideas') {
 }
 
 export function createProject(values) {
-  console.log(values)
+  console.log(values);
   return async dispatch => {
     dispatch(setMerge({ cProject: { isLoading: true } }));
     const mutationAPI = () => {
@@ -227,7 +228,7 @@ export function createProject(values) {
         );
       });
     } catch (e) {
-      console.log(e)
+      console.log(e);
       dispatch(setMerge({ cProject: { isLoading: false } }));
     }
   };
@@ -487,5 +488,42 @@ export function myProjectInterested() {
     dispatch(
       setData({ mlProjectInterested: { myProjectInterested: res.data.myProjectInterested } })
     );
+  };
+}
+
+export function updateStatusProject(values) {
+  return async dispatch => {
+    dispatch(setMerge({ upStatusProject: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation UpdateProject($data: ProjectInput!) {
+          updateProject(data: $data) {
+            id
+            status
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            upStatusProject: {
+              updateProject: res.data.updateProject,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      console.log(e);
+      dispatch(setMerge({ upStatusProject: { isLoading: false } }));
+    }
   };
 }
