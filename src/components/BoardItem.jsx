@@ -331,7 +331,7 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateProjectStatus}
         footer={null}
       >
-        <UpdateProjectStatus />
+        <UpdateProjectStatus item={item} closeModal={handleCancelUpdateProjectStatus} />
       </Modal>
     );
   };

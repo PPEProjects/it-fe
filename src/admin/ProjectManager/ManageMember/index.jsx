@@ -40,19 +40,15 @@ export const ManageMember = ({ item, closeModal }) => {
             position="leader"
             text="Leader"
           />
-          <div></div>
         </Tooltip>
         <Tooltip placement="bottom">
           <AddGoal item={item?.project} closeModal={closeModal} position="qc" board text="QC" />
-          <div></div>
         </Tooltip>
         <Tooltip placement="bottom">
           <AddGoal item={item?.project} closeModal={closeModal} position="dev" board text="Dev" />
-          <div></div>
         </Tooltip>
         <Tooltip placement="bottom">
           <AddGoal item={item?.project} closeModal={closeModal} position="dev" board text="Dev" />
-          <div></div>
         </Tooltip>
         <Tooltip placement="bottom">
           <AddGoal
@@ -62,7 +58,6 @@ export const ManageMember = ({ item, closeModal }) => {
             board
             text="Tester"
           />
-          <div></div>
         </Tooltip>
       </div>
       <div className="flex items-end justify-end mt-7">
