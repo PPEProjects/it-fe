@@ -13,6 +13,7 @@ import { AddProjectLevel } from 'admin/ProjectManager/AddProjectLevel';
 import { DownloadFiles } from 'admin/ProjectManager/DownloadFiles';
 import { UpdateFiles } from 'admin/ProjectManager/UpdateFiles';
 import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
+import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
 import { userSelector, setUserMerge, deleteProject } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,6 +21,7 @@ import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
 import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
 import { setData } from 'pages/user/userSlice';
+import { ModalDraft } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/ModalDraft';
 import { UpdateStatusIdea } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusIdea';
 import { UpdateStatusProject } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusProject';
 import { ModalComment } from 'pages/home/AllPage/ModalComment';
@@ -54,7 +56,7 @@ export const BoardItem = ({
   borderRounded = true,
 }) => {
   const dispatch = useDispatch();
-  const { dataProject } = useSelector(userSelector);
+  const { upProject, dataProject } = useSelector(userSelector);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalAssignReviewer, setIsModalAssignReviewer] = useState(false);
   const [isModalReviewer, setIsModalReviewer] = useState(false);
@@ -95,6 +97,7 @@ export const BoardItem = ({
   };
   const handleCancelDraftIdeasProject = () => {
     setIsModalDraftIdeasProject(false);
+    console.log('modal is false');
   };
   const showModalUpdateInformationPro = () => {
     setIsModalUpdateInformationPro(true);
@@ -166,6 +169,31 @@ export const BoardItem = ({
     setIsModalDownloadFiles(false);
   };
 
+  const renderModalUpdateProject = () => {
+    return (
+      <Modal
+        className="!w-[1280px]"
+        visible={upProject?.isOpen}
+        onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
+        footer={null}
+      >
+        <UpdateProject updateMyProject={dataProject} />
+      </Modal>
+    );
+  };
+
+  const renderModalUpdateProject1 = () => {
+    return (
+      <Modal
+        className="!w-[1280px]"
+        visible={upProject?.isOpen}
+        onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
+        footer={null}
+      >
+        <UpdateProject updateMyProject={dataProject} />
+      </Modal>
+    );
+  };
   const renderModalComment = () => {
     return (
       <Modal
@@ -249,7 +277,7 @@ export const BoardItem = ({
         onCancel={handleCancelManageMembers}
         footer={null}
       >
-        <ManageMember />
+        <ManageMember item={item} closeModal={handleCancelDraftIdeasProject} />
       </Modal>
     );
   };
@@ -263,7 +291,7 @@ export const BoardItem = ({
         onCancel={handleCancelDraftIdeasProject}
         footer={null}
       >
-        <AssignReviewer item={item} closeModal={handleCancelDraftIdeasProject} />
+        <AssignReviewer position="pr" item={item} closeModal={handleCancelDraftIdeasProject} />
       </Modal>
     );
   };
@@ -438,6 +466,8 @@ export const BoardItem = ({
         'border-l border-b rounded-b-md': borderRounded,
       })}
     >
+      {renderModalUpdateProject1()}
+      {renderModalUpdateProject()}
       {renderModalTopComment()}
       {renderModalAssignReviewer()}
       {renderModalReviewer()}
@@ -484,9 +514,7 @@ export const BoardItem = ({
               src={thumbImage(imgAvatar)}
               alt=""
             />
-            <span className="text-[#0369A1] font-semibold overflow-hidden line-clamp-2 max-h-10">
-              {nameProject}
-            </span>
+            <span className="font-[600] text-[#0369A1]">{nameProject}</span>
           </Link>
 
           <div className="flex items-center space-x-2">

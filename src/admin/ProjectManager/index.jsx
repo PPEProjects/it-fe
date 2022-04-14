@@ -29,7 +29,7 @@ const ProjectManager = () => {
           {Object.values(projects)
             .filter(item => !!item.project)
             .map((item, index) => {
-              console.log('item', item);
+              // console.log('item', item);
               return (
                 <div key={index}>
                   <BoardItem
@@ -46,8 +46,8 @@ const ProjectManager = () => {
                   >
                     <div className="p-2 space-y-4">
                       <StepsView StepsEnum={StepsEnum} current={item.project.status} />
-                      <StepsColumn current={item.project.status} />
-                      <StepsView StepsEnum={StepsEnum} current={item.project.status} />
+                      {/* <StepsColumn current={item.project.status} /> */}
+                      {/* <StepsView StepsEnum={StepsEnum} current={item.project.status} /> */}
                     </div>
                   </BoardItem>
                 </div>

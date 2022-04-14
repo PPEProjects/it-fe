@@ -7,7 +7,7 @@ import { thumbImage } from '../../../../services/convert';
 import { GrFormAdd } from 'react-icons/gr';
 import { UpsertProjectMembersUserIds } from '../../../../pages/memberProject/memberProjectSlice';
 
-export const AssignReviewer = ({ item, closeModal }) => {
+export const AssignReviewer = ({ item, closeModal, position }) => {
   const dispatch = useDispatch();
   const { mlUser } = useSelector(userSelector);
   useEffect(() => {
@@ -32,18 +32,18 @@ export const AssignReviewer = ({ item, closeModal }) => {
         <Button
           type="primary"
           className="pl-5"
-          // onClick={() => closeModal()}
           onClick={() => {
             const values = {
               data: {
                 projectId: item.id,
                 memberUserId: selectedItems,
-                position: 'pr',
+                position: position,
               },
             };
             dispatch(UpsertProjectMembersUserIds(values));
             closeModal();
           }}
+          // onClick={() => console.log('id project', item)}
         >
           Send invite
         </Button>
