@@ -1,52 +1,34 @@
-import { Button } from 'antd';
-import { Steps_OLD } from 'components/Steps_OLD';
 import React from 'react';
-const dataStepsColumn = [
-  {
-    name: 'created',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    name: 'reviewing & improving',
-    href: '#',
-    status: 'current',
-  },
-  {
-    name: 'approve',
-    href: '#',
-    status: 'upcoming',
-  },
-  {
-    name: 'pm preparing',
-    href: '#',
-    status: 'upcoming',
-  },
-  {
-    name: 'onboard',
-    href: '#',
-    status: 'upcoming',
-  },
-  {
-    name: 'running',
-    href: '#',
-    status: 'upcoming',
-  },
-  {
-    name: 'done/stuck/in use',
-    href: '#',
-    status: 'upcoming',
-  },
+import { Button } from 'antd';
+import { StepsColumn } from 'components/StepsColumn';
+
+export const StepsEnum = [
+  'created',
+  'reviewing & improving',
+  'approve',
+  'pm preparing',
+  'onboard',
+  'running',
+  'done',
+  'stuck',
+  'in use',
 ];
-export const UpdateStatusProject = () => {
+
+export const UpdateStatusProject = ({ item, closeModal }) => {
   return (
-    <div>
-      <span className="text-lg font-semibold text-gray-800">Project Idea Update</span>
+    <div className="space-y-3">
+      <span className="text-lg font-semibold text-gray-800">Project Update</span>
       <div>
-        <Steps_OLD stepsColumn uppercase stepsName borderNone dataSteps={dataStepsColumn} />
+        <StepsColumn
+          item={item}
+          current={item.status}
+          uppercase
+          StepsEnum={StepsEnum}
+          closeModal={closeModal}
+        />
       </div>
       <div className="text-right">
-        <Button type="primary" className="!rounded-lg">
+        <Button type="primary" className="!rounded-lg !h-10">
           Confirm
         </Button>
       </div>

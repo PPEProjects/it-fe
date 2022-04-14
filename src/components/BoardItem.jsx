@@ -252,7 +252,7 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateStatusIdea}
         footer={null}
       >
-        <UpdateStatusIdea />
+        <UpdateStatusIdea item={item} closeModal={handleCancelUpdateStatusIdea} />
       </Modal>
     );
   };
@@ -264,7 +264,7 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateStatusProject}
         footer={null}
       >
-        <UpdateStatusProject />
+        <UpdateStatusProject item={item} closeModal={handleCancelUpdateStatusProject} />
       </Modal>
     );
   };
@@ -445,7 +445,10 @@ export const BoardItem = ({
             </Link>
             <MenuItemHover nameMenu="Download" />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
-            <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusProject} />
+            <MenuItemHover
+              nameMenu="Update Status Product"
+              onClick={showModalUpdateStatusProject}
+            />
           </>
         )}
         {modalJoinProject && (

@@ -17,6 +17,7 @@ export const Tabs = ({
   borderLeft,
   border,
   colorBg,
+  TabsNameClassName,
 }) => {
   const [openTab, setOpenTab] = useState(0);
 
@@ -47,7 +48,10 @@ export const Tabs = ({
               )}
             >
               {listTab.map((item, index) => (
-                <div key={index} className="flex-auto text-center pl-4">
+                <div
+                  key={index}
+                  className={classNames('flex-auto text-center pl-4', TabsNameClassName)}
+                >
                   <span
                     className={classNames(
                       'flex cursor-pointer items-center justify-center p-2.5 text-[15px] text-gray-500',
