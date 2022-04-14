@@ -6,8 +6,9 @@ import { getMyProjects, memberProjectSelector } from '../../pages/memberProject/
 import { useDispatch, useSelector } from 'react-redux';
 import StepsView from '../../components/StepsView';
 import { StepsColumn } from 'components/StepsColumn';
+import { projectSelector } from 'pages/project/projectSlice';
 
-export const StepsEnum = ['Preparing', 'Onboard', 'Running', 'Done'];
+export const StepsEnum = ['preparing', 'onboard', 'running', 'done'];
 
 const avatarAttachment = attachment => {
   return attachment.thumb;
@@ -17,10 +18,11 @@ const ProjectManager = () => {
   const dispatch = useDispatch();
 
   const { projects } = useSelector(memberProjectSelector);
+  const { upStatusProject } = useSelector(projectSelector);
 
   useEffect(async () => {
     await dispatch(getMyProjects());
-  }, [dispatch]);
+  }, [dispatch, upStatusProject]);
 
   return (
     <MasterLayout>
@@ -29,7 +31,6 @@ const ProjectManager = () => {
           {Object.values(projects)
             .filter(item => !!item.project)
             .map((item, index) => {
-              // console.log('item', item);
               return (
                 <div key={index}>
                   <BoardItem
@@ -46,8 +47,6 @@ const ProjectManager = () => {
                   >
                     <div className="p-2 space-y-4">
                       <StepsView StepsEnum={StepsEnum} current={item.project.status} />
-                      {/* <StepsColumn current={item.project.status} /> */}
-                      {/* <StepsView StepsEnum={StepsEnum} current={item.project.status} /> */}
                     </div>
                   </BoardItem>
                 </div>
