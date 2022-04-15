@@ -7,6 +7,7 @@ import { researchRoutes } from 'pages/research/researchRoutes';
 import { projectRoutes } from 'pages/project/projectRoutes';
 import { adminIstratorRoutes } from 'admin/AdminIstrator/adminIstratorRoutes';
 import { projectManagerRoutes } from 'admin/ProjectManager/projectManagerRoutes';
+import 'antd/dist/antd.css'
 
 function App() {
 
