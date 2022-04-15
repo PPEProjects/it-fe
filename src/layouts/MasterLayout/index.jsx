@@ -4,7 +4,6 @@ import { ProfileRight } from 'pages/user/ProfileRight';
 import { useSelector } from 'react-redux';
 import { userSelector } from 'pages/user/userSlice';
 import {apolloBuilder, AppNotifyContext, NotifyWrapper, ToastView} from "ppe-notify";
-import {message} from "antd";
 import {useEffect, useState} from "react";
 
 export default function Example({ children }) {
@@ -25,18 +24,9 @@ export default function Example({ children }) {
     }
   })
 
-  const onToast = (_message) => {
-    if(_message.error) {
-      message.error(_message.message)
-    } else {
-      message.success(_message.message)
-    }
-  }
-
   useEffect(()=> {
 
     if(me?.data) {
-
       setNotifyContext((prevState) => {
         prevState.user = {
           id: '',
@@ -53,11 +43,6 @@ export default function Example({ children }) {
 
   return (
     <NotifyWrapper apollo={apolloClient} context={notifyContext}>
-
-      <AppNotifyContext.Consumer>
-        { ctx => Object.keys(ctx.user).length > 0 ? <ToastView onReceived={onToast} /> :null }
-      </AppNotifyContext.Consumer>
-
       <div className="max-w-screen-2xl m-auto">
         <Header />
         <div className="flex">
