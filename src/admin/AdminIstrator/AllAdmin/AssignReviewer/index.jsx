@@ -7,7 +7,7 @@ import { thumbImage } from '../../../../services/convert';
 import { GrFormAdd } from 'react-icons/gr';
 import { UpsertProjectMembersUserIds } from '../../../../pages/memberProject/memberProjectSlice';
 
-export const AssignReviewer = ({ item, closeModal, position }) => {
+export const AssignReviewer = ({ item, closeModal, position, submitDataModal }) => {
   const dispatch = useDispatch();
   const { mlUser } = useSelector(userSelector);
   useEffect(() => {
@@ -20,6 +20,20 @@ export const AssignReviewer = ({ item, closeModal, position }) => {
     setSelectedItems([...selectedItems, item.id]);
   };
   const hrefLocation = window.location.pathname;
+  // const [dataMappping, setDataMapping] = useState([]);
+
+  // const dataMapping = async () => {
+  //   await selectedItems.map((item, index) => {
+  //     return <> {item.name} </>;
+  //   });
+  // };
+
+  // useEffect(async () => {
+  //   await setDataMapping(selectedItems);
+  //   console.log('dataMappping', dataMappping);
+  // });
+
+  // const dataValues =
   return (
     <div>
       <span className="flex items-center justify-center text-3xl text-[#9CA3AF]">
@@ -27,12 +41,28 @@ export const AssignReviewer = ({ item, closeModal, position }) => {
       </span>
       <h4 className="text-lg text-center pt-2">Assign Reviewer</h4>
       <div className="w-80% flex py-6">
-        <Input value={selectedItems} />
+        {/* {dataMappping.map((item, index) => {
+          return (
+            <span key={index}>
+              <Input value={item.name} />
+            </span>
+          );
+        })} */}
+        <Select
+          mode="multiple"
+          placeholder="Inserted are removed"
+          value={selectedItems}
+          // onChange={this.handleChange}
+          style={{ width: '100%' }}
+        ></Select>
+        {/* <Input value={selectedItems} /> */}
+        {/* <pre> {JSON.stringify(dataValues, null, ' ')} </pre> */}
 
         <Button
           type="primary"
           className="pl-5"
           onClick={() => {
+            // console.log('item', selectedItems);
             const values = {
               data: {
                 projectId: item.id,
@@ -42,6 +72,7 @@ export const AssignReviewer = ({ item, closeModal, position }) => {
             };
             dispatch(UpsertProjectMembersUserIds(values));
             closeModal();
+            // submitDataModal(selectedItems);
           }}
           // onClick={() => console.log('id project', item)}
         >

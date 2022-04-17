@@ -5,7 +5,16 @@ import { AssignReviewer } from 'admin/AdminIstrator/AllAdmin/AssignReviewer';
 
 import { IoMdAdd } from 'react-icons/io';
 
-export const AddGoal = ({ board, running, imgAvatar, done, text, item, position, closeModal }) => {
+export const AddGoal = ({
+  board,
+  running,
+  imgAvatar,
+  done,
+  text,
+  item,
+  position,
+  submitDataModal,
+}) => {
   const [isModalAddGoal, setIsModalAddGoal] = useState(false);
   const showModelAddGoal = () => {
     setIsModalAddGoal(true);
@@ -24,7 +33,12 @@ export const AddGoal = ({ board, running, imgAvatar, done, text, item, position,
         onOk={handleOkAddGoal}
         footer={null}
       >
-        <AssignReviewer item={item} position={position} closeModal={handleOkAddGoal} />
+        <AssignReviewer
+          item={item}
+          position={position}
+          closeModal={handleOkAddGoal}
+          submitDataModal={submitDataModal}
+        />
       </Modal>
     );
   };

@@ -29,13 +29,13 @@ export const ClickEdit = () => {
     <div>
       {renderModalClickConfirm()}
       <p className="text-lg font-semibold ">All Position</p>
-      <p className="text-sm font-medium text-gray-500 -mt-4">
+      <p className="text-sm font-medium text-gray-500">
         All members participating in the project will be displayed here. You can add, remove, update
         each position.
       </p>
       <div className="flex space-x-2 mt-5">
-        <AddGoal board text="Leader" />
-        <AddGoal board text="Leader" />
+        <AddGoal done text="Leader" />
+        <AddGoal running text="Leader" />
         <AddGoal board text="Leader" />
         <AddGoal board text="Leader" />
         <AddGoal board text="Leader" />

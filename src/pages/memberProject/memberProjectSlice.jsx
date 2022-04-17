@@ -7,6 +7,7 @@ export const initialState = {
   upMemberProject: {},
   upMemberProjectUserIds: {},
   dMemberProject: {},
+  deProject: { isRefresh: true },
   projects: {},
 };
 
@@ -238,6 +239,109 @@ export function UpsertProjectMembersUserIds(values) {
       });
     } catch (e) {
       dispatch(setMerge({ upMemberProjectUserIds: { isLoading: false } }));
+    }
+  };
+}
+
+export function detailProjectMember(id) {
+  console.log('id from redux', id);
+  return async dispatch => {
+    dispatch(setMerge({ deProject: { isRefresh: false, isLoading: true } }));
+    const query = gql`
+      query DetailProject($detailProjectId: ID) {
+        detailProject(id: $detailProjectId) {
+          id
+          name
+          user {
+            email
+            id
+            name
+            phone_number
+            avatar_attachment
+          }
+          members {
+            id
+            position
+            memberUser {
+              id
+              name
+              avatar_attachment
+            }
+          }
+          attachments
+          authorUserId
+          category
+          description
+          level
+          privacy
+          version
+          budget
+          type
+          salary
+          status
+          contentStatus
+          memberJoin
+          framework
+          programingLanguage
+          is_recruit
+          is_involved
+          createdAt
+          updatedAt
+          timeToDo
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+      variables: {
+        detailProjectId: id,
+      },
+    });
+    const detailProjectIds = res?.data?.detailProject;
+    dispatch(
+      setData({
+        deProject: {
+          detailProjectIds,
+          // isLoading: false,
+          // isRefresh: false,
+        },
+      })
+    );
+  };
+}
+
+export function deleteProjectMemberId(id) {
+  console.log('id rom redux', id);
+  // return;
+  return async dispatch => {
+    dispatch(setMerge({ dProjectMemberId: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation DeleteProjectMembers($deleteProjectMembersId: ID) {
+          deleteProjectMembers(id: $deleteProjectMembersId)
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: {
+          deleteProjectMembersId: id,
+        },
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            deleProject: {
+              dProjectMemberId: res.data.deleteProjectMembersId,
+              isLoading: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ dProjectMemberId: { isLoading: false } }));
     }
   };
 }
