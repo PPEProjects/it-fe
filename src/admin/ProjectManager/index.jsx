@@ -21,6 +21,11 @@ const ProjectManager = () => {
   const { upStatusProject } = useSelector(projectSelector);
   console.log('projects', projects);
 
+  // useEffect(() => {
+  //   upStatusProject
+  // });
+  console.log('upStatusProject', upStatusProject);
+
   useEffect(async () => {
     await dispatch(getMyProjects());
   }, [dispatch, upStatusProject]);

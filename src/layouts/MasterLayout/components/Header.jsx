@@ -86,9 +86,23 @@ const Header = () => {
     );
   }
 
+
+  const onToast = (_message) => {
+    if(_message.error) {
+      message.error(_message.message)
+    } else {
+      message.success(_message.message)
+    }
+  }
+
   return (
 
     <section id='siteHeader' className="p-3 relative flex items-center space-x-2 border-b px-3">
+
+      <AppNotifyContext.Consumer key={ me.data?.id}>
+        { ctx => Object.keys(ctx.user).length > 0 ? <ToastView onReceived={onToast} /> : null }
+      </AppNotifyContext.Consumer>
+
       <div className="w-3/12 pl-3">
         <div className="flex items-center space-x-8">
           <GiHamburgerMenu onClick={toggleMenu} className="text-3xl cursor-pointer" />
