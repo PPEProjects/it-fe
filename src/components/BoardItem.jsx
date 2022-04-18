@@ -343,7 +343,7 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateInformationPro}
         footer={null}
       >
-        <UpdateInformation />
+        <UpdateInformation item={item} closeModal={handleCancelUpdateInformationPro} />
       </Modal>
     );
   };
@@ -379,6 +379,9 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Manage Members" onClick={showModalManageMembers} />
             {item?.project?.status === 'preparing' && (
               <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
+            )}
+            {item?.project?.status === 'done' && (
+              <MenuItemHover nameMenu="Review Members" onClick={showModalUpdateInformationPro} />
             )}
             {(item?.project?.status === 'preparing' ||
               item?.project?.status === 'onboard' ||
@@ -530,7 +533,9 @@ export const BoardItem = ({
               src={thumbImage(imgAvatar)}
               alt=""
             />
-            <span className="font-[600] text-[#0369A1]">{nameProject}</span>
+            <span className="text-[#0369A1] font-semibold overflow-hidden line-clamp-2 max-h-10">
+              {nameProject}
+            </span>
           </Link>
 
           <div className="flex items-center space-x-2">

@@ -12,25 +12,22 @@ const dataInformationMember = [
     phoneMember: '0905797979',
   },
 ];
-export const StatusManage = () => {
+export const StatusManage = ({ dataDetailMemberProject }) => {
+  console.log('dataDetailMemberProject', dataDetailMemberProject);
   return (
     <div>
       <h5 className="font-semibold text-sm text-gray-800">Review Members</h5>
       <p className="-mt-2 font-medium text-xs text-gray-500">Reviews are public and editable. </p>
       <div className="flex items-center space-x-4">
         <div className="w-1/3">
-          {(dataInformationMember ?? []).map((item, index) => {
-            return (
-              <div key={index}>
-                <InformationMember
-                  nameMember={item?.nameMember}
-                  goadMember={item?.goadMember}
-                  emailMember={item?.emailMember}
-                  phoneMember={item?.phoneMember}
-                />
-              </div>
-            );
-          })}
+          <div>
+            <InformationMember
+              nameMember={dataDetailMemberProject?.memberUser?.name}
+              // goadMember={item?.goadMember}
+              // emailMember={item?.emailMember}
+              // phoneMember={item?.phoneMember}
+            />
+          </div>
         </div>
         <div className="w-2/3">
           <p className="font-medium text-xs text-gray-500">Rating required</p>
