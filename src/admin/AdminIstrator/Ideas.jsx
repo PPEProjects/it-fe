@@ -92,6 +92,9 @@ const Ideas = () => {
                 <div key={index}>
                   <BoardItem
                     admin
+                    linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                    linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                    link={`/ProjectDescription?id=${item?.id}`}
                     shadowNone
                     ideas
                     numberLike

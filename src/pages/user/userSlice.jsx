@@ -350,7 +350,7 @@ export function updateProject(values) {
         );
       });
     } catch (e) {
-      console.log(e)
+      console.log(e);
       dispatch(setMerge({ upProject: { isLoading: false } }));
     }
   };
@@ -399,6 +399,10 @@ export function myListUser() {
           id
           name
           email
+          userFeedback {
+            id
+            grate
+          }
           phone_number
           avatar_attachment
           userAdvance {
