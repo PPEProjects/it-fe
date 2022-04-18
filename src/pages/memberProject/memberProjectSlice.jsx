@@ -121,42 +121,32 @@ export function deleteMemberProject(id) {
 
 export function getMyProjects() {
   return async dispatch => {
-    try {
-      const query = gql`
-        query DetailProjectMemberByIdPm {
-          detailProjectMemberByIdPm {
-            createdAt
-            deleted
-            fee
+    dispatch(setMerge({ projects: { isLoading: true } }));
+    const query = gql`
+      query DetailProjectMemberByIdPm {
+        detailProjectMemberByIdPm {
+          createdAt
+          deleted
+          fee
+          id
+          project {
             id
-            project {
+            level
+            name
+            attachments
+            status
+            user {
               id
-              level
-              name
-              attachments
-              status
-              user {
-                id
-                avatar_attachment
-              }
+              avatar_attachment
             }
           }
         }
-      `;
-
-      const res = await apolloClient.query({
-        query,
-      });
-
-      console.log(res.data?.detailProjectMemberByIdPm);
-      // console.log(res)
-
-      dispatch(
-        setMerge({
-          projects: res.data?.detailProjectMemberByIdPm || [],
-        })
-      );
-    } catch (e) {}
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+    });
+    dispatch(setData({ projects: { detailProject: res.data.detailProjectMemberByIdPm } }));
   };
 }
 

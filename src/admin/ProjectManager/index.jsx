@@ -10,21 +10,11 @@ import { projectSelector } from 'pages/project/projectSlice';
 
 export const StepsEnum = ['preparing', 'onboard', 'running', 'done'];
 
-const avatarAttachment = attachment => {
-  return attachment.thumb;
-};
-
 const ProjectManager = () => {
   const dispatch = useDispatch();
 
   const { projects } = useSelector(memberProjectSelector);
   const { upStatusProject } = useSelector(projectSelector);
-  console.log('projects', projects);
-
-  // useEffect(() => {
-  //   upStatusProject
-  // });
-  console.log('upStatusProject', upStatusProject);
 
   useEffect(async () => {
     await dispatch(getMyProjects());
@@ -34,30 +24,36 @@ const ProjectManager = () => {
     <MasterLayout>
       <LayoutAdmin>
         <div className="grid grid-cols-2 gap-4 p-4">
-          {Object.values(projects)
+          {/* {Object.values(projects)
             .filter(item => !!item?.project)
             .map((item, index) => {
               return (
-                <div key={index}>
-                  <BoardItem
-                    imgPage={item?.imgPage}
-                    imgAvatar={avatarAttachment(item.project.user.avatar_attachment)}
-                    nameProject={item?.project.name}
-                    shadowNone
-                    linkViewDetail={`/ProjectDescription?id=${item?.id}`}
-                    linkViewDescription={`/ProjectDescription?id=${item?.id}`}
-                    projectManager
-                    link={`/ProjectDescription?id=${item?.id}`}
-                    placement="bottomRight"
-                    item={item}
-                  >
-                    <div className="p-2 space-y-4">
-                      <StepsView StepsEnum={StepsEnum} current={item.project.status} />
-                    </div>
-                  </BoardItem>
-                </div>
+
               );
-            })}
+            })} */}
+          {(projects?.detailProject ?? [])?.map((item, index) => {
+            console.log('item', item);
+            return (
+              <div key={index}>
+                <BoardItem
+                  imgPage={item?.project?.attachments?.file}
+                  imgAvatar={item?.project?.user?.avatar_attachment?.file}
+                  nameProject={item?.project.name}
+                  shadowNone
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  projectManager
+                  link={`/ProjectDescription?id=${item?.id}`}
+                  placement="bottomRight"
+                  item={item}
+                >
+                  <div className="p-2 space-y-4">
+                    <StepsView StepsEnum={StepsEnum} current={item.project.status} />
+                  </div>
+                </BoardItem>
+              </div>
+            );
+          })}
         </div>
       </LayoutAdmin>
     </MasterLayout>
