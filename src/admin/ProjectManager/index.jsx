@@ -19,6 +19,7 @@ const ProjectManager = () => {
 
   const { projects } = useSelector(memberProjectSelector);
   const { upStatusProject } = useSelector(projectSelector);
+  console.log('projects', projects);
 
   useEffect(async () => {
     await dispatch(getMyProjects());
@@ -29,7 +30,7 @@ const ProjectManager = () => {
       <LayoutAdmin>
         <div className="grid grid-cols-2 gap-4 p-4">
           {Object.values(projects)
-            .filter(item => !!item.project)
+            .filter(item => !!item?.project)
             .map((item, index) => {
               return (
                 <div key={index}>

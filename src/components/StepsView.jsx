@@ -26,7 +26,7 @@ export default function StepsView({ current, StepsEnum }) {
                   index
                 )}
               </span>
-              <span className="font-medium text-gray-900 ml-1.5">{step}</span>
+              <span className="font-medium text-gray-900 capitalize ml-1.5">{step}</span>
             </a>
           </li>
         ))}
