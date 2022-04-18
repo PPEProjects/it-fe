@@ -56,7 +56,6 @@ export const AllIdeasProject = () => {
         <TitleItem title="Draft" number={dataDraft?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataDraft ?? []).map((item, index) => {
-            console.log('item', item);
             return (
               <div key={index}>
                 <BoardItem

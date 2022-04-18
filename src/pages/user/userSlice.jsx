@@ -403,6 +403,7 @@ export function myListUser() {
             id
             grate
           }
+          avgUserFeedback
           phone_number
           avatar_attachment
           userAdvance {

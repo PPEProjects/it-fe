@@ -104,7 +104,7 @@ export const InformationMember = ({
         <h6 className="text-[#6B7280] -mt-1">{goadMember}</h6>
         {icon && (
           <p className="flex items-center justify-center space-x-1">
-            <Stars numberStartActive={numberStartActive} />
+            <Stars containerClassName="!text-xl" numberStartActive={numberStartActive} />
           </p>
         )}
       </div>

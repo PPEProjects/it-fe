@@ -5,7 +5,6 @@ import { StepsColumn } from 'components/StepsColumn';
 export const StepsEnum = ['preparing', 'onboard', 'running', 'done'];
 
 export const UpdateProjectStatus = ({ item, closeModal }) => {
-  console.log('item', item);
   return (
     <div className="space-y-3">
       <span className="text-lg font-semibold text-gray-800">Project Update</span>

@@ -347,7 +347,8 @@ export const BoardItem = ({
       </Modal>
     );
   };
-  const menu = () => {
+
+  const menu = item => {
     return (
       <Menu>
         {user && (
@@ -370,21 +371,31 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Update Information" onClick={showModalUpdateInformation} />
           </>
         )}
-
         {projectManager && (
           <>
             <Link to={`${linkViewDescription}`}>
               <MenuItemHover nameMenu="View Description" />
             </Link>
             <MenuItemHover nameMenu="Manage Members" onClick={showModalManageMembers} />
-            <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
-            <MenuItemHover nameMenu="Download Files" onClick={showModalDownloadFiles} />
-            <MenuItemHover nameMenu="Update Files" onClick={showModalUpdateFiles} />
-            <MenuItemHover
-              nameMenu="Update Project Status"
-              onClick={showModalUpdateProjectStatus}
-            />
-            <MenuItemHover nameMenu="Update Information" onClick={showModalUpdateInformationPro} />
+            {item?.project?.status === 'preparing' && (
+              <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
+            )}
+            {(item?.project?.status === 'preparing' ||
+              item?.project?.status === 'onboard' ||
+              item?.project?.status === 'running') && (
+              <>
+                <MenuItemHover nameMenu="Download Files" onClick={showModalDownloadFiles} />
+                <MenuItemHover nameMenu="Update Files" onClick={showModalUpdateFiles} />
+                <MenuItemHover
+                  nameMenu="Update Project Status"
+                  onClick={showModalUpdateProjectStatus}
+                />
+                <MenuItemHover
+                  nameMenu="Update Information"
+                  onClick={showModalUpdateInformationPro}
+                />
+              </>
+            )}
           </>
         )}
         {myIdea && (

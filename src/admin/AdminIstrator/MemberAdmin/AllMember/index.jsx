@@ -28,7 +28,7 @@ export const AllMember = () => {
               dropDown
               icon
               item={item?.id}
-              numberStartActive
+              numberStartActive={item?.avgUserFeedback}
             />
           </div>
         );
