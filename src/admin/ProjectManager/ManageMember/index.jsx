@@ -25,7 +25,7 @@ export const ManageMember = ({ item, closeModal }) => {
   const renderModalClickEdit = () => {
     return (
       <Modal visible={isModalClickEdit} onCancel={handleCancelClickEdit} footer={null}>
-        <ClickEdit />
+        <ClickEdit item={item} closeModal={closeModal} />
       </Modal>
     );
   };
