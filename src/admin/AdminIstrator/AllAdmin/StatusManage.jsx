@@ -11,7 +11,7 @@ export const StatusManage = ({ dataDetailMemberProject, openModal, isCloseModal 
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const { upFeedBack } = useSelector(feedBackSelector);
-
+  console.log('dataDetailMemberProject', dataDetailMemberProject);
   useEffect(() => {
     form.setFieldsValue({
       data: {
@@ -57,6 +57,8 @@ export const StatusManage = ({ dataDetailMemberProject, openModal, isCloseModal 
                 <span className="font-medium text-xs text-gray-500">Rating required</span>
                 <div className="flex items-center -space-x-2">
                   <Stars
+                    userId={dataDetailMemberProject?.memberUser?.id}
+                    id={dataDetailMemberProject?.userFeedback?.id}
                     containerClassName="!text-5xl"
                     numberStartActive={dataDetailMemberProject?.userFeedback?.grate}
                   />

@@ -5,6 +5,7 @@ import { apolloClient } from 'services';
 
 export const initialState = {
   upFeedBack: {},
+  cFeedBack: {},
 };
 
 const feedBackSlice = createSlice({
@@ -74,6 +75,47 @@ export function updateFeedBack(values) {
     } catch (e) {
       console.log(e);
       dispatch(setMerge({ upFeedBack: { isLoading: false } }));
+    }
+  };
+}
+
+export function createFeedBack(values) {
+  return async dispatch => {
+    dispatch(setMerge({ cFeedBack: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation CreateUserFeedback($data: UserFeedbackInput!) {
+          createUserFeedback(data: $data) {
+            id
+            userId
+            projectId
+            grate
+            content
+            createdAt
+            updatedAt
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            cFeedBack: {
+              FeedBack: res.data.createUserFeedback,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ cFeedBack: { isLoading: false } }));
     }
   };
 }
