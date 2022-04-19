@@ -1,19 +1,26 @@
 import { InformationMember } from 'admin/AdminIstrator/MemberAdmin/AllMember/InformationMember';
-import { Button } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
-import React from 'react';
+import { Form, Input, Button } from 'antd';
+import React, { useEffect } from 'react';
+import { thumbImage } from 'services/convert';
+import { Stars } from 'components/Stars';
+import { feedBackSelector, updateFeedBack } from 'pages/feedBack/feedBackSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { AiOutlineStar } from 'react-icons/ai';
-const dataInformationMember = [
-  {
-    nameMember: 'Alidabet',
-    goadMember: 'Leader',
-    emailMember: '123@gmail.com',
-    phoneMember: '0905797979',
-  },
-];
-export const StatusManage = ({ dataDetailMemberProject }) => {
-  console.log('dataDetailMemberProject', dataDetailMemberProject);
+export const StatusManage = ({ dataDetailMemberProject, openModal, isCloseModal }) => {
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const { TextArea } = Input;
+  const { upFeedBack } = useSelector(feedBackSelector);
+
+  useEffect(() => {
+    form.setFieldsValue({
+      data: {
+        content: dataDetailMemberProject?.userFeedback?.content,
+        id: dataDetailMemberProject?.userFeedback?.id,
+        userId: dataDetailMemberProject?.memberUser?.id,
+      },
+    });
+  }, [dataDetailMemberProject, form]);
   return (
     <div>
       <h5 className="font-semibold text-sm text-gray-800">Review Members</h5>
@@ -23,36 +30,61 @@ export const StatusManage = ({ dataDetailMemberProject }) => {
           <div>
             <InformationMember
               nameMember={dataDetailMemberProject?.memberUser?.name}
-              // goadMember={item?.goadMember}
-              // emailMember={item?.emailMember}
-              // phoneMember={item?.phoneMember}
+              imgSrcAvatar={thumbImage(
+                dataDetailMemberProject?.memberUser?.avatar_attachment?.file
+              )}
+              goadMember={dataDetailMemberProject?.memberUser?.name}
+              emailMember={dataDetailMemberProject?.memberUser?.email}
+              phoneMember={dataDetailMemberProject?.memberUser?.phone_number}
             />
           </div>
         </div>
-        <div className="w-2/3">
-          <p className="font-medium text-xs text-gray-500">Rating required</p>
-          <div className="flex items-center -space-x-2">
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
-            <AiOutlineStar className="w-[55px] h-[52px]" />
+        <Form
+          form={form}
+          name="basic"
+          onFinish={values => {
+            dispatch(updateFeedBack(values));
+            openModal();
+            isCloseModal();
+          }}
+          scrollToFirstError
+          layout="vertical"
+          className="w-2/3"
+        >
+          <Form.List name={`data`}>
+            {() => (
+              <>
+                <span className="font-medium text-xs text-gray-500">Rating required</span>
+                <div className="flex items-center -space-x-2">
+                  <Stars
+                    containerClassName="!text-5xl"
+                    numberStartActive={dataDetailMemberProject?.userFeedback?.grate}
+                  />
+                </div>
+                <span className="font-medium text-xs text-gray-500">Feedback</span>
+                <Form.Item className="!mb-0" name="content">
+                  <TextArea className="!h-[195px] !rounded" />
+                </Form.Item>
+                <Form.Item name="id" hidden={true} />
+                <Form.Item name="userId" hidden={true} />
+              </>
+            )}
+          </Form.List>
+
+          <div className="flex justify-end space-x-4 mt-5">
+            <Form.Item>
+              <Button
+                className="font-medium text-xs !rounded-lg"
+                type="primary"
+                size="large"
+                htmlType="submit"
+                loading={upFeedBack.isLoading}
+              >
+                Confirm
+              </Button>
+            </Form.Item>
           </div>
-          <p className="font-medium text-xs text-gray-500">Feedback</p>
-          <TextArea className="!h-[195px] !rounded" />
-        </div>
-      </div>
-      <div className="flex justify-end space-x-4 mt-5">
-        <Button className="font-medium text-xs !rounded-lg">Cancel</Button>
-        <Button type="primary" className="font-medium text-xs !rounded-lg">
-          {' '}
-          Confirm
-        </Button>
+        </Form>
       </div>
     </div>
   );

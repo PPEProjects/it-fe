@@ -355,6 +355,7 @@ export function detailMemberByIdProject(id) {
             id
             name
             email
+            phone_number
             avatar_attachment
           }
           userFeedback {

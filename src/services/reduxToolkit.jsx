@@ -7,6 +7,7 @@ import projectSliceReducer from 'pages/project/projectSlice';
 import userSliceReducer from 'pages/user/userSlice';
 import adminIstratorSliceReducer from 'admin/AdminIstrator/adminIstratorSlice';
 import memberProjectSliceReducer from 'pages/memberProject/memberProjectSlice';
+import feedBackSliceReducer from 'pages/feedBack/feedBackSlice';
 
 const reducer = combineReducers({
   auths: authsReducer,
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   user: userSliceReducer,
   adminIstrator: adminIstratorSliceReducer,
   memberProject: memberProjectSliceReducer,
+  feedBack: feedBackSliceReducer,
 });
 
 export const store = configureStore({

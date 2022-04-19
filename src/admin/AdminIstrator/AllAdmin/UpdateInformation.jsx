@@ -8,16 +8,18 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { Stars } from 'components/Stars';
 import { thumbImage } from 'services/convert';
+import { feedBackSelector } from 'pages/feedBack/feedBackSlice';
 
-export const UpdateInformation = ({ item }) => {
+export const UpdateInformation = ({ item, closeModal, openModal }) => {
   const dispatch = useDispatch();
   const { deMemberByIdProject } = useSelector(memberProjectSelector);
   const [isModalEdit, setIsModalEdit] = useState(false);
   const [dataDetailMemberProject, setDataDetailMemberProject] = useState();
+  const { upFeedBack } = useSelector(feedBackSelector);
 
   useEffect(() => {
     dispatch(detailMemberByIdProject(item?.project?.id));
-  }, [dispatch, item]);
+  }, [dispatch, item, upFeedBack]);
 
   const columns = [
     {
@@ -78,7 +80,7 @@ export const UpdateInformation = ({ item }) => {
       title: '',
       dataIndex: 'change',
       key: 'change',
-      render: record => {
+      render: () => {
         return (
           <button className="text-blue-600" onClick={showModalEdit}>
             Edit
@@ -89,7 +91,7 @@ export const UpdateInformation = ({ item }) => {
   ];
   const showModalEdit = () => {
     setIsModalEdit(true);
-    // setDataDetailMemberProject(deMemberByIdProject);
+    closeModal();
   };
   const handelCancelModalEdit = () => {
     setIsModalEdit(false);
@@ -103,7 +105,11 @@ export const UpdateInformation = ({ item }) => {
           onCancel={handelCancelModalEdit}
           footer={null}
         >
-          <StatusManage dataDetailMemberProject={dataDetailMemberProject} />
+          <StatusManage
+            openModal={openModal}
+            isCloseModal={handelCancelModalEdit}
+            dataDetailMemberProject={dataDetailMemberProject}
+          />
         </Modal>
       </div>
     );
