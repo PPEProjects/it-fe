@@ -1,5 +1,4 @@
 import { Button, Modal, Tooltip, Popconfirm } from 'antd';
-import { AddGoal } from 'components/AddGoal';
 import React, { useEffect, useState } from 'react';
 
 import { HiUserAdd } from 'react-icons/hi';
@@ -13,7 +12,7 @@ import {
 } from '../../../pages/memberProject/memberProjectSlice';
 export const ClickEdit = ({ closeModal, item, handleCancelClickEdit }) => {
   const dispatch = useDispatch();
-  const { deProject } = useSelector(memberProjectSelector);
+  const { deProject, upMemberProject } = useSelector(memberProjectSelector);
   const detailProjectsMember = deProject.detailProjectIds;
 
   const [idDelete, setIdDelete] = useState(null);
@@ -22,7 +21,7 @@ export const ClickEdit = ({ closeModal, item, handleCancelClickEdit }) => {
   };
   useEffect(() => {
     dispatch(detailProjectMember(item?.project.id));
-  }, [dispatch]);
+  }, [dispatch, item, upMemberProject]);
   const [isModalClickConfirm, setIsModalClickClickConfirm] = useState(false);
 
   const showModalModalClickConfirm = () => {
@@ -122,33 +121,6 @@ export const ClickEdit = ({ closeModal, item, handleCancelClickEdit }) => {
             );
           })}
         </Tooltip>
-        {/*
-        <AddGoal done text="Leader" />
-        <AddGoal running text="Tester" />
-        <AddGoal board text="Qc" />
-        <AddGoal board text="Dev" />
-        <AddGoal board text="Pm" />
-        <AddGoal board text="Techlead" /> */}
-        {/* <Tooltip placement="bottom">*/}
-        {/* <pre> {JSON.stringify(item.project, null, '')} </pre> */}
-        {/* <AddGoal
-          item={item?.project}
-          closeModal={closeModal}
-          board
-          position="leader"
-          text="Leader"
-        />
-        <AddGoal item={item?.project} closeModal={closeModal} board position="qc" text="QC" />
-        <AddGoal item={item?.project} closeModal={closeModal} board position="dev" text="Dev" />
-        <AddGoal item={item?.project} closeModal={closeModal} board position="dev" text="Dev" />
-        <AddGoal
-          item={item?.project}
-          closeModal={closeModal}
-          board
-          position="tester"
-          text="Tester"
-        /> */}
-        {/* </Tooltip> */}
         <HiUserAdd className="text-4xl text-gray-400" onClick={showModalModalClickConfirm} />
       </div>
       <div className="flex items-end justify-end mt-7">

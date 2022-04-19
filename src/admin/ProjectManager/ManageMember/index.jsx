@@ -1,19 +1,13 @@
 import { AddGoal } from 'components/AddGoal';
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Tooltip, Popconfirm } from 'antd';
+import { Button, Modal, Tooltip } from 'antd';
 import { ClickEdit } from './ClickEdit';
-import { thumbImageBg } from 'services/convert';
-import {
-  detailProjectMember,
-  memberProjectSelector,
-  deleteProjectMemberId,
-} from '../../../pages/memberProject/memberProjectSlice';
+import { detailProjectMember, memberProjectSelector } from 'pages/memberProject/memberProjectSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { RiDeleteBin6Line } from 'react-icons/ri';
 
 export const ManageMember = ({ item, closeModal }) => {
   const dispatch = useDispatch();
-  const { deProject } = useSelector(memberProjectSelector);
+  const { deProject, upMemberProject } = useSelector(memberProjectSelector);
   const detailProjectsMember = deProject.detailProjectIds;
   const [isModalClickEdit, setIsModalClickEdit] = useState(false);
   const showModalModalClickEdit = () => {
@@ -29,12 +23,10 @@ export const ManageMember = ({ item, closeModal }) => {
       </Modal>
     );
   };
-  const deleteProjectIdMember = id => {
-    dispatch(deleteProjectMemberId(id));
-  };
+
   useEffect(() => {
     dispatch(detailProjectMember(item?.project.id));
-  }, [dispatch]);
+  }, [dispatch, item, upMemberProject]);
 
   const renderDataPosition = () => {
     return (
@@ -92,36 +84,7 @@ export const ManageMember = ({ item, closeModal }) => {
         All members participating in the project will be displayed here. You can add, remove, update
         each position.
       </p>
-      <div className="flex space-x-2 mt-5">
-        {renderDataPosition()}
-        {/* <Tooltip placement="bottom " className="flex">
-          {detailProjectsMember?.members?.map((userPosition, index) => {
-            return (
-              <>
-                <div className="text-center mx-1">
-                  <AddGoal
-                    item={item?.project}
-                    closeModal={closeModal}
-                    board
-                    position={userPosition?.position}
-                    text={userPosition?.position}
-                  />
-                </div>
-              </>
-            );
-          })}
-        </Tooltip> */}
-
-        {/* <Tooltip placement="bottom">
-          <AddGoal
-            item={item?.project}
-            closeModal={closeModal}
-            board
-            position="leader"
-            text="Leader"
-          />
-        </Tooltip> */}
-      </div>
+      <div className="flex space-x-2 mt-5">{renderDataPosition()}</div>
       <div className="flex items-end justify-end mt-7">
         <Button
           className="!rounded-md !h-10 !Poppins"
