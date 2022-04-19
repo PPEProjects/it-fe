@@ -45,26 +45,6 @@ export const AssignReviewer = ({
           value={selectedItems}
           style={{ width: '100%' }}
         ></Select>
-        {/* <Button
-          type="primary"
-          className="pl-5"
-          onClick={() => {
-            type === true
-              ? dispatch(
-                  UpsertProjectMembersUserIds({
-                    data: { projectId: item.id, memberUserId: selectedItems, position: position },
-                  })
-                )
-              : dispatch(
-                  UpdateProjectMembers({
-                    data: { id: memberUserId, memberUserId: selectedItems.toString() },
-                  })
-                );
-          }}
-        >
-          Send invite
-        </Button> */}
-
         {type ? (
           <Button
             type="primary"

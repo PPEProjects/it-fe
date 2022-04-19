@@ -11,6 +11,7 @@ export const initialState = {
   cCreateProjectMembers: {},
   projects: {},
   deMemberByIdProject: {},
+  deProjectMemberByPosition: {},
 };
 
 const memberProjectSlice = createSlice({
@@ -479,6 +480,46 @@ export function detailMemberByIdProject(id) {
       setData({
         deMemberByIdProject: {
           detailMemberByIdProject,
+        },
+      })
+    );
+  };
+}
+
+export function detailProjectMemberByPosition(position) {
+  return async dispatch => {
+    dispatch(setMerge({ deMemberByIdProject: { isLoading: true } }));
+    const query = gql`
+      query DetailProjectMemberByPosition($position: String) {
+        detailProjectMemberByPosition(position: $position) {
+          id
+          projectId
+          roles
+          pmUserId
+          project {
+            name
+            attachments
+            type
+            user {
+              id
+              name
+              avatar_attachment
+            }
+          }
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+      variables: {
+        position: position,
+      },
+    });
+    const detailProjectMemberByPosition = res?.data?.detailProjectMemberByPosition;
+    dispatch(
+      setData({
+        deProjectMemberByPosition: {
+          detailProjectMemberByPosition,
         },
       })
     );

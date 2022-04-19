@@ -8,6 +8,7 @@ export const initialState = {
   cProjectLike: {},
   cProjectInterested: {},
   mlMyProject: {},
+  mlMyIdeaProject: {},
   mlMyIdeas: {},
   deProject: { isRefresh: true },
   dProjectLike: {},
@@ -171,6 +172,41 @@ export function MyIdeas(type = 'ideas') {
       },
     });
     dispatch(setData({ mlMyIdeas: { myIdeas: res.data.searchProject } }));
+  };
+}
+
+export function detailProjectMemberByPosition(position) {
+  return async dispatch => {
+    dispatch(setMerge({ mlMyIdeaProject: { isLoading: true } }));
+    const query = gql`
+      query DetailProjectMemberByPosition($position: String) {
+        detailProjectMemberByPosition(position: $position) {
+          id
+          projectId
+          roles
+          pmUserId
+          project {
+            name
+            attachments
+            type
+            user {
+              id
+              name
+              avatar_attachment
+            }
+          }
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+      variables: {
+        position: position,
+      },
+    });
+    dispatch(
+      setData({ mlMyIdeaProject: { myIdeaProject: res.data.detailProjectMemberByPosition } })
+    );
   };
 }
 
