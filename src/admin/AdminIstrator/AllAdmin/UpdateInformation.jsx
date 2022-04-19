@@ -1,110 +1,95 @@
-import React, { useState } from 'react';
-import { Table, Space, Modal } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Table, Modal } from 'antd';
 import { StatusManage } from './StatusManage';
+import {
+  detailMemberByIdProject,
+  memberProjectSelector,
+} from 'pages/memberProject/memberProjectSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Stars } from 'components/Stars';
+import { thumbImage } from 'services/convert';
 
-import { AiOutlineStar } from 'react-icons/ai';
-
-const data = [
-  {
-    key: '1',
-    name: 'Jhon',
-    feedback: 'New York No. 1 Lake Park',
-    positon: 'Dev',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    feedback: 'London No. 1 Lake Park',
-    positon: 'Dev',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    feedback: 'Sidney No. 1 Lake Park',
-    positon: 'Dev',
-  },
-  {
-    key: '4',
-    name: 'Joe Black',
-    feedback: 'Sidney No. 1 Lake Park',
-    positon: 'Dev',
-  },
-  {
-    key: '5',
-    name: 'Joe Black',
-    feedback: 'Sidney No. 1 Lake Park',
-    positon: 'Dev',
-  },
-  {
-    key: '6',
-    name: 'Joe Black',
-    feedback: 'Sidney No. 1 Lake Park',
-    positon: 'Dev',
-  },
-];
-export const UpdateInformation = () => {
+export const UpdateInformation = ({ item }) => {
+  const dispatch = useDispatch();
+  const { deMemberByIdProject } = useSelector(memberProjectSelector);
   const [isModalEdit, setIsModalEdit] = useState(false);
+  const [dataDetailMemberProject, setDataDetailMemberProject] = useState();
+
+  useEffect(() => {
+    dispatch(detailMemberByIdProject(item?.project?.id));
+  }, [dispatch, item]);
 
   const columns = [
     {
       title: 'NAME',
-      dataIndex: 'name',
-      key: 'name',
-      render: name => (
-        <div className="flex items-center space-x-2">
-          <img src="https://i.pravatar.cc/100?img=2" alt="" className="w-10 h-10 rounded-full" />
-          <div className="">
-            <h6>{name}</h6>
-            <h6 className="-mt-3  text-gray-500">jane.cooper@example.com</h6>
+      dataIndex: 'memberUser',
+      key: 'memberUser',
+      render: memberUser => {
+        return (
+          <div className="flex items-center space-x-2">
+            <img
+              src={thumbImage(memberUser?.avatar_attachment?.file)}
+              alt=""
+              className="w-10 h-10 rounded-full"
+            />
+            <div className="">
+              <h6>{memberUser?.name}</h6>
+              <h6 className="-mt-3  text-gray-500">{memberUser?.email}</h6>
+            </div>
           </div>
-        </div>
-      ),
+        );
+      },
     },
     {
-      title: 'RATING',
-      dataIndex: 'rating',
-      key: 'rating',
-      render: rating => (
-        <div className="flex items-center justify-center space-x-1 text-xl">
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-          <AiOutlineStar />
-        </div>
-      ),
+      title: () => {
+        return <div className="text-center">RATING</div>;
+      },
+      dataIndex: 'userFeedback',
+      key: 'userFeedback',
+      render: userFeedback => {
+        return <Stars containerClassName="!text-xl" numberStartActive={userFeedback?.grate} />;
+      },
     },
 
     {
       title: 'FEEDBACK',
-      dataIndex: 'feedback',
-      key: 'feedback',
+      dataIndex: 'userFeedback',
+      key: 'userFeedback',
+      render: userFeedback => {
+        return (
+          <span className="text-sm text-gray-500 font-medium overflow-hidden line-clamp-2 max-h-10">
+            {userFeedback?.content}
+          </span>
+        );
+      },
     },
     {
       title: 'POSITION',
-      dataIndex: 'positon',
-      key: 'positon',
-      render: action => <span>{action}</span>,
+      dataIndex: 'position',
+      key: 'position',
+      render: position => (
+        <span className="text-sm font-[400] flex items-center justify-center text-gray-500">
+          {position}
+        </span>
+      ),
     },
 
     {
       title: '',
       dataIndex: 'change',
       key: 'change',
-      render: () => (
-        <button className="text-blue-600" onClick={showModalEdit}>
-          Edit
-        </button>
-      ),
+      render: record => {
+        return (
+          <button className="text-blue-600" onClick={showModalEdit}>
+            Edit
+          </button>
+        );
+      },
     },
   ];
   const showModalEdit = () => {
     setIsModalEdit(true);
+    // setDataDetailMemberProject(deMemberByIdProject);
   };
   const handelCancelModalEdit = () => {
     setIsModalEdit(false);
@@ -118,11 +103,12 @@ export const UpdateInformation = () => {
           onCancel={handelCancelModalEdit}
           footer={null}
         >
-          <StatusManage />
+          <StatusManage dataDetailMemberProject={dataDetailMemberProject} />
         </Modal>
       </div>
     );
   };
+
   return (
     <div>
       {renderModalEdit()}
@@ -131,8 +117,15 @@ export const UpdateInformation = () => {
         <Table
           pagination={false}
           columns={columns}
-          dataSource={data}
-          className="border-2 rounded-lg "
+          dataSource={deMemberByIdProject?.detailMemberByIdProject ?? []}
+          className="border-2 rounded-lg"
+          onRow={record => {
+            return {
+              onClick: () => {
+                setDataDetailMemberProject(record);
+              },
+            };
+          }}
         />
       </div>
     </div>

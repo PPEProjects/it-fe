@@ -10,6 +10,7 @@ export const initialState = {
   deProject: { isRefresh: true },
   cCreateProjectMembers: {},
   projects: {},
+  deMemberByIdProject: {},
 };
 
 const memberProjectSlice = createSlice({
@@ -428,5 +429,57 @@ export function UpdateProjectMembers(values) {
     } catch (e) {
       dispatch(setMerge({ upMemberProjectUserIds: { isLoading: false } }));
     }
+  };
+}
+
+export function detailMemberByIdProject(id) {
+  return async dispatch => {
+    dispatch(setMerge({ deMemberByIdProject: { isLoading: true } }));
+    const query = gql`
+      query DetailMemberByIdProject($projectId: ID) {
+        detailMemberByIdProject(projectId: $projectId) {
+          id
+          pmUserId
+          projectId
+          project {
+            id
+            name
+          }
+          memberUserId
+          memberUser {
+            id
+            name
+            email
+            avatar_attachment
+          }
+          userFeedback {
+            id
+            grate
+            content
+          }
+          position
+          linkTest
+          salary
+          fee
+          status
+          createdAt
+          updatedAt
+        }
+      }
+    `;
+    const res = await apolloClient.query({
+      query,
+      variables: {
+        projectId: id,
+      },
+    });
+    const detailMemberByIdProject = res?.data?.detailMemberByIdProject;
+    dispatch(
+      setData({
+        deMemberByIdProject: {
+          detailMemberByIdProject,
+        },
+      })
+    );
   };
 }

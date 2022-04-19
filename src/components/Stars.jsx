@@ -3,12 +3,7 @@ import React from 'react';
 
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
-export const Stars = ({
-  numberStartActive,
-  totalStarsClassName,
-  activeStarsClassName,
-  containerClassName,
-}) => {
+export const Stars = ({ numberStartActive, containerClassName }) => {
   const totalStars = 10;
   const activeStars = numberStartActive;
 
@@ -21,9 +16,9 @@ export const Stars = ({
     >
       {[...new Array(totalStars)].map((item, index) => {
         return index < activeStars ? (
-          <AiFillStar className={classNames('text-[#ffc700]', activeStarsClassName)} />
+          <AiFillStar className={classNames('text-[#ffc700]')} />
         ) : (
-          <AiOutlineStar className={classNames('', totalStarsClassName)} />
+          <AiOutlineStar />
         );
       })}
     </div>

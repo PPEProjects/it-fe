@@ -40,6 +40,9 @@ export const OnBoardIdeasProject = () => {
                   modalDraft
                   shadowNone
                   admin
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   placement="bottomRight"
                 />
               </div>
@@ -60,6 +63,9 @@ export const OnBoardIdeasProject = () => {
                   nameProject={item?.name}
                   modalDraftProject
                   shadowNone
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   placement="bottomRight"
                 />
               </div>

@@ -53,7 +53,7 @@ export const AllIdeasProject = () => {
             <Checkbox />
           </button>
         </div>
-        <TitleItem title="Draft" number="8" />
+        <TitleItem title="Draft" number={dataDraft?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataDraft ?? []).map((item, index) => {
             return (
@@ -63,6 +63,9 @@ export const AllIdeasProject = () => {
                   imgAvatar={item?.imgAvatar}
                   nameProject={item?.nameProject}
                   admin
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
                   borderRounded={false}
                   placement="bottomRight"
@@ -84,6 +87,9 @@ export const AllIdeasProject = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   admin
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
                   borderRounded={false}
                   placement="bottomRight"
@@ -106,6 +112,9 @@ export const AllIdeasProject = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   admin
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   borderRounded={false}
                   shadowNone
                   placement="bottomRight"

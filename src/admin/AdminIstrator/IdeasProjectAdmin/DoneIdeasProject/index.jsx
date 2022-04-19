@@ -35,6 +35,9 @@ export const DoneIdeasProject = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   modalDraft
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
                   admin
                   placement="bottomRight"

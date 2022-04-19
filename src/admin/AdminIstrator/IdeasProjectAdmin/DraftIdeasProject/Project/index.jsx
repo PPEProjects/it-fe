@@ -53,6 +53,9 @@ export const Project = () => {
                   nameProject={item?.name}
                   modalDraftProject
                   shadowNone
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   placement="bottomRight"
                 />
               </div>
@@ -68,6 +71,9 @@ export const Project = () => {
               <div key={index}>
                 <BoardItem
                   item={item}
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
@@ -88,6 +94,9 @@ export const Project = () => {
               <div key={index}>
                 <BoardItem
                   item={item}
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
@@ -108,6 +117,9 @@ export const Project = () => {
               <div key={index}>
                 <BoardItem
                   item={item}
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
@@ -128,6 +140,9 @@ export const Project = () => {
               <div key={index}>
                 <BoardItem
                   item={item}
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
@@ -152,6 +167,9 @@ export const Project = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   modalDraftProject
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
                   placement="bottomRight"
                 />
@@ -172,6 +190,9 @@ export const Project = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   modalDraftProject
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
                   placement="bottomRight"
                 />
@@ -188,6 +209,9 @@ export const Project = () => {
               <div key={index}>
                 <BoardItem
                   item={item}
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
@@ -208,6 +232,9 @@ export const Project = () => {
               <div key={index}>
                 <BoardItem
                   item={item}
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}

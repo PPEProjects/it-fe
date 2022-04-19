@@ -37,6 +37,9 @@ export const Ideas = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   modalDraft
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
                   placement="bottomRight"
                 />
@@ -58,6 +61,9 @@ export const Ideas = () => {
                   nameProject={item?.name}
                   modalDraft
                   shadowNone
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   placement="bottomRight"
                 />
               </div>
@@ -77,6 +83,9 @@ export const Ideas = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   modalDraft
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
                   placement="bottomRight"
                 />
@@ -97,6 +106,9 @@ export const Ideas = () => {
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
                   modalDraft
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
                   placement="bottomRight"
                 />

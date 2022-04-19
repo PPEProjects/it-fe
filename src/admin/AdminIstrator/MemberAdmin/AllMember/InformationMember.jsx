@@ -1,13 +1,14 @@
-import { Menu, Dropdown, Modal, Button } from 'antd';
+import { Menu, Dropdown } from 'antd';
 import React from 'react';
 import { MenuItemHover } from 'components/MenuItemHover';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
+import { Stars } from 'components/Stars';
 
-import { AiFillStar } from 'react-icons/ai';
 import { BsFillTelephoneFill, BsThreeDotsVertical } from 'react-icons/bs';
 import { HiMail } from 'react-icons/hi';
 import { addAsPosition, deleteAsPosition } from '../../adminIstratorSlice';
+import { Link } from 'react-router-dom';
 
 export const InformationMember = ({
   placement,
@@ -17,15 +18,18 @@ export const InformationMember = ({
   phoneMember,
   dropDown,
   icon,
-  idMember,
   item,
+  imgSrcAvatar,
+  numberStartActive,
 }) => {
   const dispatch = useDispatch();
 
   const menu = item => {
     return (
       <Menu>
-        <MenuItemHover nameMenu="View Profile" />
+        <Link to={`/MyProfile?id=${item}`}>
+          <MenuItemHover nameMenu="View Profile" />
+        </Link>
         <MenuItemHover
           onClick={() => {
             const values = { userId: item, roles: 'admin' };
@@ -94,27 +98,13 @@ export const InformationMember = ({
     >
       <div className="text-center text-sm">
         <p className="flex items-center justify-center">
-          <img
-            src="https://i.pravatar.cc/100?img=2"
-            alt=""
-            className="rounded-full h-[128px] w-[128px] mt-5"
-          />
+          <img src={imgSrcAvatar} alt="" className="rounded-full h-[128px] w-[128px] mt-5" />
         </p>
         <h6>{nameMember}</h6>
         <h6 className="text-[#6B7280] -mt-1">{goadMember}</h6>
         {icon && (
           <p className="flex items-center justify-center space-x-1">
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
-            <AiFillStar className="text-xl" />
+            <Stars containerClassName="!text-xl" numberStartActive={numberStartActive} />
           </p>
         )}
       </div>

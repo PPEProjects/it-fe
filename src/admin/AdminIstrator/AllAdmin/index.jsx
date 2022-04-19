@@ -56,7 +56,7 @@ const Administrator = () => {
               <Checkbox></Checkbox>
             </button>
           </div>
-          <TitleItem title="Draft" number="8" />
+          <TitleItem title="Draft" number={dataDraft?.length} />
           <div className="grid grid-cols-3 gap-4 px-3">
             {(dataDraft ?? []).map((item, index) => {
               return (
@@ -65,6 +65,9 @@ const Administrator = () => {
                     imgPage={item?.imgPage}
                     imgAvatar={item?.imgAvatar}
                     nameProject={item?.nameProject}
+                    linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                    linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                    link={`/ProjectDescription?id=${item?.id}`}
                     admin
                     shadowNone
                     placement="bottomRight"
@@ -86,6 +89,9 @@ const Administrator = () => {
                     imgAvatar={item?.avatar_attachment?.file}
                     nameProject={item?.name}
                     admin
+                    linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                    linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                    link={`/ProjectDescription?id=${item?.id}`}
                     shadowNone
                     placement="bottomRight"
                   />
@@ -109,6 +115,9 @@ const Administrator = () => {
                     imgAvatar={item?.avatar_attachment?.file}
                     nameProject={item?.name}
                     admin
+                    linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                    linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                    link={`/ProjectDescription?id=${item?.id}`}
                     shadowNone
                     placement="bottomRight"
                   />

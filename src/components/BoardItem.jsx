@@ -343,11 +343,12 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateInformationPro}
         footer={null}
       >
-        <UpdateInformation />
+        <UpdateInformation item={item} closeModal={handleCancelUpdateInformationPro} />
       </Modal>
     );
   };
-  const menu = () => {
+
+  const menu = item => {
     return (
       <Menu>
         {user && (
@@ -370,21 +371,34 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Update Information" onClick={showModalUpdateInformation} />
           </>
         )}
-
         {projectManager && (
           <>
             <Link to={`${linkViewDescription}`}>
               <MenuItemHover nameMenu="View Description" />
             </Link>
             <MenuItemHover nameMenu="Manage Members" onClick={showModalManageMembers} />
-            <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
-            <MenuItemHover nameMenu="Download Files" onClick={showModalDownloadFiles} />
-            <MenuItemHover nameMenu="Update Files" onClick={showModalUpdateFiles} />
-            <MenuItemHover
-              nameMenu="Update Project Status"
-              onClick={showModalUpdateProjectStatus}
-            />
-            <MenuItemHover nameMenu="Update Information" onClick={showModalUpdateInformationPro} />
+            {item?.project?.status === 'preparing' && (
+              <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
+            )}
+            {item?.project?.status === 'done' && (
+              <MenuItemHover nameMenu="Review Members" onClick={showModalUpdateInformationPro} />
+            )}
+            {(item?.project?.status === 'preparing' ||
+              item?.project?.status === 'onboard' ||
+              item?.project?.status === 'running') && (
+              <>
+                <MenuItemHover nameMenu="Download Files" onClick={showModalDownloadFiles} />
+                <MenuItemHover nameMenu="Update Files" onClick={showModalUpdateFiles} />
+                <MenuItemHover
+                  nameMenu="Update Project Status"
+                  onClick={showModalUpdateProjectStatus}
+                />
+                <MenuItemHover
+                  nameMenu="Update Information"
+                  onClick={showModalUpdateInformationPro}
+                />
+              </>
+            )}
           </>
         )}
         {myIdea && (
@@ -519,7 +533,9 @@ export const BoardItem = ({
               src={thumbImage(imgAvatar)}
               alt=""
             />
-            <span className="font-[600] text-[#0369A1]">{nameProject}</span>
+            <span className="text-[#0369A1] font-semibold overflow-hidden line-clamp-2 max-h-10">
+              {nameProject}
+            </span>
           </Link>
 
           <div className="flex items-center space-x-2">

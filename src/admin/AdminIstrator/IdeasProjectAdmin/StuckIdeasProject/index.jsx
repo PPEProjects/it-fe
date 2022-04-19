@@ -39,6 +39,9 @@ export const StuckIdeasProject = () => {
                   modalDraft
                   shadowNone
                   admin
+                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.id}`}
                   placement="bottomRight"
                 />
               </div>
