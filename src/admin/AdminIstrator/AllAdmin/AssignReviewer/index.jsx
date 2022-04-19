@@ -5,9 +5,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userSelector, myListUser } from 'pages/user/userSlice';
 import { thumbImage } from '../../../../services/convert';
 import { GrFormAdd } from 'react-icons/gr';
-import { UpsertProjectMembersUserIds } from '../../../../pages/memberProject/memberProjectSlice';
+import {
+  UpdateProjectMembers,
+  UpsertProjectMembersUserIds,
+} from '../../../../pages/memberProject/memberProjectSlice';
 
-export const AssignReviewer = ({ item, closeModal, position, submitDataModal }) => {
+export const AssignReviewer = ({
+  item,
+  closeModal,
+  position,
+  submitDataModal,
+  memberUserId,
+  idPosition,
+  type,
+}) => {
   const dispatch = useDispatch();
   const { mlUser } = useSelector(userSelector);
   useEffect(() => {
@@ -20,20 +31,7 @@ export const AssignReviewer = ({ item, closeModal, position, submitDataModal }) 
     setSelectedItems([...selectedItems, item.id]);
   };
   const hrefLocation = window.location.pathname;
-  // const [dataMappping, setDataMapping] = useState([]);
 
-  // const dataMapping = async () => {
-  //   await selectedItems.map((item, index) => {
-  //     return <> {item.name} </>;
-  //   });
-  // };
-
-  // useEffect(async () => {
-  //   await setDataMapping(selectedItems);
-  //   console.log('dataMappping', dataMappping);
-  // });
-
-  // const dataValues =
   return (
     <div>
       <span className="flex items-center justify-center text-3xl text-[#9CA3AF]">
@@ -41,43 +39,63 @@ export const AssignReviewer = ({ item, closeModal, position, submitDataModal }) 
       </span>
       <h4 className="text-lg text-center pt-2">Assign Reviewer</h4>
       <div className="w-80% flex py-6">
-        {/* {dataMappping.map((item, index) => {
-          return (
-            <span key={index}>
-              <Input value={item.name} />
-            </span>
-          );
-        })} */}
         <Select
           mode="multiple"
           placeholder="Inserted are removed"
           value={selectedItems}
-          // onChange={this.handleChange}
           style={{ width: '100%' }}
         ></Select>
-        {/* <Input value={selectedItems} /> */}
-        {/* <pre> {JSON.stringify(dataValues, null, ' ')} </pre> */}
-
-        <Button
+        {/* <Button
           type="primary"
           className="pl-5"
           onClick={() => {
-            // console.log('item', selectedItems);
-            const values = {
-              data: {
-                projectId: item.id,
-                memberUserId: selectedItems,
-                position: position,
-              },
-            };
-            dispatch(UpsertProjectMembersUserIds(values));
-            closeModal();
-            // submitDataModal(selectedItems);
+            type === true
+              ? dispatch(
+                  UpsertProjectMembersUserIds({
+                    data: { projectId: item.id, memberUserId: selectedItems, position: position },
+                  })
+                )
+              : dispatch(
+                  UpdateProjectMembers({
+                    data: { id: memberUserId, memberUserId: selectedItems.toString() },
+                  })
+                );
           }}
-          // onClick={() => console.log('id project', item)}
         >
           Send invite
-        </Button>
+        </Button> */}
+
+        {type ? (
+          <Button
+            type="primary"
+            className="pl-5"
+            onClick={() => {
+              dispatch(
+                UpdateProjectMembers({
+                  data: { id: memberUserId, memberUserId: selectedItems.toString() },
+                })
+              );
+              closeModal();
+            }}
+          >
+            Send invite
+          </Button>
+        ) : (
+          <Button
+            type="primary"
+            className="pl-5"
+            onClick={() => {
+              dispatch(
+                UpsertProjectMembersUserIds({
+                  data: { projectId: item.id, memberUserId: selectedItems, position: position },
+                })
+              );
+              closeModal();
+            }}
+          >
+            Send invite
+          </Button>
+        )}
       </div>
       <p className="text-xs">RECOMMENDED TEAM MEMBERS</p>
 

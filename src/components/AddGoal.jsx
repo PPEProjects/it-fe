@@ -14,6 +14,8 @@ export const AddGoal = ({
   item,
   position,
   submitDataModal,
+  memberUserId,
+  idPosition,
 }) => {
   const [isModalAddGoal, setIsModalAddGoal] = useState(false);
   const showModelAddGoal = () => {
@@ -35,6 +37,9 @@ export const AddGoal = ({
       >
         <AssignReviewer
           item={item}
+          type
+          memberUserId={memberUserId}
+          idPosition={idPosition}
           position={position}
           closeModal={handleOkAddGoal}
           submitDataModal={submitDataModal}
@@ -45,14 +50,14 @@ export const AddGoal = ({
 
   return (
     <section>
-      <div className="text-center">
+      <div className="text-center mx-1">
         {renderModalAddGoal()}
         {board && (
           <Button
             onClick={showModelAddGoal}
             type="dashed"
             shape="circle"
-            className="!w-[32px] !h-[32px]"
+            className="!w-[40px] !h-[40px]"
           >
             <div className="flex items-center justify-center">
               <IoMdAdd className="text-gray-400" />
@@ -61,14 +66,14 @@ export const AddGoal = ({
         )}
         {running && (
           <img
-            className="h-[32px] w-[32px] object-cover rounded-full cursor-pointer"
+            className="h-[40px] w-[40px] object-cover rounded-full cursor-pointer"
             src={thumbImage(imgAvatar)}
             alt=""
           />
         )}
         {done && (
           <img
-            className="h-[32px] w-[32px] object-cover rounded-full cursor-pointer"
+            className="h-[40px] w-[40px] object-cover rounded-full cursor-pointer"
             src={thumbImage(imgAvatar)}
             alt=""
           />

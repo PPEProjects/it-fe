@@ -8,6 +8,7 @@ export const initialState = {
   upMemberProjectUserIds: {},
   dMemberProject: {},
   deProject: { isRefresh: true },
+  cCreateProjectMembers: {},
   projects: {},
   deMemberByIdProject: {},
 };
@@ -333,6 +334,100 @@ export function deleteProjectMemberId(id) {
       });
     } catch (e) {
       dispatch(setMerge({ dProjectMemberId: { isLoading: false } }));
+    }
+  };
+}
+
+export function CreateProjectMembers(values) {
+  return async dispatch => {
+    dispatch(setMerge({ cCreateProjectMembers: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation CreateProjectMembers($data: ProjectMembersInput!) {
+          createProjectMembers(data: $data) {
+            id
+            pmUserId
+            projectId
+            project {
+              id
+              name
+            }
+            memberUserId
+            position
+            linkTest
+            salary
+            fee
+            status
+            createdAt
+            updatedAt
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            cCreateProjectMembers: {
+              project: res.data.UpsertProjectMembersUserIds,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ cCreateProjectMembers: { isLoading: false } }));
+    }
+  };
+}
+
+export function UpdateProjectMembers(values) {
+  return async dispatch => {
+    dispatch(setMerge({ upMemberProjectUserIds: { isLoading: true } }));
+    const mutationAPI = () => {
+      const mutation = gql`
+        mutation UpdateProjectMembers($data: ProjectMembersInput!) {
+          updateProjectMembers(data: $data) {
+            id
+            pmUserId
+            projectId
+            memberUserId
+            position
+            linkTest
+            salary
+            fee
+            status
+            createdAt
+            updatedAt
+          }
+        }
+      `;
+      return apolloClient.mutate({
+        mutation,
+        variables: values,
+      });
+    };
+
+    try {
+      await mutationAPI().then(res => {
+        dispatch(
+          setMerge({
+            upMemberProjectUserIds: {
+              project: res.data.UpdateProjectMembers,
+              isLoading: false,
+              isOpen: false,
+            },
+          })
+        );
+      });
+    } catch (e) {
+      dispatch(setMerge({ upMemberProjectUserIds: { isLoading: false } }));
     }
   };
 }
