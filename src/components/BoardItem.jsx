@@ -355,6 +355,7 @@ export const BoardItem = ({
   };
 
   const menu = item => {
+    console.log('item', item);
     return (
       <Menu>
         {user && (
@@ -430,7 +431,6 @@ export const BoardItem = ({
               nameMenu="Update Ideas"
             />
             <Popconfirm
-              // icon={<QuestionCircleOutlined style={{color: "red"}}/>}
               title={
                 <div>
                   Do you want to delete the project
@@ -457,7 +457,9 @@ export const BoardItem = ({
               <MenuItemHover nameMenu="View Description" />
             </Link>
             <MenuItemHover nameMenu="Download" />
-            <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
+            {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
+              <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
+            )}
             <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusIdea} />
           </>
         )}
@@ -467,7 +469,9 @@ export const BoardItem = ({
               <MenuItemHover nameMenu="View Description" />
             </Link>
             <MenuItemHover nameMenu="Download" />
-            <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
+            {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
+              <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
+            )}
             <MenuItemHover
               nameMenu="Update Status Project"
               onClick={showModalUpdateStatusProject}
@@ -578,15 +582,21 @@ export const BoardItem = ({
         </div>
         {approve && (
           <div className="text-right pr-5 pb-1">
-            <Button
-              onClick={() => {
-                const values = { status: 'approve', id: item?.id };
-                dispatch(updateStatusProject({ data: values }));
-              }}
-              className="!bg-[#3B82F6] !h-[40px] !rounded-md !text-white !text-sm"
-            >
-              Approve
-            </Button>
+            {item?.project?.status === 'approve' ? (
+              <Button disabled className={classNames('!h-[40px] !rounded-md !text-sm')}>
+                Approve
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  const values = { status: 'approve', id: item?.projectId || item?.id };
+                  dispatch(updateStatusProject({ data: values }));
+                }}
+                className={classNames('!bg-[#3B82F6] !h-[40px] !rounded-md !text-white !text-sm')}
+              >
+                Approve
+              </Button>
+            )}
           </div>
         )}
 

@@ -186,6 +186,7 @@ export function detailProjectMemberByPosition(position) {
           roles
           pmUserId
           project {
+            id
             name
             attachments
             type
@@ -194,6 +195,7 @@ export function detailProjectMemberByPosition(position) {
               name
               avatar_attachment
             }
+            status
           }
         }
       }
