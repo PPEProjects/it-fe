@@ -9,6 +9,7 @@ import {
   UpdateProjectMembers,
   UpsertProjectMembersUserIds,
 } from '../../../../pages/memberProject/memberProjectSlice';
+const { Option } = Select;
 
 export const AssignReviewer = ({
   item,
@@ -28,7 +29,7 @@ export const AssignReviewer = ({
   const [selectedItems, setSelectedItems] = useState([]);
   const filteredOptions = OPTIONS.filter(item => !selectedItems.includes(item.id));
   const handlerChangeUser = item => {
-    setSelectedItems([...selectedItems, item.id]);
+    setSelectedItems([...selectedItems, item?.id]);
   };
   const hrefLocation = window.location.pathname;
 
@@ -44,12 +45,18 @@ export const AssignReviewer = ({
           placeholder="Inserted are removed"
           value={selectedItems}
           style={{ width: '100%' }}
-        ></Select>
+          onChange={setSelectedItems}
+        >
+          {OPTIONS.map(item => (
+            <Option value={item.id}>{item.name}</Option>
+          ))}
+        </Select>
         {type ? (
           <Button
             type="primary"
             className="pl-5"
             onClick={() => {
+              console.log();
               dispatch(
                 UpdateProjectMembers({
                   data: { id: memberUserId, memberUserId: selectedItems.toString() },
