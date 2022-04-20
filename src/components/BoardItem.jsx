@@ -72,6 +72,7 @@ export const BoardItem = ({
   const [isModalDraftIdeasProject, setIsModalDraftIdeasProject] = useState(false);
   const [isModalUpdateStatusIdea, setIsModalUpdateStatusIdea] = useState(false);
   const [isModalUpdateStatusProject, setIsModalUpdateStatusProject] = useState(false);
+  const [isModalProjectManage, setIsModalProjectManage] = useState(false);
   const [isModalComment, setModalComment] = useState(false);
 
   const showModalComment = () => {
@@ -92,6 +93,13 @@ export const BoardItem = ({
   };
   const handleCancelUpdateStatusIdea = () => {
     setIsModalUpdateStatusIdea(false);
+  };
+
+  const showModalProjectManage = () => {
+    setIsModalProjectManage(true);
+  };
+  const handleCancelProjectManage = () => {
+    setIsModalProjectManage(false);
   };
 
   const showModalDraftIdeasProject = () => {
@@ -227,10 +235,29 @@ export const BoardItem = ({
         onCancel={handleCancelAssignReviewer}
         footer={null}
       >
-        <AssignReviewer />
+        <AssignReviewer role="Reviewer" />
       </Modal>
     );
   };
+
+  const renderModalAssignProjectManage = () => {
+    return (
+      <Modal
+        className="!w-[800px]"
+        visible={isModalProjectManage}
+        onCancel={handleCancelProjectManage}
+        footer={null}
+      >
+        <AssignReviewer
+          role="Project Manage"
+          position="pm"
+          item={item}
+          closeModal={handleCancelProjectManage}
+        />
+      </Modal>
+    );
+  };
+
   const renderModalTopComment = () => {
     return (
       <Modal visible={isModalVisible} onCancel={handleCancel} footer={null}>
@@ -295,7 +322,12 @@ export const BoardItem = ({
         onCancel={handleCancelDraftIdeasProject}
         footer={null}
       >
-        <AssignReviewer position="pr" item={item} closeModal={handleCancelDraftIdeasProject} />
+        <AssignReviewer
+          role="Reviewer"
+          position="pr"
+          item={item}
+          closeModal={handleCancelDraftIdeasProject}
+        />
       </Modal>
     );
   };
@@ -458,6 +490,7 @@ export const BoardItem = ({
             </Link>
             <MenuItemHover nameMenu="Download" />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
+            <MenuItemHover nameMenu="Assign Project Manage" onClick={showModalProjectManage} />
             <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusIdea} />
           </>
         )}
@@ -508,6 +541,7 @@ export const BoardItem = ({
       {renderModalUpdateStatusIdea()}
       {renderModalUpdateStatusProject()}
       {renderModalComment()}
+      {renderModalAssignProjectManage()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <div className="relative">
           <img

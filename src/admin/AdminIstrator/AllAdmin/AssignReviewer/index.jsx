@@ -19,6 +19,7 @@ export const AssignReviewer = ({
   memberUserId,
   idPosition,
   type,
+  role,
 }) => {
   const dispatch = useDispatch();
   const { mlUser } = useSelector(userSelector);
@@ -32,13 +33,14 @@ export const AssignReviewer = ({
     setSelectedItems([...selectedItems, item?.id]);
   };
   const hrefLocation = window.location.pathname;
+  console.log('role', role);
 
   return (
     <div>
       <span className="flex items-center justify-center text-3xl text-[#9CA3AF]">
         <HiOutlineUserGroup className="!w-[40px] !h-[32px] stroke-0" />
       </span>
-      <h4 className="text-lg text-center pt-2">Assign Reviewer</h4>
+      <h4 className="text-lg text-center pt-2">Assign {role} </h4>
       <div className="w-80% flex py-6">
         <Select
           mode="multiple"
