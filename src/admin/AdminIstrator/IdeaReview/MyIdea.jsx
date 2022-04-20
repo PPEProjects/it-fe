@@ -4,24 +4,15 @@ import MasterLayout from 'layouts/MasterLayout';
 import { BoardItem } from 'components/BoardItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { TitleItem } from '../AllAdmin/TitleItem';
-import {
-  projectSelector,
-  MyIdeas,
-  detailProjectMemberByPosition,
-} from 'pages/project/projectSlice';
+import { projectSelector, detailProjectMemberByPosition } from 'pages/project/projectSlice';
 
 export const MyIdea = () => {
   const dispatch = useDispatch();
-  const { mlMyIdeas, cProject, mlMyIdeaProject } = useSelector(projectSelector);
-
-  // useEffect(() => {
-  //   dispatch(MyIdeas());
-  // }, [dispatch, cProject]);
-  console.log('mlMyIdeaProject', mlMyIdeaProject);
+  const { mlMyIdeaProject, upStatusProject } = useSelector(projectSelector);
 
   useEffect(() => {
     dispatch(detailProjectMemberByPosition('pr'));
-  }, [dispatch]);
+  }, [dispatch, upStatusProject]);
 
   const filterIdeas = (mlMyIdeaProject?.myIdeaProject ?? []).filter(
     item => item?.project?.type === 'ideas'
@@ -42,6 +33,8 @@ export const MyIdea = () => {
                   imgAvatar={item?.project?.user?.avatar_attachment?.file}
                   nameProject={item?.project?.name}
                   shadowNone
+                  approve
+                  item={item}
                   linkViewDescription={`/ProjectDescription?id=${item?.id}`}
                   linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                   link={`/ProjectDescription?id=${item?.id}`}
@@ -53,31 +46,5 @@ export const MyIdea = () => {
         </div>
       </LayoutAdmin>
     </MasterLayout>
-    // <MasterLayout>
-    //   <LayoutAdmin>
-    //     <div className="p-4">
-    //       <TitleItem title="Idea Review" number={mlMyIdeas?.myIdeas?.length} />
-    //     </div>
-    //     <div className="grid grid-cols-2 gap-4 p-4">
-    //       {(mlMyIdeas?.myIdeas ?? []).map((item, index) => {
-    //         return (
-    //           <div key={index}>
-    //             <BoardItem
-    //               imgPage={item?.attachments?.main_picture?.file}
-    //               imgAvatar={item?.user?.avatar_attachment?.file}
-    //               nameProject={item?.name}
-    //               shadowNone
-    //               linkViewDescription={`/ProjectDescription?id=${item?.id}`}
-    //               linkViewDetail={`/ProjectDescription?id=${item?.id}`}
-    //               link={`/ProjectDescription?id=${item?.id}`}
-    //               myIdea
-    //               placement="bottomRight"
-    //             />
-    //           </div>
-    //         );
-    //       })}
-    //     </div>
-    //   </LayoutAdmin>
-    // </MasterLayout>
   );
 };
