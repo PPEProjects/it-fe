@@ -71,20 +71,27 @@ const RegisterPage = () => {
                 name="name"
                 rules={[
                   {
+                    type: 'string',
+                  },
+                  {
                     whitespace: true,
                     message: 'Please input your name!',
                   },
                   {
-                    pattern: /^[^!@#$%^&*()+-,<.>/?}|{:;'\[\]'\\]*$/,
-                    message: 'Name without special characters!',
+                    pattern: new RegExp(/^[a-zA-Z]*$/),
+                    message: 'Name without special characters and number!',
                   },
                   {
                     required: true,
                     message: 'Please input your name!',
                   },
+                  {
+                    max: 40,
+                    message: 'Name has max 40 characters!',
+                  },
                 ]}
               >
-                <Input className="!rounded" placeholder="Name" size="large" />
+                <Input className="!rounded" placeholder="Name" size="large" type="text" />
               </Form.Item>
             </div>
             <div className="relative">
@@ -105,6 +112,14 @@ const RegisterPage = () => {
                       required: true,
                       message: 'Please input your E-mail!',
                     },
+                    () => ({
+                      validator(_, value) {
+                        if (value.slice(0, -10).length > 30) {
+                          return Promise.reject('Name Email has max 30 characters!');
+                        }
+                        return Promise.resolve();
+                      },
+                    }),
                   ]}
                 >
                   <Input className="!rounded" placeholder="Email" size="large" />
@@ -129,6 +144,14 @@ const RegisterPage = () => {
                     message: 'Please input your phone number!',
                   },
                   { min: 10, message: 'The input is not valid Phone number!' },
+                  {
+                    max: 13,
+                    message: 'The input is not valid Phone number!',
+                  },
+                  {
+                    pattern: new RegExp(/^[0-9]*$/),
+                    message: 'Name without special characters and text!',
+                  },
                 ]}
               >
                 <Input
@@ -153,6 +176,10 @@ const RegisterPage = () => {
                   {
                     required: true,
                     message: 'Please input your password!',
+                  },
+                  {
+                    max: 10,
+                    message: 'Password has max 30 characters!',
                   },
                 ]}
               >

@@ -14,11 +14,17 @@ export const CurrencyItem = ({ onChange, value, name_money, name_iso_code }) => 
   return (
     <Form form={form}>
       <div className="!mb-0 space-x-3 flex items-center w-full">
-        <Form.Item className="!mb-0 !w-[70%]" name={name_money}>
+        <Form.Item
+          className="!mb-0 !w-[70%]"
+          name={name_money}
+          rules={[
+            {type: "number"}
+          ]}>
           <Input
-            className="!rounded"
+            className="!rounded"ß
             placeholder="$ 0.00"
             type="number"
+            min={0}
             onChange={e => setPrice({ ...price, money: e.target.value })}
           />
         </Form.Item>
