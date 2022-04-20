@@ -9,9 +9,9 @@ import { DoneIdeasProject } from './DoneIdeasProject';
 import { InUseIdeasProject } from './InUseIdeasProject';
 
 const menuList = [
-  {
-    title: 'All',
-  },
+  // {
+  //   title: 'All',
+  // },
   {
     title: 'Draft',
   },
@@ -33,9 +33,9 @@ const menuList = [
 ];
 
 const tabPane = [
-  {
-    content: <AllIdeasProject />,
-  },
+  // {
+  //   content: <AllIdeasProject />,
+  // },
   {
     content: <DraftIdeasProject />,
   },

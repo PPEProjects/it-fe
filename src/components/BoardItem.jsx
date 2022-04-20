@@ -16,6 +16,7 @@ import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
 import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
 import { userSelector, setUserMerge, deleteProject } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateStatusProject } from 'pages/project/projectSlice';
 
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
@@ -54,6 +55,7 @@ export const BoardItem = ({
   modalDraftProject,
   modalJoinProject,
   borderRounded = true,
+  approve,
 }) => {
   const dispatch = useDispatch();
   const { upProject, dataProject } = useSelector(userSelector);
@@ -381,7 +383,7 @@ export const BoardItem = ({
               <MenuItemHover nameMenu="View Description" />
             </Link>
             <MenuItemHover nameMenu="Manage Members" onClick={showModalManageMembers} />
-            {item?.project?.status === 'preparing' && (
+            {(item?.project?.status === 'preparing' || item?.project?.status === null) && (
               <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
             )}
             {item?.project?.status === 'done' && (
@@ -389,7 +391,8 @@ export const BoardItem = ({
             )}
             {(item?.project?.status === 'preparing' ||
               item?.project?.status === 'onboard' ||
-              item?.project?.status === 'running') && (
+              item?.project?.status === 'running' ||
+              item?.project?.status === null) && (
               <>
                 <MenuItemHover nameMenu="Download Files" onClick={showModalDownloadFiles} />
                 <MenuItemHover nameMenu="Update Files" onClick={showModalUpdateFiles} />
@@ -466,7 +469,7 @@ export const BoardItem = ({
             <MenuItemHover nameMenu="Download" />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
             <MenuItemHover
-              nameMenu="Update Status Product"
+              nameMenu="Update Status Project"
               onClick={showModalUpdateStatusProject}
             />
           </>
@@ -573,9 +576,15 @@ export const BoardItem = ({
             </Dropdown>
           </div>
         </div>
-        {admin && (
-          <div className="text-right pr-6 pb-1">
-            <Button className="!bg-[#3B82F6] !h-[40px] rounded !text-white !text-sm">
+        {approve && (
+          <div className="text-right pr-5 pb-1">
+            <Button
+              onClick={() => {
+                const values = { status: 'approve', id: item?.id };
+                dispatch(updateStatusProject({ data: values }));
+              }}
+              className="!bg-[#3B82F6] !h-[40px] !rounded-md !text-white !text-sm"
+            >
               Approve
             </Button>
           </div>

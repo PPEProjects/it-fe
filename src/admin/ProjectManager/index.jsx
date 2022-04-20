@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import MasterLayout from 'layouts/MasterLayout';
 import { LayoutAdmin } from 'layouts/LayoutAdmin';
 import { BoardItem } from 'components/BoardItem';
 import { getMyProjects, memberProjectSelector } from '../../pages/memberProject/memberProjectSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import StepsView from '../../components/StepsView';
-import { StepsColumn } from 'components/StepsColumn';
 import { projectSelector } from 'pages/project/projectSlice';
 
 export const StepsEnum = ['preparing', 'onboard', 'running', 'done'];

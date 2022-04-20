@@ -47,6 +47,7 @@ export const Project = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  approve
                   item={item}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
@@ -70,6 +71,7 @@ export const Project = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  approve
                   item={item}
                   linkViewDescription={`/ProjectDescription?id=${item?.id}`}
                   linkViewDetail={`/ProjectDescription?id=${item?.id}`}

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateFeedBack, feedBackSelector } from 'pages/feedBack/feedBackSlice';
+import { useDispatch } from 'react-redux';
+import { updateFeedBack } from 'pages/feedBack/feedBackSlice';
 
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 

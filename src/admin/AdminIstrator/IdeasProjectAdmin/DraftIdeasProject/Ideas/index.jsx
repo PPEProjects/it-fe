@@ -32,6 +32,7 @@ export const Ideas = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  approve
                   item={item}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
@@ -55,6 +56,7 @@ export const Ideas = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  approve
                   item={item}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
