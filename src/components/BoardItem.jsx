@@ -48,12 +48,11 @@ export const BoardItem = ({
   ideas,
   level,
   projectManager,
-  myIdea,
+  ReviewProject,
   clickNode,
   item,
   modalDraft,
   modalDraftProject,
-  modalJoinProject,
   borderRounded = true,
   approve,
 }) => {
@@ -387,23 +386,19 @@ export const BoardItem = ({
   };
 
   const menu = item => {
-    console.log('item', item);
     return (
       <Menu>
+        <Link to={`${linkViewDescription}`}>
+          <MenuItemHover nameMenu="View Description" />
+        </Link>
         {user && (
           <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
             <MenuItemHover nameMenu="Top Comment" onClick={showModal} />
           </>
         )}
 
         {admin && (
           <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
             <MenuItemHover nameMenu="Download" onClick={showModal} />
             <MenuItemHover nameMenu="Review" onClick={showModalReviewer} />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalAssignReviewer} />
@@ -412,9 +407,6 @@ export const BoardItem = ({
         )}
         {projectManager && (
           <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
             <MenuItemHover nameMenu="Manage Members" onClick={showModalManageMembers} />
             {(item?.project?.status === 'preparing' || item?.project?.status === null) && (
               <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
@@ -425,7 +417,9 @@ export const BoardItem = ({
             {(item?.project?.status === 'preparing' ||
               item?.project?.status === 'onboard' ||
               item?.project?.status === 'running' ||
-              item?.project?.status === null) && (
+              item?.project?.status === 'approve' ||
+              item?.project?.status === 'stuck' ||
+              item?.project?.status === 'in use') && (
               <>
                 <MenuItemHover nameMenu="Download Files" onClick={showModalDownloadFiles} />
                 <MenuItemHover nameMenu="Update Files" onClick={showModalUpdateFiles} />
@@ -441,20 +435,14 @@ export const BoardItem = ({
             )}
           </>
         )}
-        {myIdea && (
+        {ReviewProject && (
           <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
             <MenuItemHover nameMenu="Download Files" />
             <MenuItemHover nameMenu="Upload Review Files " />
           </>
         )}
         {clickNode && (
           <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
             <MenuItemHover
               onClick={() => {
                 dispatch(setData({ dataProject: { item } }));
@@ -485,39 +473,26 @@ export const BoardItem = ({
         )}
         {modalDraft && (
           <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
             <MenuItemHover nameMenu="Download" />
-            <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
-            {/* <MenuItemHover nameMenu="Assign Project Manage" onClick={showModalProjectManage} /> */}
-            {/* {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
+            {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
               <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
-            )} */}
+            )}
             <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusIdea} />
           </>
         )}
         {modalDraftProject && (
           <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
             <MenuItemHover nameMenu="Download" />
             {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
               <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
             )}
-            <MenuItemHover nameMenu="Assign Project Manage" onClick={showModalProjectManage} />
+            {!(item?.status === 'created' || item?.status === 'reviewing & improving') && (
+              <MenuItemHover nameMenu="Assign Project Manage" onClick={showModalProjectManage} />
+            )}
             <MenuItemHover
               nameMenu="Update Status Project"
               onClick={showModalUpdateStatusProject}
             />
-          </>
-        )}
-        {modalJoinProject && (
-          <>
-            <Link to={`${linkViewDescription}`}>
-              <MenuItemHover nameMenu="View Description" />
-            </Link>
           </>
         )}
       </Menu>

@@ -20,14 +20,14 @@ export const OnBoardIdeasProject = () => {
     dispatch(MyIdeas());
   }, [dispatch, cProject]);
 
-  const dataFillterIdeas = (mlMyIdeas?.myIdeas ?? []).filter(item => item.status === 'onbroad');
+  const dataFillterIdeas = (mlMyIdeas?.myIdeas ?? []).filter(item => item.status === 'onboard');
   const dataFillterProjects = (mlMyProject?.myProject ?? []).filter(
-    item => item.status === 'onbroad'
+    item => item.status === 'onboard'
   );
 
   return (
     <section>
-      <div className="space-y-4 border-b p-4 pb-5">
+      {/* <div className="space-y-4 border-b p-4 pb-5">
         <TitleItem title="Ideas" number={dataFillterIdeas?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataFillterIdeas ?? []).map((item, index) => {
@@ -49,7 +49,7 @@ export const OnBoardIdeasProject = () => {
             );
           })}
         </div>
-      </div>
+      </div> */}
 
       <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Project" number={dataFillterProjects?.length} />
