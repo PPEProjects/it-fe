@@ -83,8 +83,19 @@ const NewProject = () => {
                   className="!mb-0"
                   rules={[
                     {
+                      type: 'string',
+                    },
+                    {
                       required: true,
                       message: 'Idea/Project Name is missing.',
+                    },
+                    {
+                      max: 400,
+                      message: 'Idea/Project Name has max 400 characters',
+                    },
+                    {
+                      pattern: /^[^!@#$%^&*()+-,<.>/?}|{:;'\[\]'\\]*$/,
+                      message: 'Idea/Project Name without special characters',
                     },
                   ]}
                   name="name"
@@ -126,7 +137,17 @@ const NewProject = () => {
               </LabelItemProject>
               <div className="border-b pb-3">
                 <LabelItemProject borderB={false} flex label="Co-author name">
-                  <Form.Item className="w-1/2 !mb-0" rules={[{ required: true }]}>
+                  <Form.Item
+                    className="w-1/2 !mb-0"
+                    rules={[
+                      {
+                        required: true,
+                      },
+                      {
+                        whitespace: true,
+                      },
+                    ]}
+                  >
                     <Input value={me?.data?.name} className="!rounded" placeholder="" />
                   </Form.Item>
 
@@ -154,25 +175,51 @@ const NewProject = () => {
               <LabelItemProject label="Main description" rules information>
                 <Form.Item
                   className="!mb-0"
-                  rules={[{ required: true, message: 'Main Description is missing.' }]}
+                  rules={[
+                    { required: true, message: 'Main Description is missing.' },
+                    { max: 500, message: 'Main Description has max 500 character!' },
+                    { whitespace: true },
+                  ]}
                   name="description"
                 >
                   <TextArea className="!rounded !h-[120px]" placeholder="" />
                 </Form.Item>
               </LabelItemProject>
               <LabelItemProject width label="Category (website, adon, extension, app, other...)">
-                <Form.Item className="!mb-0" name="category">
+                <Form.Item
+                  className="!mb-0"
+                  name="category"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Category is missing!',
+                    },
+                    {
+                      max: 30,
+                      message: 'Category has max 30 character!',
+                    },
+                  ]}
+                >
                   <Input className="!rounded" placeholder="" />
                 </Form.Item>
               </LabelItemProject>
               <LabelItemProject label="Programming Language">
-                <Form.Item className="!mb-0" name="programingLanguage">
+                <Form.Item
+                  className="!mb-0"
+                  name="programingLanguage"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'You must choose or enter programing language!',
+                    },
+                  ]}
+                >
                   <Select
                     mode="multiple"
                     allowClear
                     style={{ width: '100%' }}
                     placeholder="Please select"
-                    defaultValue="ReactJs"
+                    //defaultValue="ReactJs"
                   >
                     <Option value="reactJs">ReactJs</Option>
                     <Option value="java">Java</Option>
@@ -183,13 +230,22 @@ const NewProject = () => {
                 </Form.Item>
               </LabelItemProject>
               <LabelItemProject label="Framework">
-                <Form.Item className="!mb-0" name="framework">
+                <Form.Item
+                  className="!mb-0"
+                  name="framework"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'You must choose or enter framework!',
+                    },
+                  ]}
+                >
                   <Select
                     mode="multiple"
                     allowClear
                     style={{ width: '100%' }}
                     placeholder="Please select"
-                    defaultValue="ReactJs"
+                    //defaultValue="ReactJs"
                   >
                     <Option value="reactJs">ReactJs</Option>
                     <Option value="java">Java</Option>
