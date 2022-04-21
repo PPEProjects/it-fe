@@ -34,10 +34,19 @@ const NewProject = () => {
   const { cProject } = useSelector(projectSelector);
   const { me } = useSelector(userSelector);
   const [selected, setSelected] = useState(settings[0]);
+  // const [status, setStatus] = useState('');
 
   useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);
+
+  useEffect(() => {
+    form.setFieldsValue({
+      data: {
+        status: 'created',
+      },
+    });
+  });
 
   return (
     <section>
@@ -83,6 +92,13 @@ const NewProject = () => {
                   <Input className="!rounded" placeholder="" />
                 </Form.Item>
               </LabelItemProject>
+
+              <LabelItemProject label="Status" rules>
+                <Form.Item className="!mb-0" name="status">
+                  <Input className="!rounded" placeholder="" disabled />
+                </Form.Item>
+              </LabelItemProject>
+
               <LabelItemProject flex label="Main author name" rules>
                 <Form.Item className="w-1/2 !mb-0" rules={[{ required: true }]}>
                   <Input value={me?.data?.name} disabled className="!rounded" placeholder="" />

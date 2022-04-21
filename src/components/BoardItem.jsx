@@ -490,10 +490,10 @@ export const BoardItem = ({
             </Link>
             <MenuItemHover nameMenu="Download" />
             <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
-            <MenuItemHover nameMenu="Assign Project Manage" onClick={showModalProjectManage} />
-            {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
+            {/* <MenuItemHover nameMenu="Assign Project Manage" onClick={showModalProjectManage} /> */}
+            {/* {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
               <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
-            )}
+            )} */}
             <MenuItemHover nameMenu="Update Status Idea" onClick={showModalUpdateStatusIdea} />
           </>
         )}
@@ -506,6 +506,7 @@ export const BoardItem = ({
             {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
               <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
             )}
+            <MenuItemHover nameMenu="Assign Project Manage" onClick={showModalProjectManage} />
             <MenuItemHover
               nameMenu="Update Status Project"
               onClick={showModalUpdateStatusProject}
