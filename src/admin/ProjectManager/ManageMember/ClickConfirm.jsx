@@ -1,13 +1,10 @@
 import { Button, Form, Input } from 'antd';
-import { LabelItemProject } from 'pages/project/NewProject/LabelItemProject';
-import { createProject, projectSelector } from 'pages/project/projectSlice';
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { upsertMemberProject, memberProjectSelector } from 'pages/memberProject/memberProjectSlice';
+import { useDispatch } from 'react-redux';
+import { upsertMemberProject } from 'pages/memberProject/memberProjectSlice';
 
 export const ClickConfirm = ({ item, closeModal }) => {
   const dispatch = useDispatch();
-  const { cCreateProjectMembers } = useSelector(memberProjectSelector);
   const [form] = Form.useForm();
   const { TextArea } = Input;
 
@@ -17,11 +14,7 @@ export const ClickConfirm = ({ item, closeModal }) => {
         projectId: item?.project?.id,
       },
     });
-  }, [item]);
-
-  // useEffect(() => {
-  //   dispatch(createProject());
-  // }, [dispatch]);
+  }, [item, form]);
 
   return (
     <section>
@@ -31,8 +24,6 @@ export const ClickConfirm = ({ item, closeModal }) => {
       <Form
         form={form}
         name="basic"
-        // onFinish={values => dispatch(createProject(values))}
-        // onFinish={values => console.log('values', values)}
         onFinish={values => dispatch(upsertMemberProject(values))}
         scrollToFirstError
         layout="vertical"

@@ -237,7 +237,6 @@ export function UpsertProjectMembersUserIds(values) {
 }
 
 export function detailProjectMember(id) {
-  console.log('id from redux', id);
   return async dispatch => {
     dispatch(setMerge({ deProject: { isRefresh: false, isLoading: true } }));
     const query = gql`
@@ -304,8 +303,6 @@ export function detailProjectMember(id) {
 }
 
 export function deleteProjectMemberId(id) {
-  console.log('id rom redux', id);
-  // return;
   return async dispatch => {
     dispatch(setMerge({ dProjectMemberId: { isLoading: true } }));
     const mutationAPI = () => {

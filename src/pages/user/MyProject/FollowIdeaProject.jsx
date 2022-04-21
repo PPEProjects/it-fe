@@ -29,7 +29,6 @@ const FollowIdeaProject = () => {
     dispatch(myProjectInterested());
   }, [dispatch]);
 
-  console.log('mlProjectInterested', mlProjectInterested);
   return (
     <LayoutProject>
       <section className="px-4 py-6 space-y-3">

@@ -11,7 +11,6 @@ export const StatusManage = ({ dataDetailMemberProject, openModal, isCloseModal 
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const { upFeedBack } = useSelector(feedBackSelector);
-  console.log('dataDetailMemberProject', dataDetailMemberProject);
   useEffect(() => {
     form.setFieldsValue({
       data: {

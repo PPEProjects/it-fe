@@ -7,10 +7,12 @@ import { researchRoutes } from 'pages/research/researchRoutes';
 import { projectRoutes } from 'pages/project/projectRoutes';
 import { adminIstratorRoutes } from 'admin/AdminIstrator/adminIstratorRoutes';
 import { projectManagerRoutes } from 'admin/ProjectManager/projectManagerRoutes';
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.css';
+import { userSelector } from 'pages/user/userSlice';
 
-function App() {
+import { useSelector } from 'react-redux';
 
+const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
@@ -33,6 +35,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

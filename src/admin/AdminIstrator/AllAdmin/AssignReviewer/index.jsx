@@ -33,7 +33,6 @@ export const AssignReviewer = ({
     setSelectedItems([...selectedItems, item?.id]);
   };
   const hrefLocation = window.location.pathname;
-  console.log('role', role);
 
   return (
     <div>
@@ -58,7 +57,6 @@ export const AssignReviewer = ({
             type="primary"
             className="pl-5"
             onClick={() => {
-              console.log();
               dispatch(
                 UpdateProjectMembers({
                   data: { id: memberUserId, memberUserId: selectedItems.toString() },
