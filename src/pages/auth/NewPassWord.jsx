@@ -87,6 +87,10 @@ const NewPassword = () => {
                       required: true,
                       message: 'Please input your password!',
                     },
+                    {
+                      max: 30,
+                      message: 'Password is not valid!',
+                    },
                   ]}
                 >
                   <Input.Password className="!rounded" placeholder="Password" size="large" />

@@ -88,6 +88,10 @@ const ForgotPassWord = () => {
                   name="email"
                   rules={[
                     {
+                      whitespace: true,
+                      message: '',
+                    },
+                    {
                       type: 'email',
                       message: 'The input is not valid E-mail!',
                     },
@@ -95,6 +99,14 @@ const ForgotPassWord = () => {
                       required: true,
                       message: 'Please input your E-mail!',
                     },
+                    () => ({
+                      validator(_, value) {
+                        if (value.slice(0, -10).length > 30) {
+                          return Promise.reject('Name Email has max 30 characters!');
+                        }
+                        return Promise.resolve();
+                      },
+                    }),
                   ]}
                 >
                   <Input

@@ -60,6 +60,15 @@ const LoginPage = () => {
                   required: true,
                   message: 'Please input your password!',
                 },
+                {
+                  pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+                  message:
+                    'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
+                },
+                {
+                  max: 30,
+                  message: 'Password is not valid!',
+                },
               ]}
             >
               <Input.Password className="!rounded" placeholder="Password" size="large" />
