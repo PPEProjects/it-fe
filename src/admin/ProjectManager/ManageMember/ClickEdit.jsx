@@ -10,7 +10,7 @@ import {
   memberProjectSelector,
   deleteProjectMemberId,
 } from '../../../pages/memberProject/memberProjectSlice';
-export const ClickEdit = ({ closeModal, item, handleCancelClickEdit }) => {
+export const ClickEdit = ({ closeModal, item, onCancel, handleCancelClickEdit }) => {
   const dispatch = useDispatch();
   const { deProject, upMemberProject } = useSelector(memberProjectSelector);
   const detailProjectsMember = deProject.detailProjectIds;
@@ -124,7 +124,7 @@ export const ClickEdit = ({ closeModal, item, handleCancelClickEdit }) => {
         <HiUserAdd className="text-4xl text-gray-400" onClick={showModalModalClickConfirm} />
       </div>
       <div className="flex items-end justify-end mt-7">
-        <Button className="!rounded-md !h-10 !Poppins" type="primary">
+        <Button className="!rounded-md !h-10 !Poppins" type="primary" onClick={onCancel}>
           Confirm
         </Button>
       </div>
