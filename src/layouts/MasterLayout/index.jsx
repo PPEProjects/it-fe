@@ -5,14 +5,9 @@ import { useSelector } from 'react-redux';
 import { userSelector } from 'pages/user/userSlice';
 import { apolloBuilder, AppNotifyContext, NotifyWrapper, ToastView } from 'ppe-notify';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 
 export default function Example({ children }) {
   const { isOpenMyProfileRight, me } = useSelector(userSelector);
-  const rolesAdmin = { admin: 'admin' };
-  const rolesProjectManage = { project_manage: 'project_manage' };
-  const rolesIdeasReview = { ideas_review: 'ideas_review' };
-  const rolesProjectReview = { project_review: 'project_review' };
   const [notifyContext, setNotifyContext] = useState({
     avatar: '',
     user: {},
