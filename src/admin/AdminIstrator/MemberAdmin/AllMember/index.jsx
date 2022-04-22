@@ -15,6 +15,7 @@ export const AllMember = () => {
   return (
     <div className="grid grid-cols-3 gap-5 p-3">
       {(mlUser?.myListUser ?? []).map((item, index) => {
+        // console.log('item', item);
         return (
           <div key={index}>
             <InformationMember

@@ -19,7 +19,7 @@ export const ManageMember = ({ item, closeModal }) => {
   const renderModalClickEdit = () => {
     return (
       <Modal visible={isModalClickEdit} onCancel={handleCancelClickEdit} footer={null}>
-        <ClickEdit item={item} closeModal={closeModal} />
+        <ClickEdit item={item} closeModal={closeModal} onCancel={handleCancelClickEdit} />
       </Modal>
     );
   };
@@ -34,7 +34,7 @@ export const ManageMember = ({ item, closeModal }) => {
         {detailProjectsMember?.members?.map((userPosition, index) => {
           return (
             <>
-              {userPosition.memberUser === null ? (
+              {userPosition?.memberUser === null ? (
                 <AddGoal
                   idPosition={userPosition?.memberUser?.id}
                   memberUserId={userPosition.id}
@@ -45,7 +45,7 @@ export const ManageMember = ({ item, closeModal }) => {
                 />
               ) : (
                 <>
-                  {userPosition.memberUser?.avatar_attachment?.thumb ? (
+                  {userPosition?.memberUser?.avatar_attachment?.thumb ? (
                     <div className="text-center">
                       <div className="group h-[40px] m-auto rounded-full relative  w-[40px] overflow-hidden bg-gray-300 mx-1">
                         <img

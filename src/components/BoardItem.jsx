@@ -386,6 +386,7 @@ export const BoardItem = ({
   };
 
   const menu = item => {
+    // console.log('item', item);
     return (
       <Menu>
         <Link to={`${linkViewDescription}`}>

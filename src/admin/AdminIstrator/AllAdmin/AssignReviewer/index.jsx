@@ -8,6 +8,8 @@ import { GrFormAdd } from 'react-icons/gr';
 import {
   UpdateProjectMembers,
   UpsertProjectMembersUserIds,
+  detailProjectMember,
+  memberProjectSelector,
 } from '../../../../pages/memberProject/memberProjectSlice';
 const { Option } = Select;
 
@@ -23,16 +25,47 @@ export const AssignReviewer = ({
 }) => {
   const dispatch = useDispatch();
   const { mlUser } = useSelector(userSelector);
+  const { deProject } = useSelector(memberProjectSelector);
   useEffect(() => {
     dispatch(myListUser());
   }, [dispatch]);
   const OPTIONS = mlUser?.myListUser;
   const [selectedItems, setSelectedItems] = useState([]);
-  const filteredOptions = OPTIONS.filter(item => !selectedItems.includes(item.id));
+  const filteredOptions = OPTIONS?.filter(item => !selectedItems?.includes(item.id));
   const handlerChangeUser = item => {
     setSelectedItems([...selectedItems, item?.id]);
   };
-  const hrefLocation = window.location.pathname;
+  // const [dataValues, setDataValues] = useState({});
+  // console.log('item from index : ' + position + ',' + role);
+
+  // useEffect(() => {
+  //   const dataMapping = (deProject?.detailProjectIds?.members ?? []).map(item => {
+  //     return <> {JSON.stringify(item?.memberUser?.id, null, ' ')} </>;
+  //   });
+
+  //   setDataValues(dataMapping);
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch(detailProjectMember(item.id));
+  //   const dataMapping = (deProject?.detailProjectIds?.members ?? []).map(item => {
+  //     return <> {JSON.stringify(item?.memberUser?.id, null, ' ')} </>;
+  //   });
+
+  //   setSelectedItems([...selectedItems, dataMapping]);
+  //   setDataValues(userValue);
+  // }, []);
+
+  useEffect(() => {
+    // const userValue = (deProject?.detailProjectIds?.members ?? []).map((item, index) => {
+    //   return (
+    //     <>
+    //       <pre> {JSON.stringify(item?.memberUser, null, ' ')} </pre>
+    //     </>
+    //   );
+    // });
+  });
+  const hrefLocation = window?.location?.pathname;
 
   return (
     <div>
@@ -40,16 +73,28 @@ export const AssignReviewer = ({
         <HiOutlineUserGroup className="!w-[40px] !h-[32px] stroke-0" />
       </span>
       <h4 className="text-lg text-center pt-2">Assign {role} </h4>
+      {/* <pre> {JSON.stringify(deProject?.detailProjectIds?.members, null, ' ')} </pre> */}
+      {/* <pre> {JSON.stringify(selectedItems, null, ' ')} </pre> */}
       <div className="w-80% flex py-6">
+        {/* {userValue} */}
+        {/* {(deProject?.detailProjectIds?.members ?? []).map((item, index) => {
+          return (
+            <>
+              <pre> {JSON.stringify(item?.memberUser?.id, null, ' ')} </pre>
+            </>
+          );
+        })} */}
+
         <Select
           mode="multiple"
           placeholder="Inserted are removed"
           value={selectedItems}
+          defaultValue={('datvnt', 'bao ngoc')}
           style={{ width: '100%' }}
           onChange={setSelectedItems}
         >
-          {OPTIONS.map(item => (
-            <Option value={item.id}>{item.name}</Option>
+          {OPTIONS?.map(item => (
+            <Option value={item?.id}>{item?.name}</Option>
           ))}
         </Select>
         {type ? (
@@ -59,7 +104,7 @@ export const AssignReviewer = ({
             onClick={() => {
               dispatch(
                 UpdateProjectMembers({
-                  data: { id: memberUserId, memberUserId: selectedItems.toString() },
+                  data: { id: memberUserId, memberUserId: selectedItems?.toString() },
                 })
               );
               closeModal();
@@ -74,7 +119,7 @@ export const AssignReviewer = ({
             onClick={() => {
               dispatch(
                 UpsertProjectMembersUserIds({
-                  data: { projectId: item.id, memberUserId: selectedItems, position: position },
+                  data: { projectId: item?.id, memberUserId: selectedItems, position: position },
                 })
               );
               closeModal();
@@ -85,12 +130,13 @@ export const AssignReviewer = ({
         )}
       </div>
       <p className="text-xs">RECOMMENDED TEAM MEMBERS</p>
+      {/* {JSON.stringify(item, null, ' ')} */}
 
       {hrefLocation === '/ProjectManager' ? (
         <div className="grid grid-cols-2 gap-3">
-          {selectedItems.length !== 0 ? null : (
+          {selectedItems?.length !== 0 ? null : (
             <>
-              {filteredOptions.map((item, index) => {
+              {filteredOptions?.map((item, index) => {
                 return (
                   <div key={index}>
                     <div className="h-[58px] border rounded-full px-3 flex items-center justify-between">
@@ -118,7 +164,7 @@ export const AssignReviewer = ({
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-3">
-          {filteredOptions.map((item, index) => {
+          {filteredOptions?.map((item, index) => {
             return (
               <div key={index}>
                 <div className="h-[58px] border rounded-full px-3 flex items-center justify-between">

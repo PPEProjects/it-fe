@@ -36,6 +36,7 @@ export const AddGoal = ({
         footer={null}
       >
         <AssignReviewer
+          role="Project Manage"
           item={item}
           type
           memberUserId={memberUserId}
@@ -55,6 +56,7 @@ export const AddGoal = ({
         {board && (
           <Button
             onClick={showModelAddGoal}
+            // onClick={() => console.log('item from me', item)}
             type="dashed"
             shape="circle"
             className="!w-[40px] !h-[40px]"
