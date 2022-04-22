@@ -11,15 +11,16 @@ export const StatusManage = ({ dataDetailMemberProject, openModal, isCloseModal 
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const { upFeedBack } = useSelector(feedBackSelector);
+
   useEffect(() => {
     form.setFieldsValue({
       data: {
         content: dataDetailMemberProject?.userFeedback?.content,
-        id: dataDetailMemberProject?.userFeedback?.id,
+        projectId: dataDetailMemberProject?.projectId,
         userId: dataDetailMemberProject?.memberUser?.id,
       },
     });
-  }, [dataDetailMemberProject, form]);
+  }, [dataDetailMemberProject, form, upFeedBack]);
   return (
     <div>
       <h5 className="font-semibold text-sm text-gray-800">Review Members</h5>
@@ -56,8 +57,9 @@ export const StatusManage = ({ dataDetailMemberProject, openModal, isCloseModal 
                 <span className="font-medium text-xs text-gray-500">Rating required</span>
                 <div className="flex items-center -space-x-2">
                   <Stars
+                    onClickStars
                     userId={dataDetailMemberProject?.memberUser?.id}
-                    id={dataDetailMemberProject?.userFeedback?.id}
+                    projectId={dataDetailMemberProject?.projectId}
                     containerClassName="!text-5xl"
                     numberStartActive={dataDetailMemberProject?.userFeedback?.grate}
                   />

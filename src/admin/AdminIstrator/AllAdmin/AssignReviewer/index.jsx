@@ -101,7 +101,6 @@ export const AssignReviewer = ({
           mode="multiple"
           placeholder="Inserted are removed"
           value={selectedItems}
-          defaultValue={('datvnt', 'bao ngoc')}
           style={{ width: '100%' }}
           onChange={setSelectedItems}
         >
