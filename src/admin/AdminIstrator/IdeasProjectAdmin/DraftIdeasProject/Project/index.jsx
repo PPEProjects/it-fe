@@ -25,9 +25,7 @@ export const Project = () => {
   const dataApproveProjects = (mlMyProject?.myProject ?? []).filter(
     item => item.status === 'approve'
   );
-  const dataPmProjects = (mlMyProject?.myProject ?? []).filter(
-    item => item.status === 'pm preparing'
-  );
+  const dataPmProjects = (mlMyProject?.myProject ?? []).filter(item => item.status === 'preparing');
   const dataOnboardProjects = (mlMyProject?.myProject ?? []).filter(
     item => item.status === 'onboard'
   );

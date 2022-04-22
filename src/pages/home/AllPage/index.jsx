@@ -43,7 +43,6 @@ export const AllPage = () => {
     dispatch(MyIdeas());
   }, [dispatch, cProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested]);
 
-  // console.log('mlMyProject?.myProject', mlMyProject?.myProject);
   return (
     <section className="p-3 pl-5 space-y-1">
       <section>

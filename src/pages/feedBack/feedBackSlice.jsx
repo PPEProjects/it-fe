@@ -73,7 +73,6 @@ export function updateFeedBack(values) {
         );
       });
     } catch (e) {
-      console.log(e);
       dispatch(setMerge({ upFeedBack: { isLoading: false } }));
     }
   };

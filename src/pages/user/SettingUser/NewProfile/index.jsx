@@ -20,7 +20,6 @@ const NewProfile = () => {
   const { id } = getURLParams();
   const { deUser, upsertProfile } = useSelector(userSelector);
   const deUsers = deUser?.detailUserIds;
-  console.log('deUsers', deUsers);
 
   useEffect(() => {
     dispatch(detailUser(id));

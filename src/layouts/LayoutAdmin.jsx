@@ -1,15 +1,18 @@
 import React from 'react';
-import { MenuAdmin } from 'admin/AdminIstrator/MenuAdmin';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
+import { userSelector } from 'pages/user/userSlice';
+import { useSelector } from 'react-redux';
 
-export const LayoutAdmin = ({ children, admin }) => {
+export const LayoutAdmin = ({ children }) => {
   let href = window.location.href.replace(/^.+?\/(\w+)$/gim, '$1');
+  const { me } = useSelector(userSelector);
+  const rolesAdmin = { admin: 'admin' };
 
   const renderMenu = () => {
     const menu = [
       {
-        label: 'Admin',
+        label: 'admin',
         key: 'AllAdmin',
         link: `/Administrator`,
       },
@@ -47,13 +50,38 @@ export const LayoutAdmin = ({ children, admin }) => {
     return (
       <Menu defaultSelectedKeys={[href]} mode="inline" className="rounded-lg font-medium text-base">
         {menu.map((item, i) => (
-          <Menu.Item
-            className="hover:!text-[#0369A1] hover:!bg-[#F6F9FB] hover:!rounded-lg"
-            key={item.key}
-          >
-            {item.label}
-            <Link to={`${item.link}`} />
-          </Menu.Item>
+          <>
+            {item?.label === 'admin' ? (
+              <>
+                {me?.data?.userAdvance?.roles?.includes(rolesAdmin?.admin) ? (
+                  <Menu.Item
+                    className="hover:!text-[#0369A1] capitalize hover:!bg-[#F6F9FB] hover:!rounded-lg"
+                    key={item.key}
+                  >
+                    {item.label}
+                    <Link to={`${item.link}`} />
+                  </Menu.Item>
+                ) : (
+                  <Menu.Item className="capitalize" disabled key={item.key}>
+                    {item.label}
+                    <Link to={`${item.link}`} />
+                  </Menu.Item>
+                )}
+              </>
+            ) : (
+              <>
+                {!me?.data?.userAdvance?.roles?.includes(rolesAdmin?.admin) && (
+                  <Menu.Item
+                    className="hover:!text-[#0369A1] capitalize hover:!bg-[#F6F9FB] hover:!rounded-lg"
+                    key={item.key}
+                  >
+                    {item.label}
+                    <Link to={`${item.link}`} />
+                  </Menu.Item>
+                )}
+              </>
+            )}
+          </>
         ))}
       </Menu>
     );

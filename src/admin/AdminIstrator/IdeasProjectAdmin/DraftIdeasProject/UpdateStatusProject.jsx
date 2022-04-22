@@ -6,7 +6,7 @@ export const StepsEnum = [
   'created',
   'reviewing & improving',
   'approve',
-  'pm preparing',
+  'preparing',
   'onboard',
   'running',
   'done',

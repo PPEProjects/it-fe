@@ -21,7 +21,7 @@ export const InUseIdeasProject = () => {
   }, [dispatch, cProject]);
 
   const dataFillterProjects = (mlMyProject?.myProject ?? []).filter(
-    item => item.status === 'inuse'
+    item => item.status === 'in use'
   );
 
   return (

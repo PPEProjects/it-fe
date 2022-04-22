@@ -102,7 +102,6 @@ export const AssignReviewer = ({
             type="primary"
             className="pl-5"
             onClick={() => {
-              console.log();
               dispatch(
                 UpdateProjectMembers({
                   data: { id: memberUserId, memberUserId: selectedItems?.toString() },

@@ -30,6 +30,8 @@ export const MyProjects = () => {
               return (
                 <div key={index}>
                   <BoardItem
+                    approve
+                    ReviewProject
                     item={item}
                     imgPage={item?.project?.attachments?.main_picture?.file}
                     imgAvatar={item?.project?.user?.avatar_attachment?.file}

@@ -304,8 +304,6 @@ export function detailProjectMember(id) {
 }
 
 export function deleteProjectMemberId(id) {
-  console.log('id rom redux', id);
-  // return;
   return async dispatch => {
     dispatch(setMerge({ dProjectMemberId: { isLoading: true } }));
     const mutationAPI = () => {

@@ -350,7 +350,6 @@ export function updateProject(values) {
         );
       });
     } catch (e) {
-      console.log(e);
       dispatch(setMerge({ upProject: { isLoading: false } }));
     }
   };

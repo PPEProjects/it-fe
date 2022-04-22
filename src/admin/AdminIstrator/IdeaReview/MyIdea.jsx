@@ -34,6 +34,7 @@ export const MyIdea = () => {
                   nameProject={item?.project?.name}
                   shadowNone
                   approve
+                  ReviewProject
                   item={item}
                   linkViewDescription={`/ProjectDescription?id=${item?.id}`}
                   linkViewDetail={`/ProjectDescription?id=${item?.id}`}

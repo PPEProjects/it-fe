@@ -14,9 +14,9 @@ import { BiSearch, BiShoppingBag } from 'react-icons/bi';
 import { AiOutlineClose, AiFillHome, AiOutlineSetting } from 'react-icons/ai';
 import { IoMdAdd } from 'react-icons/io';
 import { ModalVoice } from './ModalVoice';
-import {apolloBuilder, AppNotifyContext, NotifyWrapper, ToastView} from "ppe-notify";
+import { AppNotifyContext, ToastView } from 'ppe-notify';
 import { message } from 'antd';
-import NotifyButtonView from "components/header/NotifyButtonView";
+import NotifyButtonView from 'components/header/NotifyButtonView';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,10 @@ const Header = () => {
   const { me, isOpenMyProfileRight } = useSelector(userSelector);
   const { cProject } = useSelector(projectSelector);
   const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
-
+  const rolesAdmin = { admin: 'admin' };
+  const rolesProjectManage = { project_manage: 'project_manage' };
+  const rolesIdeasReview = { ideas_review: 'ideas_review' };
+  const rolesProjectReview = { project_review: 'project_review' };
   const [menuShow, setMenuShow] = useState(false);
   const [openKeys, setOpenKeys] = useState(['sub1']);
   const [isModalVoice, setIsModalVoice] = useState(false);
@@ -84,34 +87,27 @@ const Header = () => {
         <NewProject />
       </Modal>
     );
-  }
+  };
 
-
-  const onToast = (_message) => {
-    if(_message.error) {
-      message.error(_message.message)
+  const onToast = _message => {
+    if (_message.error) {
+      message.error(_message.message);
     } else {
-      message.success(_message.message)
+      message.success(_message.message);
     }
-  }
+  };
 
   return (
-
-    <section id='siteHeader' className="p-3 relative flex items-center space-x-2 border-b px-3">
-
-      <AppNotifyContext.Consumer key={ me.data?.id}>
-        { ctx => Object.keys(ctx.user).length > 0 ? <ToastView onReceived={onToast} /> : null }
+    <section id="siteHeader" className="p-3 relative flex items-center space-x-2 border-b px-3">
+      <AppNotifyContext.Consumer key={me.data?.id}>
+        {ctx => (Object.keys(ctx.user).length > 0 ? <ToastView onReceived={onToast} /> : null)}
       </AppNotifyContext.Consumer>
 
       <div className="w-3/12 pl-3">
         <div className="flex items-center space-x-8">
           <GiHamburgerMenu onClick={toggleMenu} className="text-3xl cursor-pointer" />
           <Link className="flex items-center space-x-8" to={`/AllPage`}>
-            <img
-              className="w-[41px]"
-              src={`/assets/images/photo_2021-07-14_10-53-20.jpg`}
-              alt=""
-            />{' '}
+            <img className="w-[41px]" src={`/assets/images/photo_2021-07-14_10-53-20.jpg`} alt="" />{' '}
             <span className="text-[30px] !text-black">SmileEye</span>
           </Link>
         </div>
@@ -178,20 +174,22 @@ const Header = () => {
                 </Menu.Item>
               </SubMenu>
 
-              <Menu.Item key="6">
-                <Link
-                  to={`/Administrator?id=${me?.data?.id}`}
-                  className="flex items-center space-x-2"
-                >
-                  <HiOutlineUserGroup className="text-2xl" />
-                  <span>Administration</span>
-                </Link>
-              </Menu.Item>
-              <SubMenu
-                icon={<AiOutlineSetting className="!text-2xl" />}
-                key="sub4"
-                title="Setting"
-              >
+              {(me?.data?.userAdvance?.roles?.includes(rolesAdmin?.admin) ||
+                me?.data?.userAdvance?.roles?.includes(rolesProjectManage?.project_manage) ||
+                me?.data?.userAdvance?.roles?.includes(rolesIdeasReview?.ideas_review) ||
+                me?.data?.userAdvance?.roles?.includes(rolesProjectReview?.project_review)) && (
+                <Menu.Item key="6">
+                  <Link
+                    to={`/Administrator?id=${me?.data?.id}`}
+                    className="flex items-center space-x-2"
+                  >
+                    <HiOutlineUserGroup className="text-2xl" />
+                    <span>Administration</span>
+                  </Link>
+                </Menu.Item>
+              )}
+
+              <SubMenu icon={<AiOutlineSetting className="!text-2xl" />} key="sub4" title="Setting">
                 <Menu.Item key="8">
                   <Link to={`/Account?id=${me?.data?.id}`}>Account</Link>
                 </Menu.Item>
@@ -208,15 +206,15 @@ const Header = () => {
         <div className="flex items-center w-5/6 -ml-4">
           <Input className="!rounded-l-[6px] h-[50px] z-10" />
           <Button className="!h-[50px] -ml-0.5 !rounded-r-[6px]">
-              <span className="pt-[4px]">
-                <BiSearch className="text-2xl" />
-              </span>
+            <span className="pt-[4px]">
+              <BiSearch className="text-2xl" />
+            </span>
           </Button>
         </div>
         <Button shape="circle !h-[50px] !w-[50px]">
-            <span className="pt-[4px]">
-              <BsFillMicFill className="text-xl" onClick={showModalVoice} />
-            </span>
+          <span className="pt-[4px]">
+            <BsFillMicFill className="text-xl" onClick={showModalVoice} />
+          </span>
         </Button>
       </div>
       <div className="flex space-x-2 items-center justify-end pr-4 w-4/12">
@@ -249,7 +247,6 @@ const Header = () => {
       {renderModalNewProject()}
       {renderModalVoice()}
     </section>
-
   );
 };
 

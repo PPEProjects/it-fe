@@ -31,7 +31,6 @@ export const DoneIdeasProject = () => {
             return (
               <div key={index}>
                 <BoardItem
-                  approve
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
