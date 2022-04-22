@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 import { userSelector } from 'pages/user/userSlice';
@@ -70,15 +70,13 @@ export const LayoutAdmin = ({ children }) => {
               </>
             ) : (
               <>
-                {!me?.data?.userAdvance?.roles?.includes(rolesAdmin?.admin) && (
-                  <Menu.Item
-                    className="hover:!text-[#0369A1] capitalize hover:!bg-[#F6F9FB] hover:!rounded-lg"
-                    key={item.key}
-                  >
-                    {item.label}
-                    <Link to={`${item.link}`} />
-                  </Menu.Item>
-                )}
+                <Menu.Item
+                  className="hover:!text-[#0369A1] capitalize hover:!bg-[#F6F9FB] hover:!rounded-lg"
+                  key={item.key}
+                >
+                  {item.label}
+                  <Link to={`${item.link}`} />
+                </Menu.Item>
               </>
             )}
           </>

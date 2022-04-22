@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { authRoutes } from 'pages/auth/authRoutes';
 import { homeRoutes } from 'pages/home/homeRoutes';
 import { userRoutes } from 'pages/user/userRoutes';
@@ -8,11 +8,22 @@ import { projectRoutes } from 'pages/project/projectRoutes';
 import { adminIstratorRoutes } from 'admin/AdminIstrator/adminIstratorRoutes';
 import { projectManagerRoutes } from 'admin/ProjectManager/projectManagerRoutes';
 import 'antd/dist/antd.css';
-import { userSelector } from 'pages/user/userSlice';
-
-import { useSelector } from 'react-redux';
 
 const App = () => {
+  const [user, setUser] = useState(null);
+  const rolesAdmin = { admin: 'admin' };
+  const rolesProjectManage = { project_manage: 'project_manage' };
+  const rolesIdeasReview = { ideas_review: 'ideas_review' };
+  const rolesProjectReview = { project_review: 'project_review' };
+
+  useEffect(() => {
+    window.addEventListener('currentUser', e => {
+      setUser(e.detail.data);
+    });
+  }, [user]);
+
+  console.log('user?.userAdvance?.roles', user?.userAdvance?.roles);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -29,7 +40,14 @@ const App = () => {
             ].map((props, key) => (
               <Route key={key} {...props} />
             ))}
-            <Route exact path={`/`} element={<Navigate to="/AllPage" />} />
+            {user?.userAdvance?.roles?.includes(rolesAdmin?.admin) && (
+              <Route path={`/admin`} element={<Navigate to="/Administrator" />} />
+            )}
+            {user?.userAdvance?.roles?.includes(rolesIdeasReview?.ideas_review) && (
+              <Route path={`/IdeaReview`} />
+            )}
+
+            <Route path={`/`} element={<Navigate to="/AllPage" />} />
           </Routes>
         </React.Suspense>
       </BrowserRouter>

@@ -63,6 +63,10 @@ const Header = () => {
     dispatch(getMe());
   }, [dispatch]);
 
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('currentUser', { detail: me }));
+  }, [me]);
+
   const renderModalVoice = () => {
     return (
       <Modal
@@ -180,7 +184,8 @@ const Header = () => {
                 me?.data?.userAdvance?.roles?.includes(rolesProjectReview?.project_review)) && (
                 <Menu.Item key="6">
                   <Link
-                    to={`/Administrator?id=${me?.data?.id}`}
+                    // to={`/Administrator?id=${me?.data?.id}`}
+                    to={`/Administrator`}
                     className="flex items-center space-x-2"
                   >
                     <HiOutlineUserGroup className="text-2xl" />
