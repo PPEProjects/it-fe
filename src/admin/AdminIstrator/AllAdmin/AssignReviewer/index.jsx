@@ -11,6 +11,8 @@ import {
   detailProjectMember,
   memberProjectSelector,
 } from '../../../../pages/memberProject/memberProjectSlice';
+import _ from 'lodash';
+
 const { Option } = Select;
 
 export const AssignReviewer = ({
@@ -36,7 +38,6 @@ export const AssignReviewer = ({
   const handlerChangeUser = item => {
     setSelectedItems([...selectedItems, item?.id]);
   };
-  // const [dataValues, setDataValues] = useState({});
   // console.log('item from index : ' + position + ',' + role);
 
   // useEffect(() => {
@@ -73,7 +74,32 @@ export const AssignReviewer = ({
   //   dispatch(detailProjectMember(item.id));
   // }, [item.id]);
 
-  // const assignUser = (item?.members ?? []).map((item, index) => );
+  // const data = (item?.members ?? []).map((item, index) => {
+  //   return <pre> {(JSON.stringify(item?.memberUser), null, ' ')} </pre>;
+  // });
+  // const [dataValues, setDataValues] = useState([]);
+
+  // useEffect(() => {
+  //   const data = (item?.members ?? []).map((item, index) => {
+  //     return (
+  //       <>
+  //         <pre> {JSON.stringify(item?.memberUser, null, ' ')} </pre>
+  //       </>
+  //     );
+  //   });
+  //   setDataValues(data);
+  //   console.log('dataValues', data);
+  // }, []);
+
+  useEffect(() => {
+    const ids = _.map(item?.members ?? [], 'memberUserId');
+    console.log('ids', ids, item?.members ?? []);
+    setSelectedItems(ids);
+  }, [item]);
+
+  useEffect(() => {
+    console.log('selectedItems', selectedItems);
+  }, [selectedItems]);
 
   const hrefLocation = window?.location?.pathname;
 
@@ -83,25 +109,13 @@ export const AssignReviewer = ({
         <HiOutlineUserGroup className="!w-[40px] !h-[32px] stroke-0" />
       </span>
       <h4 className="text-lg text-center pt-2">Assign {role} </h4>
-      {/* {assignUser} */}
-      {/* <pre> {JSON.stringify(assignUser, null, ' ')} </pre> */}
-      {/* <pre> {JSON.stringify(item?.members?.length, null, ' ')} </pre> */}
-      {/* <pre> {JSON.stringify(item?.members, null, ' ')} </pre> */}
-      {/* <pre> {JSON.stringify(selectedItems, null, ' ')} </pre> */}
-      {/* {(item?.members ?? []).map((item, index) => {
-        return (
-          <>
-            <pre> {JSON.stringify(item?.memberUser?.name, null, ' ')} </pre>
-          </>
-        );
-      })} */}
+
       <div className="w-80% flex py-6">
         {/* {userValue} */}
         <Select
           mode="multiple"
           placeholder="Inserted are removed"
           value={selectedItems}
-          defaultValue={('datvnt', 'bao ngoc')}
           style={{ width: '100%' }}
           onChange={setSelectedItems}
         >
@@ -121,6 +135,14 @@ export const AssignReviewer = ({
               );
               closeModal();
             }}
+            // onClick={() => {
+            //   const values = {
+            //     projectId: item?.id,
+            //     memberUserId: selectedItems,
+            //     position: position,
+            //   };
+            //   console.log('data', values);
+            // }}
           >
             Send invite
           </Button>
@@ -136,6 +158,14 @@ export const AssignReviewer = ({
               );
               closeModal();
             }}
+            // onClick={() => {
+            //   const values = {
+            //     projectId: item?.id,
+            //     memberUserId: selectedItems,
+            //     position: position,
+            //   };
+            //   console.log('data', values);
+            // }}
           >
             Send invite
           </Button>
