@@ -22,6 +22,7 @@ export const AssignReviewer = ({
   idPosition,
   type,
   role,
+  itemMember,
 }) => {
   const dispatch = useDispatch();
   const { mlUser } = useSelector(userSelector);
@@ -56,15 +57,24 @@ export const AssignReviewer = ({
   //   setDataValues(userValue);
   // }, []);
 
-  useEffect(() => {
-    // const userValue = (deProject?.detailProjectIds?.members ?? []).map((item, index) => {
-    //   return (
-    //     <>
-    //       <pre> {JSON.stringify(item?.memberUser, null, ' ')} </pre>
-    //     </>
-    //   );
-    // });
-  });
+  // useEffect(() => {
+  // dispatch(detailProjectMember(item.id));
+  // const userValue = (deProject?.detailProjectIds?.members ?? []).map((item, index) => {
+  //   return (
+  //     <>
+  //       <pre> {JSON.stringify(item?.memberUser, null, ' ')} </pre>
+  //     </>
+  //   );
+  // });
+  // dispatch();
+  // }, [deProject]);
+
+  // useEffect(() => {
+  //   dispatch(detailProjectMember(item.id));
+  // }, [item.id]);
+
+  // const assignUser = (item?.members ?? []).map((item, index) => );
+
   const hrefLocation = window?.location?.pathname;
 
   return (
@@ -73,18 +83,20 @@ export const AssignReviewer = ({
         <HiOutlineUserGroup className="!w-[40px] !h-[32px] stroke-0" />
       </span>
       <h4 className="text-lg text-center pt-2">Assign {role} </h4>
-      {/* <pre> {JSON.stringify(deProject?.detailProjectIds?.members, null, ' ')} </pre> */}
+      {/* {assignUser} */}
+      {/* <pre> {JSON.stringify(assignUser, null, ' ')} </pre> */}
+      {/* <pre> {JSON.stringify(item?.members?.length, null, ' ')} </pre> */}
+      {/* <pre> {JSON.stringify(item?.members, null, ' ')} </pre> */}
       {/* <pre> {JSON.stringify(selectedItems, null, ' ')} </pre> */}
+      {/* {(item?.members ?? []).map((item, index) => {
+        return (
+          <>
+            <pre> {JSON.stringify(item?.memberUser?.name, null, ' ')} </pre>
+          </>
+        );
+      })} */}
       <div className="w-80% flex py-6">
         {/* {userValue} */}
-        {/* {(deProject?.detailProjectIds?.members ?? []).map((item, index) => {
-          return (
-            <>
-              <pre> {JSON.stringify(item?.memberUser?.id, null, ' ')} </pre>
-            </>
-          );
-        })} */}
-
         <Select
           mode="multiple"
           placeholder="Inserted are removed"

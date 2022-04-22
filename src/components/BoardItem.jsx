@@ -485,7 +485,11 @@ export const BoardItem = ({
           <>
             <MenuItemHover nameMenu="Download" />
             {(item?.status === 'created' || item?.status === 'reviewing & improving') && (
-              <MenuItemHover nameMenu="Assign Reviewer" onClick={showModalDraftIdeasProject} />
+              <MenuItemHover
+                nameMenu="Assign Reviewer"
+                onClick={showModalDraftIdeasProject}
+                itemMember={item}
+              />
             )}
             {!(item?.status === 'created' || item?.status === 'reviewing & improving') && (
               <MenuItemHover nameMenu="Assign Project Manage" onClick={showModalProjectManage} />
