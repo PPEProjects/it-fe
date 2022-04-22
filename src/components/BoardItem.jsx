@@ -299,19 +299,6 @@ export const BoardItem = ({
     );
   };
 
-  const renderModalManageMembers = () => {
-    return (
-      <Modal
-        className="!w-[500px]"
-        visible={isModalManageMembers}
-        onCancel={handleCancelManageMembers}
-        footer={null}
-      >
-        <ManageMember item={item} closeModal={handleCloseDraftIdeasProject} />
-      </Modal>
-    );
-  };
-
   // datvnt
   const renderModalDraftIdeasProject = () => {
     return (
@@ -368,6 +355,24 @@ export const BoardItem = ({
       </Modal>
     );
   };
+
+  const renderModalManageMembers = () => {
+    return (
+      <Modal
+        className="!w-[500px]"
+        visible={isModalManageMembers}
+        onCancel={handleCancelManageMembers}
+        footer={null}
+      >
+        <ManageMember
+          item={item}
+          openModal={showModalManageMembers}
+          closeModal={handleCancelManageMembers}
+        />
+      </Modal>
+    );
+  };
+
   const renderModalUpdateInformationPro = () => {
     return (
       <Modal

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { upsertMemberProject } from 'pages/memberProject/memberProjectSlice';
 
-export const ClickConfirm = ({ item, closeModal }) => {
+export const ClickConfirm = ({ item, closeModal, showModalAllPosition }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { TextArea } = Input;
@@ -46,7 +46,10 @@ export const ClickConfirm = ({ item, closeModal }) => {
               <Form.Item className="text-right">
                 <Button
                   // loading={cCreateProjectMembers?.isLoading}
-                  onClick={() => closeModal()}
+                  onClick={() => {
+                    closeModal();
+                    showModalAllPosition();
+                  }}
                   type="primary"
                   className="!h-10 !rounded-lg"
                   htmlType="submit"

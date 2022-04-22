@@ -9,19 +9,29 @@ import {
   detailProjectMember,
   memberProjectSelector,
   deleteProjectMemberId,
-} from '../../../pages/memberProject/memberProjectSlice';
-export const ClickEdit = ({ closeModal, item, onCancel, handleCancelClickEdit }) => {
+} from 'pages/memberProject/memberProjectSlice';
+export const ClickEdit = ({ closeModal, item, onCancel, showModalAllPosition }) => {
   const dispatch = useDispatch();
-  const { deProject, upMemberProject } = useSelector(memberProjectSelector);
+  const { deProject, upMemberProject, dProjectMemberId } = useSelector(memberProjectSelector);
   const detailProjectsMember = deProject.detailProjectIds;
-
-  const [idDelete, setIdDelete] = useState(null);
+  const [idDelete, setIdDelete] = useState(false);
+  // const [idDelete, setIdDelete] = useState(null);
   const deleteProjectIdMember = id => {
     dispatch(deleteProjectMemberId(id));
   };
+
+  // useEffect(() => {
+  //   // dispatch(detailProjectMember(item?.project.id));
+  //   dispatch(detailProjectsMember);
+  //   console.log('dProjectMemberId');
+  // }, [dispatch, item, upMemberProject, dProjectMemberId]);
+
   useEffect(() => {
     dispatch(detailProjectMember(item?.project.id));
-  }, [dispatch, item, upMemberProject]);
+    // dispatch(detailProjectsMember);
+    console.log('dProjectMemberId');
+  }, [idDelete]);
+
   const [isModalClickConfirm, setIsModalClickClickConfirm] = useState(false);
 
   const showModalModalClickConfirm = () => {
@@ -38,7 +48,11 @@ export const ClickEdit = ({ closeModal, item, onCancel, handleCancelClickEdit })
         onCancel={handleCancelClickConfirm}
         footer={null}
       >
-        <ClickConfirm item={item} closeModal={handleCancelClickConfirm} />
+        <ClickConfirm
+          showModalAllPosition={showModalAllPosition}
+          item={item}
+          closeModal={handleCancelClickConfirm}
+        />
       </Modal>
     );
   };
@@ -74,7 +88,7 @@ export const ClickEdit = ({ closeModal, item, onCancel, handleCancelClickEdit })
                         okText="Yes"
                         onConfirm={() => {
                           deleteProjectIdMember(userPosition?.id);
-                          setIdDelete(userPosition?.id);
+                          setIdDelete(!idDelete);
                         }}
                         cancelText="No"
                       >
@@ -104,7 +118,10 @@ export const ClickEdit = ({ closeModal, item, onCancel, handleCancelClickEdit })
                           </div>
                         }
                         okText="Yes"
-                        onConfirm={() => deleteProjectIdMember(userPosition?.id)}
+                        onConfirm={() => {
+                          deleteProjectIdMember(userPosition?.id);
+                          setIdDelete(!idDelete);
+                        }}
                         cancelText="No"
                       >
                         <div className="invisible rounded-md opacity-0 transition group-hover:!visible group-hover:opacity-100">
@@ -121,7 +138,13 @@ export const ClickEdit = ({ closeModal, item, onCancel, handleCancelClickEdit })
             );
           })}
         </Tooltip>
-        <HiUserAdd className="text-4xl text-gray-400" onClick={showModalModalClickConfirm} />
+        <HiUserAdd
+          className="text-4xl text-gray-400"
+          onClick={() => {
+            showModalModalClickConfirm();
+            onCancel();
+          }}
+        />
       </div>
       <div className="flex items-end justify-end mt-7">
         <Button className="!rounded-md !h-10 !Poppins" type="primary" onClick={onCancel}>

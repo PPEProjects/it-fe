@@ -18,6 +18,7 @@ const { Option } = Select;
 export const AssignReviewer = ({
   item,
   closeModal,
+  handleCancelAddGoal,
   position,
   submitDataModal,
   memberUserId,
@@ -93,13 +94,13 @@ export const AssignReviewer = ({
 
   useEffect(() => {
     const ids = _.map(item?.members ?? [], 'memberUserId');
-    console.log('ids', ids, item?.members ?? []);
+    // console.log('ids', ids, item?.members ?? []);
     setSelectedItems(ids);
   }, [item]);
 
-  useEffect(() => {
-    console.log('selectedItems', selectedItems);
-  }, [selectedItems]);
+  // useEffect(() => {
+  //   // console.log('selectedItems', selectedItems);
+  // }, [selectedItems]);
 
   const hrefLocation = window?.location?.pathname;
 
@@ -133,7 +134,7 @@ export const AssignReviewer = ({
                   data: { id: memberUserId, memberUserId: selectedItems?.toString() },
                 })
               );
-              closeModal();
+              handleCancelAddGoal();
             }}
             // onClick={() => {
             //   const values = {
@@ -156,7 +157,7 @@ export const AssignReviewer = ({
                   data: { projectId: item?.id, memberUserId: selectedItems, position: position },
                 })
               );
-              closeModal();
+              handleCancelAddGoal();
             }}
             // onClick={() => {
             //   const values = {

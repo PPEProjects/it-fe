@@ -16,6 +16,7 @@ export const AddGoal = ({
   submitDataModal,
   memberUserId,
   idPosition,
+  closeModal,
 }) => {
   const [isModalAddGoal, setIsModalAddGoal] = useState(false);
   const showModelAddGoal = () => {
@@ -42,7 +43,9 @@ export const AddGoal = ({
           memberUserId={memberUserId}
           idPosition={idPosition}
           position={position}
-          closeModal={handleOkAddGoal}
+          // closeModal={handleOkAddGoal}
+          handleCancelAddGoal={handleCancelAddGoal}
+          closeModal={closeModal}
           submitDataModal={submitDataModal}
         />
       </Modal>
@@ -55,7 +58,10 @@ export const AddGoal = ({
         {renderModalAddGoal()}
         {board && (
           <Button
-            onClick={showModelAddGoal}
+            onClick={() => {
+              showModelAddGoal();
+              closeModal();
+            }}
             // onClick={() => console.log('item from me', item)}
             type="dashed"
             shape="circle"

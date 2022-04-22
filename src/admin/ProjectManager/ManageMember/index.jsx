@@ -2,12 +2,16 @@ import { AddGoal } from 'components/AddGoal';
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Tooltip } from 'antd';
 import { ClickEdit } from './ClickEdit';
-import { detailProjectMember, memberProjectSelector } from 'pages/memberProject/memberProjectSlice';
+import {
+  detailProjectMember,
+  memberProjectSelector,
+  UpdateProjectMembers,
+} from 'pages/memberProject/memberProjectSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const ManageMember = ({ item, closeModal }) => {
   const dispatch = useDispatch();
-  const { deProject, upMemberProject } = useSelector(memberProjectSelector);
+  const { deProject, upMemberProject, upMemberProjectUserIds } = useSelector(memberProjectSelector);
   const detailProjectsMember = deProject.detailProjectIds;
   const [isModalClickEdit, setIsModalClickEdit] = useState(false);
   const showModalModalClickEdit = () => {
@@ -19,14 +23,25 @@ export const ManageMember = ({ item, closeModal }) => {
   const renderModalClickEdit = () => {
     return (
       <Modal visible={isModalClickEdit} onCancel={handleCancelClickEdit} footer={null}>
-        <ClickEdit item={item} closeModal={closeModal} onCancel={handleCancelClickEdit} />
+        <ClickEdit
+          item={item}
+          closeModal={closeModal}
+          onCancel={handleCancelClickEdit}
+          showModalAllPosition={showModalModalClickEdit}
+        />
       </Modal>
     );
   };
 
   useEffect(() => {
+    renderDataPosition();
+    console.log('renderDataPosition');
+  });
+
+  useEffect(() => {
     dispatch(detailProjectMember(item?.project.id));
-  }, [dispatch, item, upMemberProject]);
+    // console.log('detailProjectMember');
+  }, [dispatch, item, upMemberProject, upMemberProjectUserIds]);
 
   const renderDataPosition = () => {
     return (
@@ -89,7 +104,11 @@ export const ManageMember = ({ item, closeModal }) => {
         <Button
           className="!rounded-md !h-10 !Poppins"
           type="primary"
-          onClick={showModalModalClickEdit}
+          // onClick={showModalModalClickEdit}
+          onClick={() => {
+            closeModal();
+            showModalModalClickEdit();
+          }}
         >
           Edit
         </Button>
