@@ -15,19 +15,9 @@ const ProjectManager = () => {
   const { projects } = useSelector(memberProjectSelector);
   const { upStatusProject } = useSelector(projectSelector);
 
-  // useEffect(async () => {
-  //   await dispatch(getMyProjects());
-  // }, [dispatch, upStatusProject]);
-
-  // useEffect(async () => {
-  //   await dispatch(getMyProjects());
-  //   console.log('projects projects', projects);
-  // }, []);
-
   useEffect(() => {
     dispatch(getMyProjects());
-    // console.log('projects projects', projects);
-  }, []);
+  }, [upStatusProject, dispatch]);
 
   return (
     <MasterLayout>

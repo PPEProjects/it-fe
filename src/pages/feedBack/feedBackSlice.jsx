@@ -42,8 +42,8 @@ export function updateFeedBack(values) {
     dispatch(setMerge({ upFeedBack: { isLoading: true } }));
     const mutationAPI = () => {
       const mutation = gql`
-        mutation UpdateUserFeedback($data: UserFeedbackInput!) {
-          updateUserFeedback(data: $data) {
+        mutation UpsertUserFeedback($data: UserFeedbackInput!) {
+          upsertUserFeedback(data: $data) {
             id
             userId
             projectId
@@ -65,7 +65,7 @@ export function updateFeedBack(values) {
         dispatch(
           setMerge({
             upFeedBack: {
-              updateProject: res.data.UpdateUserFeedback,
+              updateProject: res.data.UpsertUserFeedback,
               isLoading: false,
               isOpen: false,
             },

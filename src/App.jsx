@@ -11,18 +11,11 @@ import 'antd/dist/antd.css';
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const rolesAdmin = { admin: 'admin' };
-  const rolesProjectManage = { project_manage: 'project_manage' };
-  const rolesIdeasReview = { ideas_review: 'ideas_review' };
-  const rolesProjectReview = { project_review: 'project_review' };
-
   useEffect(() => {
     window.addEventListener('currentUser', e => {
       setUser(e.detail.data);
     });
   }, [user]);
-
-  console.log('user?.userAdvance?.roles', user?.userAdvance?.roles);
 
   return (
     <div className="App">
@@ -40,12 +33,6 @@ const App = () => {
             ].map((props, key) => (
               <Route key={key} {...props} />
             ))}
-            {user?.userAdvance?.roles?.includes(rolesAdmin?.admin) && (
-              <Route path={`/admin`} element={<Navigate to="/Administrator" />} />
-            )}
-            {user?.userAdvance?.roles?.includes(rolesIdeasReview?.ideas_review) && (
-              <Route path={`/IdeaReview`} />
-            )}
 
             <Route path={`/`} element={<Navigate to="/AllPage" />} />
           </Routes>
