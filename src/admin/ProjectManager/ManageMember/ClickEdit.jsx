@@ -20,16 +20,8 @@ export const ClickEdit = ({ closeModal, item, onCancel, showModalAllPosition }) 
     dispatch(deleteProjectMemberId(id));
   };
 
-  // useEffect(() => {
-  //   // dispatch(detailProjectMember(item?.project.id));
-  //   dispatch(detailProjectsMember);
-  //   console.log('dProjectMemberId');
-  // }, [dispatch, item, upMemberProject, dProjectMemberId]);
-
   useEffect(() => {
     dispatch(detailProjectMember(item?.project.id));
-    // dispatch(detailProjectsMember);
-    console.log('dProjectMemberId');
   }, [idDelete]);
 
   const [isModalClickConfirm, setIsModalClickClickConfirm] = useState(false);

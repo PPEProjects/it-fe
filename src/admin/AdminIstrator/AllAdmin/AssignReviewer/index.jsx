@@ -21,6 +21,7 @@ export const AssignReviewer = ({
   handleCancelAddGoal,
   position,
   submitDataModal,
+  handleCancelDraftIdeasProject,
   memberUserId,
   idPosition,
   type,
@@ -39,68 +40,11 @@ export const AssignReviewer = ({
   const handlerChangeUser = item => {
     setSelectedItems([...selectedItems, item?.id]);
   };
-  // console.log('item from index : ' + position + ',' + role);
-
-  // useEffect(() => {
-  //   const dataMapping = (deProject?.detailProjectIds?.members ?? []).map(item => {
-  //     return <> {JSON.stringify(item?.memberUser?.id, null, ' ')} </>;
-  //   });
-
-  //   setDataValues(dataMapping);
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(detailProjectMember(item.id));
-  //   const dataMapping = (deProject?.detailProjectIds?.members ?? []).map(item => {
-  //     return <> {JSON.stringify(item?.memberUser?.id, null, ' ')} </>;
-  //   });
-
-  //   setSelectedItems([...selectedItems, dataMapping]);
-  //   setDataValues(userValue);
-  // }, []);
-
-  // useEffect(() => {
-  // dispatch(detailProjectMember(item.id));
-  // const userValue = (deProject?.detailProjectIds?.members ?? []).map((item, index) => {
-  //   return (
-  //     <>
-  //       <pre> {JSON.stringify(item?.memberUser, null, ' ')} </pre>
-  //     </>
-  //   );
-  // });
-  // dispatch();
-  // }, [deProject]);
-
-  // useEffect(() => {
-  //   dispatch(detailProjectMember(item.id));
-  // }, [item.id]);
-
-  // const data = (item?.members ?? []).map((item, index) => {
-  //   return <pre> {(JSON.stringify(item?.memberUser), null, ' ')} </pre>;
-  // });
-  // const [dataValues, setDataValues] = useState([]);
-
-  // useEffect(() => {
-  //   const data = (item?.members ?? []).map((item, index) => {
-  //     return (
-  //       <>
-  //         <pre> {JSON.stringify(item?.memberUser, null, ' ')} </pre>
-  //       </>
-  //     );
-  //   });
-  //   setDataValues(data);
-  //   console.log('dataValues', data);
-  // }, []);
 
   useEffect(() => {
     const ids = _.map(item?.members ?? [], 'memberUserId');
-    // console.log('ids', ids, item?.members ?? []);
     setSelectedItems(ids);
   }, [item]);
-
-  // useEffect(() => {
-  //   // console.log('selectedItems', selectedItems);
-  // }, [selectedItems]);
 
   const hrefLocation = window?.location?.pathname;
 
@@ -134,16 +78,8 @@ export const AssignReviewer = ({
                   data: { id: memberUserId, memberUserId: selectedItems?.toString() },
                 })
               );
-              handleCancelAddGoal();
+              handleCancelDraftIdeasProject();
             }}
-            // onClick={() => {
-            //   const values = {
-            //     projectId: item?.id,
-            //     memberUserId: selectedItems,
-            //     position: position,
-            //   };
-            //   console.log('data', values);
-            // }}
           >
             Send invite
           </Button>
@@ -157,16 +93,8 @@ export const AssignReviewer = ({
                   data: { projectId: item?.id, memberUserId: selectedItems, position: position },
                 })
               );
-              handleCancelAddGoal();
+              handleCancelDraftIdeasProject();
             }}
-            // onClick={() => {
-            //   const values = {
-            //     projectId: item?.id,
-            //     memberUserId: selectedItems,
-            //     position: position,
-            //   };
-            //   console.log('data', values);
-            // }}
           >
             Send invite
           </Button>

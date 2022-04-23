@@ -35,12 +35,10 @@ export const ManageMember = ({ item, closeModal }) => {
 
   useEffect(() => {
     renderDataPosition();
-    console.log('renderDataPosition');
   });
 
   useEffect(() => {
     dispatch(detailProjectMember(item?.project.id));
-    // console.log('detailProjectMember');
   }, [dispatch, item, upMemberProject, upMemberProjectUserIds]);
 
   const renderDataPosition = () => {

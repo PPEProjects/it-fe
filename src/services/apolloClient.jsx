@@ -2,7 +2,7 @@ import Cookies from 'universal-cookie';
 import { ApolloLink } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
 import { onError } from 'apollo-link-error';
-import {ApolloClient, InMemoryCache} from "@apollo/client";
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 const cookies = new Cookies();
 const token = cookies.get('ppe-it');
 const httpLink = new HttpLink({
@@ -15,7 +15,6 @@ const httpLink = new HttpLink({
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     (graphQLErrors ?? []).forEach(({ message, locations, path }) => {
-      // console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
       if (path === `login`) {
         return alert(`Email or password are wrongs!`);
       }

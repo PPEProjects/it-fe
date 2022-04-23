@@ -45,12 +45,6 @@ class restClient extends Component {
   }
 
   static async post(endpoint, params = {}) {
-    // console.log(
-    //   "endpoint, params",
-    //   process.env.REACT_APP_DEV_URL ?? "https://be-ppe.codeby.com",
-    //   endpoint,
-    //   params
-    // );
     const config = { ...this._get_config() };
     return await axios
       .post(

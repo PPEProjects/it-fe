@@ -43,7 +43,9 @@ export const AddGoal = ({
           memberUserId={memberUserId}
           idPosition={idPosition}
           position={position}
-          // closeModal={handleOkAddGoal}
+          // handleCancelAddGoal={handleCancelAddGoal}
+          // handercloseGoal={handleCancelAddGoal}
+          handleOkAddGoal={handleOkAddGoal}
           handleCancelAddGoal={handleCancelAddGoal}
           closeModal={closeModal}
           submitDataModal={submitDataModal}
@@ -62,7 +64,6 @@ export const AddGoal = ({
               showModelAddGoal();
               closeModal();
             }}
-            // onClick={() => console.log('item from me', item)}
             type="dashed"
             shape="circle"
             className="!w-[40px] !h-[40px]"

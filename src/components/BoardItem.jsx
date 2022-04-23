@@ -312,6 +312,7 @@ export const BoardItem = ({
           role="Reviewer"
           position="pr"
           item={item}
+          handleCancelDraftIdeasProject={handleCancelDraftIdeasProject}
           closeModal={handleCancelDraftIdeasProject}
         />
       </Modal>
@@ -391,7 +392,6 @@ export const BoardItem = ({
   };
 
   const menu = item => {
-    // console.log('item', item);
     return (
       <Menu>
         <Link to={`${linkViewDescription}`}>

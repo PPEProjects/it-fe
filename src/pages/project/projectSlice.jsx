@@ -213,8 +213,6 @@ export function detailProjectMemberByPosition(position) {
 }
 
 export function createProject(values) {
-  console.log(values);
-  // return;
   return async dispatch => {
     dispatch(setMerge({ cProject: { isLoading: true } }));
     const mutationAPI = () => {

@@ -50,7 +50,6 @@ export const QueryMe = () => {
       const res = await apolloClient.query({
         query,
       });
-      // console.log('res', res);
       // window.dispatchEvent(new CustomEvent('user', res));
     })();
   }, []);

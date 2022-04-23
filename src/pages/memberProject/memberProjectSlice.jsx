@@ -237,7 +237,6 @@ export function UpsertProjectMembersUserIds(values) {
 }
 
 export function detailProjectMember(id) {
-  // console.log('id from redux', id);
   return async dispatch => {
     dispatch(setMerge({ deProject: { isRefresh: false, isLoading: true } }));
     const query = gql`

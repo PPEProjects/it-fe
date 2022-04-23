@@ -296,44 +296,6 @@ const NewProject = () => {
                   </>
                 )}
               </Form.List>
-
-              {/* <div className="flex border-b p-3">
-                <label className="w-1/3 text-sm text-gray-700">Pitch Deck</label>
-                <button
-                  type="button"
-                  className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  <p className="flex items-center justify-center">
-                    {' '}
-                    <IconDatabase className="!w-[38px] !h-[40px]" />
-                  </p>
-                  <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
-                    <a href>Upload a file</a>
-                    <span>or drag and drop</span>
-                  </span>
-                  <span className="text-[12px] text-gray-400">PNG, JPG, up to 10MB</span>
-                </button>
-              </div>
-              <div className="flex border-b p-3">
-                <label className="w-1/3 text-sm text-gray-700 flex items-center space-x-2">
-                  <span>Other files</span>
-                  <AiFillInfoCircle className="text-lg text-gray-400" />
-                </label>
-                <button
-                  type="button"
-                  className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  <p className="flex items-center justify-center">
-                    {' '}
-                    <IconDatabase className="!w-[38px] !h-[40px]" />
-                  </p>
-                  <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
-                    <a href>Upload a file</a>
-                    <span>or drag and drop</span>
-                  </span>
-                  <span className="text-[12px] text-gray-400">PNG, JPG, up to 10MB</span>
-                </button>
-              </div> */}
             </>
           )}
         </Form.List>
