@@ -6,14 +6,23 @@ import { AiOutlineCheck } from 'react-icons/ai';
  * @param current { String }
  * @constructor
  */
-export default function StepsView({ current, StepsEnum }) {
+export default function StepsView({ current, StepsEnum, flexCol, itemsCenter = true }) {
   const _current = StepsEnum.indexOf(current);
   return (
     <div className="border rounded p-3">
-      <ul className="flex items-center justify-evenly">
+      <ul
+        className={classNames('flex justify-evenly !mb-0', {
+          'items-center': itemsCenter,
+        })}
+      >
         {StepsEnum.map((step, index) => (
           <li key={step}>
-            <a href className="flex items-center justify-center">
+            <a
+              href
+              className={classNames('flex items-center justify-center', {
+                'flex-col space-y-1': flexCol,
+              })}
+            >
               <span
                 className={classNames(
                   'step-circle',
@@ -26,7 +35,13 @@ export default function StepsView({ current, StepsEnum }) {
                   index
                 )}
               </span>
-              <span className="font-medium text-gray-900 capitalize ml-1.5">{step}</span>
+              <span
+                className={classNames('font-medium text-gray-900 capitalize ml-1.5', {
+                  'text-[8px] w-16 text-center': flexCol,
+                })}
+              >
+                {step}
+              </span>
             </a>
           </li>
         ))}

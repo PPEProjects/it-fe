@@ -55,6 +55,7 @@ export const BoardItem = ({
   modalDraftProject,
   borderRounded = true,
   approve,
+  containerClassName,
 }) => {
   const dispatch = useDispatch();
   const { upProject, dataProject } = useSelector(userSelector);
@@ -180,31 +181,6 @@ export const BoardItem = ({
     setIsModalDownloadFiles(false);
   };
 
-  const renderModalUpdateProject = () => {
-    return (
-      <Modal
-        className="!w-[1280px]"
-        visible={upProject?.isOpen}
-        onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
-        footer={null}
-      >
-        <UpdateProject updateMyProject={dataProject} />
-      </Modal>
-    );
-  };
-
-  const renderModalUpdateProject1 = () => {
-    return (
-      <Modal
-        className="!w-[1280px]"
-        visible={upProject?.isOpen}
-        onCancel={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
-        footer={null}
-      >
-        <UpdateProject updateMyProject={dataProject} />
-      </Modal>
-    );
-  };
   const renderModalComment = () => {
     return (
       <Modal
@@ -511,13 +487,11 @@ export const BoardItem = ({
 
   return (
     <section
-      className={classNames('pb-3 shadow-sm', {
+      className={classNames('pb-3 shadow-sm', containerClassName, {
         '!shadow-none': shadowNone,
         'border-l border-b rounded-b-md': borderRounded,
       })}
     >
-      {renderModalUpdateProject1()}
-      {renderModalUpdateProject()}
       {renderModalTopComment()}
       {renderModalAssignReviewer()}
       {renderModalReviewer()}
