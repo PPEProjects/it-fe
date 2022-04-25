@@ -24,6 +24,7 @@ const ProjectManager = () => {
       <LayoutAdmin>
         <div className="grid grid-cols-2 gap-4 p-4">
           {(projects?.detailProject ?? [])?.map((item, index) => {
+            console.log('item', item);
             return (
               <div key={index}>
                 <BoardItem
@@ -31,10 +32,10 @@ const ProjectManager = () => {
                   imgAvatar={item?.project?.user?.avatar_attachment?.file}
                   nameProject={item?.project?.name}
                   shadowNone
-                  linkViewDetail={`/ProjectDescription?id=${item?.id}`}
-                  linkViewDescription={`/ProjectDescription?id=${item?.id}`}
+                  linkViewDetail={`/ProjectDescription?id=${item?.project?.id}`}
+                  linkViewDescription={`/ProjectDescription?id=${item?.project?.id}`}
                   projectManager
-                  link={`/ProjectDescription?id=${item?.id}`}
+                  link={`/ProjectDescription?id=${item?.project?.id}`}
                   placement="bottomRight"
                   item={item}
                 >
