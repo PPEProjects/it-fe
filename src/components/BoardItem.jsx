@@ -286,7 +286,7 @@ export const BoardItem = ({
       >
         <AssignReviewer
           role="Reviewer"
-          position="pr"
+          position="project_review"
           item={item}
           handleCancelDraftIdeasProject={handleCancelDraftIdeasProject}
           closeModal={handleCancelDraftIdeasProject}
