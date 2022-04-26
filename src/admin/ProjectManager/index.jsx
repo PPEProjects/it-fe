@@ -24,7 +24,7 @@ const ProjectManager = () => {
       <LayoutAdmin>
         <div className="grid grid-cols-2 gap-4 p-4">
           {(projects?.detailProject ?? [])?.map((item, index) => {
-            console.log('item', item);
+            // console.log('item', item);
             return (
               <div key={index}>
                 <BoardItem

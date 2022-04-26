@@ -20,6 +20,7 @@ import {
   memberProjectSelector,
   setMemberProjectMerge,
   deleteMemberProject,
+  detailMemberByIdProject,
 } from 'pages/memberProject/memberProjectSlice';
 import { userSelector } from 'pages/user/userSlice';
 
@@ -41,6 +42,7 @@ import { LikeProject } from 'pages/project/LikeProject';
 
 import { ReactComponent as IconMenuComment } from 'assets/menu-comment-icon.svg';
 import { ItemComment } from './ItemComment';
+import UserPositionComp from 'components/UserPositioncomp';
 
 const { TextArea } = Input;
 const ProjectDescription = () => {
@@ -53,7 +55,8 @@ const ProjectDescription = () => {
   const { deProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested } =
     useSelector(projectSelector);
   const detailProjects = deProject.detailProjectIds;
-  const { upMemberProject, dMemberProject } = useSelector(memberProjectSelector);
+  const { upMemberProject, dMemberProject, deMemberByIdProject } =
+    useSelector(memberProjectSelector);
   const { me } = useSelector(userSelector);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [idUserName, setIdUserName] = useState({});
@@ -83,6 +86,12 @@ const ProjectDescription = () => {
     cProjectInterested,
     dProjectInterested,
   ]);
+
+  // datvnt
+
+  useEffect(() => {
+    dispatch(detailMemberByIdProject(id));
+  }, [id, dispatch]);
 
   useEffect(() => {
     const idUser = (detailProjects?.projectLikes ?? []).filter(
@@ -128,7 +137,7 @@ const ProjectDescription = () => {
   return (
     <MasterLayout>
       {renderModalTopComment()}
-      {renderModalJoinPosition()}
+      {/* {renderModalJoinPosition()} */}
       <section className="p-4 space-y-4 bg-[#F6F9FB]">
         <Link to="/AllPage">
           <div className="flex text-gray-900 pl-2 text-sm items-center space-x-1">
@@ -236,7 +245,10 @@ const ProjectDescription = () => {
               <div className="text-sm flex space-x-12 items-center">
                 <span>Member:</span>
                 <div className="flex items-center space-x-2 pt-2">
-                  {(detailProjects?.members ?? []).map((item, index) => {
+                  {/* <UserPositionComp detailProjects={detailProjects} /> */}
+                  <UserPositionComp detailProjects={deMemberByIdProject} />
+
+                  {/* {(detailProjects?.members ?? []).map((item, index) => {
                     return (
                       <BoardPosition
                         running
@@ -248,8 +260,8 @@ const ProjectDescription = () => {
                         }}
                       />
                     );
-                  })}
-                  <BoardPosition board text="Position" />
+                  })} */}
+                  {/* <BoardPosition board text="Position" /> */}
                 </div>
               </div>
             </div>
