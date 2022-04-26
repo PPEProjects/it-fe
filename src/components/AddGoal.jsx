@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { thumbImage } from 'services/convert';
 import { Button, Modal } from 'antd';
 import { AssignReviewer } from 'admin/AdminIstrator/AllAdmin/AssignReviewer';
 
 import { IoMdAdd } from 'react-icons/io';
-
+import {
+  detailMemberByIdProject,
+  memberProjectSelector,
+} from 'pages/memberProject/memberProjectSlice';
+import { useSelector, useDispatch } from 'react-redux';
 export const AddGoal = ({
   board,
   running,
@@ -28,6 +32,15 @@ export const AddGoal = ({
   const handleCancelAddGoal = () => {
     setIsModalAddGoal(false);
   };
+  const dispatch = useDispatch();
+  const { deMemberByIdProject } = useSelector(memberProjectSelector);
+
+  useEffect(() => {
+    dispatch(detailMemberByIdProject(item?.project?.id));
+  }, [item, dispatch]);
+
+  // console.log('asdasdasdaaaaaaaaaaaaaaa,', item);
+
   const renderModalAddGoal = () => {
     return (
       <Modal
@@ -38,7 +51,7 @@ export const AddGoal = ({
       >
         <AssignReviewer
           role="Project Manage"
-          item={item}
+          item={deMemberByIdProject?.detailMemberByIdProject}
           type
           memberUserId={memberUserId}
           idPosition={idPosition}

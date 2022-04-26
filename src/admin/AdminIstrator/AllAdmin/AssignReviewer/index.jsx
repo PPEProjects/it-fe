@@ -55,6 +55,8 @@ export const AssignReviewer = ({
       </span>
       <h4 className="text-lg text-center pt-2">Assign {role} </h4>
 
+      <pre> {JSON.stringify(item, null, ' ')} </pre>
+
       <div className="w-80% flex py-6">
         {/* {userValue} */}
         <Select

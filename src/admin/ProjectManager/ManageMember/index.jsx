@@ -53,6 +53,7 @@ export const ManageMember = ({ item, closeModal }) => {
                   memberUserId={userPosition.id}
                   closeModal={closeModal}
                   board
+                  item={item}
                   position={userPosition?.position}
                   text={userPosition?.position}
                 />
