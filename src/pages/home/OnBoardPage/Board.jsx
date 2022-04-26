@@ -17,6 +17,7 @@ import { userSelector } from 'pages/user/userSlice';
 import { LikeProject } from 'pages/project/LikeProject';
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
+import UserPositionComp from 'components/UserPositioncomp';
 
 export const Board = ({ containerClassName }) => {
   const dispatch = useDispatch();
@@ -118,7 +119,11 @@ export const Board = ({ containerClassName }) => {
                       </button>
                     </Tooltip>
                   </div>
-                  <div className="grid grid-cols-7 gap-2 px-3">
+                  {/* <pre> {JSON.stringify(item?.members, null, ' ')} </pre> */}
+                  {/* <div className="grid grid-cols-7 gap-2 px-3"> */}
+                  <UserPositionComp detailProjects={item?.members} />
+                  {/* </div> */}
+                  {/* <div className="grid grid-cols-7 gap-2 px-3">
                     <BoardPosition board text="Leader" />
                     <BoardPosition board text="PO" />
                     <BoardPosition board text="Dev" />
@@ -128,7 +133,7 @@ export const Board = ({ containerClassName }) => {
                     <BoardPosition board text="Leader" />
                     <BoardPosition board text="QA" />
                     <BoardPosition board text="Leader" />
-                  </div>
+                  </div> */}
                   {isMeInterested ? (
                     <button
                       onClick={() => {

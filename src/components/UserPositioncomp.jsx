@@ -14,6 +14,7 @@ const UserPositionComp = ({ detailProjects, dataPostion }) => {
   const dispatch = useDispatch();
   const [dataPosition, setDataPosition] = useState('');
   const [dataLinkTest, setDataLinkTest] = useState('');
+  // const
 
   const renderModalJoinPosition = () => {
     return (
@@ -31,8 +32,9 @@ const UserPositionComp = ({ detailProjects, dataPostion }) => {
   return (
     <div>
       {renderModalJoinPosition()}
-      <Tooltip placement="bottom" className="flex">
-        {(detailProjects?.detailMemberByIdProject ?? []).map((userPosition, index) => {
+      <pre> {JSON.stringify(detailProjects, null, ' ')} </pre>
+      {/* <Tooltip placement="bottom" className="flex">
+        {(detailProjects ?? []).map((userPosition, index) => {
           return (
             <>
               {userPosition?.memberUser === null ? (
@@ -82,7 +84,7 @@ const UserPositionComp = ({ detailProjects, dataPostion }) => {
             </>
           );
         })}
-      </Tooltip>
+      </Tooltip> */}
     </div>
   );
 };

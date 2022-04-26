@@ -19,7 +19,6 @@ export const BoardPosition = ({
   setDataPosition,
   userPosition,
   setDataLinkTest,
-  // userPosition?.linkTest
 }) => {
   const texts = (
     <span className="text-[12px] font-medium">
@@ -40,9 +39,10 @@ export const BoardPosition = ({
           <>
             <Button
               onClick={() => {
-                dispatch(setMemberProjectMerge('upMemberProject', { isOpen: true }));
-                setDataPosition(text);
-                setDataLinkTest(userPosition?.linkTest);
+                // dispatch(setMemberProjectMerge('upMemberProject', { isOpen: true }));
+                // setDataPosition(text);
+                // setDataLinkTest(userPosition?.linkTest);
+                // console.log('item click', userPosition);
               }}
               type="dashed"
               shape="circle"
@@ -94,9 +94,6 @@ export const BoardPosition = ({
           />
         )}
         <div className="text-[10px] text-center">{text}</div>
-        {/* <div className="text-[10px] text-center">
-          <pre> {JSON.stringify(userPosition?.linkTest, null, ' ')} </pre>
-        </div> */}
       </div>
     </section>
   );

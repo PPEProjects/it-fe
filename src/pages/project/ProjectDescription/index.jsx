@@ -105,18 +105,18 @@ const ProjectDescription = () => {
     setIdUserProjectInterested(idProjectInterested);
   }, [detailProjects, me]);
 
-  const renderModalJoinPosition = () => {
-    return (
-      <Modal
-        className="!w-[800px]"
-        visible={upMemberProject?.isOpen}
-        onCancel={() => dispatch(setMemberProjectMerge('upMemberProject', { isOpen: false }))}
-        footer={null}
-      >
-        <JoinPosition />
-      </Modal>
-    );
-  };
+  // const renderModalJoinPosition = () => {
+  //   return (
+  //     <Modal
+  //       className="!w-[800px]"
+  //       visible={upMemberProject?.isOpen}
+  //       onCancel={() => dispatch(setMemberProjectMerge('upMemberProject', { isOpen: false }))}
+  //       footer={null}
+  //     >
+  //       <JoinPosition />
+  //     </Modal>
+  //   );
+  // };
 
   const renderModalTopComment = () => {
     return (
@@ -246,7 +246,7 @@ const ProjectDescription = () => {
                 <span>Member:</span>
                 <div className="flex items-center space-x-2 pt-2">
                   {/* <UserPositionComp detailProjects={detailProjects} /> */}
-                  <UserPositionComp detailProjects={deMemberByIdProject} />
+                  <UserPositionComp detailProjects={deMemberByIdProject?.detailMemberByIdProject} />
 
                   {/* {(detailProjects?.members ?? []).map((item, index) => {
                     return (
