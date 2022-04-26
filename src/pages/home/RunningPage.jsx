@@ -1,15 +1,15 @@
 import React from 'react';
 import MasterLayout from 'layouts/MasterLayout';
 import { MenuPage } from './MenuPage';
-import { NewComponents } from 'components/NewComponents';
+import { ComponentMyProject } from './ComponentMyProject';
 
 const RunningPage = () => {
   return (
     <MasterLayout>
-      <MenuPage />
-      <div className="p-3 grid grid-cols-4 gap-4">
-        <NewComponents />
-      </div>
+      <section>
+        <MenuPage />
+        <ComponentMyProject status="running" containerClassName="px-10 py-3" />
+      </section>
     </MasterLayout>
   );
 };

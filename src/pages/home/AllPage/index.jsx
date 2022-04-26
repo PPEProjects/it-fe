@@ -1,12 +1,15 @@
 import React from 'react';
 import { Ideas } from 'pages/home/IdeasPage/Ideas';
-import { Board } from 'pages/home/OnBoardPage/Board';
+import { ComponentMyProject } from '../ComponentMyProject';
 
 export const AllPage = () => {
   return (
     <section className="p-3 pl-5 space-y-1">
-      <Board />
+      <ComponentMyProject status="onboard" />
       <Ideas />
+      <ComponentMyProject status="running" />
+      <ComponentMyProject status="done" />
+      <ComponentMyProject status="in use" />
       {/* <section>
         <h3 className="text-[18px] font-[600]">Project Running</h3>
         <div className="grid grid-cols-4 gap-4">

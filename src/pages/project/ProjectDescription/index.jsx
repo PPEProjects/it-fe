@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MasterLayout from 'layouts/MasterLayout';
 import { Input, Button, Menu, Dropdown, Modal, Tooltip } from 'antd';
-import { BoardPosition } from 'pages/home/AllPage/BoardPosition';
 import { InformationItem } from './InformationItem';
-import { CommentItem } from 'pages/home/AllPage/CommentItem';
 import { TopComment } from 'pages/home/AllPage/TopComment';
 import {
   detailProject,
@@ -19,7 +17,6 @@ import { JoinPosition } from 'pages/home/AllPage/JoinPosition';
 import {
   memberProjectSelector,
   setMemberProjectMerge,
-  deleteMemberProject,
   detailMemberByIdProject,
 } from 'pages/memberProject/memberProjectSlice';
 import { userSelector } from 'pages/user/userSlice';
@@ -29,9 +26,7 @@ import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { MdMailOutline, MdAttachFile } from 'react-icons/md';
 import { BsTelephoneFill, BsEmojiSmile } from 'react-icons/bs';
 import {
-  AiOutlineLike,
   AiOutlineMessage,
-  AiOutlineHeart,
   AiOutlineShareAlt,
   AiOutlineLeft,
   AiOutlineDown,
@@ -40,14 +35,12 @@ import {
 } from 'react-icons/ai';
 import { LikeProject } from 'pages/project/LikeProject';
 
-import { ReactComponent as IconMenuComment } from 'assets/menu-comment-icon.svg';
 import { ItemComment } from './ItemComment';
 import UserPositionComp from 'components/UserPositioncomp';
 
-const { TextArea } = Input;
 const ProjectDescription = () => {
   const text = (
-    <span className="text-[10px font-medium] text-gray-700">Copy Link To Clipboard</span>
+    <span className="text-[10px] font-medium text-gray-700">Copy Link To Clipboard</span>
   );
   const color = ['white'];
   const dispatch = useDispatch();
