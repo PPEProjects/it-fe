@@ -3,24 +3,11 @@ import { LayoutProject } from 'layouts/LayoutMyProject';
 import { ButtonSort } from 'components/ButtonSort';
 import { TitleItem } from 'admin/AdminIstrator/AllAdmin/TitleItem';
 import { BoardItem } from 'components/BoardItem';
-import { Steps_OLD } from 'components/Steps_OLD';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector, listJoinProject } from 'pages/user/userSlice';
+import StepsView from 'components/StepsView';
+export const StepsEnum = ['created', 'reviewing & improving', 'approve'];
 
-const dataStepsColumn = [
-  {
-    description: 'Vitae sed mi luctus laoreet.',
-    name: 'Create idea SuCCESSFUL',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    description: 'Cursus semper viverra facilisis et.',
-    name: 'WAITING for approval',
-    href: '#',
-    status: 'current',
-  },
-];
 const MyIdeas = () => {
   const dispatch = useDispatch();
   const { mlPJoinProject, cProject } = useSelector(userSelector);
@@ -38,7 +25,7 @@ const MyIdeas = () => {
             number={mlPJoinProject?.listJoinProject?.length}
             className="text-lg font-semibold"
           />
-          <div className="grid grid-cols-3 gap-4 px-3">
+          <div className="grid grid-cols-2 gap-4 px-3">
             {(mlPJoinProject?.listJoinProject ?? []).map((item, index) => {
               return (
                 <div key={index}>
@@ -49,15 +36,15 @@ const MyIdeas = () => {
                     linkViewDescription={`/ProjectDescription?id=${item?.id}`}
                     linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                     link={`/ProjectDescription?id=${item?.id}`}
-                    shadowNone
                     numberLike="3"
+                    containerClassName="border-r !shadow"
                     numberComment="6"
                     modalJoinProject
                     numberHeart="8"
                     placement="bottomRight"
                   >
-                    <div className="px-2 -mt-4">
-                      <Steps_OLD dataSteps={dataStepsColumn} stepsColumn uppercase borderNone />
+                    <div className="px-2">
+                      <StepsView StepsEnum={StepsEnum} current={item?.status} />
                     </div>
                   </BoardItem>
                 </div>

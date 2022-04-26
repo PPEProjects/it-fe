@@ -7,51 +7,19 @@ import { Steps_OLD } from 'components/Steps_OLD';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelector, myProject } from 'pages/user/userSlice';
 import { ModalProject } from './ModalProject';
-
-const dataStepsNameColumn = [
-  {
-    key: 1,
-    name: 'Created',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    key: 2,
-    name: 'Creviewing & Improving',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    key: 3,
-    name: 'Approve',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    key: 4,
-    name: 'PM Preparing',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    key: 5,
-    name: 'OnBoard',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    key: 6,
-    name: 'Running',
-    href: '#',
-    status: 'complete',
-  },
-  {
-    key: 7,
-    name: 'Done/Stuck/InUse',
-    href: '#',
-    status: 'current',
-  },
+import StepsView from 'components/StepsView';
+export const StepsEnum = [
+  'created',
+  'reviewing & improving',
+  'approve',
+  'preparing',
+  'onboard',
+  'running',
+  'done',
+  // 'stuck',
+  // 'in use',
 ];
+
 const MyIdeas = () => {
   const dispatch = useDispatch();
   const { mlMyProject, cProject, upProject, dProject } = useSelector(userSelector);
@@ -88,12 +56,14 @@ const MyIdeas = () => {
                     placement="bottomRight"
                   >
                     <div className="px-2 -mt-4">
-                      <Steps_OLD
-                        dataSteps={dataStepsNameColumn}
-                        stepsRow
-                        StepsNameColumn
-                        stepsName
-                      />{' '}
+                      <div className="px-2">
+                        <StepsView
+                          itemsCenter={false}
+                          flexCol
+                          StepsEnum={StepsEnum}
+                          current={item?.status}
+                        />
+                      </div>
                     </div>
                   </BoardItem>
                 </div>
