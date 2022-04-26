@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { memberProjectSelector, upsertMemberProject } from 'pages/memberProject/memberProjectSlice';
 import { getURLParams } from 'services';
 import { StarRed } from 'components/StarRed';
+import { Link } from 'react-router-dom';
 
-export const JoinPosition = () => {
+export const JoinPosition = ({ dataPosition, dataLinkTest }) => {
+  // console.log('dataPosition', dataPosition);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { TextArea } = Input;
@@ -20,10 +22,18 @@ export const JoinPosition = () => {
         memberUserId: me?.data?.id,
         status: 'pending',
         projectId: id,
+        position: dataPosition,
+        linkTest: dataLinkTest,
       },
     });
-  }, [me, id, form]);
+  }, [me, id, form, dataPosition]);
 
+  const handlerSubmit = () => {
+    // <a className="text-white" href={dataLinkTest} target="_blank"></a>;
+    window.open(dataLinkTest, '_blank', 'noopener,noreferrer');
+  };
+
+  // console.log('dataLinkTest', dataLinkTest);
   return (
     <section>
       <span className="text-[18px] font-semibold text-gray-800">Confirm Information</span>
@@ -86,7 +96,7 @@ export const JoinPosition = () => {
                   className="!mb-0 w-1/2"
                   name="position"
                 >
-                  <Input className="!rounded" placeholder="Leader" />
+                  <Input className="!rounded" disabled />
                 </Form.Item>
               </div>
               <Form.Item className="!mb-0" label="Job Description" name="jobDescription">
@@ -106,6 +116,7 @@ export const JoinPosition = () => {
             size="large"
             htmlType="submit"
             loading={upMemberProject.isLoading}
+            onClick={() => handlerSubmit()}
           >
             Start test
           </Button>

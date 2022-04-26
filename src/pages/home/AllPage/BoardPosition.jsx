@@ -16,6 +16,10 @@ export const BoardPosition = ({
   nameUser,
   onConfirm,
   onClick,
+  setDataPosition,
+  userPosition,
+  setDataLinkTest,
+  // userPosition?.linkTest
 }) => {
   const texts = (
     <span className="text-[12px] font-medium">
@@ -28,14 +32,21 @@ export const BoardPosition = ({
   const dispatch = useDispatch();
   return (
     <section>
-      <div className="m-auto">
+      <div
+        // className="m-auto"
+        className="text-center mx-1"
+      >
         {board && (
           <>
             <Button
-              onClick={() => dispatch(setMemberProjectMerge('upMemberProject', { isOpen: true }))}
+              onClick={() => {
+                dispatch(setMemberProjectMerge('upMemberProject', { isOpen: true }));
+                setDataPosition(text);
+                setDataLinkTest(userPosition?.linkTest);
+              }}
               type="dashed"
               shape="circle"
-              className="!w-[32px] !h-[32px]"
+              className="!w-[40px] !h-[40px]"
             >
               <Tooltip placement="bottom" title={texts}>
                 <div className="flex items-center justify-center">
@@ -83,6 +94,9 @@ export const BoardPosition = ({
           />
         )}
         <div className="text-[10px] text-center">{text}</div>
+        {/* <div className="text-[10px] text-center">
+          <pre> {JSON.stringify(userPosition?.linkTest, null, ' ')} </pre>
+        </div> */}
       </div>
     </section>
   );
