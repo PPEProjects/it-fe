@@ -4,7 +4,7 @@ import { MyProject, projectSelector } from 'pages/project/projectSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const DoneIdeasProject = () => {
+export const Done = () => {
   const dispatch = useDispatch();
   const { mlMyProject, cProject } = useSelector(projectSelector);
   const [loadMore, setLoadMore] = useState(3);

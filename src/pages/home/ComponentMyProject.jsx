@@ -19,7 +19,7 @@ import { Tooltip } from 'antd';
 import classNames from 'classnames';
 import UserPositionComp from 'components/UserPositioncomp';
 
-export const Board = ({ containerClassName }) => {
+export const ComponentMyProject = ({ containerClassName, status }) => {
   const dispatch = useDispatch();
   const {
     mlMyProject,
@@ -38,14 +38,14 @@ export const Board = ({ containerClassName }) => {
   }, [dispatch, cProject, cProjectLike, dProjectLike, cProjectInterested, dProjectInterested]);
   const { me } = useSelector(userSelector);
 
+  const dataFilterProjects = (mlMyProject?.myProject ?? []).filter(item => item.status === status);
+
   return (
     <section className={classNames('', containerClassName)}>
-      <h3 className="text-[18px] font-[600]">OnBoard</h3>
-      <p className="text-sm -mt-2 text-gray-500">
-        Projects that allow registration to participate.
-      </p>
+      <h3 className="text-[18px] font-[600] capitalize">{status}</h3>
+
       <div className="grid grid-cols-4 gap-x-4 gap-y-16">
-        {(mlMyProject?.myProject?.slice(0, loadMore) ?? [])?.map((item, index) => {
+        {(dataFilterProjects?.slice(0, loadMore) ?? [])?.map((item, index) => {
           const isMe = _.first(
             item?.projectLikes?.filter(projectLike => projectLike.userId === me?.data?.id)
           );
@@ -119,21 +119,59 @@ export const Board = ({ containerClassName }) => {
                       </button>
                     </Tooltip>
                   </div>
-                  {/* <pre> {JSON.stringify(item?.members, null, ' ')} </pre> */}
-                  {/* <div className="grid grid-cols-7 gap-2 px-3"> */}
-                  <UserPositionComp detailProjects={item?.members} />
-                  {/* </div> */}
-                  {/* <div className="grid grid-cols-7 gap-2 px-3">
-                    <BoardPosition board text="Leader" />
-                    <BoardPosition board text="PO" />
-                    <BoardPosition board text="Dev" />
-                    <BoardPosition board text="Leader" />
-                    <BoardPosition board text="Leader" />
-                    <BoardPosition board text="Tester" />
-                    <BoardPosition board text="Leader" />
-                    <BoardPosition board text="QA" />
-                    <BoardPosition board text="Leader" />
-                  </div> */}
+                  {status === 'onboard' && (
+                    //  <UserPositionComp detailProjects={item?.members} />
+                    <div className="grid grid-cols-7 gap-2 px-3">
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="PO" />
+                      <BoardPosition board text="Dev" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Tester" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="QA" />
+                      <BoardPosition board text="Leader" />
+                    </div>
+                  )}
+                  {status === 'in use' && (
+                    <div className="grid grid-cols-7 gap-2 px-3">
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="PO" />
+                      <BoardPosition board text="Dev" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Tester" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="QA" />
+                      <BoardPosition board text="Leader" />
+                    </div>
+                  )}
+                  {status === 'running' && (
+                    <div className="grid grid-cols-7 gap-2 px-3">
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="PO" />
+                      <BoardPosition board text="Dev" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Tester" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="QA" />
+                      <BoardPosition board text="Leader" />
+                    </div>
+                  )}
+                  {status === 'done' && (
+                    <div className="grid grid-cols-7 gap-2 px-3">
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="PO" />
+                      <BoardPosition board text="Dev" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Tester" />
+                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="QA" />
+                      <BoardPosition board text="Leader" />
+                    </div>
+                  )}
                   {isMeInterested ? (
                     <button
                       onClick={() => {
@@ -153,7 +191,7 @@ export const Board = ({ containerClassName }) => {
           );
         })}
       </div>
-      {loadMore < mlMyProject?.myProject?.length && (
+      {loadMore < dataFilterProjects?.length && (
         <SeeMore py8 name="See more" onClick={onLoadMore} />
       )}
     </section>
