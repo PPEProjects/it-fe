@@ -121,8 +121,9 @@ export const ComponentMyProject = ({ containerClassName, status }) => {
                   </div>
                   {status === 'onboard' && (
                     //  <UserPositionComp detailProjects={item?.members} />
+
                     <div className="grid grid-cols-7 gap-2 px-3">
-                      <BoardPosition board text="Leader" />
+                      {/* <BoardPosition board text="Leader" />
                       <BoardPosition board text="PO" />
                       <BoardPosition board text="Dev" />
                       <BoardPosition board text="Leader" />
@@ -130,7 +131,8 @@ export const ComponentMyProject = ({ containerClassName, status }) => {
                       <BoardPosition board text="Tester" />
                       <BoardPosition board text="Leader" />
                       <BoardPosition board text="QA" />
-                      <BoardPosition board text="Leader" />
+                      <BoardPosition board text="Leader" /> */}
+                      <UserPositionComp detailProjects={item?.members} />
                     </div>
                   )}
                   {status === 'in use' && (

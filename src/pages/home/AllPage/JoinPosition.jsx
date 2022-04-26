@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { memberProjectSelector, upsertMemberProject } from 'pages/memberProject/memberProjectSlice';
 import { getURLParams } from 'services';
 import { StarRed } from 'components/StarRed';
-import { Link } from 'react-router-dom';
 
 export const JoinPosition = ({ dataPosition, dataLinkTest }) => {
-  // console.log('dataPosition', dataPosition);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { TextArea } = Input;
@@ -29,7 +27,6 @@ export const JoinPosition = ({ dataPosition, dataLinkTest }) => {
   }, [me, id, form, dataPosition]);
 
   const handlerSubmit = () => {
-    // <a className="text-white" href={dataLinkTest} target="_blank"></a>;
     window.open(dataLinkTest, '_blank', 'noopener,noreferrer');
   };
 
@@ -37,6 +34,8 @@ export const JoinPosition = ({ dataPosition, dataLinkTest }) => {
   return (
     <section>
       <span className="text-[18px] font-semibold text-gray-800">Confirm Information</span>
+      <pre> {JSON.stringify(dataLinkTest, null, ' ')} </pre>
+      <pre> {JSON.stringify(dataPosition, null, ' ')} </pre>
       <Form
         form={form}
         name="basic"

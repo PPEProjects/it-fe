@@ -32,8 +32,8 @@ const UserPositionComp = ({ detailProjects, dataPostion }) => {
   return (
     <div>
       {renderModalJoinPosition()}
-      <pre> {JSON.stringify(detailProjects, null, ' ')} </pre>
-      {/* <Tooltip placement="bottom" className="flex">
+      {/* <pre> {JSON.stringify(detailProjects, null, ' ')} </pre> */}
+      <Tooltip placement="bottom" className="flex">
         {(detailProjects ?? []).map((userPosition, index) => {
           return (
             <>
@@ -84,7 +84,7 @@ const UserPositionComp = ({ detailProjects, dataPostion }) => {
             </>
           );
         })}
-      </Tooltip> */}
+      </Tooltip>
     </div>
   );
 };

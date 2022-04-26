@@ -55,7 +55,7 @@ export const AssignReviewer = ({
       </span>
       <h4 className="text-lg text-center pt-2">Assign {role} </h4>
 
-      <pre> {JSON.stringify(item, null, ' ')} </pre>
+      {/* <pre> {JSON.stringify(item, null, ' ')} </pre> */}
 
       <div className="w-80% flex py-6">
         {/* {userValue} */}
@@ -80,7 +80,7 @@ export const AssignReviewer = ({
                   data: { id: memberUserId, memberUserId: selectedItems?.toString() },
                 })
               );
-              handleCancelDraftIdeasProject();
+              closeModal();
             }}
           >
             Send invite
@@ -95,7 +95,7 @@ export const AssignReviewer = ({
                   data: { projectId: item?.id, memberUserId: selectedItems, position: position },
                 })
               );
-              handleCancelDraftIdeasProject();
+              closeModal();
             }}
           >
             Send invite

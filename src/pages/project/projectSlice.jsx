@@ -64,10 +64,12 @@ export function MyProject(type = 'project') {
           members {
             id
             position
+            linkTest
             memberUserId
             memberUser {
               id
               name
+              avatar_attachment
             }
           }
           attachments

@@ -39,10 +39,12 @@ export const BoardPosition = ({
           <>
             <Button
               onClick={() => {
-                // dispatch(setMemberProjectMerge('upMemberProject', { isOpen: true }));
-                // setDataPosition(text);
-                // setDataLinkTest(userPosition?.linkTest);
+                dispatch(setMemberProjectMerge('upMemberProject', { isOpen: true }));
+                setDataPosition(userPosition?.position);
+                setDataLinkTest(userPosition?.linkTest);
                 // console.log('item click', userPosition);
+                // console.log('item click', userPosition?.position);
+                // console.log('item click', userPosition?.linkTest);
               }}
               type="dashed"
               shape="circle"
