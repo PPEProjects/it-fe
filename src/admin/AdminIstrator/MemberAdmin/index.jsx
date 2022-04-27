@@ -7,26 +7,27 @@ const menuList = [
     title: 'All',
   },
   {
-    title: 'MemberAdmin',
+    title: 'Admin',
   },
   {
-    title: 'Ideas',
+    title: 'Idea Reviewer',
   },
   {
-    title: 'OnBoard',
+    title: 'Project Reviewer',
   },
   {
-    title: 'Running',
+    title: 'Project Manager',
   },
   {
-    title: 'Stuck',
+    title: 'Default Member',
   },
-  {
-    title: 'Done',
-  },
-  {
-    title: 'InUse',
-  },
+  //   ,
+  //   {
+  //     title: 'Done',
+  //   },
+  //   {
+  //     title: 'InUse',
+  //   },
 ];
 
 const tabPane = [

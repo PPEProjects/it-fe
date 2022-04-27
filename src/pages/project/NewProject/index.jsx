@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CurrencyItem } from 'components/CurrencyItem';
 import { Image } from '@tienlucky/storage';
 import { LabelItemProject } from './LabelItemProject';
+import { DatePicker } from 'antd';
+import moment from 'moment';
 
 import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { AiFillInfoCircle } from 'react-icons/ai';
@@ -189,16 +191,16 @@ const NewProject = () => {
                 <Form.Item
                   className="!mb-0"
                   name="category"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Category is missing!',
-                    },
-                    {
-                      max: 30,
-                      message: 'Category has max 30 character!',
-                    },
-                  ]}
+                  // rules={[
+                  //   {
+                  //     required: true,
+                  //     message: 'Category is missing!',
+                  //   },
+                  //   {
+                  //     max: 30,
+                  //     message: 'Category has max 30 character!',
+                  //   },
+                  // ]}
                 >
                   <Input className="!rounded" placeholder="" />
                 </Form.Item>
@@ -207,12 +209,12 @@ const NewProject = () => {
                 <Form.Item
                   className="!mb-0"
                   name="programingLanguage"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'You must choose or enter programing language!',
-                    },
-                  ]}
+                  // rules={[
+                  //   {
+                  //     required: true,
+                  //     message: 'You must choose or enter programing language!',
+                  //   },
+                  // ]}
                 >
                   <Select
                     mode="multiple"
@@ -233,12 +235,12 @@ const NewProject = () => {
                 <Form.Item
                   className="!mb-0"
                   name="framework"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'You must choose or enter framework!',
-                    },
-                  ]}
+                  // rules={[
+                  //   {
+                  //     required: true,
+                  //     message: 'You must choose or enter framework!',
+                  //   },
+                  // ]}
                 >
                   <Select
                     mode="multiple"
@@ -264,7 +266,29 @@ const NewProject = () => {
 
               <LabelItemProject width label="Time to do">
                 <Form.Item className="!mb-0" name="timeToDo">
-                  <Input className="!rounded" placeholder="" />
+                  {/* <Input className="!rounded" placeholder="" /> */}
+                  <div className="flex items-center">
+                    From
+                    <span className="mx-1">
+                      <DatePicker
+                        className="rounded"
+                        format="YYYY-MM-DD HH:mm:ss"
+                        // disabledDate={disabledDate}
+                        // disabledTime={disabledDateTime}
+                        showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+                      />
+                    </span>
+                    To
+                    <span className="mx-1">
+                      <DatePicker
+                        className="rounded"
+                        format="YYYY-MM-DD HH:mm:ss"
+                        // disabledDate={disabledDate}
+                        // disabledTime={disabledDateTime}
+                        showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
+                      />
+                    </span>
+                  </div>
                 </Form.Item>
               </LabelItemProject>
               <LabelItemProject width label="Recruit members after done">
