@@ -27,15 +27,15 @@ export const DoneIdeasProject = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  item={item}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}
                   nameProject={item?.name}
-                  modalDraft
                   linkViewDescription={`/ProjectDescription?id=${item?.id}`}
                   linkViewDetail={`/ProjectDescription?id=${item?.id}`}
                   link={`/ProjectDescription?id=${item?.id}`}
                   shadowNone
-                  admin
+                  company
                   placement="bottomRight"
                 />
               </div>

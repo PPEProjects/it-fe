@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BoardItem } from 'components/BoardItem';
 import { SeeMore } from 'components/SeeMore';
-import { BoardPosition } from 'pages/home/AllPage/BoardPosition';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectSelector, MyProject } from 'pages/project/projectSlice';
 import {
@@ -18,6 +17,7 @@ import { LikeProject } from 'pages/project/LikeProject';
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
 import UserPositionComp from 'components/UserPositioncomp';
+import { RiCommunityFill } from 'react-icons/ri';
 
 export const ComponentMyProject = ({ containerClassName, status }) => {
   const dispatch = useDispatch();
@@ -46,6 +46,7 @@ export const ComponentMyProject = ({ containerClassName, status }) => {
 
       <div className="grid grid-cols-4 gap-x-4 gap-y-16">
         {(dataFilterProjects?.slice(0, loadMore) ?? [])?.map((item, index) => {
+          console.log('item', item);
           const isMe = _.first(
             item?.projectLikes?.filter(projectLike => projectLike.userId === me?.data?.id)
           );
@@ -69,7 +70,7 @@ export const ComponentMyProject = ({ containerClassName, status }) => {
                 onClickComment
                 imgAvatar={item?.avatar_attachment?.file}
               >
-                <div className="relative">
+                <div className="relative min-h-[155px]">
                   <div className="flex items-center justify-between pb-3 text-sm text-[#164E63]">
                     <button className="flex items-center space-x-1 cursor-pointer px-3">
                       {isMe ? (
@@ -119,61 +120,26 @@ export const ComponentMyProject = ({ containerClassName, status }) => {
                       </button>
                     </Tooltip>
                   </div>
-                  {status === 'onboard' && (
-                    //  <UserPositionComp detailProjects={item?.members} />
-
+                  {(status === 'onboard' || status === 'running' || status === 'done') && (
                     <div className="grid grid-cols-7 gap-2 px-3">
-                      {/* <BoardPosition board text="Leader" />
-                      <BoardPosition board text="PO" />
-                      <BoardPosition board text="Dev" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Tester" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="QA" />
-                      <BoardPosition board text="Leader" /> */}
                       <UserPositionComp detailProjects={item?.members} />
                     </div>
                   )}
                   {status === 'in use' && (
-                    <div className="grid grid-cols-7 gap-2 px-3">
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="PO" />
-                      <BoardPosition board text="Dev" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Tester" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="QA" />
-                      <BoardPosition board text="Leader" />
+                    <div className="grid grid-cols-1 gap-2 px-3">
+                      <div className="flex font-[500] text-[#164E63] space-x-1.5">
+                        <RiCommunityFill className="text-xl" />
+                        <span>
+                          Company:
+                          {item?.companies ??
+                            [].map(companies => {
+                              return { companies };
+                            })}
+                        </span>
+                      </div>
                     </div>
                   )}
-                  {status === 'running' && (
-                    <div className="grid grid-cols-7 gap-2 px-3">
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="PO" />
-                      <BoardPosition board text="Dev" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Tester" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="QA" />
-                      <BoardPosition board text="Leader" />
-                    </div>
-                  )}
-                  {status === 'done' && (
-                    <div className="grid grid-cols-7 gap-2 px-3">
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="PO" />
-                      <BoardPosition board text="Dev" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="Tester" />
-                      <BoardPosition board text="Leader" />
-                      <BoardPosition board text="QA" />
-                      <BoardPosition board text="Leader" />
-                    </div>
-                  )}
+
                   {isMeInterested ? (
                     <button
                       onClick={() => {

@@ -13,29 +13,25 @@ import { AddProjectLevel } from 'admin/ProjectManager/AddProjectLevel';
 import { DownloadFiles } from 'admin/ProjectManager/DownloadFiles';
 import { UpdateFiles } from 'admin/ProjectManager/UpdateFiles';
 import { UpdateProjectStatus } from 'admin/ProjectManager/UpdateProjectStatus';
-import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
 import { userSelector, setUserMerge, deleteProject } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateStatusProject } from 'pages/project/projectSlice';
 
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { FiEdit } from 'react-icons/fi';
-import { AiOutlineLike, AiOutlineMessage, AiOutlineHeart, AiOutlineShareAlt } from 'react-icons/ai';
+import { AiOutlineLike, AiOutlineMessage } from 'react-icons/ai';
 import { setData } from 'pages/user/userSlice';
-import { ModalDraft } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/ModalDraft';
 import { UpdateStatusIdea } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusIdea';
 import { UpdateStatusProject } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusProject';
 import { ModalComment } from 'pages/home/AllPage/ModalComment';
+import { AddCompany } from 'admin/AdminIstrator/IdeasProjectAdmin/AddCompany';
 
 export const BoardItem = ({
   imgPage,
   imgAvatar,
   nameProject,
-  numberLike,
   numberLikeIdeas,
   numberCommentIdeas,
-  numberComment,
-  numberHeart,
   link,
   children,
   user,
@@ -56,6 +52,7 @@ export const BoardItem = ({
   borderRounded = true,
   approve,
   containerClassName,
+  company,
 }) => {
   const dispatch = useDispatch();
   const { upProject, dataProject } = useSelector(userSelector);
@@ -74,12 +71,19 @@ export const BoardItem = ({
   const [isModalUpdateStatusProject, setIsModalUpdateStatusProject] = useState(false);
   const [isModalProjectManage, setIsModalProjectManage] = useState(false);
   const [isModalComment, setModalComment] = useState(false);
+  const [isModalCompany, setModalCompany] = useState(false);
 
   const showModalComment = () => {
     setModalComment(true);
   };
   const handleCancelComment = () => {
     setModalComment(false);
+  };
+  const showModalCompany = () => {
+    setModalCompany(true);
+  };
+  const handleCancelCompany = () => {
+    setModalCompany(false);
   };
 
   const showModalUpdateStatusProject = () => {
@@ -367,12 +371,26 @@ export const BoardItem = ({
     );
   };
 
+  const renderModalAddCompany = () => {
+    return (
+      <Modal
+        className="!w-[555px]"
+        visible={isModalCompany}
+        onCancel={handleCancelCompany}
+        footer={null}
+      >
+        <AddCompany item={item} closeModal={handleCancelCompany} />
+      </Modal>
+    );
+  };
+
   const menu = item => {
     return (
       <Menu>
         <Link to={`${linkViewDescription}`}>
           <MenuItemHover nameMenu="View Description" />
         </Link>
+        {company && <MenuItemHover nameMenu="Add company" onClick={showModalCompany} />}
         {user && (
           <>
             <MenuItemHover nameMenu="Top Comment" onClick={showModal} />
@@ -390,7 +408,9 @@ export const BoardItem = ({
         {projectManager && (
           <>
             <MenuItemHover nameMenu="Manage Members" onClick={showModalManageMembers} />
-            {(item?.project?.status === 'preparing' || item?.project?.status === null) && (
+            {(item?.project?.status === 'approve' ||
+              item?.project?.status === 'stuck' ||
+              item?.project?.status === 'in use') && (
               <MenuItemHover nameMenu="Add Project Levels" onClick={showModalAddProjectLevel} />
             )}
             {item?.project?.status === 'done' && (
@@ -492,6 +512,7 @@ export const BoardItem = ({
         'border-l border-b rounded-b-md': borderRounded,
       })}
     >
+      {renderModalAddCompany()}
       {renderModalTopComment()}
       {renderModalAssignReviewer()}
       {renderModalReviewer()}
@@ -594,26 +615,6 @@ export const BoardItem = ({
             )}
           </div>
         )}
-
-        {/* {user && (
-          <div className="flex items-center justify-between text-sm text-[#164E63]">
-            <p className="flex items-center space-x-1 cursor-pointer">
-              <AiOutlineLike className="text-2xl stroke-[20px]" />
-              <span>{numberLike}</span>
-            </p>
-            <p onClick={showModalComment} className="flex items-center space-x-1 cursor-pointer">
-              <AiOutlineMessage className="text-2xl stroke-[20px]" />
-              <span>{numberComment}</span>
-            </p>
-            <p className="flex items-center space-x-1 cursor-pointer">
-              <AiOutlineHeart className="text-2xl stroke-[20px]" />
-              <span>{numberHeart}</span>
-            </p>
-            <p className="pr-2 cursor-pointer">
-              <AiOutlineShareAlt className="text-2xl stroke-[20px]" />
-            </p>
-          </div>
-        )} */}
       </div>
 
       <div className="pt-2">{children}</div>

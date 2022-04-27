@@ -6,7 +6,7 @@ import { ComponentMyProject } from './ComponentMyProject';
 const InUsePage = () => {
   return (
     <MasterLayout>
-      <section>
+      <section className="w-full">
         <MenuPage />
         <ComponentMyProject status="in use" containerClassName="px-10 py-3" />
       </section>

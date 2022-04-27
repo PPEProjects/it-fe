@@ -316,6 +316,7 @@ export function updateProject(values) {
             framework
             programingLanguage
             level
+            companies
             privacy
             version
             budget

@@ -72,6 +72,7 @@ export function MyProject(type = 'project') {
               avatar_attachment
             }
           }
+          companies
           attachments
           authorUserId
           category

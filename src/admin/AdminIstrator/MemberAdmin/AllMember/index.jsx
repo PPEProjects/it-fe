@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { myListUser, userSelector } from 'pages/user/userSlice';
 import { thumbImage } from 'services/convert';
+import { adminIstratorSelector } from '../../adminIstratorSlice';
 
 export const AllMember = () => {
   const dispatch = useDispatch();
   const { mlUser } = useSelector(userSelector);
+  const { aPosition, dPosition } = useSelector(adminIstratorSelector);
 
   useEffect(() => {
     dispatch(myListUser());
-  }, [dispatch]);
+  }, [dispatch, aPosition, dPosition]);
 
   return (
     <div className="grid grid-cols-3 gap-5 p-3">
@@ -26,7 +28,7 @@ export const AllMember = () => {
               phoneMember={item?.phone_number}
               dropDown
               icon
-              item={item?.id}
+              item={item}
               numberStartActive={item?.avgUserFeedback}
             />
           </div>
