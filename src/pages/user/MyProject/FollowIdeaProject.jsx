@@ -41,12 +41,16 @@ const FollowIdeaProject = () => {
           />
           <div className="grid grid-cols-3 gap-4 px-3">
             {(mlProjectInterested?.myProjectInterested ?? []).map((item, index) => {
+              console.log('itemitemitemitemitem', item);
               return (
                 <div key={index}>
                   <BoardItem
                     imgPage={item?.project?.attachments?.main_picture?.file}
                     nameProject={item?.project?.name}
                     imgAvatar={item?.project?.user?.avatar_attachment?.file}
+                    linkViewDescription={`/ProjectDescription?id=${item?.project?.id}`}
+                    linkViewDetail={`/ProjectDescription?id=${item?.project?.id}`}
+                    link={`/ProjectDescription?id=${item?.project?.id}`}
                     shadowNone
                     modalJoinProject
                     numberLike="3"

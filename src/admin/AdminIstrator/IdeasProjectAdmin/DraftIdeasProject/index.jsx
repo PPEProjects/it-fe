@@ -5,10 +5,10 @@ import { Project } from './Project';
 
 const menuList = [
   {
-    title: 'Ideas',
+    title: 'Draft Ideas',
   },
   {
-    title: 'Project',
+    title: 'Draft Project',
   },
 ];
 
