@@ -15,6 +15,8 @@ import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { ButtonItems } from './ButtonItems';
 import { FcAddDatabase } from 'react-icons/fc';
+import { ReactComponent as IconDatabasePlus } from 'assets/databasePlus-icon.svg';
+import { ReactComponent as ImageIcon } from 'assets/image-icon.svg';
 
 const settings = [
   {
@@ -49,13 +51,28 @@ const NewProject = () => {
     });
   });
 
-  const IconDatabasePlus = () => {
-    return (
-      <div className="!h-11 !w-11 mx-auto">
-        <img src="https://cdn-icons.flaticon.com/png/512/2018/premium/2018978.png?token=exp=1651121507~hmac=8250ecf8eb16fa06a03944692ede3ca5" />
-      </div>
-    );
-  };
+  // const IconDatabasePlus = () => {
+  //   return (
+  //     <div className="!h-11 !w-11 mx-auto">
+  //       {/* <img src="https://cdn-icons.flaticon.com/png/512/2018/premium/2018978.png?token=exp=1651121507~hmac=8250ecf8eb16fa06a03944692ede3ca5" /> */}
+  //       <svg
+  //         width="41"
+  //         height="42"
+  //         viewBox="0 0 41 42"
+  //         fill="none"
+  //         xmlns="http://www.w3.org/2000/svg"
+  //       >
+  //         <path
+  //           d="M1.5 9V29C1.5 33.418 8.663 37 17.5 37C18.881 37 20.221 36.913 21.5 36.748M1.5 9C1.5 13.418 8.663 17 17.5 17C26.337 17 33.5 13.418 33.5 9M1.5 9C1.5 4.582 8.663 1 17.5 1C26.337 1 33.5 4.582 33.5 9M33.5 9V23M33.5 19C33.5 23.418 26.337 27 17.5 27C8.663 27 1.5 23.418 1.5 19M33.5 29V35M33.5 35V41M33.5 35H39.5M33.5 35H27.5"
+  //           stroke="#9CA3AF"
+  //           stroke-width="2"
+  //           stroke-linecap="round"
+  //           stroke-linejoin="round"
+  //         />
+  //       </svg>
+  //     </div>
+  //   );
+  // };
 
   return (
     <section>
@@ -322,7 +339,12 @@ const NewProject = () => {
                           },
                         ]}
                       >
-                        <ImageSingleUpload isBorder isDelete isFull />
+                        <ImageSingleUpload
+                          isBorder
+                          isDelete
+                          isFull
+                          icon={<ImageIcon className="text-4xl mx-auto" />}
+                        />
                       </Form.Item>
                     </LabelItemProject>
                     <LabelItemProject label="Pitch Deck" rules>
@@ -342,7 +364,7 @@ const NewProject = () => {
                           isFull
                           // icon={<FcAddDatabase className="text-4xl mx-auto" />}
                           // icon="/public/assets/images/background_default.png"
-                          icon={<IconDatabasePlus />}
+                          icon={<IconDatabasePlus className="text-4xl mx-auto" />}
                         />
                       </Form.Item>
                     </LabelItemProject>
@@ -353,7 +375,7 @@ const NewProject = () => {
                           isDelete
                           isFull
                           // icon={<FcAddDatabase className="text-4xl mx-auto" />}
-                          icon={<IconDatabasePlus />}
+                          icon={<IconDatabasePlus className="text-4xl mx-auto" />}
                         />
                       </Form.Item>
                     </LabelItemProject>
