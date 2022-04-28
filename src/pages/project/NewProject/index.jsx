@@ -126,7 +126,7 @@ const NewProject = () => {
                   ]}
                   name="name"
                 >
-                  <Input className="!rounded" placeholder="" />
+                  <Input className="!rounded" placeholder="" maxLength={400} />
                 </Form.Item>
               </LabelItemProject>
 
@@ -215,6 +215,12 @@ const NewProject = () => {
                 <Form.Item
                   className="!mb-0"
                   name="category"
+                  rules={[
+                    {
+                      max: 30,
+                      message: 'Category Name has max 30 characters',
+                    },
+                  ]}
                   // rules={[
                   //   {
                   //     required: true,
@@ -226,7 +232,7 @@ const NewProject = () => {
                   //   },
                   // ]}
                 >
-                  <Input className="!rounded" placeholder="" />
+                  <Input className="!rounded" placeholder="" maxLength={30} />
                 </Form.Item>
               </LabelItemProject>
               <LabelItemProject label="Programming Language">
@@ -340,9 +346,11 @@ const NewProject = () => {
                         ]}
                       >
                         <ImageSingleUpload
+                          labelMain="Upload a file"
                           isBorder
                           isDelete
                           isFull
+                          labelFormat="PNG, JPG, up to 10MB"
                           icon={<ImageIcon className="text-4xl mx-auto" />}
                         />
                       </Form.Item>
@@ -359,9 +367,11 @@ const NewProject = () => {
                         ]}
                       >
                         <ImageSingleUpload
+                          labelMain="Upload a file"
                           isBorder
                           isDelete
                           isFull
+                          labelFormat="PDF, PPTX, PPSX up to 100MB"
                           // icon={<FcAddDatabase className="text-4xl mx-auto" />}
                           // icon="/public/assets/images/background_default.png"
                           icon={<IconDatabasePlus className="text-4xl mx-auto" />}
@@ -371,9 +381,11 @@ const NewProject = () => {
                     <LabelItemProject label="Other files">
                       <Form.Item name="" className="text-sm text-gray-700">
                         <ImageSingleUpload
+                          labelMain="Upload a file"
                           isBorder
                           isDelete
                           isFull
+                          labelFormat="PNG, JPG, MP4, DOCS, XLS, RTF"
                           // icon={<FcAddDatabase className="text-4xl mx-auto" />}
                           icon={<IconDatabasePlus className="text-4xl mx-auto" />}
                         />
