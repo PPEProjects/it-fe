@@ -25,6 +25,7 @@ import { UpdateStatusIdea } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIde
 import { UpdateStatusProject } from 'admin/AdminIstrator/IdeasProjectAdmin/DraftIdeasProject/UpdateStatusProject';
 import { ModalComment } from 'pages/home/AllPage/ModalComment';
 import { AddCompany } from 'admin/AdminIstrator/IdeasProjectAdmin/AddCompany';
+import UploadReviewFile from 'admin/AdminIstrator/IdeaReview/UploadReviewFile';
 
 export const BoardItem = ({
   imgPage,
@@ -72,6 +73,7 @@ export const BoardItem = ({
   const [isModalProjectManage, setIsModalProjectManage] = useState(false);
   const [isModalComment, setModalComment] = useState(false);
   const [isModalCompany, setModalCompany] = useState(false);
+  const [isModalUploadReviewFiles, setModalUploadReviewFiles] = useState(false);
 
   const showModalComment = () => {
     setModalComment(true);
@@ -183,6 +185,14 @@ export const BoardItem = ({
 
   const handleCancelDownloadFiles = () => {
     setIsModalDownloadFiles(false);
+  };
+
+  const handlerShowUploadReviewFiles = () => {
+    setModalUploadReviewFiles(true);
+  };
+
+  const handlerCancelUploadReviewFiles = () => {
+    setModalUploadReviewFiles(false);
   };
 
   const renderModalComment = () => {
@@ -384,6 +394,22 @@ export const BoardItem = ({
     );
   };
 
+  const renderModalUploadReviewFile = () => {
+    return (
+      <Modal
+        className="!w-[500px]"
+        visible={isModalUploadReviewFiles}
+        onCancel={handlerCancelUploadReviewFiles}
+        footer={null}
+      >
+        <UploadReviewFile
+          openModal={showModalUpdateInformationPro}
+          closeModal={handleCancelUpdateInformationPro}
+        />
+      </Modal>
+    );
+  };
+
   const menu = item => {
     return (
       <Menu>
@@ -440,7 +466,7 @@ export const BoardItem = ({
         {ReviewProject && (
           <>
             <MenuItemHover nameMenu="Download Files" />
-            <MenuItemHover nameMenu="Upload Review Files " />
+            <MenuItemHover nameMenu="Upload Review Files " onClick={handlerShowUploadReviewFiles} />
           </>
         )}
         {clickNode && (
@@ -528,6 +554,7 @@ export const BoardItem = ({
       {renderModalUpdateStatusProject()}
       {renderModalComment()}
       {renderModalAssignProjectManage()}
+      {renderModalUploadReviewFile()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <div className="relative">
           <img
