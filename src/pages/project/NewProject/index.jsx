@@ -12,8 +12,9 @@ import moment from 'moment';
 import { ImageSingleUpload } from '@smileeye.edu.vn/image';
 import '@smileeye.edu.vn/image/src/smileeye.edu.vn-image.min.css';
 import { BsFillInfoCircleFill } from 'react-icons/bs';
-
+import { AiOutlineCalendar } from 'react-icons/ai';
 import { ButtonItems } from './ButtonItems';
+import { FcAddDatabase } from 'react-icons/fc';
 
 const settings = [
   {
@@ -47,6 +48,14 @@ const NewProject = () => {
       },
     });
   });
+
+  const IconDatabasePlus = () => {
+    return (
+      <div className="!h-11 !w-11 mx-auto">
+        <img src="https://cdn-icons.flaticon.com/png/512/2018/premium/2018978.png?token=exp=1651121507~hmac=8250ecf8eb16fa06a03944692ede3ca5" />
+      </div>
+    );
+  };
 
   return (
     <section>
@@ -269,9 +278,10 @@ const NewProject = () => {
                     From
                     <span className="mx-1">
                       <DatePicker
-                        className="rounded"
+                        className="!rounded !p-0 custom-mize-datepicker"
                         format="YYYY-MM-DD HH:mm:ss"
                         // disabledDate={disabledDate}
+                        suffixIcon={<AiOutlineCalendar className="text-2xl text-black" />}
                         // disabledTime={disabledDateTime}
                         showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
                       />
@@ -279,7 +289,8 @@ const NewProject = () => {
                     To
                     <span className="mx-1">
                       <DatePicker
-                        className="rounded"
+                        className="!rounded custom-mize-datepicker !p-0"
+                        suffixIcon={<AiOutlineCalendar className="text-2xl text-black" />}
                         format="YYYY-MM-DD HH:mm:ss"
                         // disabledDate={disabledDate}
                         // disabledTime={disabledDateTime}
@@ -301,23 +312,49 @@ const NewProject = () => {
                 {() => (
                   <>
                     <LabelItemProject label="Main picture" rules>
-                      <Form.Item name="main_picture" className="text-sm custom-mize text-gray-700">
+                      <Form.Item
+                        name="main_picture"
+                        className="text-sm custom-mize text-gray-700"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Image is missing!',
+                          },
+                        ]}
+                      >
+                        <ImageSingleUpload isBorder isDelete isFull />
+                      </Form.Item>
+                    </LabelItemProject>
+                    <LabelItemProject label="Pitch Deck" rules>
+                      <Form.Item
+                        name=""
+                        className="text-sm text-gray-700"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Image is missing!',
+                          },
+                        ]}
+                      >
                         <ImageSingleUpload
                           isBorder
                           isDelete
                           isFull
-                          // icon={<BsFillInfoCircleFill className="text-4xl mx-auto" />}
+                          // icon={<FcAddDatabase className="text-4xl mx-auto" />}
+                          // icon="/public/assets/images/background_default.png"
+                          icon={<IconDatabasePlus />}
                         />
-                      </Form.Item>
-                    </LabelItemProject>
-                    <LabelItemProject label="Pitch Deck" rules>
-                      <Form.Item name="" className="text-sm text-gray-700">
-                        <ImageSingleUpload isBorder isDelete isFull />
                       </Form.Item>
                     </LabelItemProject>
                     <LabelItemProject label="Other files">
                       <Form.Item name="" className="text-sm text-gray-700">
-                        <ImageSingleUpload isBorder isDelete isFull />
+                        <ImageSingleUpload
+                          isBorder
+                          isDelete
+                          isFull
+                          // icon={<FcAddDatabase className="text-4xl mx-auto" />}
+                          icon={<IconDatabasePlus />}
+                        />
                       </Form.Item>
                     </LabelItemProject>
                   </>

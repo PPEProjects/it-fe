@@ -1,4 +1,4 @@
-@import "ppe-notify/dist/css/style.min.css";
+@import 'ppe-notify/dist/css/style.min.css';
 @import '@tienlucky/storage/src/tienlucky-storage.min.css';
 
 @tailwind base;
@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 .step-circle {
-  @apply flex justify-center items-center rounded-full border-2 border-primary-500 flex-shrink-0 w-8 h-8
+  @apply flex justify-center items-center rounded-full border-2 border-primary-500 flex-shrink-0 w-8 h-8;
 }
 
 .rounded-full.header-notify-avatar img {
@@ -16,4 +16,12 @@
 
 ._infinite-notifies:not(:empty) + ._empty-content {
   display: none;
+}
+
+.custom-mize-datepicker input {
+  @apply !pl-2;
+}
+
+.custom-mize-datepicker .ant-picker-suffix {
+  @apply !py-1 !px-2 !border-l;
 }
