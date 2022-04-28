@@ -55,19 +55,35 @@ const LoginPage = () => {
             <StarRed star name="Password" />
             <Form.Item
               name="password"
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: 'Please input your password!',
+              //   },
+              //   {
+              //     pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+              //     message:
+              //       'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
+              //   },
+              //   {
+              //     max: 30,
+              //     message: 'Password is not valid!',
+              //   },
+              // ]}
               rules={[
+                {
+                  pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#$%^&*()_=+]).{8,}/,
+                  // pattern: new RegExp(/^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\"\\/?>.<,-]+$/i),
+                  message:
+                    'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
+                },
                 {
                   required: true,
                   message: 'Please input your password!',
                 },
                 {
-                  pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
-                  message:
-                    'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
-                },
-                {
                   max: 30,
-                  message: 'Password is not valid!',
+                  message: 'Password has max 30 characters!',
                 },
               ]}
             >

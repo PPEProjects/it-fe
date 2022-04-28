@@ -77,10 +77,10 @@ const RegisterPage = () => {
                     whitespace: true,
                     message: 'Please input your name!',
                   },
-                  {
-                    pattern: new RegExp(/^[a-zA-Z]*$/),
-                    message: 'Name without special characters and number!',
-                  },
+                  // {
+                  //   pattern: new RegExp(/^[a-zA-Z]*$/),
+                  //   message: 'Name without special characters and number!',
+                  // },
                   {
                     required: true,
                     message: 'Please input your name!',
@@ -115,7 +115,10 @@ const RegisterPage = () => {
                     () => ({
                       validator(_, value) {
                         if (value.slice(0, -10).length > 30) {
-                          return Promise.reject('Name Email has max 30 characters!');
+                          // return Promise.reject('Name Email has max 30 characters!');
+                          return Promise.reject(
+                            'Your email must be between 6 and 30 characters in length.'
+                          );
                         }
                         return Promise.resolve();
                       },
@@ -169,7 +172,8 @@ const RegisterPage = () => {
                 name="password"
                 rules={[
                   {
-                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#$%^&*()_=+]).{8,}/,
+                    // pattern: new RegExp(/^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\"\\/?>.<,-]+$/i),
                     message:
                       'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
                   },
@@ -178,7 +182,7 @@ const RegisterPage = () => {
                     message: 'Please input your password!',
                   },
                   {
-                    max: 10,
+                    max: 30,
                     message: 'Password has max 30 characters!',
                   },
                 ]}
