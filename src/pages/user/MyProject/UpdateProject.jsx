@@ -6,9 +6,9 @@ import { userSelector, setUserMerge, updateProject } from 'pages/user/userSlice'
 import { getMe } from 'pages/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { CurrencyItem } from 'components/CurrencyItem';
-import { Image } from '@tienlucky/storage';
 import { LabelItemProject } from 'pages/project/NewProject/LabelItemProject';
-
+import { ImageSingleUpload } from '@smileeye.edu.vn/image';
+import '@smileeye.edu.vn/image/src/smileeye.edu.vn-image.min.css';
 import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { AiFillInfoCircle } from 'react-icons/ai';
 
@@ -205,17 +205,17 @@ export const UpdateProject = ({ updateMyProject }) => {
                   <>
                     <LabelItemProject label="Main picture">
                       <Form.Item name="main_picture" className="text-sm text-gray-700">
-                        <Image.SingleUpload isBorder isDelete isFull />
+                        <ImageSingleUpload isBorder isDelete isFull />
                       </Form.Item>
                     </LabelItemProject>
                     <LabelItemProject label="Pitch Deck">
                       <Form.Item name="" className="text-sm text-gray-700">
-                        <Image.SingleUpload isBorder isDelete isFull />
+                        <ImageSingleUpload isBorder isDelete isFull />
                       </Form.Item>
                     </LabelItemProject>
                     <LabelItemProject label="Other files">
                       <Form.Item name="" className="text-sm text-gray-700">
-                        <Image.SingleUpload isBorder isDelete isFull />
+                        <ImageSingleUpload isBorder isDelete isFull />
                       </Form.Item>
                     </LabelItemProject>
                   </>
