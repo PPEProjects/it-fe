@@ -11,7 +11,7 @@ export const MyIdea = () => {
   const { mlMyIdeaProject, upStatusProject } = useSelector(projectSelector);
 
   useEffect(() => {
-    dispatch(detailProjectMemberByPosition('pr'));
+    dispatch(detailProjectMemberByPosition('project_review'));
   }, [dispatch, upStatusProject]);
 
   const filterIdeas = (mlMyIdeaProject?.myIdeaProject ?? []).filter(
