@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Stars } from 'components/Stars';
 import { thumbImage } from 'services/convert';
 import { feedBackSelector } from 'pages/feedBack/feedBackSlice';
-
+import { Rate } from 'antd';
 export const UpdateInformation = ({ item, closeModal, openModal }) => {
   const dispatch = useDispatch();
   const { deMemberByIdProject } = useSelector(memberProjectSelector);
@@ -49,7 +49,9 @@ export const UpdateInformation = ({ item, closeModal, openModal }) => {
       dataIndex: 'userFeedback',
       key: 'userFeedback',
       render: userFeedback => {
-        return <Stars containerClassName="!text-xl" numberStartActive={userFeedback?.grate} />;
+        // return <Stars containerClassName="!text-xl" numberStartActive={userFeedback?.grate} />;
+        // return <Stars containerClassName="!text-xl" numberStartActive={userFeedback?.grate} />;
+        return <Rate disabled value={userFeedback?.grate} count={10} />;
       },
     },
 

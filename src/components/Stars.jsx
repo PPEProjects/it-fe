@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFeedBack } from 'pages/feedBack/feedBackSlice';
 import { feedBackSelector } from 'pages/feedBack/feedBackSlice';
-
+import { Rate } from 'antd';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 export const Stars = ({
@@ -20,6 +20,15 @@ export const Stars = ({
 
   useEffect(() => {}, [upFeedBack]);
 
+  // useEffect(() => {
+  //   console.log('data');
+  // }, [onClickStars]);
+  const handerchangerate = rate => {
+    const values = { userId: userId, projectId: projectId, grate: rate };
+    dispatch(updateFeedBack({ data: values }));
+    // console.log('handerchangerate', rate);
+  };
+
   return (
     <div
       className={classNames(
@@ -27,7 +36,9 @@ export const Stars = ({
         containerClassName
       )}
     >
-      {[...new Array(totalStars)].map((item, index) => {
+      <Rate onChange={handerchangerate} defaultValue={activeStars} count={10} />
+
+      {/* {[...new Array(totalStars)].map((item, index) => {
         return index <= activeStars ? (
           <>
             {onClickStars ? (
@@ -57,7 +68,7 @@ export const Stars = ({
             )}
           </>
         );
-      })}
+      })} */}
     </div>
   );
 };

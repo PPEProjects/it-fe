@@ -60,8 +60,8 @@ export const ManageMember = ({ item, closeModal }) => {
               ) : (
                 <>
                   {userPosition?.memberUser?.avatar_attachment?.thumb ? (
-                    <div className="text-center">
-                      <div className="group h-[40px] m-auto rounded-full relative  w-[40px] overflow-hidden bg-gray-300 mx-1">
+                    <div className="text-center px-1">
+                      <div className="group h-[40px] mx-auto rounded-full relative  w-[40px] overflow-hidden bg-gray-300 px-1">
                         <img
                           className="h-[40px] w-[40px] object-cover rounded-full cursor-pointer"
                           alt=""
@@ -71,8 +71,8 @@ export const ManageMember = ({ item, closeModal }) => {
                       <div className="text-[10px]">{userPosition?.position}</div>
                     </div>
                   ) : (
-                    <div className="text-center">
-                      <div className="group h-[40px] m-auto rounded-full relative  w-[40px] overflow-hidden bg-gray-300 mx-1">
+                    <div className="text-center mx-auto">
+                      <div className="group h-[40px] mx-auto rounded-full relative  w-[40px] overflow-hidden bg-gray-300">
                         <img
                           className="h-[40px] w-[40px] object-cover rounded-full cursor-pointer"
                           src="/assets/images/smile-eye-default.png"
