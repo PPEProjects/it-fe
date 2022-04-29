@@ -68,10 +68,21 @@ export const ManageMember = ({ item, closeModal }) => {
                           src={userPosition.memberUser?.avatar_attachment?.thumb}
                         />
                       </div>
-                      <div className="text-[10px]">{userPosition?.position}</div>
+                      {/* <div className="text-[10px]">{userPosition?.position}</div> */}
+                      {userPosition?.position === 'project_manage' ? (
+                        <div className="text-[10px]">pm</div>
+                      ) : (
+                        <>
+                          {userPosition?.position === 'project_review' ? (
+                            <div className="text-[10px]">pr</div>
+                          ) : (
+                            <div className="text-[10px]">{userPosition?.position}</div>
+                          )}
+                        </>
+                      )}
                     </div>
                   ) : (
-                    <div className="text-center mx-auto">
+                    <div className="text-center px-1">
                       <div className="group h-[40px] mx-auto rounded-full relative  w-[40px] overflow-hidden bg-gray-300">
                         <img
                           className="h-[40px] w-[40px] object-cover rounded-full cursor-pointer"
@@ -79,7 +90,18 @@ export const ManageMember = ({ item, closeModal }) => {
                           alt=""
                         />
                       </div>
-                      <div className="text-[10px]">{userPosition?.position}</div>
+                      {/* <div className="text-[10px]">{userPosition?.position}</div> */}
+                      {userPosition?.position === 'project_manage' ? (
+                        <div className="text-[10px]">pm</div>
+                      ) : (
+                        <>
+                          {userPosition?.position === 'project_review' ? (
+                            <div className="text-[10px]">pr</div>
+                          ) : (
+                            <div className="text-[10px]">{userPosition?.position}</div>
+                          )}
+                        </>
+                      )}
                     </div>
                   )}
                 </>

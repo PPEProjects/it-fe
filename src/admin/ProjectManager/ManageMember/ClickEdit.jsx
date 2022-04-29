@@ -91,7 +91,18 @@ export const ClickEdit = ({ closeModal, item, onCancel, showModalAllPosition }) 
                         </div>
                       </Popconfirm>
                     </div>
-                    <div className="text-[10px]">{userPosition?.position}</div>
+                    {/* <div className="text-[10px]">{userPosition?.position}</div> */}
+                    {userPosition?.position === 'project_manage' ? (
+                      <div className="text-[10px]">pm</div>
+                    ) : (
+                      <>
+                        {userPosition?.position === 'project_review' ? (
+                          <div className="text-[10px]">pr</div>
+                        ) : (
+                          <div className="text-[10px]">{userPosition?.position}</div>
+                        )}
+                      </>
+                    )}
                   </div>
                 ) : (
                   <div className="text-center mx-1">
@@ -123,7 +134,19 @@ export const ClickEdit = ({ closeModal, item, onCancel, showModalAllPosition }) 
                         </div>
                       </Popconfirm>
                     </div>
-                    <div className="text-[10px]">{userPosition?.position}</div>
+                    {/* <div className="text-[10px]">{userPosition?.position}</div> */}
+                    {/* switch case */}
+                    {userPosition?.position === 'project_manage' ? (
+                      <div className="text-[10px]">pm</div>
+                    ) : (
+                      <>
+                        {userPosition?.position === 'project_review' ? (
+                          <div className="text-[10px]">pr</div>
+                        ) : (
+                          <div className="text-[10px]">{userPosition?.position}</div>
+                        )}
+                      </>
+                    )}
                   </div>
                 )}
               </>

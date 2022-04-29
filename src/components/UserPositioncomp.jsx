@@ -65,7 +65,17 @@ const UserPositionComp = ({ detailProjects, dataPostion }) => {
                           src={userPosition.memberUser?.avatar_attachment?.thumb}
                         />
                       </div>
-                      <div className="text-[10px]">{userPosition?.position}</div>
+                      {userPosition?.position === 'project_manage' ? (
+                        <div className="text-[10px]">pm</div>
+                      ) : (
+                        <>
+                          {userPosition?.position === 'project_review' ? (
+                            <div className="text-[10px]">pr</div>
+                          ) : (
+                            <div className="text-[10px]">{userPosition?.position}</div>
+                          )}
+                        </>
+                      )}
                     </div>
                   ) : (
                     <div className="text-center">
@@ -76,7 +86,18 @@ const UserPositionComp = ({ detailProjects, dataPostion }) => {
                           alt=""
                         />
                       </div>
-                      <div className="text-[10px]">{userPosition?.position}</div>
+                      {/* <div className="text-[10px]">{userPosition?.position}</div> */}
+                      {userPosition?.position === 'project_manage' ? (
+                        <div className="text-[10px]">pm</div>
+                      ) : (
+                        <>
+                          {userPosition?.position === 'project_review' ? (
+                            <div className="text-[10px]">pr</div>
+                          ) : (
+                            <div className="text-[10px]">{userPosition?.position}</div>
+                          )}
+                        </>
+                      )}
                     </div>
                   )}
                 </>
