@@ -7,6 +7,7 @@ import { RunningIdeasProject } from './RunningIdeasProject';
 import { StuckIdeasProject } from './StuckIdeasProject';
 import { DoneIdeasProject } from './DoneIdeasProject';
 import { InUseIdeasProject } from './InUseIdeasProject';
+import { IdeasApprove } from './IdeasApprove';
 
 const menuList = [
   // {
@@ -15,6 +16,12 @@ const menuList = [
 
   {
     title: 'Draft',
+  },
+  {
+    title: 'Ideas',
+  },
+  {
+    title: 'PM Preparing',
   },
   {
     title: 'OnBoard',
@@ -40,6 +47,14 @@ const tabPane = [
   {
     content: <DraftIdeasProject />,
   },
+  // datvnt
+  {
+    content: <IdeasApprove />,
+  },
+  {
+    content: <OnBoardIdeasProject />,
+  },
+  // datvnt
   {
     content: <OnBoardIdeasProject />,
   },
