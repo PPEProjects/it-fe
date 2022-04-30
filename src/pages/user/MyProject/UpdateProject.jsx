@@ -67,8 +67,9 @@ export const UpdateProject = ({ updateMyProject }) => {
   return (
     <section>
       <div className="text-[#075985] border-b">
-        <p className="text-[18px]">Project Information </p>
+        <p className="text-[18px]">Project Information datvnt</p>
         <p className="flex rounded items-center pl-5 p-2 bg-[#E0F2FE] space-x-3 text-[20px]">
+          <pre> {JSON.stringify(updateMyProject, null, ' ')} </pre>
           <BsFillInfoCircleFill />
           <span>
             Congratulations for having a great project. Please{' '}

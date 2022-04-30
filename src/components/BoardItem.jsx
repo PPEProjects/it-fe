@@ -26,6 +26,7 @@ import { UpdateStatusProject } from 'admin/AdminIstrator/IdeasProjectAdmin/Draft
 import { ModalComment } from 'pages/home/AllPage/ModalComment';
 import { AddCompany } from 'admin/AdminIstrator/IdeasProjectAdmin/AddCompany';
 import UploadReviewFile from 'admin/AdminIstrator/IdeaReview/UploadReviewFile';
+import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
 
 export const BoardItem = ({
   imgPage,
@@ -372,8 +373,13 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateInformationPro}
         footer={null}
       >
-        <UpdateInformation
+        {/* <UpdateInformation
           item={item}
+          openModal={showModalUpdateInformationPro}
+          closeModal={handleCancelUpdateInformationPro}
+        /> */}
+        <UpdateProject
+          updateMyProject={item?.project}
           openModal={showModalUpdateInformationPro}
           closeModal={handleCancelUpdateInformationPro}
         />

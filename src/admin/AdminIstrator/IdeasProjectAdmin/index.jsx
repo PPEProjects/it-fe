@@ -8,6 +8,7 @@ import { StuckIdeasProject } from './StuckIdeasProject';
 import { DoneIdeasProject } from './DoneIdeasProject';
 import { InUseIdeasProject } from './InUseIdeasProject';
 import { IdeasApprove } from './IdeasApprove';
+import { PmPreparing } from './PmPreparing';
 
 const menuList = [
   // {
@@ -52,7 +53,7 @@ const tabPane = [
     content: <IdeasApprove />,
   },
   {
-    content: <OnBoardIdeasProject />,
+    content: <PmPreparing />,
   },
   // datvnt
   {
