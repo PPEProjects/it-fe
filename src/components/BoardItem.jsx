@@ -373,16 +373,16 @@ export const BoardItem = ({
         onCancel={handleCancelUpdateInformationPro}
         footer={null}
       >
-        {/* <UpdateInformation
+        <UpdateInformation
           item={item}
           openModal={showModalUpdateInformationPro}
           closeModal={handleCancelUpdateInformationPro}
-        /> */}
-        <UpdateProject
+        />
+        {/* <UpdateProject
           updateMyProject={item?.project}
           openModal={showModalUpdateInformationPro}
           closeModal={handleCancelUpdateInformationPro}
-        />
+        /> */}
       </Modal>
     );
   };
