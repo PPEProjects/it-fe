@@ -127,7 +127,7 @@ export const ManageMember = ({ item, closeModal }) => {
           type="primary"
           // onClick={showModalModalClickEdit}
           onClick={() => {
-            closeModal();
+            // closeModal();
             showModalModalClickEdit();
           }}
         >

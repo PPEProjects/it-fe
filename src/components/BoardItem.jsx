@@ -27,6 +27,7 @@ import { ModalComment } from 'pages/home/AllPage/ModalComment';
 import { AddCompany } from 'admin/AdminIstrator/IdeasProjectAdmin/AddCompany';
 import UploadReviewFile from 'admin/AdminIstrator/IdeaReview/UploadReviewFile';
 import { UpdateProject } from 'pages/user/MyProject/UpdateProject';
+import { UpdateProjectManage } from 'pages/user/MyProject/UpdateProjectManage';
 
 export const BoardItem = ({
   imgPage,
@@ -75,6 +76,7 @@ export const BoardItem = ({
   const [isModalComment, setModalComment] = useState(false);
   const [isModalCompany, setModalCompany] = useState(false);
   const [isModalUploadReviewFiles, setModalUploadReviewFiles] = useState(false);
+  const [isModalUpdateProject, setModalUpdateProject] = useState(false);
 
   const showModalComment = () => {
     setModalComment(true);
@@ -194,6 +196,14 @@ export const BoardItem = ({
 
   const handlerCancelUploadReviewFiles = () => {
     setModalUploadReviewFiles(false);
+  };
+
+  const handlerShowModalUpdateProject = () => {
+    setModalUpdateProject(true);
+  };
+
+  const handlerCancelShowModalUpdateProject = () => {
+    setModalUpdateProject(false);
   };
 
   const renderModalComment = () => {
@@ -387,6 +397,24 @@ export const BoardItem = ({
     );
   };
 
+  const renderModalUpdateProject = () => {
+    return (
+      <Modal
+        className="!w-[1045px]"
+        visible={isModalUpdateProject}
+        onCancel={handlerCancelShowModalUpdateProject}
+        footer={null}
+      >
+        <UpdateProjectManage
+          type="pm"
+          updateMyProject={item?.project}
+          openModal={handlerShowModalUpdateProject}
+          closeModal={handlerCancelShowModalUpdateProject}
+        />
+      </Modal>
+    );
+  };
+
   const renderModalAddCompany = () => {
     return (
       <Modal
@@ -463,7 +491,7 @@ export const BoardItem = ({
                 />
                 <MenuItemHover
                   nameMenu="Update Information"
-                  onClick={showModalUpdateInformationPro}
+                  onClick={handlerShowModalUpdateProject}
                 />
               </>
             )}
@@ -561,6 +589,7 @@ export const BoardItem = ({
       {renderModalComment()}
       {renderModalAssignProjectManage()}
       {renderModalUploadReviewFile()}
+      {renderModalUpdateProject()}
       <div className="group aspect-w-4 rounded-md relative aspect-h-4 overflow-hidden bg-gray-300">
         <div className="relative">
           <img

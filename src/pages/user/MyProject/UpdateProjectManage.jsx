@@ -11,8 +11,7 @@ import { ImageSingleUpload } from '@smileeye.edu.vn/image';
 import '@smileeye.edu.vn/image/src/smileeye.edu.vn-image.min.css';
 import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { AiFillInfoCircle } from 'react-icons/ai';
-
-import { ReactComponent as IconDatabase } from 'assets/database.svg';
+import { detailProjectMember, memberProjectSelector } from 'pages/memberProject/memberProjectSlice';
 
 const settings = [
   {
@@ -25,7 +24,8 @@ const settings = [
   },
 ];
 
-export const UpdateProject = ({ updateMyProject, type }) => {
+export const UpdateProjectManage = ({ updateMyProject, type, closeModal }) => {
+  const { deProject } = useSelector(memberProjectSelector);
   const [form] = Form.useForm();
   const { Option } = Select;
   const { TextArea } = Input;
@@ -35,30 +35,35 @@ export const UpdateProject = ({ updateMyProject, type }) => {
   const [selected, setSelected] = useState(settings[0]);
 
   useEffect(() => {
+    dispatch(detailProjectMember(updateMyProject?.id));
+    // console.log('detailProjectIds', deProject?.detailProjectIds);
+  }, [updateMyProject?.id]);
+
+  useEffect(() => {
     form.setFieldsValue({
       data: {
         budget: {
-          money: updateMyProject?.item?.budget?.money,
-          iso_code: updateMyProject?.item?.budget?.iso_code,
+          money: deProject?.detailProjectIds?.budget?.money,
+          iso_code: deProject?.detailProjectIds?.budget?.iso_code,
         },
         attachments: {
-          main_picture: updateMyProject?.item?.attachments?.main_picture?.file,
+          main_picture: deProject?.detailProjectIds?.attachments?.main_picture?.file,
         },
         salary: {
-          money: updateMyProject?.item?.budget?.money,
-          iso_code: updateMyProject?.item?.budget?.iso_code,
+          money: deProject?.detailProjectIds?.budget?.money,
+          iso_code: deProject?.detailProjectIds?.budget?.iso_code,
         },
 
-        framework: updateMyProject?.item?.framework,
-        programingLanguage: updateMyProject?.item?.programingLanguage,
-        type: updateMyProject?.item?.type,
-        name: updateMyProject?.item?.name,
-        id: updateMyProject?.item?.id,
-        description: updateMyProject?.item?.description,
-        category: updateMyProject?.item?.category,
+        framework: deProject?.detailProjectIds?.framework,
+        programingLanguage: deProject?.detailProjectIds?.programingLanguage,
+        type: deProject?.detailProjectIds?.type,
+        name: deProject?.detailProjectIds?.name,
+        id: deProject?.detailProjectIds?.id,
+        description: deProject?.detailProjectIds?.description,
+        category: deProject?.detailProjectIds?.category,
       },
     });
-  }, [updateMyProject, form]);
+  }, [deProject?.detailProjectIds, form]);
 
   useEffect(() => {
     dispatch(getMe());
@@ -223,44 +228,6 @@ export const UpdateProject = ({ updateMyProject, type }) => {
                   </>
                 )}
               </Form.List>
-
-              {/* <div className="flex border-b p-3">
-                <label className="w-1/3 text-sm text-gray-700">Pitch Deck</label>
-                <button
-                  type="button"
-                  className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  <p className="flex items-center justify-center">
-                    {' '}
-                    <IconDatabase className="!w-[38px] !h-[40px]" />
-                  </p>
-                  <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
-                    <a href>Upload a file</a>
-                    <span>or drag and drop</span>
-                  </span>
-                  <span className="text-[12px] text-gray-400">PNG, JPG, up to 10MB</span>
-                </button>
-              </div>
-              <div className="flex border-b p-3">
-                <label className="w-1/3 text-sm text-gray-700 flex items-center space-x-2">
-                  <span>Other files</span>
-                  <AiFillInfoCircle className="text-lg text-gray-400" />
-                </label>
-                <button
-                  type="button"
-                  className="relative w-2/3 block border-2 border-gray-300 border-dashed rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  <p className="flex items-center justify-center">
-                    {' '}
-                    <IconDatabase className="!w-[38px] !h-[40px]" />
-                  </p>
-                  <span className="mt-2 text-sm flex items-center space-x-1 justify-center font-medium text-gray-900 text-[14px]">
-                    <a href>Upload a file</a>
-                    <span>or drag and drop</span>
-                  </span>
-                  <span className="text-[12px] text-gray-400">PNG, JPG, up to 10MB</span>
-                </button>
-              </div> */}
             </>
           )}
         </Form.List>
@@ -331,7 +298,8 @@ export const UpdateProject = ({ updateMyProject, type }) => {
             <Button
               className="!rounded-md"
               size="large"
-              onClick={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
+              // onClick={() => dispatch(setUserMerge('upProject', { isOpen: false }))}
+              onClick={() => closeModal()}
             >
               Cancel
             </Button>
@@ -342,7 +310,8 @@ export const UpdateProject = ({ updateMyProject, type }) => {
               type="primary"
               size="large"
               htmlType="submit"
-              loading={upProject.isLoading}
+              onClick={() => closeModal()}
+              // loading={deProject.isLoading}
             >
               Create
             </Button>

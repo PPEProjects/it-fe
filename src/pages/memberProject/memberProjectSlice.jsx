@@ -294,8 +294,8 @@ export function detailProjectMember(id) {
       setData({
         deProject: {
           detailProjectIds,
-          // isLoading: false,
-          // isRefresh: false,
+          isLoading: false,
+          isRefresh: false,
         },
       })
     );
