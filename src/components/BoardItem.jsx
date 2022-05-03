@@ -437,8 +437,8 @@ export const BoardItem = ({
         footer={null}
       >
         <UploadReviewFile
-          openModal={showModalUpdateInformationPro}
-          closeModal={handleCancelUpdateInformationPro}
+          openModal={handlerShowUploadReviewFiles}
+          onCancel={handlerCancelUploadReviewFiles}
         />
       </Modal>
     );

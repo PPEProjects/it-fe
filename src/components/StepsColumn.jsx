@@ -79,7 +79,7 @@ export const StepsColumn = ({
                 {step}
               </span>
             </a>
-            {iconDropdown && (
+            {/* {iconDropdown && (
               <>
                 {index === max_length - 1 && (
                   <div>
@@ -93,10 +93,24 @@ export const StepsColumn = ({
                   </div>
                 )}
               </>
-            )}
+            )} */}
+            <>
+              {index === max_length - 1 && (
+                <div>
+                  <BiChevronDown
+                    onClick={() => setIsShow(!isShow)}
+                    className={classNames(
+                      'text-3xl text-gray-400 ease-in-out duration-500',
+                      isShow ? 'rotate-180' : ''
+                    )}
+                  />
+                </div>
+              )}
+            </>
           </li>
         ))}
-        {isShow && <div>{children}</div>}
+        {/* {isShow && <div>{children}</div>} */}
+        {isShow && <div> Datvnt </div>}
       </ul>
     </div>
   );
