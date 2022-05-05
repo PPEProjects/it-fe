@@ -14,8 +14,8 @@ export const LikeProject = ({ likeProject, idProject, followName, follow = true,
 
   return (
     <button
-      className={classNames('!text-[#164E63] !border-none', {
-        'shadow-sm absolute right-4 bottom-[11px] bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md':
+      className={classNames('!text-[#164E63] !border-none !shadow-md', {
+        '!shadow-md absolute right-4 bottom-[11px] bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md':
           followName,
       })}
       onClick={() => {
@@ -37,7 +37,7 @@ export const LikeProject = ({ likeProject, idProject, followName, follow = true,
             </>
           )}
           {followName1 && (
-            <button className="shadow-sm p-1.5 text-[#F97316] flex items-center justify-center space-x-1.5 w-[90px] rounded-md">
+            <button className="!shadow-md p-1.5 text-[#F97316] flex items-center justify-center space-x-1.5 w-[90px] rounded-md">
               <AiOutlineHeart className="text-xl stroke-[20px]" />
               <span className="text-[11px]">Follow</span>
             </button>

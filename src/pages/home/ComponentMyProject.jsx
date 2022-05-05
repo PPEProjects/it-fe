@@ -145,7 +145,7 @@ export const ComponentMyProject = ({ containerClassName, status }) => {
                       onClick={() => {
                         dispatch(deleteProjectInterested(isMeInterested?.id));
                       }}
-                      className="shadow-sm absolute right-4 bottom-3 bg-[#F97316] p-1.5 flex text-white items-center justify-center space-x-1.5 w-[90px] rounded-md"
+                      className="!shadow-xl absolute right-4 bottom-3 bg-[#F97316] p-1.5 flex text-white items-center justify-center space-x-1.5 w-[90px] rounded-md"
                     >
                       <AiOutlineHeart className="text-xl stroke-[20px]" />
                       <span className="text-[11px]">Follow</span>
