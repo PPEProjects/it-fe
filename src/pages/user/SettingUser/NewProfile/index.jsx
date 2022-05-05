@@ -159,7 +159,9 @@ const NewProfile = () => {
                       style={{ width: '100%' }}
                       placeholder="Please select"
                     >
-                      <Option value="male">Male</Option>
+                      <Option value="English">English</Option>
+                      <Option value="VietNamese">VietNamese</Option>
+                      <Option value="Japanese">Japanese</Option>
                     </Select>
                   </Form.Item>
                   <Form.List name="skill">
@@ -176,7 +178,12 @@ const NewProfile = () => {
                             style={{ width: '100%' }}
                             placeholder="Please select"
                           >
-                            <Option value="female">Female</Option>
+                            <Option value="HTML">HTML</Option>
+                            <Option value="ReactJs">ReactJs</Option>
+                            <Option value="NodeJs">NodeJs</Option>
+                            <Option value="Php">Php</Option>
+                            <Option value="Java">Java</Option>
+                            <Option value="VueJs">VueJs</Option>
                           </Select>
                         </Form.Item>
                         <Form.Item className="w-full !mb-0" name="framework" label="Framework">
@@ -186,7 +193,8 @@ const NewProfile = () => {
                             style={{ width: '100%' }}
                             placeholder="Please select"
                           >
-                            <Option value="otherGenders">Other genders</Option>
+                            <Option value="Tailwind">Tailwind</Option>
+                            <Option value="Bootrap">Bootrap</Option>
                           </Select>
                         </Form.Item>
                       </>

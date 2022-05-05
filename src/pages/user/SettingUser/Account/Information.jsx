@@ -74,7 +74,11 @@ export const Information = () => {
                   <Form.Item className="!mb-0 w-full !mt-0.5" name="first_name" label="Surname">
                     <Input className="!rounded" placeholder="Enter your surname" />
                   </Form.Item>
-                  <Form.Item className="!mb-0 w-full !mt-0.5" name="first_name" label="Middle Name">
+                  <Form.Item
+                    className="!mb-0 w-full !mt-0.5"
+                    // name="middle_name"
+                    label="Middle Name"
+                  >
                     <Input className="!rounded" placeholder="Enter your middle name" />
                   </Form.Item>
 
