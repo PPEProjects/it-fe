@@ -239,6 +239,7 @@ export function createProject(values) {
             type
             salary
             status
+            contentStatus
             memberJoin
             framework
             programingLanguage
@@ -322,6 +323,7 @@ export function detailProject(id) {
           numberLikes
           salary
           status
+          contentStatus
           memberJoin
           framework
           programingLanguage
@@ -540,6 +542,7 @@ export function updateStatusProject(values) {
           updateProject(data: $data) {
             id
             status
+            contentStatus
           }
         }
       `;

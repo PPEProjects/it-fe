@@ -25,3 +25,7 @@
 .custom-mize-datepicker .ant-picker-suffix {
   @apply !py-1 !px-2 !border-l;
 }
+
+.step-border {
+  background: #f6f9fb;
+}

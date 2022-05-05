@@ -138,6 +138,7 @@ export function getMyProjects() {
             name
             attachments
             status
+            contentStatus
             user {
               id
               avatar_attachment
@@ -294,8 +295,8 @@ export function detailProjectMember(id) {
       setData({
         deProject: {
           detailProjectIds,
-          isLoading: false,
-          isRefresh: false,
+          // isLoading: false,
+          // isRefresh: false,
         },
       })
     );

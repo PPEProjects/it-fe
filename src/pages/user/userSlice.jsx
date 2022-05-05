@@ -237,6 +237,7 @@ export function myProject(type = 'project') {
           privacy
           version
           status
+          contentStatus
           budget
           type
           salary
@@ -283,6 +284,7 @@ export function myIdeas(type = 'ideas') {
           budget
           type
           salary
+          contentStatus
           is_involved
           is_recruit
           createdAt
