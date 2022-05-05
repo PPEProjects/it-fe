@@ -56,8 +56,9 @@ export const ClickEdit = ({ closeModal, item, onCancel, showModalAllPosition }) 
         All members participating in the project will be displayed here. You can add, remove, update
         each position.
       </p>
-      <div className="flex space-x-2 mt-5">
-        <Tooltip placement="bottom" className="flex">
+      {/* <div className="flex space-x-2 mt-5"> */}
+      <div className="flex mt-5 flex justify-center">
+        <Tooltip placement="bottom" className="grid grid-cols-6 gap-3">
           {detailProjectsMember?.members?.map((userPosition, index) => {
             return (
               <>
@@ -152,14 +153,14 @@ export const ClickEdit = ({ closeModal, item, onCancel, showModalAllPosition }) 
               </>
             );
           })}
+          <HiUserAdd
+            className="text-4xl text-gray-400"
+            onClick={() => {
+              showModalModalClickConfirm();
+              onCancel();
+            }}
+          />
         </Tooltip>
-        <HiUserAdd
-          className="text-4xl text-gray-400"
-          onClick={() => {
-            showModalModalClickConfirm();
-            onCancel();
-          }}
-        />
       </div>
       <div className="flex items-end justify-end mt-7">
         <Button className="!rounded-md !h-10 !Poppins" type="primary" onClick={onCancel}>

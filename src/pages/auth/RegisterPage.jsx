@@ -172,7 +172,8 @@ const RegisterPage = () => {
                 name="password"
                 rules={[
                   {
-                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[#$%^&*()_=+]).{8,}/,
+                    pattern: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&*()_=+]).{8,}/,
+                    // pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]{8,}$',
                     // pattern: new RegExp(/^[a-zA-Z@~`!@#$%^&*()_=+\\\\';:\"\\/?>.<,-]+$/i),
                     message:
                       'Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters!',
@@ -182,7 +183,7 @@ const RegisterPage = () => {
                     message: 'Please input your password!',
                   },
                   {
-                    max: 30,
+                    // max: 30,
                     message: 'Password has max 30 characters!',
                   },
                 ]}

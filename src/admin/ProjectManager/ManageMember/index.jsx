@@ -43,7 +43,7 @@ export const ManageMember = ({ item, closeModal }) => {
 
   const renderDataPosition = () => {
     return (
-      <Tooltip placement="bottom" className="flex">
+      <Tooltip placement="bottom" className="grid grid-cols-6 gap-3">
         {detailProjectsMember?.members?.map((userPosition, index) => {
           return (
             <>
@@ -120,7 +120,8 @@ export const ManageMember = ({ item, closeModal }) => {
         All members participating in the project will be displayed here. You can add, remove, update
         each position.
       </p>
-      <div className="flex space-x-2 mt-5">{renderDataPosition()}</div>
+      {/* <div className="flex space-x-2 mt-5"> */}
+      <div className="flex mt-5 flex justify-center">{renderDataPosition()}</div>
       <div className="flex items-end justify-end mt-7">
         <Button
           className="!rounded-md !h-10 !Poppins"
