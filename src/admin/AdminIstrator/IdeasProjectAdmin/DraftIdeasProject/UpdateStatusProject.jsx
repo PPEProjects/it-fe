@@ -6,12 +6,12 @@ export const StepsEnum = [
   'created',
   'reviewing & improving',
   'approve',
-  'preparing',
-  'onboard',
-  'running',
-  'done',
-  'stuck',
-  'in use',
+  // 'preparing',
+  // 'onboard',
+  // 'running',
+  // 'done',
+  // 'stuck',
+  // 'in use',
 ];
 
 export const UpdateStatusProject = ({ item, closeModal }) => {

@@ -15,13 +15,15 @@ export const AddCompany = ({ item, closeModal }) => {
       data: {
         id: item?.id,
         companies: [item?.companies],
+        status: 'in use',
       },
     });
-  }, [form, item]);
+  }, [form, item, dispatch]);
 
   return (
     <section>
       <span className="text-[18px] font-semibold text-gray-800">Add company</span>
+      {/* <pre> {JSON.stringify(item, null, ' ')} </pre> */}
       <Form
         form={form}
         name="basic"
@@ -29,6 +31,7 @@ export const AddCompany = ({ item, closeModal }) => {
           dispatch(updateProject(values));
           closeModal();
         }}
+        // onFinish={values => console.log('values in use', values)}
         scrollToFirstError
         layout="vertical"
         className="!py-4 bg-white space-y-3"
@@ -43,6 +46,10 @@ export const AddCompany = ({ item, closeModal }) => {
                       {fields.map(({ name }) => (
                         <div className="relative">
                           <Form.Item className="!mb-0" label="Company" name={[name]}>
+                            <Input className="!rounded" />
+                          </Form.Item>
+
+                          <Form.Item name="status" hidden>
                             <Input className="!rounded" />
                           </Form.Item>
 

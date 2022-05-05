@@ -109,7 +109,7 @@ export const Project = () => {
           })}
         </div>
       </div>
-      <div className="space-y-4 p-4 pb-5">
+      {/* <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Pm preparing" number={dataPmProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataPmProjects ?? []).map((item, index) => {
@@ -131,8 +131,8 @@ export const Project = () => {
             );
           })}
         </div>
-      </div>
-      <div className="space-y-4 p-4 pb-5">
+      </div> */}
+      {/* <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Onboard" number={dataOnboardProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataOnboardProjects ?? []).map((item, index) => {
@@ -154,8 +154,8 @@ export const Project = () => {
             );
           })}
         </div>
-      </div>
-      <div className="space-y-4 p-4 pb-5">
+      </div> */}
+      {/* <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Running" number={dataRunningProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataRunningProjects ?? []).map((item, index) => {
@@ -177,8 +177,8 @@ export const Project = () => {
             );
           })}
         </div>
-      </div>
-      <div className="space-y-4 p-4 pb-5">
+      </div> */}
+      {/* <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Done" number={dataDoneProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataDoneProjects ?? []).map((item, index) => {
@@ -200,8 +200,8 @@ export const Project = () => {
             );
           })}
         </div>
-      </div>
-      <div className="space-y-4 p-4 pb-5">
+      </div> */}
+      {/* <div className="space-y-4 p-4 pb-5">
         <TitleItem title="Stuck" number={dataStuckProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataStuckProjects ?? []).map((item, index) => {
@@ -223,8 +223,8 @@ export const Project = () => {
             );
           })}
         </div>
-      </div>
-      <div className="space-y-4 p-4 pb-5">
+      </div> */}
+      {/* <div className="space-y-4 p-4 pb-5">
         <TitleItem title="In use" number={dataUseProjects?.length} />
         <div className="grid grid-cols-3 gap-4 px-3">
           {(dataUseProjects ?? []).map((item, index) => {
@@ -246,7 +246,7 @@ export const Project = () => {
             );
           })}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
