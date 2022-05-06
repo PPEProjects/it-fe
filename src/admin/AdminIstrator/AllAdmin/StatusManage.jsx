@@ -57,6 +57,7 @@ export const StatusManage = ({ dataDetailMemberProject, openModal, isCloseModal 
                 <span className="font-medium text-xs text-gray-500">Rating required</span>
                 <div className="flex items-center -space-x-2">
                   <Stars
+                    disabled={false}
                     onClickStars
                     userId={dataDetailMemberProject?.memberUser?.id}
                     projectId={dataDetailMemberProject?.projectId}

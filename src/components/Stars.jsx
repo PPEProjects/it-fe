@@ -12,6 +12,7 @@ export const Stars = ({
   userId,
   projectId,
   onClickStars,
+  disabled,
 }) => {
   const totalStars = 10;
   const activeStars = numberStartActive;
@@ -36,7 +37,7 @@ export const Stars = ({
         containerClassName
       )}
     >
-      <Rate onChange={handerchangerate} defaultValue={activeStars} count={10} />
+      <Rate disabled={disabled} onChange={handerchangerate} defaultValue={activeStars} count={10} />
 
       {/* {[...new Array(totalStars)].map((item, index) => {
         return index <= activeStars ? (

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IoIosAdd } from 'react-icons/io';
 import { MdDeleteForever } from 'react-icons/md';
 
-export const AddCompany = ({ item, closeModal }) => {
+export const AddCompany = ({ item, closeModal, setOnLoad }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { upProject } = useSelector(userSelector);
@@ -81,7 +81,8 @@ export const AddCompany = ({ item, closeModal }) => {
             type="primary"
             size="large"
             htmlType="submit"
-            loading={upProject.isLoading}
+            // loading={upProject.isLoading}
+            onClick={() => setOnLoad()}
           >
             Confirm
           </Button>

@@ -341,7 +341,7 @@ const NewProject = () => {
                         rules={[
                           {
                             required: true,
-                            message: 'Image is missing!',
+                            message: 'Main picture is missing!',
                           },
                         ]}
                       >
@@ -362,7 +362,7 @@ const NewProject = () => {
                         rules={[
                           {
                             required: true,
-                            message: 'Image is missing!',
+                            message: 'Pitch Deck is missing!',
                           },
                         ]}
                       >

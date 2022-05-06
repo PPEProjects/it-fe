@@ -14,7 +14,7 @@ export const LikeProject = ({ likeProject, idProject, followName, follow = true,
 
   return (
     <button
-      className={classNames('!text-[#164E63] !border-none !shadow-md', {
+      className={classNames('!text-[#164E63] !border-none', {
         '!shadow-md absolute right-4 bottom-[11px] bg-white p-1.5 flex text-[#F97316] items-center justify-center space-x-1.5 w-[90px] rounded-md':
           followName,
       })}

@@ -7,14 +7,19 @@ import { useDispatch, useSelector } from 'react-redux';
 export const DoneIdeasProject = () => {
   const dispatch = useDispatch();
   const { mlMyProject, cProject } = useSelector(projectSelector);
+  const [isLoad, setIsLoad] = useState(true);
   const [loadMore, setLoadMore] = useState(3);
   const onLoadMore = () => {
     setLoadMore(loadMore + 3);
   };
+  const setOnLoad = () => {
+    console.log('setOnLoad');
+    setIsLoad(!isLoad);
+  };
 
   useEffect(() => {
     dispatch(MyProject());
-  }, [dispatch, cProject]);
+  }, [dispatch, cProject, isLoad]);
 
   const dataFillterProjects = (mlMyProject?.myProject ?? []).filter(item => item.status === 'done');
 
@@ -27,6 +32,7 @@ export const DoneIdeasProject = () => {
             return (
               <div key={index}>
                 <BoardItem
+                  setOnLoad={setOnLoad}
                   item={item}
                   imgPage={item?.attachments?.main_picture?.file}
                   imgAvatar={item?.avatar_attachment?.file}

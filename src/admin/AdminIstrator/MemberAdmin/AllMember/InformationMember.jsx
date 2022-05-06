@@ -30,6 +30,12 @@ export const InformationMember = ({
   const rolesProjectManage = { project_manage: 'project_manage' };
   const rolesAdmin = { admin: 'admin' };
 
+  // const dataRoles = item?.userAdvance?.roles?.filter(item => item?.includes('admin'));
+  // const filterAdmin = dataRoles.includes('admin');
+
+  // .map(name => name.includes('admin'));
+  // console.log('filterAdmin', filterAdmin);
+
   const menu = item => {
     return (
       <Menu>
@@ -131,6 +137,8 @@ export const InformationMember = ({
         'shadow-xs space-y-7': dropDown,
       })}
     >
+      {/* <pre> {JSON.stringify(item, null, ' ')} </pre> */}
+
       <div className="text-center text-sm min-h-[232px]">
         <p className="flex items-center justify-center">
           <img src={imgSrcAvatar} alt="" className="rounded-full h-[128px] w-[128px] mt-5" />
@@ -139,7 +147,11 @@ export const InformationMember = ({
         <h6 className="text-[#6B7280] -mt-1">{goadMember}</h6>
         {icon && (
           <p className="flex items-center justify-center space-x-1">
-            <Stars containerClassName="!text-xl" numberStartActive={numberStartActive} />
+            <Stars
+              disabled={true}
+              containerClassName="!text-xl"
+              numberStartActive={numberStartActive}
+            />
           </p>
         )}
       </div>

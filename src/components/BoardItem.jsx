@@ -56,6 +56,7 @@ export const BoardItem = ({
   approve,
   containerClassName,
   company,
+  setOnLoad,
 }) => {
   const dispatch = useDispatch();
   const { upProject, dataProject } = useSelector(userSelector);
@@ -423,7 +424,7 @@ export const BoardItem = ({
         onCancel={handleCancelCompany}
         footer={null}
       >
-        <AddCompany item={item} closeModal={handleCancelCompany} />
+        <AddCompany setOnLoad={setOnLoad} item={item} closeModal={handleCancelCompany} />
       </Modal>
     );
   };

@@ -1,6 +1,11 @@
 import React from 'react';
 import { Tabs } from 'components/Tabs';
 import { AllMember } from './AllMember';
+import { Admin } from './Admin';
+import { IdeaReviewer } from './IdeaReviewer';
+import { ProjectReviewer } from './ProjectReviewer';
+import { ProjectManager } from './ProjectManager';
+import { DefaultMember } from './DefaultMember';
 
 const menuList = [
   {
@@ -33,6 +38,21 @@ const menuList = [
 const tabPane = [
   {
     content: <AllMember />,
+  },
+  {
+    content: <Admin />,
+  },
+  {
+    content: <IdeaReviewer />,
+  },
+  {
+    content: <ProjectReviewer />,
+  },
+  {
+    content: <ProjectManager />,
+  },
+  {
+    content: <DefaultMember />,
   },
 ];
 export const MemberAdmin = () => {
